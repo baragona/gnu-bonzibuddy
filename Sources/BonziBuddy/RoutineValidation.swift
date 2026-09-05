@@ -49,7 +49,7 @@ func validateRoutines() throws {
                 propSamples += 1
                 guard validAnchor(prop.anchor),finite(prop.offset),finite(prop.scale),prop.scale.min()>0,(0...1).contains(prop.visibility),prop.rotation.vector.x.isFinite,abs(length(prop.rotation.vector)-1)<0.001 else {throw failure("Invalid prop transform")}
                 switch (prop.kind,prop.deformation) {
-                case (.globe,.rigid),(.coconut,.rigid),(.sunglasses,.rigid),(.headphones,.rigid),(.butterflyWing,.rigid),(.butterflyBody,.rigid),(.bookLeft,.rigid),(.bookRight,.rigid): break
+                case (.writingPad,.rigid),(.pencil,.rigid),(.globe,.rigid),(.coconut,.rigid),(.sunglasses,.rigid),(.headphones,.rigid),(.butterflyWing,.rigid),(.butterflyBody,.rigid),(.bookLeft,.rigid),(.bookRight,.rigid): break
                 case let (.bookLeaf,.page(curl)):
                     guard curl.isFinite,(0...1).contains(curl) else {throw failure("Invalid page curl")}
                 case let (.bananaFruit,.fruit(remaining)):

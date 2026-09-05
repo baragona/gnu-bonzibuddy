@@ -345,6 +345,21 @@ fragment float4 propFragment(PropVarying vertexIn [[stage_in]],depth2d<float> sh
             in.color.rgb*=1.0-0.35*line*step(0.12,uv.x)*step(uv.x,0.88)*step(0.12,uv.y)*step(uv.y,0.88);
         }
     }
+    if (prop.material.x==11.0 || prop.material.x==12.0) {
+        int region=int(vertexIn.uv.w+0.5);
+        const float3 colors[7]={float3(0.55,0.32,0.09),float3(0.98,0.97,0.86),float3(0.98,0.68,0.025),float3(0.72,0.55,0.18),float3(0.08),float3(0.79,0.58,0.32),float3(0.82,0.28,0.22)};
+        in.color.rgb=colors[clamp(region,0,6)];
+        if (prop.material.x==11.0 && region==0 && vertexIn.uv.z< -0.5) {
+            float2 p=(vertexIn.uv.xy-float2(0.5))*2.7;
+            float r=dot(p,p);
+            if (r<1.0) {
+                float z=sqrt(1.0-r);
+                float2 mapUV=float2(atan2(p.x,z)/(2.0*M_PI_F)+0.5,0.5-asin(p.y)/M_PI_F);
+                float mask=land.sample(mapSampler,mapUV).r;
+                in.color.rgb=mix(float3(0.23,0.025,0.72),float3(0.02,0.80,0.13),mask)*(0.65+0.35*z);
+            }
+        }
+    }
     float sheen=prop.material.x==4.0 ? 1.0:prop.material.x<0.5 ? 1.0:prop.material.x<1.5 ? 0.15:0.4;
     float4 shaded=shadeSurface(in,shadow,u,eyes,sheen,prop.material.z);
     if (prop.material.x==4.0) {

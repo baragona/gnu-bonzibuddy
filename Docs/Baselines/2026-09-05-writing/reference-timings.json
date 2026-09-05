@@ -1,0 +1,47 @@
+[
+  {
+    "name": "WriteReturn",
+    "frames": 13,
+    "durationMS": 1450
+  },
+  {
+    "name": "WriteContinued",
+    "frames": 11,
+    "durationMS": 1200
+  },
+  {
+    "name": "WritePre",
+    "frames": 13,
+    "durationMS": 1450
+  },
+  {
+    "name": "WriteOnce",
+    "frames": 13,
+    "durationMS": 1450
+  },
+  {
+    "name": "WriteOnceAgain",
+    "frames": 9,
+    "durationMS": 1200
+  },
+  {
+    "name": "WritePause",
+    "frames": 5,
+    "durationMS": 500
+  },
+  {
+    "name": "Write",
+    "frames": 37,
+    "durationMS": 4300
+  },
+  {
+    "name": "Writing",
+    "frames": 35,
+    "durationMS": 5200
+  },
+  {
+    "name": "WritingReturn",
+    "frames": 17,
+    "durationMS": 1850
+  }
+]

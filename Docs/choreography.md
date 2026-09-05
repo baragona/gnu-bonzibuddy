@@ -25,7 +25,7 @@ The action filter enables focused three-angle reviews while keeping the full sui
 
 ## Outstanding scope
 
-Refine banana and miss variation; refine sunglasses finger contact; refine coconut headphones contact; refine butterfly interaction; refine seated reading and look-up variants; writing pad/pencil; bamboo mailbox/letter variants; vine and surfboard movement/entrance/exit; chest beating/backflip; hugs/kisses/giggles/shushing; directional presentations and explanations; richer facial/gaze/idle sequences. Each needs actual geometry where applicable, reference-based choreography, clean entry/return/interruption behavior, multiple-angle review, and runtime profiling. This list is the remaining scope, not a list of completed features.
+Refine banana and miss variation; refine sunglasses finger contact; refine coconut headphones contact; refine butterfly interaction; refine seated reading and look-up variants; refine writing pad/pencil contact and pause variants; bamboo mailbox/letter variants; vine and surfboard movement/entrance/exit; chest beating/backflip; hugs/kisses/giggles/shushing; directional presentations and explanations; richer facial/gaze/idle sequences. Each needs actual geometry where applicable, reference-based choreography, clean entry/return/interruption behavior, multiple-angle review, and runtime profiling. This list is the remaining scope, not a list of completed features.
 
 The facing transform is included before hierarchical interruption blending, so interrupting a turned pose does not snap the body back to front. Props derive orientation from the blended root matrix. Stationary-leg regression assertions exclude actions with an intentional facing turn; their full skeleton is still checked for transition continuity and convergence.
 
@@ -144,3 +144,7 @@ Menu animation requests now honor a routine's handoff policy: prop routines fini
 `ReadLookUpRoutine` reuses the seated book retrieval and stow geometry, with the original entry/continued/return durations of 4.95, 5.80, and 2.53 seconds. The continued loop includes two open-palm gestures and a return to scanning the book. A return request during either gesture waits until the hand has returned to the cover before stowing. The book retains the same prop identities, stance, lighting, and accessory composition. This is visual choreography; it does not synthesize speech.
 
 The page hinge now translates behind the stationary blocks independently of sheet rotation, preventing the turning thickness offset from crossing the opposite cover. Sampled leaf vertices clear both page-block planes; see [the reading look-up checkpoint](Baselines/2026-09-05-reading-lookup/README.md).
+
+## Writing pad and pencil
+
+Initial `WriteRoutine` combines Write (4.30 seconds), WriteContinued (1.20 seconds), and WriteReturn (1.45 seconds). Indexed meshes include a paper stack, yellow binding, globe-decorated brown back, pencil shaft, wood taper, graphite tip, and eraser. Choreography derives pencil contact and support-hand targets from the same pad frame. Write holds its repeated stroke loop, completes an active stroke before lifting the pencil, and stows both objects before another menu action or accessory transfer. The loop shares its raised-pencil boundary pose. Further work includes accumulated ink, dedicated pause/once variants, and exact finger contact.
