@@ -29,7 +29,8 @@ enum RoutineLibrary {
         return x*x*x*(x*(x*6-15)+10)
     }
     static let definitions:[Action:RoutineDefinition]=[
-        .write:RoutineDefinition(duration:WriteRoutine.duration,changesFacing:true,holdRange:WriteRoutine.holdRange,handoffPolicy:.finishRoutine,returnDelay:WriteRoutine.returnDelay,sample:WriteRoutine.sample),
+        .writePause:RoutineDefinition(duration:WritePauseRoutine.duration,changesFacing:true,holdRange:WritePauseRoutine.holdRange,handoffPolicy:.finishRoutine,continuation:WritePauseRoutine.continuation,sample:WritePauseRoutine.sample),
+        .write:RoutineDefinition(duration:WriteRoutine.duration,changesFacing:true,holdRange:WriteRoutine.holdRange,handoffPolicy:.finishRoutine,returnDelay:WriteRoutine.returnDelay,continuation:WriteRoutine.continuation,sample:WriteRoutine.sample),
         .readLookUp:RoutineDefinition(duration:ReadLookUpRoutine.duration,changesStance:true,holdRange:ReadLookUpRoutine.holdRange,handoffPolicy:.finishRoutine,returnDelay:ReadLookUpRoutine.returnDelay,sample:ReadLookUpRoutine.sample),
         .read:RoutineDefinition(duration:ReadRoutine.duration,changesStance:true,holdRange:ReadRoutine.holdRange,handoffPolicy:.finishRoutine,returnDelay:{t in t>=5.65 && t<7.20 ? 7.20-t:0},sample:ReadRoutine.sample),
         .butterfly:RoutineDefinition(duration:ButterflyRoutine.duration,changesFacing:true,handoffPolicy:.finishRoutine,sample:ButterflyRoutine.sample),
@@ -49,6 +50,13 @@ enum RoutineLibrary {
 // One definition owns each routine's timing, movement policy, and pure sampler.
 // The action catalog, rig, face system, and validators share this definition.
 enum RoutineHandoffPolicy {case interruptible, finishRoutine}
+enum RoutineFamily {case writing}
+struct RoutineContinuation {
+    let family:RoutineFamily
+    let entryElapsed:Double
+    let acceptsFrom:Range<Double>
+    let delay:(Double)->Double
+}
 struct RoutineDefinition {
     let duration:Double
     var changesFacing=false
@@ -56,5 +64,6 @@ struct RoutineDefinition {
     var holdRange:Range<Double>?
     var handoffPolicy:RoutineHandoffPolicy = .interruptible
     var returnDelay:(Double)->Double = {_ in 0}
+    var continuation:RoutineContinuation?
     let sample:(Double)->RoutinePose
 }

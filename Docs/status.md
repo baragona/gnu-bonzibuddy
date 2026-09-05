@@ -7,7 +7,7 @@ The user-approved appearance is about 90% satisfactory. Preserve its palette, sh
 - Native transparent desktop panel, local speech and controls.
 - Rigged polygon fan model, real-time Metal skinning, antialiasing, and soft shadows.
 - Fifteen facial morphs, gaze, shared and independent eye closure, automatic blinking.
-- Idle, left/right glances, clap, shrug, wave, dance, think, surprise, speech, globe spinning, coconut juggling, butterfly flight/landing, seated book reading and look-up gestures, initial pencil-and-pad writing, and coconut headphones with listening and removal.
+- Idle, left/right glances, clap, shrug, wave, dance, think, surprise, speech, globe spinning, coconut juggling, butterfly flight/landing, seated book reading and look-up gestures, pencil-and-pad writing with in-place pause/resume, and coconut headphones with listening and removal.
 - Independent Sunglasses and Headphones toggles, both worn during other actions, with a shared queue for animated put-on/removal. Headphones fit against the cheeks.
 - Initial banana eating/missed-toss routines with separate fruit and animated peel; visual fidelity remains in progress.
 - Shared prop lighting/shadows, semantic attachments, typed deformation, and interruption retirement; remaining routines tracked in [choreography](choreography.md).

@@ -4,6 +4,9 @@ import simd
 enum WriteRoutine {
     static let duration=6.95
     static let holdRange=4.30..<5.50
+    static let continuation=RoutineContinuation(family:.writing,entryElapsed:4.30,acceptsFrom:0..<5.50,delay:{t in
+        t<1.90 ? 1.90-t:returnDelay(at:t)
+    })
     static let center=MotionTrack<SIMD3<Float>>([(0,[0.58,-0.40,-0.22]),(0.65,[0.58,-0.40,-0.22]),(1.0,[0.60,-0.40,0.25]),(1.35,[0.22,-0.12,0.47]),(5.50,[0.22,-0.12,0.47]),(5.95,[0.60,-0.40,0.25]),(6.35,[0.58,-0.40,-0.22]),(6.95,[0.58,-0.40,-0.22])])
     static func returnDelay(at t:Double)->Double {
         guard t>=1.90 && t<5.50 else {return 0}

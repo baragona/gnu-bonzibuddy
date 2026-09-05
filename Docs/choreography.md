@@ -148,3 +148,7 @@ The page hinge now translates behind the stationary blocks independently of shee
 ## Writing pad and pencil
 
 Initial `WriteRoutine` combines Write (4.30 seconds), WriteContinued (1.20 seconds), and WriteReturn (1.45 seconds). Indexed meshes include a paper stack, yellow binding, globe-decorated brown back, pencil shaft, wood taper, graphite tip, and eraser. Choreography derives pencil contact and support-hand targets from the same pad frame. Write holds its repeated stroke loop, completes an active stroke before lifting the pencil, and stows both objects before another menu action or accessory transfer. The loop shares its raised-pencil boundary pose. Further work includes accumulated ink, dedicated pause/once variants, and exact finger contact.
+
+### Writing pause and resume
+
+Write Pause reuses retrieval and stow while holding the pad and raised pencil. Its half-second attention change follows the extracted WritePause sequence. Selecting it during Write waits for the active stroke to finish and enters directly with the props held. Selecting Write again resumes the stroke loop without retrieval. Exact WriteOnce/WriteOnceAgain scheduling and accumulated ink remain unfinished.

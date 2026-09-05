@@ -1,0 +1,12 @@
+{
+  "contactSamples" : 61,
+  "holdSeamPassed" : true,
+  "inPlacePauseResumePassed" : true,
+  "maximumPencilPlaneError" : 2.2118911147117615e-08,
+  "note" : "Pencil contact is measured against the authored pad plane. These checks do not establish finger contact, full-body collision avoidance, or original visual identity.",
+  "queuedContinuationCancellationPassed" : true,
+  "retrievalAndAccessoryHandoffsPassed" : true,
+  "strokeAndStowHandoffPassed" : true,
+  "triangles" : 218,
+  "vertices" : 436
+}

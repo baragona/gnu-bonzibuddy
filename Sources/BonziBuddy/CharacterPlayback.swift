@@ -67,6 +67,16 @@ struct CharacterPlayback {
     mutating func request(_ action:Action,at time:Double,mode:PlaybackMode = .once) {
         adoptQueuedBody(at:time)
         if accessories.busyUntil>time {play(action,at:time,mode:mode);return}
+        let body=bodySnapshot(at:time)
+        if let source=RoutineLibrary.definitions[body.action]?.continuation,
+           let destination=RoutineLibrary.definitions[action]?.continuation,
+           source.family == destination.family,source.acceptsFrom.contains(body.elapsed) {
+            let ready=time+max(0,source.delay(body.elapsed))
+            var player=ActionPlayback()
+            player.play(action,at:ready,mode:mode,elapsed:destination.entryElapsed)
+            queuedBody=(player,ready)
+            return
+        }
         let ready=handoffTime(at:time)
         if ready>time {
             var player=ActionPlayback();player.play(action,at:ready,mode:mode)
@@ -76,6 +86,7 @@ struct CharacterPlayback {
     @discardableResult mutating func finishRoutine(at time:Double)->Bool {
         adoptQueuedBody(at:time)
         if accessories.busyUntil>time {play(.idle,at:time);return true}
+        queuedBody=nil
         return playback.finish(at:time)
     }
     mutating func play(_ action: Action, at time: Double, mode:PlaybackMode = .once) {

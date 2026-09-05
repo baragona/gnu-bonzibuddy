@@ -20,6 +20,14 @@ func validateRoutines() throws {
     var sampled=0,propSamples=0
     for (action,definition) in RoutineLibrary.definitions {
         guard definition.duration.isFinite,definition.duration>0 else {throw failure("Invalid routine duration")}
+        if let continuation=definition.continuation {
+            guard continuation.entryElapsed>=0,continuation.entryElapsed<definition.duration,
+                  continuation.acceptsFrom.lowerBound>=0,continuation.acceptsFrom.upperBound<=definition.duration else {throw failure("Invalid continuation range")}
+            for frame in 0...Int(definition.duration*120) {
+                let t=Double(frame)/120,delay=continuation.delay(t)
+                guard delay.isFinite,delay>=0,delay<=definition.duration else {throw failure("Invalid continuation delay")}
+            }
+        }
         if let loop=definition.holdRange {
             guard loop.lowerBound>=0,loop.upperBound<definition.duration,loop.upperBound>loop.lowerBound else {throw failure("Invalid hold range")}
             let a=definition.sample(loop.lowerBound),b=definition.sample(loop.upperBound)

@@ -1,0 +1,9 @@
+{
+  "note" : "Visual sequence of in-place writing\/pause\/resume with both accessories; inspect alongside CPU scheduling and contact checks. Not a pixel-continuity or collision proof.",
+  "pauseEnteredAt" : 5.5,
+  "pauseRequestedAt" : 4.7000000000000002,
+  "renderedViews" : 543,
+  "resumeRequestedAt" : 6.5,
+  "savedViews" : 33,
+  "timelineSamples" : 181
+}

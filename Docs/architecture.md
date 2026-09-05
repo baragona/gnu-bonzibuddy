@@ -75,3 +75,9 @@ Props have their own `PropVarying` shader interpolants. Before shared lighting, 
 `StanceIntent` separates lower-body intent from imported joint indices. Routines supply a pelvis displacement, ankle targets, foot rotations, and knee bend directions; FanRig solves those targets and retains its local-joint transition blending. `changesStance` describes the resulting movement policy for validation. `PropDeformation.page` carries curl into the common color/shadow deformation path.
 
 Interactive `request` differs from low-level `play`: menu requests respect `handoffPolicy`, whereas direct playback remains useful for deterministic previews and immediate speech synchronization. `RoutineDefinition.returnDelay` declares a safe delay before a held routine begins its return (reading finishes an active page turn). `ActionPlayback.completionTime` is the scheduling authority for the complete return, avoiding duplicated timing arithmetic in the coordinator and preview tools. Independent speech layered over reading remains future work.
+
+## Continuing related routines
+
+A `RoutineContinuation` declares a compatible family, an entry time inside the destination clip, the source interval that permits continuation, and a delay to its safe handoff pose. `CharacterPlayback.request` uses that contract before requesting a full stow. The queued playback begins at the declared elapsed time; the renderer remains unaware of routine families. Shared prop IDs prevent duplicate retirement draws. Requests during accessory transfers continue to use the existing hand-transfer queue.
+
+Writing and Write Pause are the first family. Switching during retrieval waits for retrieval to finish; switching during a stroke waits for the pencil lift. Unrelated actions and accessory transfers still require the full stow. The existing skeletal/facial interruption blends handle changing gaze as the variants switch.

@@ -15,8 +15,8 @@ struct ActionPlayback {
     private var started:Double=0
     private var mode:PlaybackMode = .once
     private var returnAt:Double?
-    mutating func play(_ action:Action,at time:Double,mode:PlaybackMode = .once) {
-        selected=action;started=time;self.mode=mode;returnAt=nil
+    mutating func play(_ action:Action,at time:Double,mode:PlaybackMode = .once,elapsed:Double = 0) {
+        selected=action;started=time-max(0,elapsed);self.mode=mode;returnAt=nil
     }
     @discardableResult mutating func finish(at time:Double)->Bool {
         guard let loop=RoutineLibrary.definitions[selected]?.holdRange else {return false}
