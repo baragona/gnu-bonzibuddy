@@ -33,7 +33,15 @@ struct CharacterPlayback {
             // Wearing glasses does not reserve anything; only a transfer waits.
             let ownsProps=RoutineLibrary.definitions[body.action]?.accessoryTransferPolicy == .finishRoutine
             if ownsProps && body.action.duration.isFinite {
-                begin=time+max(0,body.action.duration-body.elapsed)
+                if let loop=RoutineLibrary.definitions[body.action]?.holdRange {
+                    // A held routine needs its authored return before another
+                    // accessory can claim the hands; it must not wait forever.
+                    playback.finish(at:time)
+                    let returning=playback.sample(at:time)
+                    begin=returning.elapsed>=loop.upperBound
+                        ? time+max(0,body.action.duration-returning.elapsed)
+                        : time+max(0,loop.lowerBound-body.elapsed)+body.action.duration-loop.upperBound
+                } else {begin=time+max(0,body.action.duration-body.elapsed)}
             }
             suspendsBody=begin==time
         } else if sunglasses.transfer(at:time)==nil {

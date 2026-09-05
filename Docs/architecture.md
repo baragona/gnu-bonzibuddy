@@ -22,7 +22,7 @@ Speech uses `AVSpeechSynthesizer`. Mute settings and reminders use local UserDef
 
 ## Routine and prop boundaries
 
-New routines use one registered `RoutineDefinition` for duration, facing policy, and a deterministic pose sampler. `GlobeRoutine`, `CoconutJuggle`, the two `BananaRoutine` variants, and `SunglassesRoutine` exercise this path. The older ten actions still contain legacy rig-specific curves; moving those curves into routine samplers remains work.
+New routines use one registered `RoutineDefinition` for duration, facing policy, and a deterministic pose sampler. `GlobeRoutine`, `CoconutJuggle`, the two `BananaRoutine` variants, `SunglassesRoutine`, and `HeadphonesRoutine` exercise this path. The older ten actions still contain legacy rig-specific curves; moving those curves into routine samplers remains work.
 
 ```mermaid
 flowchart TD
@@ -64,3 +64,5 @@ To add a routine, register its definition, author its pose/prop tracks, and supp
 The app exposes Sunglasses as a checked toggle. The older full sunglasses performance is retained for offline original-reference validation. Persistent wear does not run its head-turning/adjusting loop over unrelated actions. General limb masks and arbitration between multiple simultaneous accessory transfers remain future work. The current scheduler protects prop routines by waiting for completion; it does not synthesize an early catch-and-stow motion.
 
 `--validate-wearables` checks rapid reversals, repeated sets, action requests during transfers, resumed body time, deferred prop stow, cancelling a deferred removal, and head attachment across all other actions. It also renders seven combinations and removal from front, quarter, and profile views.
+
+A hold-capable prop routine with `finishRoutine` transfer policy receives an explicit return request before a pending accessory transfer. Its return finishes before the hand slot changes owner. Coconut headphones exercise this case: sunglasses stay worn through listening, and a request to remove them first completes the headset's stow. `--validate-headphones` covers this ordering as well as indexed mesh winding, finite normals, two-handed carry, and the rigid head attachment.

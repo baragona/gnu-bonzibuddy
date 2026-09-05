@@ -3,7 +3,7 @@ import simd
 // Pure scene descriptions: no Metal types, mesh buffers, or skeleton indices.
 enum PropKind: Int, CaseIterable {
     // Stable material IDs consumed by the Metal prop fragment function.
-    case globe=0, coconut=1, bananaFruit=2, bananaPeel=3, sunglasses=4
+    case globe=0, coconut=1, bananaFruit=2, bananaPeel=3, sunglasses=4, headphones=5
 }
 indirect enum PropAnchor {
     case character

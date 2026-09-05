@@ -1,0 +1,10 @@
+{
+  "degenerateTriangles" : 0,
+  "maximumCarryGripError" : 0.0034640124067664146,
+  "maximumHeadAttachmentError" : 2.9802322387695312e-07,
+  "note" : "Geometry orientation and attachment checks, not proof of fingertip contact, headband clearance, or original visual fidelity.",
+  "reversedTriangles" : 0,
+  "sunglassesCombinationAndOrderedReturnPassed" : true,
+  "triangles" : 14464,
+  "vertices" : 7852
+}

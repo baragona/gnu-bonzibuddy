@@ -10,6 +10,8 @@ struct PropMesh {
     init(device:MTLDevice,kind:PropKind) throws {
         var vertices:[PropVertex]=[],indices:[UInt32]=[]
         switch kind {
+        case .headphones:
+            (vertices,indices)=HeadphonesGeometry.mesh()
         case .sunglasses:
             let asset=try PropAssetData(url:PropAssetData.url("FanSunglasses.mesh"))
             self.vertices=asset.vertices.withUnsafeBytes {device.makeBuffer(bytes:$0.baseAddress!,length:$0.count)!}

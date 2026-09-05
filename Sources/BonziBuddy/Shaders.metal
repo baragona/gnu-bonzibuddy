@@ -267,7 +267,7 @@ fragment float4 propFragment(Varying in [[stage_in]],depth2d<float> shadow [[tex
     if (prop.material.x==0.0) {
         float mask=land.sample(mapSampler,in.eyeUV.xy).r;
         in.color.rgb=mix(float3(0.23,0.025,0.72),float3(0.02,0.92,0.13),mask);
-    } else if (prop.material.x==1.0) {
+    } else if (prop.material.x==1.0 || prop.material.x==5.0) {
         float2 uv=in.eyeUV.xy;
         float gx=uv.x*603.0+sin(uv.y*123.0)*2.0,gy=uv.y*347.0+sin(uv.x*79.0);
         float grain=sin(gx)*sin(gy)*exp(-0.35*(fwidth(gx)+fwidth(gy)));
@@ -297,6 +297,11 @@ fragment float4 propFragment(Varying in [[stage_in]],depth2d<float> shadow [[tex
     }
     if (prop.material.x==4.0) {
         in.color.rgb=mix(float3(0.035,0.025,0.045),float3(0.008,0.016,0.021),in.eyeHeight);
+    }
+    if (prop.material.x==5.0) {
+        if (in.eyeHeight>2.5) in.color.rgb=float3(0.32,0.33,0.35);
+        else if (in.eyeHeight>1.5) in.color.rgb=float3(0.94,0.88,0.66);
+        else if (in.eyeHeight>0.5) in.color.rgb=float3(0.025,0.023,0.030);
     }
     float sheen=prop.material.x==4.0 ? 1.0:prop.material.x<0.5 ? 1.0:prop.material.x<1.5 ? 0.15:0.4;
     float4 shaded=shadeSurface(in,shadow,u,eyes,sheen,prop.material.z);

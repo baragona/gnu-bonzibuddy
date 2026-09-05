@@ -25,7 +25,7 @@ The action filter enables focused three-angle reviews while keeping the full sui
 
 ## Outstanding scope
 
-Refine banana and miss variation; refine sunglasses finger contact; coconut headphones; butterfly interaction; seated book reading; writing pad/pencil; bamboo mailbox/letter variants; vine and surfboard movement/entrance/exit; chest beating/backflip; hugs/kisses/giggles/shushing; directional presentations and explanations; richer facial/gaze/idle sequences. Each needs actual geometry where applicable, reference-based choreography, clean entry/return/interruption behavior, multiple-angle review, and runtime profiling. This list is the remaining scope, not a list of completed features.
+Refine banana and miss variation; refine sunglasses finger contact; refine coconut headphones contact; butterfly interaction; seated book reading; writing pad/pencil; bamboo mailbox/letter variants; vine and surfboard movement/entrance/exit; chest beating/backflip; hugs/kisses/giggles/shushing; directional presentations and explanations; richer facial/gaze/idle sequences. Each needs actual geometry where applicable, reference-based choreography, clean entry/return/interruption behavior, multiple-angle review, and runtime profiling. This list is the remaining scope, not a list of completed features.
 
 The facing transform is included before hierarchical interruption blending, so interrupting a turned pose does not snap the body back to front. Props derive orientation from the blended root matrix. Stationary-leg regression assertions exclude actions with an intentional facing turn; their full skeleton is still checked for transition continuity and convergence.
 
@@ -97,3 +97,17 @@ Build/BonziBuddy.app/Contents/MacOS/BonziBuddy --validate-fan-actions --action s
 The sustained 18-second wear-and-return preview renders 300 frames from three angles (900 views), with no clipping. Numerical checks keep the prop held at 100 seconds, preserve the loop seam, accept early/repeated return requests, and remove it after the return. Hand-marker and head-attachment errors stay below 2.4e-7 model units; the return-start matrix jump is below 3.0e-7. All 225 ordered action transitions and 765 facial interruption cases pass, and neutral appearance remains effectively unchanged (RGBA MAE 8.95e-8). These checks do not establish fingertip contact or original animation identity.
 
 The final selected worn-pose comparison (original continued frame 19, native frame 40) has silhouette IoU 0.765 and RGB MAE 0.227, still failing the whole-character near-identity gate. The comparison prompted broader gray lens reflections; it also retains the approved fan character’s different body proportions. Reports and the comparison image are preserved in `Baselines/2026-09-05-sunglasses/`.
+
+## Coconut headphones
+
+`HeadphonesGeometry` builds hollow coconut shells with cream interiors, a curved black headband, and an antenna. The shell surfaces have independent inside/outside normals and indexed rims; all parts share the prop color and shadow pipeline. The original reference shows the white interiors while Bonzi holds the headset upside down.
+
+`HeadphonesRoutine` follows the extracted 12.02-second continued sequence and 2.10-second return. It lifts and rotates the headset with both hands, seats it on a rigid head attachment, releases the hands, closes the eyes, and adds a small listening sway. The held range is 2.00–12.02 seconds. Selecting Headphones holds the listening routine; Return to rest plays its removal. Worn sunglasses remain independent.
+
+A hold-capable routine marked `finishRoutine` now receives its return request before a sunglasses transfer, so held listening cannot block a toggle indefinitely or lose its headset mid-transfer. This serializes hand ownership; it does not yet make headphones a second independent wearable.
+
+The procedural mesh and choreography are an initial reference-based implementation. Hand targets remain authored in character space, and finer fingertip contact and frame-by-frame original motion matching need further work.
+
+Validation: 7,852 headset vertices and 14,464 triangles, no reversed or degenerate triangles, sampled carry marker error 0.00347 model units, and head attachment error below 3e-7. The normal and held-with-sunglasses previews cover 516 frames from three angles (1,548 views) with no clipping. All 256 ordered skeletal transitions and 864 facial transition cases pass. The neutral render remains effectively unchanged (RGBA MAE 8.95e-8).
+
+The selected original listening frame 27 versus native frame 100 comparison improved after revising earcup and antenna proportions: silhouette IoU 0.743, RGB MAE 0.251. It still fails the near-identity gate. Reports and selected images are in `Baselines/2026-09-05-headphones/`; these checks do not establish exact original choreography or comprehensive collision avoidance.
