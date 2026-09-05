@@ -56,6 +56,7 @@ struct RoutineContinuation {
     let entryElapsed:Double
     let acceptsFrom:Range<Double>
     let delay:(Double)->Double
+    var exitElapsed:(Double)->Double? = {_ in nil}
 }
 struct RoutineDefinition {
     let duration:Double

@@ -152,3 +152,5 @@ Initial `WriteRoutine` combines Write (4.30 seconds), WriteContinued (1.20 secon
 ### Writing pause and resume
 
 Write Pause reuses retrieval and stow while holding the pad and raised pencil. Its half-second attention change follows the extracted WritePause sequence. Selecting it during Write waits for the active stroke to finish and enters directly with the props held. Selecting Write again resumes the stroke loop without retrieval. Exact WriteOnce/WriteOnceAgain scheduling and accumulated ink remain unfinished.
+
+The paused writing hand lowers toward the original chest-level pose, carrying the pencil with it. Resume reverses this half-second motion before entering the writing loop; stow uses the same return to the common grip.

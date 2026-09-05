@@ -25,6 +25,9 @@ func validateRoutines() throws {
                   continuation.acceptsFrom.lowerBound>=0,continuation.acceptsFrom.upperBound<=definition.duration else {throw failure("Invalid continuation range")}
             for frame in 0...Int(definition.duration*120) {
                 let t=Double(frame)/120,delay=continuation.delay(t)
+                if let exit=continuation.exitElapsed(t) {
+                    guard exit.isFinite,exit>=0,exit<definition.duration else {throw failure("Invalid continuation exit phase")}
+                }
                 guard delay.isFinite,delay>=0,delay<=definition.duration else {throw failure("Invalid continuation delay")}
             }
         }

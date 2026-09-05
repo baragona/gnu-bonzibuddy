@@ -72,6 +72,9 @@ struct CharacterPlayback {
            let destination=RoutineLibrary.definitions[action]?.continuation,
            source.family == destination.family,source.acceptsFrom.contains(body.elapsed) {
             let ready=time+max(0,source.delay(body.elapsed))
+            if let exit=source.exitElapsed(body.elapsed) {
+                playback.play(body.action,at:time,mode:.once,elapsed:exit)
+            }
             var player=ActionPlayback()
             player.play(action,at:ready,mode:mode,elapsed:destination.entryElapsed)
             queuedBody=(player,ready)

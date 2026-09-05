@@ -22,6 +22,9 @@ struct ActionPlayback {
         guard let loop=RoutineLibrary.definitions[selected]?.holdRange else {return false}
         if returnAt != nil {return true}
         if mode == .once && time>=started+selected.duration {return false}
+        // A one-shot already in its return phase must keep advancing instead
+        // of jumping back to the beginning of that phase.
+        if mode == .once && time-started>=loop.upperBound {return true}
         // Finish putting the object on before starting its removal.
         let delay=RoutineLibrary.definitions[selected]?.returnDelay(sample(at:time).elapsed) ?? 0
         returnAt=max(time,started+loop.lowerBound)+max(0,delay)

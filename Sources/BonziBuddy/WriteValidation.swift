@@ -36,10 +36,10 @@ func validateWrite() throws {
     guard variant.playbackSnapshot(at:5.49).action == .write,
           variant.playbackSnapshot(at:5.51).action == .writePause else {throw failure("Pause did not wait for the stroke")}
     variant.request(.write,at:6.0,mode:.hold)
-    guard variant.playbackSnapshot(at:6.0).action == .write,
-          abs(variant.playbackSnapshot(at:6.0).elapsed-4.30)<0.000001 else {throw failure("Resume replayed retrieval")}
+    guard variant.playbackSnapshot(at:6.49).action == .writePause,variant.playbackSnapshot(at:6.50).action == .write,
+          abs(variant.playbackSnapshot(at:6.50).elapsed-4.30)<0.000001 else {throw failure("Resume replayed retrieval")}
     for frame in 0...120 {
-        let snapshot=variant.playbackSnapshot(at:6+Double(frame)/120)
+        let snapshot=variant.playbackSnapshot(at:6.5+Double(frame)/120)
         let pose=RoutineLibrary.sample(snapshot.action,at:snapshot.elapsed)
         guard pose.props.count==2,pose.props.allSatisfy({$0.visibility==1}) else {throw failure("Variant switch lost the pad or pencil")}
     }
@@ -48,19 +48,38 @@ func validateWrite() throws {
         guard length(pause.hands[side]!.wrist-start.hands[side]!.wrist)<0.00001 else {throw failure("Shared writing seam hand mismatch")}
     }
     guard length(pause.props[1].offset-start.props[1].offset)<0.00001 else {throw failure("Shared writing seam pencil mismatch")}
+    // A reversal partway through lowering must begin from the displayed prop pose.
+    for t in stride(from:1.95,through:2.85,by:0.05) {
+        let exit=WritePauseRoutine.continuation.exitElapsed(t)!
+        let before=WritePauseRoutine.sample(at:t),after=WritePauseRoutine.sample(at:exit)
+        guard length(before.props[1].offset-after.props[1].offset)<0.00001,
+              length(before.hands[.left]!.wrist-after.hands[.left]!.wrist)<0.00001,
+              abs(before.headYaw-after.headYaw)<0.00001 else {throw failure("Pause reversal jumped")}
+    }
     var early=CharacterPlayback();early.play(.write,at:0,mode:.hold)
     early.request(.writePause,at:0.4,mode:.hold)
     guard early.playbackSnapshot(at:1.89).action == .write,
           early.playbackSnapshot(at:1.91).action == .writePause else {throw failure("Pause interrupted retrieval")}
-    variant.setHeadphonesEnabled(true,at:6.50)
-    guard variant.playbackSnapshot(at:8.64).action == .write,
-          variant.playbackSnapshot(at:8.66).action == .headphones else {throw failure("Accessory transfer skipped resumed writing stow")}
+    variant.setHeadphonesEnabled(true,at:7.0)
+    guard variant.playbackSnapshot(at:9.14).action == .write,
+          variant.playbackSnapshot(at:9.16).action == .headphones else {throw failure("Accessory transfer skipped resumed writing stow")}
     var cancelled=CharacterPlayback();cancelled.play(.write,at:0,mode:.hold)
     cancelled.request(.writePause,at:4.70,mode:.hold)
     cancelled.finishRoutine(at:5.0)
     guard cancelled.playbackSnapshot(at:5.6).action == .write,
           cancelled.playbackSnapshot(at:7.0).action == .idle else {throw failure("Return to rest failed to cancel queued continuation")}
-    let report:[String:Any]=["inPlacePauseResumePassed":true,"queuedContinuationCancellationPassed":true,"retrievalAndAccessoryHandoffsPassed":true,"vertices":vertices,"triangles":triangles,"maximumPencilPlaneError":tipError,"contactSamples":61,"holdSeamPassed":true,"strokeAndStowHandoffPassed":true,"note":"Pencil contact is measured against the authored pad plane. These checks do not establish finger contact, full-body collision avoidance, or original visual identity."]
+    var returning=CharacterPlayback();returning.play(.writePause,at:0,mode:.hold)
+    returning.request(.write,at:3.0,mode:.hold)
+    let beforeStop=returning.playbackSnapshot(at:3.25)
+    returning.finishRoutine(at:3.25)
+    let afterStop=returning.playbackSnapshot(at:3.25)
+    guard beforeStop.action == afterStop.action,abs(beforeStop.elapsed-afterStop.elapsed)<0.00001,
+          returning.playbackSnapshot(at:5.0).action == .idle else {throw failure("Stopping a continuation replayed its return phase")}
+    var repeated=CharacterPlayback();repeated.play(.writePause,at:0,mode:.hold)
+    repeated.request(.write,at:3.0,mode:.hold);repeated.request(.write,at:3.25,mode:.hold)
+    guard repeated.playbackSnapshot(at:3.49).action == .writePause,
+          repeated.playbackSnapshot(at:3.50).action == .write else {throw failure("Repeated resume restarted the exit")}
+    let report:[String:Any]=["smoothPauseReversalPassed":true,"returnDuringContinuationPassed":true,"repeatedResumePassed":true,"inPlacePauseResumePassed":true,"queuedContinuationCancellationPassed":true,"retrievalAndAccessoryHandoffsPassed":true,"vertices":vertices,"triangles":triangles,"maximumPencilPlaneError":tipError,"contactSamples":61,"holdSeamPassed":true,"strokeAndStowHandoffPassed":true,"note":"Pencil contact is measured against the authored pad plane. These checks do not establish finger contact, full-body collision avoidance, or original visual identity."]
     try FileManager.default.createDirectory(atPath:"Validation/Writing",withIntermediateDirectories:true)
     let data=try JSONSerialization.data(withJSONObject:report,options:[.prettyPrinted,.sortedKeys])
     try data.write(to:URL(fileURLWithPath:"Validation/Writing/checks.json"));print(String(decoding:data,as:UTF8.self))

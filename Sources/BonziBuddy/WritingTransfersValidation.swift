@@ -22,7 +22,7 @@ func validateWritingTransfers() throws {
             if selected {try writePNG(texture,to:"\(folder)/transfer-\(frame)-\(view).png");rendered += 1}
         }
     }
-    let report:[String:Any]=["timelineSamples":181,"renderedViews":543,"savedViews":rendered,"pauseRequestedAt":4.7,"pauseEnteredAt":5.5,"resumeRequestedAt":6.5,"note":"Visual sequence of in-place writing/pause/resume with both accessories; inspect alongside CPU scheduling and contact checks. Not a pixel-continuity or collision proof."]
+    let report:[String:Any]=["timelineSamples":181,"renderedViews":543,"savedViews":rendered,"pauseRequestedAt":4.7,"pauseEnteredAt":5.5,"resumeRequestedAt":6.5,"resumeEnteredAt":7.0,"note":"Visual sequence of in-place writing/pause/resume with both accessories; inspect alongside CPU scheduling and contact checks. Not a pixel-continuity or collision proof."]
     let data=try JSONSerialization.data(withJSONObject:report,options:[.prettyPrinted,.sortedKeys])
     try data.write(to:URL(fileURLWithPath:"\(folder)/checks.json"));print(String(decoding:data,as:UTF8.self))
 }
