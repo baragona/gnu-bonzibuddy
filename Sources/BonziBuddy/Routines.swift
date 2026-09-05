@@ -29,10 +29,10 @@ enum RoutineLibrary {
     }
     static let definitions:[Action:RoutineDefinition]=[
         .sunglasses:RoutineDefinition(duration:SunglassesRoutine.duration,holdRange:SunglassesRoutine.holdRange,sample:SunglassesRoutine.sample),
-        .globe:RoutineDefinition(duration:GlobeRoutine.duration,changesFacing:true,sample:GlobeRoutine.sample),
-        .juggle:RoutineDefinition(duration:CoconutJuggle.duration,sample:CoconutJuggle.sample),
-        .banana:RoutineDefinition(duration:BananaRoutine.duration(miss:false),changesFacing:true,sample:{BananaRoutine.sample(at:$0,miss:false)}),
-        .bananaMiss:RoutineDefinition(duration:BananaRoutine.duration(miss:true),changesFacing:true,sample:{BananaRoutine.sample(at:$0,miss:true)})
+        .globe:RoutineDefinition(duration:GlobeRoutine.duration,changesFacing:true,accessoryTransferPolicy:.finishRoutine,sample:GlobeRoutine.sample),
+        .juggle:RoutineDefinition(duration:CoconutJuggle.duration,accessoryTransferPolicy:.finishRoutine,sample:CoconutJuggle.sample),
+        .banana:RoutineDefinition(duration:BananaRoutine.duration(miss:false),changesFacing:true,accessoryTransferPolicy:.finishRoutine,sample:{BananaRoutine.sample(at:$0,miss:false)}),
+        .bananaMiss:RoutineDefinition(duration:BananaRoutine.duration(miss:true),changesFacing:true,accessoryTransferPolicy:.finishRoutine,sample:{BananaRoutine.sample(at:$0,miss:true)})
     ]
     static func sample(_ action:Action,at t:Double)->RoutinePose {
         guard let definition=definitions[action],t>=0,t<=definition.duration else {return RoutinePose()}
@@ -42,9 +42,11 @@ enum RoutineLibrary {
 
 // One definition owns each routine's timing, movement policy, and pure sampler.
 // The action catalog, rig, face system, and validators share this definition.
+enum AccessoryTransferPolicy {case pauseAndResume, finishRoutine}
 struct RoutineDefinition {
     let duration:Double
     var changesFacing=false
     var holdRange:Range<Double>?
+    var accessoryTransferPolicy:AccessoryTransferPolicy = .pauseAndResume
     let sample:(Double)->RoutinePose
 }

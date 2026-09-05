@@ -8,8 +8,12 @@ enum SurfaceKind { case skin, detail, nose, mouth, lid }
 struct Instance { var model: simd_float4x4; var color: SIMD4<Float> }
 
 final class Character {
-    private var playback=ActionPlayback()
-    func playbackSnapshot(at time:Double)->ActionSnapshot {playback.sample(at:time)}
+    private var playback=CharacterPlayback()
+    var sunglassesEnabled:Bool {playback.sunglassesEnabled}
+    func playbackSnapshot(at time:Double)->ActionSnapshot {playback.playbackSnapshot(at:time)}
+    func wearsSunglasses(at time:Double)->Bool {playback.wearsSunglasses(at:time)}
+    func accessoryPose(at time:Double)->RoutinePose {playback.accessoryPose(at:time)}
+    func setSunglassesEnabled(_ enabled:Bool,at time:Double) {playback.setSunglassesEnabled(enabled,at:time)}
     var yaw: Float = 0
     var pitch: Float = 0.18
     var bindPose = false
@@ -22,10 +26,11 @@ final class Character {
     private(set) var surfaces: [SurfaceKind] = []
     private var transitionMouth: Float = 0
     private var transitionFrom: [Instance] = []
-    @discardableResult func finishRoutine(at time:Double)->Bool {playback.finish(at:time)}
-    func play(_ action: Action, at time: Double, mode:PlaybackMode = .once) {
-        let previous = localInstances(at:time)
-        playback.play(action,at:time,mode:mode); transitionFrom = previous; transitionMouth = mouthOpening
+    @discardableResult func finishRoutine(at time:Double)->Bool {playback.finishRoutine(at:time)}
+    func play(_ action:Action,at time:Double,mode:PlaybackMode = .once) {
+        let previous=localInstances(at:time)
+        playback.play(action,at:time,mode:mode)
+        transitionFrom=previous;transitionMouth=mouthOpening
     }
     func instances(at time: Double) -> [Instance] {
         var pose=localInstances(at:time)
@@ -35,7 +40,7 @@ final class Character {
     }
     // Capture and blend poses in character space; camera changes apply afterward.
     private func localInstances(at time: Double) -> [Instance] {
-        let snapshot=playback.sample(at:time)
+        let snapshot=playback.playbackSnapshot(at:time)
         let action=snapshot.action,elapsed=snapshot.elapsed
         let t = Float(time), a = Float(elapsed)
         let envelope = min(1, a*4) * min(1, Float(max(0,action.duration-elapsed))*3)

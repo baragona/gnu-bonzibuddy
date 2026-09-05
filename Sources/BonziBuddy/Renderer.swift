@@ -179,7 +179,11 @@ final class Renderer: NSObject, MTKViewDelegate {
         }
         let props: [PropDraw]
         if let rig=fanRig,fanLiveActions {
-            props=propMotion.sample(action:playback.action,started:playback.started,at:time,cues:rig.routine.props,rig:rig,bones:objects)
+            var cues=rig.routine.props
+            let accessory=character.accessoryPose(at:time)
+            cues += accessory.props.filter {wearable in !cues.contains(where:{$0.id==wearable.id})}
+            automaticFace.eyeClosure=max(automaticFace.eyeClosure,accessory.face.eyeClosure)
+            props=propMotion.sample(action:playback.action,started:playback.started,at:time,cues:cues,rig:rig,bones:objects)
         } else { props=[] }
         objects.withUnsafeBytes { buffer.contents().copyMemory(from: $0.baseAddress!, byteCount: $0.count) }
         let lightDirection = normalize(SIMD3<Float>(-0.5,0.8,1.4))

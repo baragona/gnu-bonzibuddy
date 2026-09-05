@@ -26,6 +26,11 @@ struct ActionPlayback {
         returnAt=max(time,started+loop.lowerBound)
         return true
     }
+    // Move the body timeline while an accessory owns the hand-transfer slot.
+    mutating func shift(by duration:Double) {
+        started += duration
+        if let requested=returnAt {returnAt=requested+duration}
+    }
     func sample(at time:Double)->ActionSnapshot {
         let elapsed=max(0,time-started)
         let loop=RoutineLibrary.definitions[selected]?.holdRange

@@ -114,9 +114,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate, AVSpeechSynthesizerDel
         }
         viewItem.submenu=views;menu.addItem(viewItem)
         menu.addItem(.separator())
-        for action in Action.allCases where action != .idle && action != .speak {
+        for action in Action.allCases where action != .idle && action != .speak && action != .sunglasses {
             let i = NSMenuItem(title:action.rawValue,action:#selector(animate(_:)),keyEquivalent:""); i.representedObject = action.rawValue; i.target = self; menu.addItem(i)
         }
+        let glasses=NSMenuItem(title:"Sunglasses",action:#selector(toggleSunglasses),keyEquivalent:"")
+        glasses.target=self;glasses.state=renderer.character.sunglassesEnabled ? .on:.off;menu.addItem(glasses)
         item("Return to rest",#selector(finishRoutine))
         item("Tell a joke",#selector(joke)); item("Tell the time",#selector(tellTime))
         menu.addItem(.separator())
@@ -147,6 +149,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, AVSpeechSynthesizerDel
         renderer.character.yaw=angles[0];renderer.character.pitch=angles[1]
         status.menu=makeMenu()
     }
+    @objc func toggleSunglasses() { renderer.character.setSunglassesEnabled(!renderer.character.sunglassesEnabled,at:renderer.time);status.menu=makeMenu() }
     @objc func animate(_ sender:NSMenuItem) { guard let name = sender.representedObject as? String, let a = Action(rawValue:name) else { return }; renderer.character.play(a,at:renderer.time,mode:RoutineLibrary.definitions[a]?.holdRange == nil ? .once:.hold) }
     @objc func finishRoutine() { if !renderer.character.finishRoutine(at:renderer.time) {renderer.character.play(.idle,at:renderer.time)} }
     @objc func wave() { renderer.character.play(.wave,at:renderer.time) }
