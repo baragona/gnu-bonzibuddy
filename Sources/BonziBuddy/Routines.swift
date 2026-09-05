@@ -21,6 +21,7 @@ struct RoutinePose {
     var headPitch: Float = 0
     var face=FacialIntent()
     var props: [PropCue] = []
+    var stance=StanceIntent()
 }
 enum RoutineLibrary {
     static func smooth(_ t: Double, _ start: Double, _ end: Double) -> Float {
@@ -28,13 +29,14 @@ enum RoutineLibrary {
         return x*x*x*(x*(x*6-15)+10)
     }
     static let definitions:[Action:RoutineDefinition]=[
-        .butterfly:RoutineDefinition(duration:ButterflyRoutine.duration,changesFacing:true,accessoryTransferPolicy:.finishRoutine,sample:ButterflyRoutine.sample),
-        .headphones:RoutineDefinition(duration:HeadphonesRoutine.duration,holdRange:HeadphonesRoutine.holdRange,accessoryTransferPolicy:.finishRoutine,sample:HeadphonesRoutine.sample),
+        .read:RoutineDefinition(duration:ReadRoutine.duration,changesStance:true,holdRange:ReadRoutine.holdRange,handoffPolicy:.finishRoutine,returnDelay:{t in t>=5.65 && t<7.20 ? 7.20-t:0},sample:ReadRoutine.sample),
+        .butterfly:RoutineDefinition(duration:ButterflyRoutine.duration,changesFacing:true,handoffPolicy:.finishRoutine,sample:ButterflyRoutine.sample),
+        .headphones:RoutineDefinition(duration:HeadphonesRoutine.duration,holdRange:HeadphonesRoutine.holdRange,handoffPolicy:.finishRoutine,sample:HeadphonesRoutine.sample),
         .sunglasses:RoutineDefinition(duration:SunglassesRoutine.duration,holdRange:SunglassesRoutine.holdRange,sample:SunglassesRoutine.sample),
-        .globe:RoutineDefinition(duration:GlobeRoutine.duration,changesFacing:true,accessoryTransferPolicy:.finishRoutine,sample:GlobeRoutine.sample),
-        .juggle:RoutineDefinition(duration:CoconutJuggle.duration,accessoryTransferPolicy:.finishRoutine,sample:CoconutJuggle.sample),
-        .banana:RoutineDefinition(duration:BananaRoutine.duration(miss:false),changesFacing:true,accessoryTransferPolicy:.finishRoutine,sample:{BananaRoutine.sample(at:$0,miss:false)}),
-        .bananaMiss:RoutineDefinition(duration:BananaRoutine.duration(miss:true),changesFacing:true,accessoryTransferPolicy:.finishRoutine,sample:{BananaRoutine.sample(at:$0,miss:true)})
+        .globe:RoutineDefinition(duration:GlobeRoutine.duration,changesFacing:true,handoffPolicy:.finishRoutine,sample:GlobeRoutine.sample),
+        .juggle:RoutineDefinition(duration:CoconutJuggle.duration,handoffPolicy:.finishRoutine,sample:CoconutJuggle.sample),
+        .banana:RoutineDefinition(duration:BananaRoutine.duration(miss:false),changesFacing:true,handoffPolicy:.finishRoutine,sample:{BananaRoutine.sample(at:$0,miss:false)}),
+        .bananaMiss:RoutineDefinition(duration:BananaRoutine.duration(miss:true),changesFacing:true,handoffPolicy:.finishRoutine,sample:{BananaRoutine.sample(at:$0,miss:true)})
     ]
     static func sample(_ action:Action,at t:Double)->RoutinePose {
         guard let definition=definitions[action],t>=0,t<=definition.duration else {return RoutinePose()}
@@ -44,11 +46,13 @@ enum RoutineLibrary {
 
 // One definition owns each routine's timing, movement policy, and pure sampler.
 // The action catalog, rig, face system, and validators share this definition.
-enum AccessoryTransferPolicy {case pauseAndResume, finishRoutine}
+enum RoutineHandoffPolicy {case interruptible, finishRoutine}
 struct RoutineDefinition {
     let duration:Double
     var changesFacing=false
+    var changesStance=false
     var holdRange:Range<Double>?
-    var accessoryTransferPolicy:AccessoryTransferPolicy = .pauseAndResume
+    var handoffPolicy:RoutineHandoffPolicy = .interruptible
+    var returnDelay:(Double)->Double = {_ in 0}
     let sample:(Double)->RoutinePose
 }

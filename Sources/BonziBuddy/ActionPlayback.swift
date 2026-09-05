@@ -23,8 +23,15 @@ struct ActionPlayback {
         if returnAt != nil {return true}
         if mode == .once && time>=started+selected.duration {return false}
         // Finish putting the object on before starting its removal.
-        returnAt=max(time,started+loop.lowerBound)
+        let delay=RoutineLibrary.definitions[selected]?.returnDelay(sample(at:time).elapsed) ?? 0
+        returnAt=max(time,started+loop.lowerBound)+max(0,delay)
         return true
+    }
+    var completionTime:Double? {
+        if let requested=returnAt,let loop=RoutineLibrary.definitions[selected]?.holdRange {
+            return requested+selected.duration-loop.upperBound
+        }
+        return mode == .once && selected.duration.isFinite ? started+selected.duration:nil
     }
     // Move the body timeline while an accessory owns the hand-transfer slot.
     mutating func shift(by duration:Double) {

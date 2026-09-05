@@ -37,6 +37,7 @@ final class PropRenderer {
         switch deformation {
         case .rigid: return (0,[0,0,0,1])
         case let .peel(openings): return (1,SIMD4(simd_clamp(openings,SIMD3(repeating:0),SIMD3(repeating:1)),1))
+        case let .page(curl): return (3,[min(1,max(0,curl)),0,0,1])
         case let .fruit(remaining): return (2,[0,0,0,min(1,max(0.001,remaining))])
         }
     }

@@ -7,7 +7,7 @@ The user-approved appearance is about 90% satisfactory. Preserve its palette, sh
 - Native transparent desktop panel, local speech and controls.
 - Rigged polygon fan model, real-time Metal skinning, antialiasing, and soft shadows.
 - Fifteen facial morphs, gaze, shared and independent eye closure, automatic blinking.
-- Idle, left/right glances, clap, shrug, wave, dance, think, surprise, speech, globe spinning, coconut juggling, butterfly flight/landing, and coconut headphones with listening and removal.
+- Idle, left/right glances, clap, shrug, wave, dance, think, surprise, speech, globe spinning, coconut juggling, butterfly flight/landing, seated book reading, and coconut headphones with listening and removal.
 - Independent Sunglasses and Headphones toggles, both worn during other actions, with a shared queue for animated put-on/removal. Headphones fit against the cheeks.
 - Initial banana eating/missed-toss routines with separate fruit and animated peel; visual fidelity remains in progress.
 - Shared prop lighting/shadows, semantic attachments, typed deformation, and interruption retirement; remaining routines tracked in [choreography](choreography.md).
@@ -20,7 +20,7 @@ The user-approved appearance is about 90% satisfactory. Preserve its palette, sh
 - Improve original animation fidelity and extend choreography/coverage. Contact checks measure proximity, not comprehensive collision avoidance.
 - Improve facial expressiveness and mouth behavior. Blinking currently uses an eye-surface cover, and speech jaw motion is approximate rather than phoneme animation.
 - Polish reminder window layout and controls.
-- Continue visual comparison: last recorded original-image silhouette IoU 0.821 and RGB MAE 0.205 fail the 0.95 / 0.05 likeness gate.
+- Continue visual comparison: the selected reading pose has original-image silhouette IoU 0.724 and RGB MAE 0.285, failing the unchanged 0.95 / 0.05 likeness gate.
 - Original feature parity remains future work; no third-party APIs are integrated.
 
 ## Recorded animation checks
@@ -28,3 +28,5 @@ The user-approved appearance is about 90% satisfactory. Preserve its palette, sh
 The pre-organization pass rendered 1,515 views across ten full actions and three camera angles without clipping. It checked 100 ordered skeletal transitions and 300 facial transitions. Wave wrist-pivot error was approximately 1.9e-7; clap palm proximity was below 0.001 at sampled contact frames. These are sampled checks, not proof of original animation identity.
 
 Selected numerical reports are preserved under `Baselines/2026-09-05/`. Full generated images, GIFs, and performance experiments remain local under the ignored `Validation/` directory. Appearance checkpoints are tracked under `References/ApprovedFanAppearance/` and `References/ApprovedAppearance/`. Historical iteration notes are in [the development log](History/development.md) and [model conversion history](../References/CandidateModel/README.md).
+
+The [reading checkpoint](Baselines/2026-09-05-reading/README.md) records seated grounding, page-safe returns, wearable combinations, and three-angle original comparisons.

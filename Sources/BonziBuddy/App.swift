@@ -153,9 +153,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate, AVSpeechSynthesizerDel
     }
     @objc func toggleHeadphones() {renderer.character.setHeadphonesEnabled(!renderer.character.headphonesEnabled,at:renderer.time);status.menu=makeMenu()}
     @objc func toggleSunglasses() { renderer.character.setSunglassesEnabled(!renderer.character.sunglassesEnabled,at:renderer.time);status.menu=makeMenu() }
-    @objc func animate(_ sender:NSMenuItem) { guard let name = sender.representedObject as? String, let a = Action(rawValue:name) else { return }; renderer.character.play(a,at:renderer.time,mode:RoutineLibrary.definitions[a]?.holdRange == nil ? .once:.hold) }
-    @objc func finishRoutine() { if !renderer.character.finishRoutine(at:renderer.time) {renderer.character.play(.idle,at:renderer.time)} }
-    @objc func wave() { renderer.character.play(.wave,at:renderer.time) }
+    @objc func animate(_ sender:NSMenuItem) { guard let name = sender.representedObject as? String, let a = Action(rawValue:name) else { return }; renderer.character.request(a,at:renderer.time,mode:RoutineLibrary.definitions[a]?.holdRange == nil ? .once:.hold) }
+    @objc func finishRoutine() { if !renderer.character.finishRoutine(at:renderer.time) {renderer.character.request(.idle,at:renderer.time)} }
+    @objc func wave() { renderer.character.request(.wave,at:renderer.time) }
     @objc func speakInput() { let text = input.stringValue.trimmingCharacters(in:.whitespacesAndNewlines); if !text.isEmpty { say(String(text.prefix(2000))); input.stringValue = "" } }
     @objc func joke() { say(["Why did the banana go to the doctor? It wasn't peeling well!","I tried to catch some fog. I mist.","Why do programmers prefer dark mode? Because light attracts bugs!"].randomElement()!) }
     @objc func tellTime() { say("It's \(DateFormatter.localizedString(from:Date(),dateStyle:.none,timeStyle:.short)). Time flies when you're a gorilla!") }

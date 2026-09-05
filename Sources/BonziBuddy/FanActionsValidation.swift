@@ -26,8 +26,10 @@ func validateFanActions() throws {
     for action in faceOnly ? [] : actions {
         renderer.character.play(action,at:0,mode:holdSeconds == nil ? .once:.hold)
         let duration:Double
-        if let holdSeconds,let loop=RoutineLibrary.definitions[action]?.holdRange {
-            duration=max(holdSeconds,loop.lowerBound)+action.duration-loop.upperBound
+        if let holdSeconds {
+            var planned=ActionPlayback();planned.play(action,at:0,mode:.hold);planned.finish(at:holdSeconds)
+            guard let end=planned.completionTime else {throw failure("Held preview has no scheduled return")}
+            duration=end
         } else {duration=action == .idle ? 4.6:action == .speak ? 2.0:action.duration}
         let frames=Int(ceil(duration*15))+1,name=action.rawValue.lowercased().replacingOccurrences(of:" ",with:"-")+(holdSeconds == nil ? "":"-held")+(withSunglasses ? "-sunglasses":"")+(withHeadphones ? "-headphones":"")
         guard let gif=CGImageDestinationCreateWithURL(URL(fileURLWithPath:"\(folder)/\(name).gif") as CFURL,"com.compuserve.gif" as CFString,frames,nil) else { throw failure("Cannot create action preview") }
@@ -54,7 +56,7 @@ func validateFanActions() throws {
                 NSImage(cgImage:bitmap.cgImage!,size:NSSize(width:400,height:320)).draw(in:NSRect(x:camera*400,y:0,width:400,height:320))
             }
             NSGraphicsContext.restoreGraphicsState()
-            if frame==min(15,frames/2) || frame==frames/2 || (action == .clap && frame<=6) || (action == .shrug && [5,7,9,22,27,33].contains(frame)) || (action == .think && [5,10,20,45,55,60].contains(frame)) || ((action == .dance || action == .juggle || action == .banana || action == .bananaMiss || action == .sunglasses || action == .headphones || action == .butterfly) && frame%10==0) {
+            if frame==min(15,frames/2) || frame==frames/2 || (action == .clap && frame<=6) || (action == .shrug && [5,7,9,22,27,33].contains(frame)) || (action == .think && [5,10,20,45,55,60].contains(frame)) || ((action == .dance || action == .juggle || action == .banana || action == .bananaMiss || action == .sunglasses || action == .headphones || action == .butterfly || action == .read) && frame%10==0) {
                 try output.representation(using:.png,properties:[:])!.write(to:URL(fileURLWithPath:"\(folder)/\(name)-\(frame).png"))
             }
             CGImageDestinationAddImage(gif,output.cgImage!,[kCGImagePropertyGIFDictionary:[kCGImagePropertyGIFDelayTime:1.0/15]] as CFDictionary)

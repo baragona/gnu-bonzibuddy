@@ -1,0 +1,14 @@
+{
+  "accessoryWaitedForStow" : true,
+  "footSurfaceSamples" : 6762,
+  "groundY" : -0.92000000000000004,
+  "heldAndRequestedReturnPassed" : true,
+  "maximumSeatedAnkleError" : 1.2310378849633707e-07,
+  "menuRequestWaitedForStand" : true,
+  "minimumFootY" : -0.92055940628051758,
+  "minimumSeatedFootY" : -0.91759198904037476,
+  "note" : "Foot surface heights are sampled diagnostics. These checks do not establish full-body collision avoidance or original choreography fidelity.",
+  "pageTurnCompletedBeforeReturn" : true,
+  "triangles" : 160,
+  "vertices" : 212
+}

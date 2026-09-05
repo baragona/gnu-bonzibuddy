@@ -27,13 +27,20 @@ func validateRoutines() throws {
         }
         for t in [-0.1,0,definition.duration,definition.duration+0.1] {
             let pose=RoutineLibrary.sample(action,at:t)
-            guard pose.props.isEmpty,pose.face.distance(to:FacialIntent())<0.0001,pose.hands.values.allSatisfy({$0.weight<0.0001}) else {throw failure("Routine leaks beyond entry/return: \(action)")}
+            guard pose.props.isEmpty,pose.face.distance(to:FacialIntent())<0.0001,pose.hands.values.allSatisfy({$0.weight<0.0001}),length(pose.stance.pelvisOffset)<0.0001,pose.stance.feet.values.allSatisfy({$0.weight<0.0001}) else {throw failure("Routine leaks beyond entry/return: \(action)")}
         }
         for frame in 0...Int(ceil(definition.duration*120)) {
-            let pose=RoutineLibrary.sample(action,at:Double(frame)/120)
+            let elapsed=Double(frame)/120
+            let delay=definition.returnDelay(elapsed)
+            guard delay.isFinite,delay>=0,delay<=definition.duration else {throw failure("Invalid return delay")}
+            let pose=RoutineLibrary.sample(action,at:elapsed)
             sampled += 1
             guard [pose.bodyYaw,pose.headYaw,pose.headTilt,pose.headPitch,pose.face.jawOpening,pose.face.eyeClosure,pose.face.smileOffset,pose.face.gaze.x,pose.face.gaze.y].allSatisfy(\.isFinite),
                   (0...1).contains(pose.face.jawOpening),(0...1).contains(pose.face.eyeClosure) else {throw failure("Invalid facial or body channels: \(action)")}
+            guard finite(pose.stance.pelvisOffset) else {throw failure("Invalid pelvis target")}
+            for foot in pose.stance.feet.values {
+                guard finite(foot.ankle),finite(foot.kneeBend),length(foot.kneeBend)>0.001,(0...1).contains(foot.weight),abs(length(foot.rotation.vector)-1)<0.001 else {throw failure("Invalid foot target")}
+            }
             for hand in pose.hands.values {
                 guard finite(hand.wrist),finite(hand.fingers),finite(hand.palm),length(cross(hand.fingers,hand.palm))>0.001,(0...1).contains(hand.weight),(0...1).contains(hand.grip) else {throw failure("Invalid hand frame: \(action)")}
             }
@@ -42,7 +49,9 @@ func validateRoutines() throws {
                 propSamples += 1
                 guard validAnchor(prop.anchor),finite(prop.offset),finite(prop.scale),prop.scale.min()>0,(0...1).contains(prop.visibility),prop.rotation.vector.x.isFinite,abs(length(prop.rotation.vector)-1)<0.001 else {throw failure("Invalid prop transform")}
                 switch (prop.kind,prop.deformation) {
-                case (.globe,.rigid),(.coconut,.rigid),(.sunglasses,.rigid),(.headphones,.rigid),(.butterflyWing,.rigid),(.butterflyBody,.rigid): break
+                case (.globe,.rigid),(.coconut,.rigid),(.sunglasses,.rigid),(.headphones,.rigid),(.butterflyWing,.rigid),(.butterflyBody,.rigid),(.bookLeft,.rigid),(.bookRight,.rigid): break
+                case let (.bookLeaf,.page(curl)):
+                    guard curl.isFinite,(0...1).contains(curl) else {throw failure("Invalid page curl")}
                 case let (.bananaFruit,.fruit(remaining)):
                     guard remaining.isFinite,(0...1).contains(remaining) else {throw failure("Invalid fruit amount")}
                 case let (.bananaPeel,.peel(openings)):

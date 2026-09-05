@@ -252,6 +252,10 @@ PropVertex deformProp(PropVertex v,constant PropUniforms& prop) {
             v.normal=float4(normalize(cross(dv,du)),0);
         }
     }
+    if (prop.material.y==3.0) {
+        v.position=mix(v.position,v.openedPosition,prop.deformation.x);
+        v.normal=float4(normalize(mix(v.normal.xyz,v.openedNormal.xyz,prop.deformation.x)),0);
+    }
     return v;
 }
 struct PropVarying {float4 position [[position]];float3 world;float3 normal;float4 color;float4 uv;};
@@ -315,6 +319,32 @@ fragment float4 propFragment(PropVarying vertexIn [[stage_in]],depth2d<float> sh
         in.color.rgb=mix(float3(1.0,0.88,0.08),float3(0.97,0.46,0.025),edge);
         in.color.rgb=mix(in.color.rgb,float3(0.49,0.46,0.08),max(spot,lower));
     } else if (prop.material.x==7.0) in.color.rgb=float3(0.37,0.35,0.06);
+    if (prop.material.x>=8.0 && prop.material.x<=10.0) {
+        float2 uv=vertexIn.uv.xy;
+        bool paper=vertexIn.uv.w>0.5;
+        in.color.rgb=paper ? float3(0.97,0.94,0.82):float3(0.46,0.255,0.055);
+        if (!paper && vertexIn.uv.z>0.5) {
+            float border=(1.0-smoothstep(0.025,0.035,min(min(uv.x,1.0-uv.x),min(uv.y,1.0-uv.y))));
+            in.color.rgb=mix(in.color.rgb,float3(0.78,0.57,0.12),border);
+            if (prop.material.x==9.0) {
+                float2 p=(uv-float2(0.57,0.60))*3.1;
+                float r=dot(p,p);
+                if (r<1.0) {
+                    float z=sqrt(1.0-r);
+                    float2 mapUV=float2(atan2(p.x,z)/(2.0*M_PI_F)+0.5,0.5-asin(p.y)/M_PI_F);
+                    float mask=land.sample(mapSampler,mapUV).r;
+                    in.color.rgb=mix(float3(0.23,0.025,0.72),float3(0.02,0.80,0.13),mask)*(0.65+0.35*z);
+                }
+            } else {
+                float line=1.0-smoothstep(0.012,0.022,abs(uv.y-(0.50+0.08*sin(uv.x*9.0))));
+                in.color.rgb=mix(in.color.rgb,float3(0.80,0.60,0.13),line*step(0.15,uv.x)*step(uv.x,0.85));
+            }
+        }
+        if (paper && vertexIn.uv.z< -0.5) {
+            float line=1.0-smoothstep(0.06,0.12,abs(fract(uv.y*16.0)-0.5));
+            in.color.rgb*=1.0-0.35*line*step(0.12,uv.x)*step(uv.x,0.88)*step(0.12,uv.y)*step(uv.y,0.88);
+        }
+    }
     float sheen=prop.material.x==4.0 ? 1.0:prop.material.x<0.5 ? 1.0:prop.material.x<1.5 ? 0.15:0.4;
     float4 shaded=shadeSurface(in,shadow,u,eyes,sheen,prop.material.z);
     if (prop.material.x==4.0) {

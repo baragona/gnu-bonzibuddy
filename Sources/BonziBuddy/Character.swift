@@ -29,6 +29,11 @@ final class Character {
     private var transitionMouth: Float = 0
     private var transitionFrom: [Instance] = []
     @discardableResult func finishRoutine(at time:Double)->Bool {playback.finishRoutine(at:time)}
+    func request(_ action:Action,at time:Double,mode:PlaybackMode = .once) {
+        let previous=localInstances(at:time)
+        playback.request(action,at:time,mode:mode)
+        transitionFrom=previous;transitionMouth=mouthOpening
+    }
     func play(_ action:Action,at time:Double,mode:PlaybackMode = .once) {
         let previous=localInstances(at:time)
         playback.play(action,at:time,mode:mode)

@@ -37,23 +37,11 @@ struct CharacterPlayback {
         guard enabled != accessories.requested.contains(wearable) else {return}
         adoptQueuedBody(at:time)
         let previousEnd=max(time,accessories.busyUntil)
-        let body=bodySnapshot(at:time)
         var begin=time
         if accessories.busyUntil<=time {
             // Prop routines own their hands until their authored stow completes.
             // Wearing glasses does not reserve anything; only a transfer waits.
-            let ownsProps=RoutineLibrary.definitions[body.action]?.accessoryTransferPolicy == .finishRoutine
-            if ownsProps && body.action.duration.isFinite {
-                if let loop=RoutineLibrary.definitions[body.action]?.holdRange {
-                    // A held routine needs its authored return before another
-                    // accessory can claim the hands; it must not wait forever.
-                    playback.finish(at:time)
-                    let returning=playback.sample(at:time)
-                    begin=returning.elapsed>=loop.upperBound
-                        ? time+max(0,body.action.duration-returning.elapsed)
-                        : time+max(0,loop.lowerBound-body.elapsed)+body.action.duration-loop.upperBound
-                } else {begin=time+max(0,body.action.duration-body.elapsed)}
-            }
+            begin=handoffTime(at:time)
             suspendsBody=begin==time
         } else if accessories.transfer(at:time)==nil {
             begin=accessories.nextTransferStart ?? time
@@ -64,6 +52,26 @@ struct CharacterPlayback {
         if var queued=queuedBody {
             queued.player.shift(by:nextEnd-queued.start);queued.start=nextEnd;queuedBody=queued
         }
+    }
+    // Interactive requests honor authored stow/stand sequences. Direct play is
+    // retained for deterministic previews and immediate speech synchronization.
+    private mutating func handoffTime(at time:Double)->Double {
+        let body=bodySnapshot(at:time)
+        guard RoutineLibrary.definitions[body.action]?.handoffPolicy == .finishRoutine,body.action.duration.isFinite else {return time}
+        if RoutineLibrary.definitions[body.action]?.holdRange != nil {
+            playback.finish(at:time)
+            return max(time,playback.completionTime ?? time)
+        }
+        return time+max(0,body.action.duration-body.elapsed)
+    }
+    mutating func request(_ action:Action,at time:Double,mode:PlaybackMode = .once) {
+        adoptQueuedBody(at:time)
+        if accessories.busyUntil>time {play(action,at:time,mode:mode);return}
+        let ready=handoffTime(at:time)
+        if ready>time {
+            var player=ActionPlayback();player.play(action,at:ready,mode:mode)
+            queuedBody=(player,ready)
+        } else {play(action,at:time,mode:mode)}
     }
     @discardableResult mutating func finishRoutine(at time:Double)->Bool {
         adoptQueuedBody(at:time)

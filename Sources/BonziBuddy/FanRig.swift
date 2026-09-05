@@ -89,12 +89,15 @@ final class FanRig {
         if !sourcePose {
             for hip in [12,16] {
                 let side:Float=hip==12 ? -1:1
-                let h=xyz(rest[hip])+SIMD3<Float>(0,-0.09,0)
-                let foot=xyz(rest[hip+2])+SIMD3<Float>(side*0.035,0,0)
+                let h=xyz(rest[hip])+SIMD3<Float>(0,-0.09,0)+routine.stance.pelvisOffset
+                let intent=routine.stance.feet[hip==12 ? .left:.right]
+                let restFoot=xyz(rest[hip+2])+SIMD3<Float>(side*0.035,0,0)
+                let foot=restFoot+((intent?.ankle ?? restFoot)-restFoot)*(intent?.weight ?? 0)
                 let upper=length(xyz(rest[hip+1])-xyz(rest[hip])),lower=length(xyz(rest[hip+2])-xyz(rest[hip+1]))
-                let d=length(foot-h),axis=normalize(foot-h)
+                let distance=length(foot-h),d=max(0.00001,min(upper+lower-0.00001,distance)),axis=normalize(foot-h)
                 let along=(upper*upper-lower*lower+d*d)/(2*d)
-                let pole=SIMD3<Float>(side*0.65,0,0.76)
+                let restPole=SIMD3<Float>(side*0.65,0,0.76)
+                let pole=restPole+((intent?.kneeBend ?? restPole)-restPole)*(intent?.weight ?? 0)
                 let bend=normalize(pole-axis*dot(pole,axis))
                 knees[hip]=h+axis*along+bend*sqrt(max(0,upper*upper-along*along))
                 ankles[hip]=foot
@@ -103,7 +106,7 @@ final class FanRig {
         for (i,node) in source.nodes.enumerated() {
             var inherited=node.parent<0 ? rest[i] : posed[node.parent]*local[i]
             if !sourcePose {
-                if [12,16,20].contains(i) { inherited=translation([0,-0.09,0])*inherited }
+                if [12,16,20].contains(i) { inherited=translation(SIMD3<Float>(0,-0.09,0)+routine.stance.pelvisOffset)*inherited }
                 if [23,40,24,41].contains(i) {
                     let reach:Float=(i==23 || i==40) ? 2.3:1.12
                     var extended=local[i];extended.columns.3.x *= reach;extended.columns.3.y *= reach;extended.columns.3.z *= reach
@@ -140,7 +143,10 @@ final class FanRig {
                 if i==13 || i==17 { result=aim(i+1,ankles[i-1]!-xyz(inherited)) }
                 if i==14 || i==18 {
                     let hip=i-2,legSide:Float=i==14 ? -1:1,p=ankles[hip]!
-                    result=translation(p)*rotate(legSide*0.25,[0,1,0])*translation(-xyz(rest[i]))*rest[i]
+                    let restRotation=simd_quatf(angle:legSide*0.25,axis:[0,1,0])
+                    let intent=routine.stance.feet[i==14 ? .left:.right]
+                    let rotation=simd_slerp(restRotation,intent?.rotation ?? restRotation,intent?.weight ?? 0)
+                    result=translation(p)*simd_float4x4(rotation)*translation(-xyz(rest[i]))*rest[i]
                 }
                 if i==56 {
                     let p=xyz(inherited)
@@ -222,7 +228,8 @@ final class FanRig {
                         let thumb=i>=(side<0 ? 36:52)
                         let curl:Float=thumb ? 0.65:[Float(1.05),1.35,0.80][segment]
                         let p=xyz(inherited)
-                        let grasp=translation(p)*rotate(-side*curl,[0,1,0])*translation(-p)*inherited
+                        let axis=thumb ? SIMD3<Float>(0,-side,0):normalize(cross(intent.fingers,intent.palm))
+                        let grasp=translation(p)*rotate(curl,axis)*translation(-p)*inherited
                         result=blendRotation(result,grasp,intent.grip*intent.weight)
                     }
                     if intent.pointing && ([30,31,32,33,34,35,46,47,48,49,50,51].contains(i)) {

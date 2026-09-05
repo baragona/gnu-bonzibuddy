@@ -25,7 +25,7 @@ The action filter enables focused three-angle reviews while keeping the full sui
 
 ## Outstanding scope
 
-Refine banana and miss variation; refine sunglasses finger contact; refine coconut headphones contact; refine butterfly interaction; seated book reading; writing pad/pencil; bamboo mailbox/letter variants; vine and surfboard movement/entrance/exit; chest beating/backflip; hugs/kisses/giggles/shushing; directional presentations and explanations; richer facial/gaze/idle sequences. Each needs actual geometry where applicable, reference-based choreography, clean entry/return/interruption behavior, multiple-angle review, and runtime profiling. This list is the remaining scope, not a list of completed features.
+Refine banana and miss variation; refine sunglasses finger contact; refine coconut headphones contact; refine butterfly interaction; refine seated reading and add lookup variants; writing pad/pencil; bamboo mailbox/letter variants; vine and surfboard movement/entrance/exit; chest beating/backflip; hugs/kisses/giggles/shushing; directional presentations and explanations; richer facial/gaze/idle sequences. Each needs actual geometry where applicable, reference-based choreography, clean entry/return/interruption behavior, multiple-angle review, and runtime profiling. This list is the remaining scope, not a list of completed features.
 
 The facing transform is included before hierarchical interruption blending, so interrupting a turned pose does not snap the body back to front. Props derive orientation from the blended root matrix. Stationary-leg regression assertions exclude actions with an intentional facing turn; their full skeleton is still checked for transition continuity and convergence.
 
@@ -127,3 +127,14 @@ Pointing exposed a rig bug: fixed-world-axis curls twisted the non-index fingers
 The plain and both-accessories previews each render 156 frames from three angles: 936 views without clipping. Unique butterfly meshes total 1,295 vertices and 1,488 triangles. Perch attachment error is below 1.6e-7, waypoint velocity mismatch below 0.00134, and the curled middle finger remains 0.248 model units below the index tip at the checked pointing pose. The other index tip stays within 0.171 of the perch center during touching, reaching the wing region; this is not an exact collision/contact proof.
 
 The original-frame comparison prompted a wider/larger butterfly and more olive markings. The final selected pose still fails whole-character near-identity: silhouette IoU 0.629, RGB MAE 0.291. The neutral render is preserved (RGBA MAE 8.95e-8), and 289 ordered action transitions plus 969 facial cases pass. A material regression checks 2,646 gold-colored wing pixels and finds zero changed channels under blink/gaze changes. Reports and representative views are in `Baselines/2026-09-05-butterfly/`.
+
+
+## Seated reading
+
+The implementation combines the extracted `Read` entrance (4.30 seconds), `ReadContinued` loop (4.75 seconds), and `ReadReturn` (2.56 seconds). Bonzi sits with his soles facing forward, retrieves and opens a brown book with a globe cover, scans the pages, turns a sheet, stows the book, and stands. Selecting Read holds the reading loop; Return to rest requests the return. Dedicated looking-up variants and reading-aloud behavior remain unfinished.
+
+`StanceIntent` authors a pelvis offset and semantic foot targets, including foot rotation and knee bend direction. The shared rig solves the legs and blends the stance through its existing skeletal transition path. Stance-changing routines declare that fact so the transition validator does not incorrectly demand stationary leg matrices; `--validate-read` separately checks their targets and sampled foot surface height. Grip curls now use the authored finger/palm directions, matching the earlier pointing fix.
+
+The book has hinged cover/page-block meshes and a separate two-sided turning sheet. A typed page-curl parameter deforms both the color and shadow passes. Held hand targets follow the same cover transforms. Original-frame comparison prompted a larger book across the lap, a revised tilt, and outward-turned feet. Detailed spine curvature and exact finger/page contact remain refinement work.
+
+Menu animation requests now honor a routine's handoff policy: prop routines finish their authored return/stow before the latest queued request starts. Direct `play` remains available for offline previews and current immediate speech synchronization. Reading also declares a return delay during a page turn. Playback exposes the scheduled completion time, so queued actions, accessory transfers, and held previews all wait through the page turn and the entire return.
