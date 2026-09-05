@@ -25,7 +25,7 @@ The action filter enables focused three-angle reviews while keeping the full sui
 
 ## Outstanding scope
 
-Refine banana and miss variation; sunglasses; coconut headphones; butterfly interaction; seated book reading; writing pad/pencil; bamboo mailbox/letter variants; vine and surfboard movement/entrance/exit; chest beating/backflip; hugs/kisses/giggles/shushing; directional presentations and explanations; richer facial/gaze/idle sequences. Each needs actual geometry where applicable, reference-based choreography, clean entry/return/interruption behavior, multiple-angle review, and runtime profiling. This list is the remaining scope, not a list of completed features.
+Refine banana and miss variation; refine sunglasses finger contact; coconut headphones; butterfly interaction; seated book reading; writing pad/pencil; bamboo mailbox/letter variants; vine and surfboard movement/entrance/exit; chest beating/backflip; hugs/kisses/giggles/shushing; directional presentations and explanations; richer facial/gaze/idle sequences. Each needs actual geometry where applicable, reference-based choreography, clean entry/return/interruption behavior, multiple-angle review, and runtime profiling. This list is the remaining scope, not a list of completed features.
 
 The facing transform is included before hierarchical interruption blending, so interrupting a turned pose does not snap the body back to front. Props derive orientation from the blended root matrix. Stationary-leg regression assertions exclude actions with an intentional facing turn; their full skeleton is still checked for transition continuity and convergence.
 
@@ -75,3 +75,25 @@ The architecture checkpoint samples 3,776 routine frames and 5,400 prop cues. Se
 A selected first-bite comparison (original frame 18, native frame 30) has silhouette IoU 0.767 and RGB MAE 0.281, failing the existing near-identity gate. It remains a whole-character selected-pose diagnostic, not time-aligned choreography or mouth-contact proof. Reports and the comparison image are in `Baselines/2026-09-05-routines/`.
 
 All 196 ordered action transitions and 644 facial interruption cases pass, including the later banana jaw/gaze/smile beats.
+
+## Sunglasses and sustained playback
+
+The fan source already contains a separate glasses object. `Scripts/export-sunglasses.py` exports its 2,944 used vertices and 5,824 triangles as `Resources/Props/FanSunglasses.mesh`, fitting its coordinates to the approved upper-face lift and head proportions. The imported frames, lenses, and temples retain real depth; a material response permits highlights on dark lenses without changing the character's material.
+
+The inspected original `SunglassesContinued` has 52 frames and 12.60 seconds of timing, including putting them on. `SunglassesReturn` has 20 frames and 1.90 seconds. Our complete preview combines those into 14.50 seconds. A reusable hold range spans 1.90–12.60 seconds: selecting Sunglasses in the app keeps this wearing/adjusting cycle active, and **Return to rest** requests the removal sequence. A request during the entrance waits for the glasses to be put on before removing them. Repeated return requests do not restart removal; backward scrubbing remains deterministic.
+
+The geometry's left hinge marker drives a hand socket. A rigid attachment blend transfers the same prop between that socket and the head, preserving identity. The authored adjustment briefly nudges the glasses while the hand reaches their temple. The reference's relaxed expression is approximated with slight eye closure behind the lenses and a small smile offset, both removed on return.
+
+Starting an unrelated action still uses generic interruption/prop retirement. Keeping glasses equipped while independently speaking or gesturing, and more precise fingertip wrapping, remain work. Head-relative hand targets are currently authored in character coordinates; the head attachment itself is resolved from the evaluated rig.
+
+```sh
+python3 Scripts/export-sunglasses.py
+./Scripts/build.sh
+Build/BonziBuddy.app/Contents/MacOS/BonziBuddy --validate-sunglasses
+Build/BonziBuddy.app/Contents/MacOS/BonziBuddy --validate-fan-actions --action sunglasses
+Build/BonziBuddy.app/Contents/MacOS/BonziBuddy --validate-fan-actions --action sunglasses --hold-seconds 18
+```
+
+The sustained 18-second wear-and-return preview renders 300 frames from three angles (900 views), with no clipping. Numerical checks keep the prop held at 100 seconds, preserve the loop seam, accept early/repeated return requests, and remove it after the return. Hand-marker and head-attachment errors stay below 2.4e-7 model units; the return-start matrix jump is below 3.0e-7. All 225 ordered action transitions and 765 facial interruption cases pass, and neutral appearance remains effectively unchanged (RGBA MAE 8.95e-8). These checks do not establish fingertip contact or original animation identity.
+
+The final selected worn-pose comparison (original continued frame 19, native frame 40) has silhouette IoU 0.765 and RGB MAE 0.227, still failing the whole-character near-identity gate. The comparison prompted broader gray lens reflections; it also retains the approved fan character’s different body proportions. Reports and the comparison image are preserved in `Baselines/2026-09-05-sunglasses/`.

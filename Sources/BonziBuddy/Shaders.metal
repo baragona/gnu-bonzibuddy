@@ -106,7 +106,7 @@ float visibility(float3 world,float3 normal,depth2d<float> shadow,constant Unifo
     return lit/32.0;
 }
 struct FanEyeUniforms { float4 face; float4 closures; };
-float4 shadeSurface(Varying in,depth2d<float> shadow,constant Uniforms& u,constant FanEyeUniforms& eyes,float sheenScale) {
+float4 shadeSurface(Varying in,depth2d<float> shadow,constant Uniforms& u,constant FanEyeUniforms& eyes,float sheenScale,float minimumSheen) {
     float4 face=eyes.face;
     float3 n = normalize(in.normal);
     float3 geometric = normalize(cross(dfdx(in.world),dfdy(in.world)));
@@ -144,13 +144,13 @@ float4 shadeSurface(Varying in,depth2d<float> shadow,constant Uniforms& u,consta
             eyeCatchlight=(1.0-smoothstep(1.0-edge,1.0+edge,spot))*pupil*(1.0-lid);
         }
     }
-    float sheen = smoothstep(0.42,0.65,max(surfaceColor.r,max(surfaceColor.g,surfaceColor.b)));
+    float sheen = max(minimumSheen,smoothstep(0.42,0.65,max(surfaceColor.r,max(surfaceColor.g,surfaceColor.b))));
     float3 color = surfaceColor.rgb * (0.36 + 0.60*diffuse*shade + 0.12*fill) + 0.16*spec*shade*sheen*sheenScale;
     color=mix(color,float3(0.98,0.98,1.0),eyeCatchlight*0.94);
     return float4(color * in.color.a, in.color.a);
 }
 fragment float4 fragmentMain(Varying in [[stage_in]],depth2d<float> shadow [[texture(0)]],constant Uniforms& u [[buffer(2)]],constant FanEyeUniforms& eyes [[buffer(3)]]) {
-    return shadeSurface(in,shadow,u,eyes,1.0);
+    return shadeSurface(in,shadow,u,eyes,1.0,0.0);
 }
 vertex Varying groundVertex(uint v [[vertex_id]],constant Uniforms& u [[buffer(2)]]) {
     const float2 corners[6] = {float2(-1.4,-1.4),float2(1.4,-1.4),float2(-1.4,1.4),float2(-1.4,1.4),float2(1.4,-1.4),float2(1.4,1.4)};
@@ -295,6 +295,16 @@ fragment float4 propFragment(Varying in [[stage_in]],depth2d<float> shadow [[tex
         float3 shell=mix(yellow,float3(0.30,0.15,0.018),clamp(tip,0.0,1.0));
         in.color.rgb=mix(shell,float3(0.98,0.91,0.62),in.eyeHeight*0.92);
     }
-    float sheen=prop.material.x<0.5 ? 1.0:prop.material.x<1.5 ? 0.15:0.4;
-    return shadeSurface(in,shadow,u,eyes,sheen);
+    if (prop.material.x==4.0) {
+        in.color.rgb=mix(float3(0.035,0.025,0.045),float3(0.008,0.016,0.021),in.eyeHeight);
+    }
+    float sheen=prop.material.x==4.0 ? 1.0:prop.material.x<0.5 ? 1.0:prop.material.x<1.5 ? 0.15:0.4;
+    float4 shaded=shadeSurface(in,shadow,u,eyes,sheen,prop.material.z);
+    if (prop.material.x==4.0) {
+        // A broad studio-light reflection gives the original's gray lens bands.
+        // It follows the surface normal as the head turns, independent of the clip.
+        float band=pow(max(0.0,dot(normalize(in.normal),normalize(float3(-0.15,0.10,1.5)))),5.0);
+        shaded.rgb+=float3(0.40,0.41,0.42)*band*in.eyeHeight*in.color.a;
+    }
+    return shaded;
 }

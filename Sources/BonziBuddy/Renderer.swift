@@ -163,9 +163,9 @@ final class Renderer: NSObject, MTKViewDelegate {
         let playback=character.playbackSnapshot(at:time)
         if let fanRig {
             if fanLiveActions {
-                fanRig.updateLiveAction(playback.action,started:playback.started,at:time)
+                fanRig.updateLiveAction(playback.action,started:playback.started,at:time,elapsed:playback.elapsed)
                 fanMorphIndices=[2,1]
-                automaticFace=fanFaceMotion.sample(playback.action,started:playback.started,at:time)
+                automaticFace=fanFaceMotion.sample(playback.action,started:playback.started,at:time,elapsed:playback.elapsed)
                 fanMorphWeights=[1,automaticFace.jawOpening]
             }
             if fanValidationMotion {

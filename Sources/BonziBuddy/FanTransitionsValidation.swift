@@ -51,7 +51,7 @@ func validateFanTransitions() throws {
     var faceJump:Float=0,faceSettled:Float=0
     var facialCases=0
     for from in Action.allCases { for to in Action.allCases {
-        let lateBeats:[Double]=from == .banana ? [2.1,4.3]:from == .bananaMiss ? [2.2,5.8]:[]
+        let lateBeats:[Double]=from == .banana ? [2.1,4.3]:from == .bananaMiss ? [2.2,5.8]:from == .sunglasses ? [2.0,11.3]:[]
         for interrupt in [0.12,0.5,0.8]+lateBeats {
         facialCases += 1
         let face=FanFaceMotion()

@@ -1,0 +1,6 @@
+{
+  "path": "Resources/Props/FanSunglasses.mesh",
+  "sha256": "6b9e3021fd2c7711cdb14c100e6da2c343a25c33e41d736c68cdbe416072199a",
+  "exporter": "Scripts/export-sunglasses.py",
+  "reproducibleExportChecked": true
+}

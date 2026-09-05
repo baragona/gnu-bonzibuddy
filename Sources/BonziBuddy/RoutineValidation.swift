@@ -6,6 +6,13 @@ func validateRoutines() throws {
     func matrixError(_ a:simd_float4x4,_ b:simd_float4x4)->Float {
         (0..<4).reduce(Float(0)) {largest,c in (0..<4).reduce(largest) {max($0,abs(a[c][$1]-b[c][$1]))}}
     }
+    func validAnchor(_ anchor:PropAnchor)->Bool {
+        switch anchor {
+        case .character,.attachment: return true
+        case let .transformed(parent,offset,rotation): return validAnchor(parent) && finite(offset) && abs(length(rotation.vector)-1)<0.001
+        case let .blend(from,to,weight): return validAnchor(from) && validAnchor(to) && weight.isFinite && (0...1).contains(weight)
+        }
+    }
     var playback=ActionPlayback()
     playback.play(.banana,at:5)
     let middle=playback.sample(at:7),finished=playback.sample(at:20),rewound=playback.sample(at:7)
@@ -13,6 +20,11 @@ func validateRoutines() throws {
     var sampled=0,propSamples=0
     for (action,definition) in RoutineLibrary.definitions {
         guard definition.duration.isFinite,definition.duration>0 else {throw failure("Invalid routine duration")}
+        if let loop=definition.holdRange {
+            guard loop.lowerBound>=0,loop.upperBound<definition.duration,loop.upperBound>loop.lowerBound else {throw failure("Invalid hold range")}
+            let a=definition.sample(loop.lowerBound),b=definition.sample(loop.upperBound)
+            guard a.face.distance(to:b.face)<0.0001,abs(a.headYaw-b.headYaw)<0.0001,a.props.map(\.id)==b.props.map(\.id) else {throw failure("Discontinuous hold-loop channels")}
+        }
         for t in [-0.1,0,definition.duration,definition.duration+0.1] {
             let pose=RoutineLibrary.sample(action,at:t)
             guard pose.props.isEmpty,pose.face.distance(to:FacialIntent())<0.0001,pose.hands.values.allSatisfy({$0.weight<0.0001}) else {throw failure("Routine leaks beyond entry/return: \(action)")}
@@ -28,9 +40,9 @@ func validateRoutines() throws {
             guard Set(pose.props.map(\.id)).count==pose.props.count else {throw failure("Duplicate prop IDs")}
             for prop in pose.props {
                 propSamples += 1
-                guard finite(prop.offset),finite(prop.scale),prop.scale.min()>0,(0...1).contains(prop.visibility),prop.rotation.vector.x.isFinite,abs(length(prop.rotation.vector)-1)<0.001 else {throw failure("Invalid prop transform")}
+                guard validAnchor(prop.anchor),finite(prop.offset),finite(prop.scale),prop.scale.min()>0,(0...1).contains(prop.visibility),prop.rotation.vector.x.isFinite,abs(length(prop.rotation.vector)-1)<0.001 else {throw failure("Invalid prop transform")}
                 switch (prop.kind,prop.deformation) {
-                case (.globe,.rigid),(.coconut,.rigid): break
+                case (.globe,.rigid),(.coconut,.rigid),(.sunglasses,.rigid): break
                 case let (.bananaFruit,.fruit(remaining)):
                     guard remaining.isFinite,(0...1).contains(remaining) else {throw failure("Invalid fruit amount")}
                 case let (.bananaPeel,.peel(openings)):

@@ -28,7 +28,7 @@ final class PropRenderer {
         shadow.vertexFunction=library.makeFunction(name:"propShadowVertex")
         shadow.depthAttachmentPixelFormat = .depth32Float
         shadowPipeline=try device.makeRenderPipelineState(descriptor:shadow)
-        meshes=Dictionary(uniqueKeysWithValues:PropKind.allCases.map { ($0,PropMesh(device:device,kind:$0)) })
+        meshes=try Dictionary(uniqueKeysWithValues:PropKind.allCases.map { ($0,try PropMesh(device:device,kind:$0)) })
         let url=Bundle.main.resourceURL?.appendingPathComponent("Props/globe-land.png")
         let path=url.flatMap { FileManager.default.fileExists(atPath:$0.path) ? $0:nil } ?? URL(fileURLWithPath:"Resources/Props/globe-land.png")
         globeTexture=try MTKTextureLoader(device:device).newTexture(URL:path,options:[.SRGB:false,.generateMipmaps:true])
@@ -48,7 +48,7 @@ final class PropRenderer {
             let mesh=meshes[draw.kind]!
             encoder.setVertexBuffer(mesh.vertices,offset:0,index:0)
             let (deformationMode,parameters)=packedDeformation(draw.deformation)
-            var uniforms=PropUniforms(model:draw.model,color:[1,1,1,1],material:[Float(draw.kind.rawValue),deformationMode,0,0],deformation:parameters)
+            var uniforms=PropUniforms(model:draw.model,color:[1,1,1,1],material:[Float(draw.kind.rawValue),deformationMode,draw.kind == .sunglasses ? 0.75:0,0],deformation:parameters)
             encoder.setVertexBytes(&uniforms,length:MemoryLayout<PropUniforms>.stride,index:5)
             if !shadow {encoder.setFragmentBytes(&uniforms,length:MemoryLayout<PropUniforms>.stride,index:5)}
             encoder.drawIndexedPrimitives(type:.triangle,indexCount:mesh.indexCount,indexType:.uint32,indexBuffer:mesh.indices,indexBufferOffset:0)

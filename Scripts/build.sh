@@ -8,8 +8,8 @@ for asset in FanRigged.mesh FanRig.json FanMorphs.bin FanMorphs.json FanTeeth.me
         exit 1
     fi
 done
-if [[ ! -s Resources/Props/globe-land.png ]]; then
-    echo "Missing required prop texture: Resources/Props/globe-land.png" >&2
+if [[ ! -s Resources/Props/globe-land.png || ! -s Resources/Props/FanSunglasses.mesh ]]; then
+    echo "Missing required prop asset: globe-land.png or FanSunglasses.mesh" >&2
     exit 1
 fi
 mkdir -p .build Validation Resources

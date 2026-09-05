@@ -15,7 +15,7 @@ The build produces an ad-hoc signed app with all runtime assets bundled. Drag Bo
 
 ## Current state
 
-The default model has a 20% neutral smile, 15 facial morph controls, gaze, blinking, articulated hands, and fourteen actions with interruption blending, including globe spinning, coconut juggling, and initial banana routines. The approved appearance is preserved in `References/ApprovedFanAppearance/`.
+The default model has a 20% neutral smile, 15 facial morph controls, gaze, blinking, articulated hands, and fifteen actions with interruption blending, including globe spinning, coconut juggling, initial banana routines, and sunglasses with sustained wear/removal. The approved appearance is preserved in `References/ApprovedFanAppearance/`.
 
 Visual likeness and animation coverage are still in progress. The latest live measurements are near **60 fps**, despite requesting 120 fps; presentation pacing remains unresolved. Reminders also need UI polish. See [current status](Docs/status.md) for limitations and recorded checks.
 

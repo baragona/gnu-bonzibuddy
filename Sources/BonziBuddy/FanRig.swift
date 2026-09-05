@@ -26,7 +26,7 @@ final class FanRig {
     private var transitionStarted:Double = 0
     private var actionStarted:Double?
     private var lastActionTime:Double = -.infinity
-    func updateLiveAction(_ next:Action, started:Double, at time:Double) {
+    func updateLiveAction(_ next:Action, started:Double, at time:Double, elapsed:Double?=nil) {
         if time<lastActionTime {
             // Offline scrubbing starts a new timeline; future transition poses
             // must not contaminate an earlier frame or another camera review.
@@ -38,7 +38,7 @@ final class FanRig {
             transitionStarted=time
             actionStarted=started
         }
-        action=next;actionTime=max(0,time-started)
+        action=next;actionTime=max(0,elapsed ?? (time-started))
         waveTime=next == .wave ? actionTime:nil
     }
     init(url:URL) throws {

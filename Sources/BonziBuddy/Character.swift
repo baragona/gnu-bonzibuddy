@@ -22,9 +22,10 @@ final class Character {
     private(set) var surfaces: [SurfaceKind] = []
     private var transitionMouth: Float = 0
     private var transitionFrom: [Instance] = []
-    func play(_ action: Action, at time: Double) {
+    @discardableResult func finishRoutine(at time:Double)->Bool {playback.finish(at:time)}
+    func play(_ action: Action, at time: Double, mode:PlaybackMode = .once) {
         let previous = localInstances(at:time)
-        playback.play(action,at:time); transitionFrom = previous; transitionMouth = mouthOpening
+        playback.play(action,at:time,mode:mode); transitionFrom = previous; transitionMouth = mouthOpening
     }
     func instances(at time: Double) -> [Instance] {
         var pose=localInstances(at:time)

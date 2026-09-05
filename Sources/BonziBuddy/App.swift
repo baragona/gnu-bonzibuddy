@@ -117,6 +117,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, AVSpeechSynthesizerDel
         for action in Action.allCases where action != .idle && action != .speak {
             let i = NSMenuItem(title:action.rawValue,action:#selector(animate(_:)),keyEquivalent:""); i.representedObject = action.rawValue; i.target = self; menu.addItem(i)
         }
+        item("Return to rest",#selector(finishRoutine))
         item("Tell a joke",#selector(joke)); item("Tell the time",#selector(tellTime))
         menu.addItem(.separator())
         item(muted ? "Enable voice" : "Mute voice",#selector(toggleMute))
@@ -146,7 +147,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate, AVSpeechSynthesizerDel
         renderer.character.yaw=angles[0];renderer.character.pitch=angles[1]
         status.menu=makeMenu()
     }
-    @objc func animate(_ sender:NSMenuItem) { guard let name = sender.representedObject as? String, let a = Action(rawValue:name) else { return }; renderer.character.play(a,at:renderer.time) }
+    @objc func animate(_ sender:NSMenuItem) { guard let name = sender.representedObject as? String, let a = Action(rawValue:name) else { return }; renderer.character.play(a,at:renderer.time,mode:RoutineLibrary.definitions[a]?.holdRange == nil ? .once:.hold) }
+    @objc func finishRoutine() { if !renderer.character.finishRoutine(at:renderer.time) {renderer.character.play(.idle,at:renderer.time)} }
     @objc func wave() { renderer.character.play(.wave,at:renderer.time) }
     @objc func speakInput() { let text = input.stringValue.trimmingCharacters(in:.whitespacesAndNewlines); if !text.isEmpty { say(String(text.prefix(2000))); input.stringValue = "" } }
     @objc func joke() { say(["Why did the banana go to the doctor? It wasn't peeling well!","I tried to catch some fog. I mist.","Why do programmers prefer dark mode? Because light attracts bugs!"].randomElement()!) }

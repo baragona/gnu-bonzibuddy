@@ -3,3 +3,8 @@ https://www.naturalearthdata.com/about/terms-of-use/
 Source: ne_110m_land.geojson
 https://github.com/nvkelso/natural-earth-vector/blob/master/geojson/ne_110m_land.geojson
 Baked locally by Scripts/bake-globe-texture.swift. Palette is authored in Metal.
+
+FanSunglasses.mesh: glasses geometry from YinyangGio's Bonzi fan model, exported
+from the project's existing scene.json and fitted to the approved head shape.
+See ../FanModel/ATTRIBUTION.txt for the model source and credits.
+Export script: Scripts/export-sunglasses.py. No external modeling application used.

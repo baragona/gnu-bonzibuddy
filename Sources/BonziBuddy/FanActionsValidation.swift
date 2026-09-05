@@ -14,15 +14,26 @@ func validateFanActions() throws {
     let requested=CommandLine.arguments.firstIndex(of:"--action").flatMap { $0+1<CommandLine.arguments.count ? CommandLine.arguments[$0+1]:nil }
     let actions=Action.allCases.filter { requested == nil || $0.rawValue.lowercased()==requested!.lowercased() }
     if requested != nil && actions.isEmpty { throw failure("Unknown validation action") }
+    let holdArgument=CommandLine.arguments.firstIndex(of:"--hold-seconds")
+    let holdSeconds=holdArgument.flatMap {$0+1<CommandLine.arguments.count ? Double(CommandLine.arguments[$0+1]):nil}
+    if holdArgument != nil {
+        guard let holdSeconds,holdSeconds.isFinite,holdSeconds>0,actions.count==1,RoutineLibrary.definitions[actions[0]]?.holdRange != nil else {throw failure("Hold preview needs one hold-capable action and a positive duration")}
+    }
     for action in faceOnly ? [] : actions {
-        renderer.character.play(action,at:0)
-        let duration=action == .idle ? 4.6 : action == .speak ? 2.0 : action.duration
-        let frames=Int(ceil(duration*15))+1,name=action.rawValue.lowercased().replacingOccurrences(of:" ",with:"-")
+        renderer.character.play(action,at:0,mode:holdSeconds == nil ? .once:.hold)
+        let duration:Double
+        if let holdSeconds,let loop=RoutineLibrary.definitions[action]?.holdRange {
+            duration=max(holdSeconds,loop.lowerBound)+action.duration-loop.upperBound
+        } else {duration=action == .idle ? 4.6:action == .speak ? 2.0:action.duration}
+        let frames=Int(ceil(duration*15))+1,name=action.rawValue.lowercased().replacingOccurrences(of:" ",with:"-")+(holdSeconds == nil ? "":"-held")
         guard let gif=CGImageDestinationCreateWithURL(URL(fileURLWithPath:"\(folder)/\(name).gif") as CFURL,"com.compuserve.gif" as CFString,frames,nil) else { throw failure("Cannot create action preview") }
         CGImageDestinationSetProperties(gif,[kCGImagePropertyGIFDictionary:[kCGImagePropertyGIFLoopCount:0]] as CFDictionary)
-        var clipped=0
+        var clipped=0,requestedReturn=false
         for frame in 0..<frames {
             let time=Double(frame)/15
+            if let holdSeconds,time>=holdSeconds,!requestedReturn {
+                renderer.character.finishRoutine(at:holdSeconds);requestedReturn=true
+            }
             let output=NSBitmapImageRep(bitmapDataPlanes:nil,pixelsWide:1200,pixelsHigh:320,bitsPerSample:8,samplesPerPixel:4,hasAlpha:true,isPlanar:false,colorSpaceName:.deviceRGB,bytesPerRow:4800,bitsPerPixel:32)!
             NSGraphicsContext.saveGraphicsState();NSGraphicsContext.current=NSGraphicsContext(bitmapImageRep:output)!
             NSColor(calibratedWhite:0.94,alpha:1).setFill();NSRect(x:0,y:0,width:1200,height:320).fill()
@@ -39,13 +50,13 @@ func validateFanActions() throws {
                 NSImage(cgImage:bitmap.cgImage!,size:NSSize(width:400,height:320)).draw(in:NSRect(x:camera*400,y:0,width:400,height:320))
             }
             NSGraphicsContext.restoreGraphicsState()
-            if frame==min(15,frames/2) || frame==frames/2 || (action == .clap && frame<=6) || (action == .shrug && [5,7,9,22,27,33].contains(frame)) || (action == .think && [5,10,20,45,55,60].contains(frame)) || ((action == .dance || action == .juggle || action == .banana || action == .bananaMiss) && frame%10==0) {
+            if frame==min(15,frames/2) || frame==frames/2 || (action == .clap && frame<=6) || (action == .shrug && [5,7,9,22,27,33].contains(frame)) || (action == .think && [5,10,20,45,55,60].contains(frame)) || ((action == .dance || action == .juggle || action == .banana || action == .bananaMiss || action == .sunglasses) && frame%10==0) {
                 try output.representation(using:.png,properties:[:])!.write(to:URL(fileURLWithPath:"\(folder)/\(name)-\(frame).png"))
             }
             CGImageDestinationAddImage(gif,output.cgImage!,[kCGImagePropertyGIFDictionary:[kCGImagePropertyGIFDelayTime:1.0/15]] as CFDictionary)
         }
         guard CGImageDestinationFinalize(gif) else { throw failure("Cannot save action preview") }
-        reports.append(["action":action.rawValue,"frames":frames,"clippedViews":clipped]);print("Rendered \(action.rawValue), \(frames) frames, \(clipped) clipped views")
+        reports.append(["action":action.rawValue,"frames":frames,"clippedViews":clipped,"playback":holdSeconds == nil ? "once":"held then return","returnRequestedAt":holdSeconds ?? -1]);print("Rendered \(action.rawValue), \(frames) frames, \(clipped) clipped views")
     }
     renderer.character.play(.idle,at:0);renderer.character.yaw=0
     for (name,time) in [("open",3.9),("half",4.04),("closed",4.10),("reopening",4.20)] {

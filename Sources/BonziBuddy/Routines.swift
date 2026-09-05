@@ -28,6 +28,7 @@ enum RoutineLibrary {
         return x*x*x*(x*(x*6-15)+10)
     }
     static let definitions:[Action:RoutineDefinition]=[
+        .sunglasses:RoutineDefinition(duration:SunglassesRoutine.duration,holdRange:SunglassesRoutine.holdRange,sample:SunglassesRoutine.sample),
         .globe:RoutineDefinition(duration:GlobeRoutine.duration,changesFacing:true,sample:GlobeRoutine.sample),
         .juggle:RoutineDefinition(duration:CoconutJuggle.duration,sample:CoconutJuggle.sample),
         .banana:RoutineDefinition(duration:BananaRoutine.duration(miss:false),changesFacing:true,sample:{BananaRoutine.sample(at:$0,miss:false)}),
@@ -44,5 +45,6 @@ enum RoutineLibrary {
 struct RoutineDefinition {
     let duration:Double
     var changesFacing=false
+    var holdRange:Range<Double>?
     let sample:(Double)->RoutinePose
 }

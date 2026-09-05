@@ -18,7 +18,7 @@ final class FanFaceMotion {
         face.jawOpening=max(jaw,face.jawOpening);face.eyeClosure=max(closure,face.eyeClosure)
         return face
     }
-    func sample(_ next:Action,started nextStart:Double,at time:Double)->FacialIntent {
+    func sample(_ next:Action,started nextStart:Double,at time:Double,elapsed:Double?=nil)->FacialIntent {
         // Offline previews can restart their timeline; the live clock is monotonic.
         if time<lastTime { action=nil;started=nil;displayed = FacialIntent() }
         if action != next || started != nextStart {
@@ -26,7 +26,7 @@ final class FanFaceMotion {
         }
         let t=min(1,max(0,Float((time-transitionTime)/0.15)))
         let weight=t*t*(3-2*t)
-        displayed=from.blended(to:Self.target(next,elapsed:time-nextStart),amount:weight)
+        displayed=from.blended(to:Self.target(next,elapsed:elapsed ?? (time-nextStart)),amount:weight)
         lastTime=time
         return displayed
     }
