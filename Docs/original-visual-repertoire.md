@@ -1,6 +1,6 @@
 # Original visual repertoire
 
-Research date: September 5, 2026. The original's repertoire is substantially broader than our current action catalog. The working tree has eighteen action entries, including first globe, juggling, banana, butterfly, reading, headphones, and sunglasses implementations. See [source audit and full animation directory](../References/AnimationInventory/README.md) and [sampled sprite review](../References/AnimationInventory/surfboard-sprite-review.png).
+Research date: September 5, 2026. The original's repertoire is substantially broader than our current action catalog. The working tree has nineteen action entries, including first globe, juggling, banana, butterfly, reading, headphones, and sunglasses implementations. See [source audit and full animation directory](../References/AnimationInventory/README.md) and [sampled sprite review](../References/AnimationInventory/surfboard-sprite-review.png).
 
 ## Evidence levels
 
@@ -15,7 +15,7 @@ Research date: September 5, 2026. The original's repertoire is substantially bro
 | Put on sunglasses, pose, adjust them, and remove them | Visual: earlier `Idle2_1`; later continued/return entries also exist | Implemented with sustained wear and removal; finer finger contact remains |
 | Coconut-shell headphones, with continued and return segments | Extracted and visually reviewed: `HeadphonesContinued` 60 frames, `HeadphonesReturn` 18 frames | Initial hollow-shell mesh, two-handed pickup, held listening, and removal; finer contact remains |
 | Juggling three coconuts | Extracted: `Juggle` 62 frames; exact trajectories still need matching | Implemented; sampled clearance passes, visual fidelity remains approximate |
-| Seated book reading, looking up, resuming, and putting away | Extracted: `Read` 31 frames plus related segments | Initial seated reading, page turn, and stow/stand; dedicated lookup variants remain |
+| Seated book reading, looking up, resuming, and putting away | Extracted: `Read` 31 frames plus related segments | Seated reading/page turn plus look-up/continued gestures and stow/stand; reading aloud remains |
 | Pencil-and-pad writing, pausing, repeating a stroke, and returning | Extracted: `Write` 37 frames plus related segments | Missing |
 | Bamboo-style mailbox, empty/full outcomes, read a letter, advance, and return | Extracted: separate mail family | Missing; visual routines can work without email integration |
 | Surfboard entrance, exit, and directional travel | Visual: earlier `Show` / `Hide`; move families in metadata | Missing |

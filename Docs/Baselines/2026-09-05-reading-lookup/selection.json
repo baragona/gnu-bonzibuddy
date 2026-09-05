@@ -1,0 +1,7 @@
+{
+  "nativeCamera" : 0,
+  "nativeSource" : "Validation\/FanActions\/read-look-up-100.png",
+  "note" : "Selected pose comparison; frames are not automatically time-aligned.",
+  "originalFrame" : 6,
+  "originalStrip" : "Validation\/Original\/ReadLookUpContinued\/frames.png"
+}

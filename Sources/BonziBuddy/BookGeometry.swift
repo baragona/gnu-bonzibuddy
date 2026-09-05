@@ -9,7 +9,7 @@ enum BookGeometry {
             for side:Float in [-1,1] {
                 let start=UInt32(vertices.count)
                 for row in 0...1 {for column in 0...columns {
-                    let u=Float(column)/Float(columns),v=Float(row),x=width*u,y=(v-0.5)*0.325,z:Float = -0.07+side*0.001
+                    let u=Float(column)/Float(columns),v=Float(row),x=width*u,y=(v-0.5)*0.325,z:Float = side*0.001
                     let bend:Float=0.13*sin(Float.pi*u)*u
                     let slope:Float=0.13/width*(sin(Float.pi*u)+Float.pi*u*cos(Float.pi*u))
                     vertices.append(PropVertex(position:[x,y,z,1],normal:[0,0,side,0],uv:[u,v,0,1],openedPosition:[x,y,z+bend,1],openedNormal:SIMD4(normalize(SIMD3<Float>(-slope,0,1))*side,0)))

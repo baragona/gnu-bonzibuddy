@@ -19,6 +19,28 @@ func validateRead() throws {
         }
         verticesCount+=vertices.count;trianglesCount+=indices.count/3
     }
+    // Both opened page-block front planes bound a convex clear region.
+    // Testing every deformed leaf vertex also bounds every rasterized triangle.
+    let leaf=BookGeometry.mesh(.bookLeaf).0
+    var minimumPageClearance:Float=100
+    for frame in 0...180 {
+        let t=6.10+0.80*Double(frame)/180
+        if let cue=ReadRoutine.sample(at:t).props.first(where:{$0.kind == .bookLeaf}),
+           case let .page(curl)=cue.deformation {
+            for vertex in leaf {
+                let v=vertex.position+(vertex.openedPosition-vertex.position)*curl
+                let p=cue.rotation.act(SIMD3(v.x,v.y,v.z))+cue.offset/ReadRoutine.bookScale
+                let frontmost=abs(p.x)*sin(Float(0.35))+p.z*cos(Float(0.35))
+                minimumPageClearance=min(minimumPageClearance,-0.064-frontmost)
+            }
+        }
+    }
+    guard minimumPageClearance>0.005 else {throw failure("Turning page intersects the stationary page blocks: \(minimumPageClearance)")}
+    var lookup=CharacterPlayback();lookup.play(.readLookUp,at:0,mode:.hold)
+    lookup.request(.wave,at:6.4)
+    guard lookup.playbackSnapshot(at:6.8).elapsed<10.75,
+          lookup.playbackSnapshot(at:9.42).action == .readLookUp,
+          lookup.playbackSnapshot(at:9.44).action == .wave else {throw failure("Look-up gesture/return handoff was cut short")}
     let rig=try FanRig(url:URL(fileURLWithPath:"Resources/FanModel/FanRig.json")),mesh=try FanMeshData(url:URL(fileURLWithPath:"Resources/FanModel/FanRigged.mesh"))
     struct FootSample {let p:SIMD4<Float>;let bones:[Int];let weights:[Float]}
     var feet:[FootSample]=[]
@@ -66,7 +88,7 @@ func validateRead() throws {
     guard turning.playbackSnapshot(at:6.8).elapsed<9.05,turning.playbackSnapshot(at:9.7).action == .read,turning.playbackSnapshot(at:9.8).action == .wave else {throw failure("Page turn was cut off before stow")}
     guard minimumFootY>=(-0.925),abs(seatedFootY+0.92)<0.015 else {throw failure("Seated feet float or intersect the floor: \(minimumFootY), \(seatedFootY)")}
     guard ankleError<0.00001 else {throw failure("Seated feet lost their targets")}
-    let report:[String:Any]=["vertices":verticesCount,"triangles":trianglesCount,"footSurfaceSamples":feet.count,"maximumSeatedAnkleError":ankleError,"minimumFootY":minimumFootY,"minimumSeatedFootY":seatedFootY,"groundY":-0.92,"pageTurnCompletedBeforeReturn":true,"menuRequestWaitedForStand":true,"heldAndRequestedReturnPassed":true,"accessoryWaitedForStow":true,"note":"Foot surface heights are sampled diagnostics. These checks do not establish full-body collision avoidance or original choreography fidelity."]
+    let report:[String:Any]=["minimumPageBlockClearance":minimumPageClearance,"lookupGestureReturnPassed":true,"vertices":verticesCount,"triangles":trianglesCount,"footSurfaceSamples":feet.count,"maximumSeatedAnkleError":ankleError,"minimumFootY":minimumFootY,"minimumSeatedFootY":seatedFootY,"groundY":-0.92,"pageTurnCompletedBeforeReturn":true,"menuRequestWaitedForStand":true,"heldAndRequestedReturnPassed":true,"accessoryWaitedForStow":true,"note":"Foot surface heights are sampled diagnostics. These checks do not establish full-body collision avoidance or original choreography fidelity."]
     try FileManager.default.createDirectory(atPath:"Validation/Read",withIntermediateDirectories:true)
     let data=try JSONSerialization.data(withJSONObject:report,options:[.prettyPrinted,.sortedKeys]);try data.write(to:URL(fileURLWithPath:"Validation/Read/checks.json"));print(String(decoding:data,as:UTF8.self))
 }

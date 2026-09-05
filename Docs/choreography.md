@@ -25,7 +25,7 @@ The action filter enables focused three-angle reviews while keeping the full sui
 
 ## Outstanding scope
 
-Refine banana and miss variation; refine sunglasses finger contact; refine coconut headphones contact; refine butterfly interaction; refine seated reading and add lookup variants; writing pad/pencil; bamboo mailbox/letter variants; vine and surfboard movement/entrance/exit; chest beating/backflip; hugs/kisses/giggles/shushing; directional presentations and explanations; richer facial/gaze/idle sequences. Each needs actual geometry where applicable, reference-based choreography, clean entry/return/interruption behavior, multiple-angle review, and runtime profiling. This list is the remaining scope, not a list of completed features.
+Refine banana and miss variation; refine sunglasses finger contact; refine coconut headphones contact; refine butterfly interaction; refine seated reading and look-up variants; writing pad/pencil; bamboo mailbox/letter variants; vine and surfboard movement/entrance/exit; chest beating/backflip; hugs/kisses/giggles/shushing; directional presentations and explanations; richer facial/gaze/idle sequences. Each needs actual geometry where applicable, reference-based choreography, clean entry/return/interruption behavior, multiple-angle review, and runtime profiling. This list is the remaining scope, not a list of completed features.
 
 The facing transform is included before hierarchical interruption blending, so interrupting a turned pose does not snap the body back to front. Props derive orientation from the blended root matrix. Stationary-leg regression assertions exclude actions with an intentional facing turn; their full skeleton is still checked for transition continuity and convergence.
 
@@ -131,10 +131,16 @@ The original-frame comparison prompted a wider/larger butterfly and more olive m
 
 ## Seated reading
 
-The implementation combines the extracted `Read` entrance (4.30 seconds), `ReadContinued` loop (4.75 seconds), and `ReadReturn` (2.56 seconds). Bonzi sits with his soles facing forward, retrieves and opens a brown book with a globe cover, scans the pages, turns a sheet, stows the book, and stands. Selecting Read holds the reading loop; Return to rest requests the return. Dedicated looking-up variants and reading-aloud behavior remain unfinished.
+The implementation combines the extracted `Read` entrance (4.30 seconds), `ReadContinued` loop (4.75 seconds), and `ReadReturn` (2.56 seconds). Bonzi sits with his soles facing forward, retrieves and opens a brown book with a globe cover, scans the pages, turns a sheet, stows the book, and stands. Selecting Read holds the reading loop; Return to rest requests the return. Read Look Up adds the original’s distinct look-up and conversational hand gestures. Reading-aloud behavior remains unfinished.
 
 `StanceIntent` authors a pelvis offset and semantic foot targets, including foot rotation and knee bend direction. The shared rig solves the legs and blends the stance through its existing skeletal transition path. Stance-changing routines declare that fact so the transition validator does not incorrectly demand stationary leg matrices; `--validate-read` separately checks their targets and sampled foot surface height. Grip curls now use the authored finger/palm directions, matching the earlier pointing fix.
 
 The book has hinged cover/page-block meshes and a separate two-sided turning sheet. A typed page-curl parameter deforms both the color and shadow passes. Held hand targets follow the same cover transforms. Original-frame comparison prompted a larger book across the lap, a revised tilt, and outward-turned feet. Detailed spine curvature and exact finger/page contact remain refinement work.
 
 Menu animation requests now honor a routine's handoff policy: prop routines finish their authored return/stow before the latest queued request starts. Direct `play` remains available for offline previews and current immediate speech synchronization. Reading also declares a return delay during a page turn. Playback exposes the scheduled completion time, so queued actions, accessory transfers, and held previews all wait through the page turn and the entire return.
+
+### Reading look-up variant
+
+`ReadLookUpRoutine` reuses the seated book retrieval and stow geometry, with the original entry/continued/return durations of 4.95, 5.80, and 2.53 seconds. The continued loop includes two open-palm gestures and a return to scanning the book. A return request during either gesture waits until the hand has returned to the cover before stowing. The book retains the same prop identities, stance, lighting, and accessory composition. This is visual choreography; it does not synthesize speech.
+
+The page hinge now translates behind the stationary blocks independently of sheet rotation, preventing the turning thickness offset from crossing the opposite cover. Sampled leaf vertices clear both page-block planes; see [the reading look-up checkpoint](Baselines/2026-09-05-reading-lookup/README.md).

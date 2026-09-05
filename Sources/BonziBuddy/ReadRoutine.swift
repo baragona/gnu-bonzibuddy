@@ -27,7 +27,7 @@ enum ReadRoutine {
         let page=RoutineLibrary.smooth(t,6.10,6.85)
         if t>=6.10 && t<=6.90 {
             let reveal=RoutineLibrary.smooth(t,6.10,6.18)*(1-RoutineLibrary.smooth(t,6.82,6.90))
-            props.append(PropCue(id:"read.page",kind:.bookLeaf,anchor:anchor,offset:.zero,rotation:simd_quatf(angle:0.35+(Float.pi-0.70)*page,axis:[0,1,0]),scale:SIMD3(repeating:bookScale),visibility:reveal,deformation:.page(curl:sin(Float.pi*page))))
+            props.append(PropCue(id:"read.page",kind:.bookLeaf,anchor:anchor,offset:[0,0,-0.08*bookScale],rotation:simd_quatf(angle:0.35+(Float.pi-0.70)*page,axis:[0,1,0]),scale:SIMD3(repeating:bookScale),visibility:reveal,deformation:.page(curl:sin(Float.pi*page))))
         }
         let held=RoutineLibrary.smooth(t,1.80,2.20)*(1-RoutineLibrary.smooth(t,9.30,9.70))
         let retrieval=RoutineLibrary.smooth(t,0.95,1.35)*(1-RoutineLibrary.smooth(t,1.95,2.20))
