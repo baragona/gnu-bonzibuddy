@@ -79,7 +79,30 @@ func validateWrite() throws {
     repeated.request(.write,at:3.0,mode:.hold);repeated.request(.write,at:3.25,mode:.hold)
     guard repeated.playbackSnapshot(at:3.49).action == .writePause,
           repeated.playbackSnapshot(at:3.50).action == .write else {throw failure("Repeated resume restarted the exit")}
-    let report:[String:Any]=["smoothPauseReversalPassed":true,"returnDuringContinuationPassed":true,"repeatedResumePassed":true,"inPlacePauseResumePassed":true,"queuedContinuationCancellationPassed":true,"retrievalAndAccessoryHandoffsPassed":true,"vertices":vertices,"triangles":triangles,"maximumPencilPlaneError":tipError,"contactSamples":61,"holdSeamPassed":true,"strokeAndStowHandoffPassed":true,"note":"Pencil contact is measured against the authored pad plane. These checks do not establish finger contact, full-body collision avoidance, or original visual identity."]
+    for action in [Action.writeOnce,.writeAgain] {
+        let definition=RoutineLibrary.definitions[action]!,loop=definition.holdRange!
+        var single=CharacterPlayback();single.play(action,at:0,mode:.hold)
+        let paused=WritePauseRoutine.sample(at:2.40)
+        for frame in 0...240 {
+            let snapshot=single.playbackSnapshot(at:loop.lowerBound+Double(frame)/60)
+            let pose=RoutineLibrary.sample(snapshot.action,at:snapshot.elapsed)
+            guard snapshot.action == action,pose.props.count==2,
+                  length(pose.props[1].offset-paused.props[1].offset)<0.00001,
+                  length(pose.hands[.left]!.wrist-paused.hands[.left]!.wrist)<0.00001 else {throw failure("Single write repeated its stroke instead of pausing")}
+        }
+        single.finishRoutine(at:10)
+        guard single.playbackSnapshot(at:12.0).action == .idle else {throw failure("Single write did not stow")}
+        var repeatPass=CharacterPlayback();repeatPass.play(.writePause,at:0,mode:.hold)
+        repeatPass.request(action,at:3.0,mode:.hold)
+        guard repeatPass.playbackSnapshot(at:3.49).action == .writePause,
+              repeatPass.playbackSnapshot(at:3.50).action == action,
+              abs(repeatPass.playbackSnapshot(at:3.50).elapsed-1.90)<0.00001 else {throw failure("Single write repeated retrieval")}
+        let end=3.50+(action == .writeOnce ? 1.45:1.20)
+        repeatPass.request(.writePause,at:3.80,mode:.hold)
+        guard repeatPass.playbackSnapshot(at:end-0.01).action == action,
+              repeatPass.playbackSnapshot(at:end+0.01).action == .writePause else {throw failure("Single stroke was interrupted before pause")}
+    }
+    let report:[String:Any]=["singlePassSettlesWithoutRepeating":true,"singlePassContinuationPassed":true,"smoothPauseReversalPassed":true,"returnDuringContinuationPassed":true,"repeatedResumePassed":true,"inPlacePauseResumePassed":true,"queuedContinuationCancellationPassed":true,"retrievalAndAccessoryHandoffsPassed":true,"vertices":vertices,"triangles":triangles,"maximumPencilPlaneError":tipError,"contactSamples":61,"holdSeamPassed":true,"strokeAndStowHandoffPassed":true,"note":"Pencil contact is measured against the authored pad plane. These checks do not establish finger contact, full-body collision avoidance, or original visual identity."]
     try FileManager.default.createDirectory(atPath:"Validation/Writing",withIntermediateDirectories:true)
     let data=try JSONSerialization.data(withJSONObject:report,options:[.prettyPrinted,.sortedKeys])
     try data.write(to:URL(fileURLWithPath:"Validation/Writing/checks.json"));print(String(decoding:data,as:UTF8.self))

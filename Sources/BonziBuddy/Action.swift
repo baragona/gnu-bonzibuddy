@@ -7,7 +7,7 @@ enum Action: String, CaseIterable {
     case clap = "Clap", shrug = "Shrug", wave = "Wave"
     case dance = "Dance", think = "Think", surprised = "Surprised", speak = "Speak"
     case globe = "Globe", juggle = "Juggle"
-    case write = "Write", writePause = "Write Pause"
+    case write = "Write", writePause = "Write Pause", writeOnce = "Write Once", writeAgain = "Write Again"
     case read = "Read", readLookUp = "Read Look Up"
     case butterfly = "Butterfly"
     case headphones = "Headphones"
@@ -22,7 +22,7 @@ enum Action: String, CaseIterable {
         case .clap: return ClapAnimation.duration
         case .shrug: return ShrugAnimation.duration
         case .dance: return 8
-        case .globe, .juggle, .banana, .bananaMiss, .sunglasses, .headphones, .butterfly, .read, .readLookUp, .write, .writePause: preconditionFailure("Missing routine definition")
+        case .globe, .juggle, .banana, .bananaMiss, .sunglasses, .headphones, .butterfly, .read, .readLookUp, .write, .writePause, .writeOnce, .writeAgain: preconditionFailure("Missing routine definition")
         case .wave, .think, .surprised: return 4
         }
     }

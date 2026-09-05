@@ -29,6 +29,8 @@ enum RoutineLibrary {
         return x*x*x*(x*(x*6-15)+10)
     }
     static let definitions:[Action:RoutineDefinition]=[
+        .writeOnce:WriteSingleRoutine.once,
+        .writeAgain:WriteSingleRoutine.again,
         .writePause:RoutineDefinition(duration:WritePauseRoutine.duration,changesFacing:true,holdRange:WritePauseRoutine.holdRange,handoffPolicy:.finishRoutine,continuation:WritePauseRoutine.continuation,sample:WritePauseRoutine.sample),
         .write:RoutineDefinition(duration:WriteRoutine.duration,changesFacing:true,holdRange:WriteRoutine.holdRange,handoffPolicy:.finishRoutine,returnDelay:WriteRoutine.returnDelay,continuation:WriteRoutine.continuation,sample:WriteRoutine.sample),
         .readLookUp:RoutineDefinition(duration:ReadLookUpRoutine.duration,changesStance:true,holdRange:ReadLookUpRoutine.holdRange,handoffPolicy:.finishRoutine,returnDelay:ReadLookUpRoutine.returnDelay,sample:ReadLookUpRoutine.sample),

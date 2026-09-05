@@ -147,10 +147,14 @@ The page hinge now translates behind the stationary blocks independently of shee
 
 ## Writing pad and pencil
 
-Initial `WriteRoutine` combines Write (4.30 seconds), WriteContinued (1.20 seconds), and WriteReturn (1.45 seconds). Indexed meshes include a paper stack, yellow binding, globe-decorated brown back, pencil shaft, wood taper, graphite tip, and eraser. Choreography derives pencil contact and support-hand targets from the same pad frame. Write holds its repeated stroke loop, completes an active stroke before lifting the pencil, and stows both objects before another menu action or accessory transfer. The loop shares its raised-pencil boundary pose. Further work includes accumulated ink, dedicated pause/once variants, and exact finger contact.
+Initial `WriteRoutine` combines Write (4.30 seconds), WriteContinued (1.20 seconds), and WriteReturn (1.45 seconds). Indexed meshes include a paper stack, yellow binding, globe-decorated brown back, pencil shaft, wood taper, graphite tip, and eraser. Choreography derives pencil contact and support-hand targets from the same pad frame. Write holds its repeated stroke loop, completes an active stroke before lifting the pencil, and stows both objects before another menu action or accessory transfer. The loop shares its raised-pencil boundary pose. Further work includes accumulated ink, Writing/WritingReturn variations, and exact finger contact.
 
 ### Writing pause and resume
 
-Write Pause reuses retrieval and stow while holding the pad and raised pencil. Its half-second attention change follows the extracted WritePause sequence. Selecting it during Write waits for the active stroke to finish and enters directly with the props held. Selecting Write again resumes the stroke loop without retrieval. Exact WriteOnce/WriteOnceAgain scheduling and accumulated ink remain unfinished.
+Write Pause reuses retrieval and stow while holding the pad and raised pencil. Its half-second attention change follows the extracted WritePause sequence. Selecting it during Write waits for the active stroke to finish and enters directly with the props held. Selecting Write again resumes the stroke loop without retrieval. Write Once and Write Again now perform their respective 1.45- and 1.20-second stroke passes and settle into the held pause. Accumulated ink remains unfinished.
 
 The paused writing hand lowers toward the original chest-level pose, carrying the pencil with it. Resume reverses this half-second motion before entering the writing loop; stow uses the same return to the common grip.
+
+### Single writing passes
+
+`WriteSingleRoutine` composes the common retrieval, one stroke pass, and the paused routine. Write Once uses the original 1.45-second stroke segment; Write Again uses 1.20 seconds. Both hold only the final pause, so a long hold never repeats the stroke. Their compatible entry starts after retrieval when the pad is already held. Requests during the stroke finish the pass before switching. The existing adapted 1.90-second retrieval is shared rather than matching WritePre’s original 1.45 seconds exactly.
