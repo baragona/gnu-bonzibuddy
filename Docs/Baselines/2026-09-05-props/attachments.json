@@ -1,0 +1,6 @@
+{
+  "interruptionRetirementPassed" : true,
+  "maximumWristAnchorError" : 5.9604644775390625e-08,
+  "note" : "Numerical attachment and lifecycle checks; visual match is reviewed separately.",
+  "sampledFrames" : 745
+}

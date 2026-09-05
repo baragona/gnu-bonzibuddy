@@ -16,6 +16,7 @@ final class FanRig {
     let local:[simd_float4x4]
     let inverseRest:[simd_float4x4]
     var sourcePose=false
+    private(set) var routine=RoutinePose()
     var waveTime:Double?
     var action:Action = .idle
     var actionTime:Double=0
@@ -51,9 +52,11 @@ final class FanRig {
         var posed:[simd_float4x4]=[]
         var gestureElbows:[Int:SIMD3<Float>]=[:],gestureWrists:[Int:SIMD3<Float>]=[:]
         func ease(_ x:Float)->Float { let t=min(1,max(0,x));return t*t*(3-2*t) }
+        routine=sourcePose ? RoutinePose():RoutineLibrary.sample(action,at:actionTime)
         let a=Float(actionTime)
         let actionEnvelope=ease(a/0.35)*ease(Float(max(0,action.duration-actionTime))/0.35)
         func armAction(_ side:Float)->ArmPose? {
+            if let hand=routine.hands[side<0 ? 26:42] { return ArmPose(elbow:[side*0.55,-0.05,0.1],wrist:hand.wrist,angle:0,spread:hand.openness) }
             if action == .clap { return ClapAnimation.arm(at:actionTime,side:side) }
             if action == .shrug { return ShrugAnimation.arm(at:actionTime,side:side) }
             var target=ArmPose.rest(side)
@@ -136,9 +139,9 @@ final class FanRig {
                     let p=xyz(inherited)
                     let glance=(action == .lookLeft || action == .lookRight) ? LookAnimation.yaw(at:actionTime,left:action == .lookLeft) : 0
                     let tilt:Float=action == .think ? -0.08*actionEnvelope : 0
-                    result=translation(p)*rotate(glance,[0,1,0])*rotate(tilt)*scaleMatrix([1.13,0.93,1])*translation(-p)*inherited
+                    result=translation(p)*rotate(glance+routine.headYaw,[0,1,0])*rotate(tilt+routine.headTilt)*scaleMatrix([1.13,0.93,1])*translation(-p)*inherited
                 }
-                if (i==22 || i==39),let pose=arms[side],action == .clap || action == .shrug || action == .think || action == .dance {
+                if (i==22 || i==39),let pose=arms[side],action == .clap || action == .shrug || action == .think || action == .dance || routine.hands[i==22 ? 26:42] != nil {
                     let elbow=i==22 ? 23:40,hand=i==22 ? 24:41,wrist=i==22 ? 26:42
                     let shoulder=xyz(inherited)
                     let upper=length(xyz(rest[elbow])-xyz(rest[i]))*2.3
@@ -146,10 +149,11 @@ final class FanRig {
                     let restElbow=shoulder+normalize(restingUpper)*upper
                     let restWrist=restElbow+normalize(restingForearm)*lower
                     let baseline=ArmPose.rest(side)
-                    let engagement=(action == .think || action == .dance) ? actionEnvelope:min(1,(length(pose.wrist-baseline.wrist)+length(pose.elbow-baseline.elbow))*5)
+                    var engagement=(action == .think || action == .dance) ? actionEnvelope:min(1,(length(pose.wrist-baseline.wrist)+length(pose.elbow-baseline.elbow))*5)
                     var target=action == .think ? SIMD3<Float>(0.23,0.25,0.55):pose.wrist*SIMD3<Float>(0.9,0.9,0.7)+SIMD3<Float>(0,0.11,0.035)
                     if action == .shrug { target.y-=0.13*(1-pose.spread) }
                     if action == .clap { target=SIMD3(pose.wrist.x*0.4,pose.wrist.y*0.9+0.11-(side>0 ? 0.02:0),side<0 ? 0.41:0.30) }
+                    if let intent=routine.hands[wrist] { target=intent.wrist;engagement=intent.weight }
                     let wanted=restWrist+(target-restWrist)*engagement
                     let direction=normalize(wanted-shoulder),distance=min(upper+lower-0.002,max(abs(upper-lower)+0.002,length(wanted-shoulder)))
                     let along=(upper*upper-lower*lower+distance*distance)/(2*distance)
@@ -186,7 +190,7 @@ final class FanRig {
                         if action == .shrug { result=blendRotation(handFrame(i==26 ? 30:46,[-side,0.04,0.08],[0,-0.35,-1]),handFrame(i==26 ? 30:46,[side,0.08,0],[0,1,0.1]),pose.spread) }
                         if action == .clap { result=blendRotation(result,handFrame(i==26 ? 30:46,[-side,0,0],[0,side<0 ? 1:-1,0]),min(1,(length(dw)+length(de))*6)) }
                     }
-                    if (27...38).contains(i) || (43...54).contains(i) { result=blendRotation(result,inherited,pose.spread) }
+                    if routine.hands[side<0 ? 26:42] == nil && ((27...38).contains(i) || (43...54).contains(i)) { result=blendRotation(result,inherited,pose.spread) }
                     if action == .think && [52,53,54].contains(i) {
                         let p=xyz(inherited)
                         let axis:SIMD3<Float>=[0,-1,0]
@@ -197,6 +201,19 @@ final class FanRig {
                         let p=xyz(inherited)
                         let axis=SIMD3<Float>(0,-1,0)
                         result=blendRotation(result,translation(p)*rotate(angle,axis)*translation(-p)*inherited,actionEnvelope)
+                    }
+
+                }
+                if let intent=routine.hands[side<0 ? 26:42] {
+                    if i==26 || i==42 {
+                        let baseline=handFrame(i==26 ? 30:46,[-side,0.04,0.08],[0,-0.35,-1])
+                        result=blendRotation(baseline,handFrame(i==26 ? 30:46,intent.fingers,intent.palm),intent.weight)
+                    }
+                    if (27...38).contains(i) || (43...54).contains(i) { result=blendRotation(result,inherited,intent.openness*intent.weight) }
+                    if intent.pointing && ([30,31,32,33,34,35,46,47,48,49,50,51].contains(i)) {
+                        let angle:Float=[30,33,46,49].contains(i) ? 1.1:[31,34,47,50].contains(i) ? 1.35:0.65
+                        let p=xyz(inherited)
+                        result=blendRotation(result,translation(p)*rotate(-side*angle,[0,1,0])*translation(-p)*inherited,intent.weight)
                     }
 
                 }
@@ -213,6 +230,10 @@ final class FanRig {
                 }
             }
             posed.append(result)
+        }
+        if !sourcePose {
+            let facing=rotate(routine.bodyYaw,[0,1,0])
+            posed=posed.map { facing*$0 }
         }
         if !sourcePose && transitionPose.count==posed.count {
             let amount=ease(Float((time-transitionStarted)/0.20))

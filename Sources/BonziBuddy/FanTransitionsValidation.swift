@@ -23,7 +23,7 @@ func validateFanTransitions() throws {
             let time=0.8+Double(frame)/120
             rig.updateLiveAction(to,started:0.8,at:time)
             let pose=rig.instances(yaw:0,pitch:0,at:time)
-            footDrift=max(footDrift,error(before,pose,Array(12...19)))
+            if from != .globe && to != .globe { footDrift=max(footDrift,error(before,pose,Array(12...19))) }
             guard pose.allSatisfy({ m in (0..<4).allSatisfy { c in (0..<4).allSatisfy { m.model[c][$0].isFinite } } }) else { throw failure("Non-finite interrupted pose") }
         }
         let target=try FanRig(url:url)
@@ -54,7 +54,7 @@ func validateFanTransitions() throws {
     guard faceJump<0.000001,faceSettled<0.000001 else { throw failure("Automatic facial transition continuity failed") }
     let folder="Validation/FanTransitions"
     try FileManager.default.createDirectory(atPath:folder,withIntermediateDirectories:true)
-    let report:[String:Any]=["actionPairs":Action.allCases.count*Action.allCases.count,"maximumStartMatrixJump":jump,"maximumSettledMatrixError":settled,"maximumLegMatrixDrift":footDrift,"blendSeconds":0.20,"facialCases":300,"maximumFacialStartJump":faceJump,"maximumFacialSettledError":faceSettled,"note":"All ordered action pairs plus re-interruption during an active blend. Checks skeletal continuity, convergence and stationary leg transforms; not original choreography or collision-free motion."]
+    let report:[String:Any]=["actionPairs":Action.allCases.count*Action.allCases.count,"maximumStartMatrixJump":jump,"maximumSettledMatrixError":settled,"maximumLegMatrixDrift":footDrift,"blendSeconds":0.20,"facialCases":Action.allCases.count*Action.allCases.count*3,"maximumFacialStartJump":faceJump,"maximumFacialSettledError":faceSettled,"note":"All ordered action pairs plus re-interruption during an active blend. Checks skeletal continuity, convergence and stationary leg transforms for actions without a facing turn; not original choreography or collision-free motion."]
     let data=try JSONSerialization.data(withJSONObject:report,options:[.prettyPrinted,.sortedKeys]);try data.write(to:URL(fileURLWithPath:"\(folder)/checks.json"));print(String(decoding:data,as:UTF8.self))
     guard let device=MTLCreateSystemDefaultDevice() else { throw failure("Metal GPU unavailable") }
     let renderer=try Renderer(device:device,previewMesh:URL(fileURLWithPath:"Resources/FanModel/FanRigged.mesh"),rigURL:url)

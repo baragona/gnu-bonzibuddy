@@ -8,6 +8,10 @@ for asset in FanRigged.mesh FanRig.json FanMorphs.bin FanMorphs.json FanTeeth.me
         exit 1
     fi
 done
+if [[ ! -s Resources/Props/globe-land.png ]]; then
+    echo "Missing required prop texture: Resources/Props/globe-land.png" >&2
+    exit 1
+fi
 mkdir -p .build Validation Resources
 xcrun swiftc -O -swift-version 5 -module-cache-path .build/clang-cache Sources/BonziBuddy/*.swift -o .build/BonziBuddy
 if [[ ! -f Resources/Bonzi.mesh || Sources/BonziBuddy/Character.swift -nt Resources/Bonzi.mesh || Sources/BonziBuddy/Mesh.swift -nt Resources/Bonzi.mesh || Sources/BonziBuddy/Animation.swift -nt Resources/Bonzi.mesh ]]; then
@@ -17,6 +21,8 @@ APP="$PWD/Build/BonziBuddy.app"
 mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Resources"
 cp .build/BonziBuddy "$APP/Contents/MacOS/BonziBuddy"
 cp Sources/BonziBuddy/Shaders.metal Resources/Bonzi.mesh "$APP/Contents/Resources/"
+mkdir -p "$APP/Contents/Resources/Props"
+cp Resources/Props/* "$APP/Contents/Resources/Props/"
 mkdir -p "$APP/Contents/Resources/FanModel"
 cp Resources/FanModel/FanRigged.mesh Resources/FanModel/FanRig.json Resources/FanModel/FanMorphs.bin Resources/FanModel/FanMorphs.json Resources/FanModel/FanTeeth.mesh Resources/FanModel/ATTRIBUTION.txt "$APP/Contents/Resources/FanModel/"
 cat > "$APP/Contents/Info.plist" <<'PLIST'

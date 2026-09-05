@@ -1,0 +1,5 @@
+Globe land mask: made with Natural Earth (public domain).
+https://www.naturalearthdata.com/about/terms-of-use/
+Source: ne_110m_land.geojson
+https://github.com/nvkelso/natural-earth-vector/blob/master/geojson/ne_110m_land.geojson
+Baked locally by Scripts/bake-globe-texture.swift. Palette is authored in Metal.

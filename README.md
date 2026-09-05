@@ -15,7 +15,7 @@ The build produces an ad-hoc signed app with all runtime assets bundled. Drag Bo
 
 ## Current state
 
-The default model has a 20% neutral smile, 15 facial morph controls, gaze, blinking, articulated hands, and ten actions with interruption blending. The approved appearance is preserved in `References/ApprovedFanAppearance/`.
+The default model has a 20% neutral smile, 15 facial morph controls, gaze, blinking, articulated hands, and eleven actions with interruption blending, including a first globe prop routine. The approved appearance is preserved in `References/ApprovedFanAppearance/`.
 
 Visual likeness and animation coverage are still in progress. The latest live measurements are near **60 fps**, despite requesting 120 fps; presentation pacing remains unresolved. Reminders also need UI polish. See [current status](Docs/status.md) for limitations and recorded checks.
 
@@ -30,6 +30,6 @@ Visual likeness and animation coverage are still in progress. The latest live me
 | `Docs/` | Architecture, asset workflow, validation instructions, and historical notes |
 | `Build/`, `.build/`, `Validation/` | Ignored local output |
 
-[Architecture](Docs/architecture.md) · [Asset provenance and conversion](Docs/assets.md) · [Validation](Docs/validation.md)
+[Choreography architecture](Docs/choreography.md) · [Original visual repertoire](Docs/original-visual-repertoire.md) · [Architecture](Docs/architecture.md) · [Asset provenance and conversion](Docs/assets.md) · [Validation](Docs/validation.md)
 
 The imported model is credited to YinyangGio; see [bundled attribution](Resources/FanModel/ATTRIBUTION.txt). Reference artwork belongs to its respective rights holders. This project does not grant rights to the original character.

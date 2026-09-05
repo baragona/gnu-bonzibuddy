@@ -31,6 +31,8 @@ final class Renderer: NSObject, MTKViewDelegate {
     var fanValidationMotion=false
     var fanLiveActions=false
     let fanFaceMotion=FanFaceMotion()
+    var propRenderer:PropRenderer?
+    let propMotion=PropMotion()
     var fanNeutralSmile:Float=0.2
     var fanExpressionNames:[String]=[]
     var fanExpressionOverrides:[Int:Float]=[:]
@@ -145,6 +147,7 @@ final class Renderer: NSObject, MTKViewDelegate {
         }
         buffers = (0..<3).map { _ in device.makeBuffer(length: 128*MemoryLayout<Instance>.stride, options: .storageModeShared)! }
         super.init()
+        if rigURL != nil { propRenderer=try PropRenderer(device:device,library:library,sampleCount:sampleCount) }
     }
     func projection(width: Int, height: Int) -> simd_float4x4 {
         let aspect = Float(width)/Float(height), halfHeight: Float = 1.40
@@ -175,6 +178,10 @@ final class Renderer: NSObject, MTKViewDelegate {
             objects=character.instances(at:time)
             if fanPreview { objects[0] = Instance(model:rotate(character.pitch,[1,0,0])*rotate(character.yaw,[0,1,0]),color:[1,1,1,1]) }
         }
+        let props: [PropDraw]
+        if let rig=fanRig,fanLiveActions {
+            props=propMotion.sample(action:character.action,started:character.started,at:time,cues:rig.routine.props,rig:rig,bones:objects,yaw:character.yaw,pitch:character.pitch)
+        } else { props=[] }
         objects.withUnsafeBytes { buffer.contents().copyMemory(from: $0.baseAddress!, byteCount: $0.count) }
         let lightDirection = normalize(SIMD3<Float>(-0.5,0.8,1.4))
         let right = normalize(cross(SIMD3<Float>(0,1,0),lightDirection)), up = cross(lightDirection,right)
@@ -187,7 +194,8 @@ final class Renderer: NSObject, MTKViewDelegate {
         func chunk(_ i:Int)->SIMD4<Float> { SIMD4(faceWeights[i],faceWeights[i+1],faceWeights[i+2],faceWeights[i+3]) }
         var blink=(fanLiveActions || fanValidationMotion) && fanAutoBlink ? 1-BlinkAnimation.eyeOpen(at:time) : 0
         if fanLiveActions && fanAutoBlink { blink=max(blink,actionEyeClosure) }
-        var morphUniforms=FanMorphUniforms(selection:[fanUpperFaceLift && fanRig?.sourcePose == false ? 1:0,0,fanMorphVertexCount,fanMorphCount],weights:(chunk(0),chunk(4),chunk(8),chunk(12)),face:[max(blink,fanEyeClosure),fanGaze.x,fanGaze.y,fanRig == nil ? 0:(fanEyeCatchlights ? 1:2)])
+        let gaze=fanGaze+(fanLiveActions ? (fanRig?.routine.gaze ?? .zero):.zero)
+        var morphUniforms=FanMorphUniforms(selection:[fanUpperFaceLift && fanRig?.sourcePose == false ? 1:0,0,fanMorphVertexCount,fanMorphCount],weights:(chunk(0),chunk(4),chunk(8),chunk(12)),face:[max(blink,fanEyeClosure),gaze.x,gaze.y,fanRig == nil ? 0:(fanEyeCatchlights ? 1:2)])
         let shadowPass = MTLRenderPassDescriptor()
         shadowPass.depthAttachment.texture = shadowTexture
         shadowPass.depthAttachment.loadAction = .clear; shadowPass.depthAttachment.storeAction = .store; shadowPass.depthAttachment.clearDepth = 1
@@ -202,7 +210,7 @@ final class Renderer: NSObject, MTKViewDelegate {
             shadowEncoder.setVertexBytes(&morphUniforms,length:MemoryLayout<FanMorphUniforms>.stride,index:4)
         }
         if shadowsEnabled { shadowEncoder.drawIndexedPrimitives(type:.triangle,indexCount:indexCount,indexType:.uint32,indexBuffer:indices,indexBufferOffset:0) }
-        if shadowsEnabled { drawFanTeeth(shadowEncoder) }
+        if shadowsEnabled { drawFanTeeth(shadowEncoder);propRenderer?.draw(props,encoder:shadowEncoder,shadow:true) }
         shadowEncoder.endEncoding()
         let encoder = command.makeRenderCommandEncoder(descriptor: pass)!
         encoder.label = "Skinned mesh and soft desktop shadow"
@@ -221,6 +229,7 @@ final class Renderer: NSObject, MTKViewDelegate {
         encoder.setFragmentTexture(shadowTexture,index:0)
         encoder.drawIndexedPrimitives(type: .triangle,indexCount: indexCount,indexType: .uint32,indexBuffer: indices,indexBufferOffset: 0)
         drawFanTeeth(encoder)
+        propRenderer?.draw(props,encoder:encoder,shadow:false)
         if !wireframe && shadowsEnabled {
             encoder.setRenderPipelineState(groundPipeline)
             encoder.drawPrimitives(type:.triangle,vertexStart:0,vertexCount:6)

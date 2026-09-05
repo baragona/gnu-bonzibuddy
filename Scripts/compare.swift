@@ -37,7 +37,8 @@ struct Raster {
 let renderPath=CommandLine.arguments.count>1 ? CommandLine.arguments[1] : "Validation/idle.png"
 let outputFolder=CommandLine.arguments.count>2 ? CommandLine.arguments[2] : "Validation"
 try FileManager.default.createDirectory(atPath:outputFolder,withIntermediateDirectories:true)
-let reference=Raster("References/idle.png").normalized(), render=Raster(renderPath).normalized()
+let referencePath=CommandLine.arguments.count>3 ? CommandLine.arguments[3] : "References/idle.png"
+let reference=Raster(referencePath).normalized(), render=Raster(renderPath).normalized()
 var output=[UInt8](repeating:255,count:768*256*4)
 var intersection=0,union=0,error=0
 for y in 0..<256 { for x in 0..<256 {
@@ -59,7 +60,7 @@ let iou=Double(intersection)/Double(union),mae=Double(error)/Double(union*3)/255
 // Fixed patches help distinguish material brightness from silhouette differences.
 // They are diagnostic only and do not change the full-image acceptance gate.
 var materialRegions:[[String:Any]]=[]
-for (name,x0,y0,x1,y1) in [("muzzle",100,68,156,95),("belly",99,146,157,181),("arm fur",63,135,85,147),("resting hands",104,110,150,141)] {
+for (name,x0,y0,x1,y1) in (CommandLine.arguments.count>3 ? [] : [("muzzle",100,68,156,95),("belly",99,146,157,181),("arm fur",63,135,85,147),("resting hands",104,110,150,141)]) {
     var a=[Double](repeating:0,count:3),b=a,n=0.0,regionError=0.0
     for y in y0..<y1 { for x in x0..<x1 {
         let i=(y*256+x)*4
@@ -82,5 +83,5 @@ for y in stride(from:20,through:240,by:10) {
     }
     silhouetteRows.append(["normalizedY":y,"referenceXSpans":spans(reference),"renderXSpans":spans(render)])
 }
-let report:[String:Any] = ["silhouetteRows":silhouetteRows,"materialRegions":materialRegions,"silhouetteIoU":iou,"foregroundRGBMeanAbsoluteError":mae,"passesNearIdenticalGate":iou>=0.95 && mae<=0.05,"gate":["minimumSilhouetteIoU":0.95,"maximumForegroundRGBMAE":0.05],"method":"Idle pose, foreground matte removal (20 RGB distance), independent bounding-box fit preserving aspect ratio into 256x256 with 12px padding, nearest-neighbor sampling. RGB MAE measured over union of foreground. This is a diagnostic, not proof of perceptual identity.","panels":["Original reference","Metal render","Absolute RGB difference"]]
+let report:[String:Any] = ["referencePath":referencePath,"renderPath":renderPath,"silhouetteRows":silhouetteRows,"materialRegions":materialRegions,"silhouetteIoU":iou,"foregroundRGBMeanAbsoluteError":mae,"passesNearIdenticalGate":iou>=0.95 && mae<=0.05,"gate":["minimumSilhouetteIoU":0.95,"maximumForegroundRGBMAE":0.05],"method":"Selected pose, foreground matte removal (20 RGB distance), independent bounding-box fit preserving aspect ratio into 256x256 with 12px padding, nearest-neighbor sampling. RGB MAE measured over union of foreground. This is a diagnostic, not proof of perceptual identity.","panels":["Original reference","Metal render","Absolute RGB difference"]]
 let json=try JSONSerialization.data(withJSONObject:report,options:[.prettyPrinted,.sortedKeys]); try json.write(to:URL(fileURLWithPath:"\(outputFolder)/visual-metrics.json")); print(String(decoding:json,as:UTF8.self))

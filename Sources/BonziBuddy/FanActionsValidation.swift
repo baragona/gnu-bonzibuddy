@@ -11,7 +11,10 @@ func validateFanActions() throws {
     let folder=faceOnly ? "Validation/FanFace" : "Validation/FanActions"
     try FileManager.default.createDirectory(atPath:folder,withIntermediateDirectories:true)
     var reports:[[String:Any]]=[]
-    for action in faceOnly ? [] : Action.allCases {
+    let requested=CommandLine.arguments.firstIndex(of:"--action").flatMap { $0+1<CommandLine.arguments.count ? CommandLine.arguments[$0+1]:nil }
+    let actions=Action.allCases.filter { requested == nil || $0.rawValue.lowercased()==requested!.lowercased() }
+    if requested != nil && actions.isEmpty { throw failure("Unknown validation action") }
+    for action in faceOnly ? [] : actions {
         renderer.character.play(action,at:0)
         let duration=action == .idle ? 4.6 : action == .speak ? 2.0 : action.duration
         let frames=Int(ceil(duration*15))+1,name=action.rawValue.lowercased().replacingOccurrences(of:" ",with:"-")

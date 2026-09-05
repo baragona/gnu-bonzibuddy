@@ -6,7 +6,7 @@ func scale(_ p: SIMD3<Float>) -> simd_float4x4 { simd_float4x4(diagonal: SIMD4(p
 func rotate(_ angle: Float, _ axis: SIMD3<Float> = [0,0,1]) -> simd_float4x4 { simd_float4x4(simd_quatf(angle: angle, axis: axis)) }
 enum SurfaceKind { case skin, detail, nose, mouth, lid }
 struct Instance { var model: simd_float4x4; var color: SIMD4<Float> }
-enum Action: String, CaseIterable { case idle = "Idle", lookLeft = "Look Left", lookRight = "Look Right", clap = "Clap", shrug = "Shrug", wave = "Wave", dance = "Dance", think = "Think", surprised = "Surprised", speak = "Speak"; var duration: Double { if self == .lookLeft || self == .lookRight { return LookAnimation.duration }; if self == .clap { return ClapAnimation.duration }; if self == .shrug { return ShrugAnimation.duration }; return (self == .idle || self == .speak) ? .infinity : self == .dance ? 8 : 4 } }
+enum Action: String, CaseIterable { case idle = "Idle", lookLeft = "Look Left", lookRight = "Look Right", clap = "Clap", shrug = "Shrug", wave = "Wave", dance = "Dance", think = "Think", surprised = "Surprised", speak = "Speak", globe = "Globe"; var duration: Double { if self == .globe { return 6.2 }; if self == .lookLeft || self == .lookRight { return LookAnimation.duration }; if self == .clap { return ClapAnimation.duration }; if self == .shrug { return ShrugAnimation.duration }; return (self == .idle || self == .speak) ? .infinity : self == .dance ? 8 : 4 } }
 
 final class Character {
     var action: Action = .idle

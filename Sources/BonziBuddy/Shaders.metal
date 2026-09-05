@@ -106,7 +106,7 @@ float visibility(float3 world,float3 normal,depth2d<float> shadow,constant Unifo
     return lit/32.0;
 }
 struct FanEyeUniforms { float4 face; float4 closures; };
-fragment float4 fragmentMain(Varying in [[stage_in]],depth2d<float> shadow [[texture(0)]],constant Uniforms& u [[buffer(2)]],constant FanEyeUniforms& eyes [[buffer(3)]]) {
+float4 shadeSurface(Varying in,depth2d<float> shadow,constant Uniforms& u,constant FanEyeUniforms& eyes) {
     float4 face=eyes.face;
     float3 n = normalize(in.normal);
     float3 geometric = normalize(cross(dfdx(in.world),dfdy(in.world)));
@@ -148,6 +148,9 @@ fragment float4 fragmentMain(Varying in [[stage_in]],depth2d<float> shadow [[tex
     float3 color = surfaceColor.rgb * (0.36 + 0.60*diffuse*shade + 0.12*fill) + 0.16*spec*shade*sheen;
     color=mix(color,float3(0.98,0.98,1.0),eyeCatchlight*0.94);
     return float4(color * in.color.a, in.color.a);
+}
+fragment float4 fragmentMain(Varying in [[stage_in]],depth2d<float> shadow [[texture(0)]],constant Uniforms& u [[buffer(2)]],constant FanEyeUniforms& eyes [[buffer(3)]]) {
+    return shadeSurface(in,shadow,u,eyes);
 }
 vertex Varying groundVertex(uint v [[vertex_id]],constant Uniforms& u [[buffer(2)]]) {
     const float2 corners[6] = {float2(-1.4,-1.4),float2(1.4,-1.4),float2(-1.4,1.4),float2(-1.4,1.4),float2(1.4,-1.4),float2(1.4,1.4)};
@@ -221,4 +224,22 @@ vertex Varying fanVertexMain(const device FanVertex* vertices [[buffer(0)]],cons
 }
 vertex float4 fanShadowVertex(const device FanVertex* vertices [[buffer(0)]],const device Instance* bones [[buffer(1)]],constant Uniforms& u [[buffer(2)]],const device FanMorphDelta* morphs [[buffer(3)]],constant FanMorphUniforms& mu [[buffer(4)]],uint id [[vertex_id]]) {
     return u.light*deformFan(morphFan(vertices[id],id,morphs,mu),bones).world;
+}
+
+// Rigid polygon props share the character's lighting and the same shadow map.
+struct PropVertex { float4 position; float4 normal; float4 uv; };
+struct PropUniforms { float4x4 model; float4 color; float4 material; };
+vertex Varying propVertex(const device PropVertex* vertices [[buffer(0)]],constant Uniforms& u [[buffer(2)]],constant PropUniforms& prop [[buffer(5)]],uint id [[vertex_id]]) {
+    PropVertex v=vertices[id];float4 world=prop.model*v.position;Varying out;
+    out.position=u.projection*world;out.world=world.xyz;out.normal=transformNormal(prop.model,v.normal.xyz);
+    out.color=prop.color;out.jaw=0;out.eyeUV=float3(v.uv.xy,0);out.eyeHeight=0;return out;
+}
+vertex float4 propShadowVertex(const device PropVertex* vertices [[buffer(0)]],constant Uniforms& u [[buffer(2)]],constant PropUniforms& prop [[buffer(5)]],uint id [[vertex_id]]) {
+    return u.light*prop.model*vertices[id].position;
+}
+fragment float4 propFragment(Varying in [[stage_in]],depth2d<float> shadow [[texture(0)]],texture2d<float> land [[texture(1)]],constant Uniforms& u [[buffer(2)]],constant FanEyeUniforms& eyes [[buffer(3)]],constant PropUniforms& prop [[buffer(5)]]) {
+    constexpr sampler mapSampler(s_address::repeat,t_address::clamp_to_edge,filter::linear,mip_filter::linear);
+    float mask=land.sample(mapSampler,in.eyeUV.xy).r;
+    in.color.rgb=mix(float3(0.23,0.025,0.72),float3(0.02,0.92,0.13),mask);
+    return shadeSurface(in,shadow,u,eyes);
 }

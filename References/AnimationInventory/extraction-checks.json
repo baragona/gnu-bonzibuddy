@@ -1,0 +1,10 @@
+{
+  "sha256": "f3d4425238b5f68b4d41ed5be271d2f4118a245baf808a62dc1a9e6e619b2f95",
+  "width": 200,
+  "height": 160,
+  "imageCount": 1253,
+  "decodedImages": 1044,
+  "animationCount": 146,
+  "baseFrames": 2788,
+  "note": "Decoded and composited base frames in storage order. Mouth overlays are parsed as metadata but not composited into these strips."
+}

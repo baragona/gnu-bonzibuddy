@@ -1,0 +1,1030 @@
+{
+  "sha256": "f3d4425238b5f68b4d41ed5be271d2f4118a245baf808a62dc1a9e6e619b2f95",
+  "bytes": 5249795,
+  "animationCount": 146,
+  "singleFrameEntries": 29,
+  "animations": [
+    {
+      "name": "Decline",
+      "internalName": "DECLINE",
+      "frameCount": 20,
+      "transition": 1,
+      "returnAnimation": ""
+    },
+    {
+      "name": "Idle1_9",
+      "internalName": "IDLE1_9",
+      "frameCount": 5,
+      "transition": 2,
+      "returnAnimation": ""
+    },
+    {
+      "name": "Explain",
+      "internalName": "EXPLAIN",
+      "frameCount": 8,
+      "transition": 1,
+      "returnAnimation": ""
+    },
+    {
+      "name": "Idle1_1",
+      "internalName": "IDLE1_1",
+      "frameCount": 13,
+      "transition": 2,
+      "returnAnimation": ""
+    },
+    {
+      "name": "Alert",
+      "internalName": "ALERT",
+      "frameCount": 2,
+      "transition": 2,
+      "returnAnimation": ""
+    },
+    {
+      "name": "Confused",
+      "internalName": "CONFUSED",
+      "frameCount": 18,
+      "transition": 1,
+      "returnAnimation": ""
+    },
+    {
+      "name": "Congratulate",
+      "internalName": "CONGRATULATE",
+      "frameCount": 13,
+      "transition": 1,
+      "returnAnimation": ""
+    },
+    {
+      "name": "DontRecognize",
+      "internalName": "DONTRECOGNIZE",
+      "frameCount": 19,
+      "transition": 1,
+      "returnAnimation": ""
+    },
+    {
+      "name": "Acknowledge",
+      "internalName": "ACKNOWLEDGE",
+      "frameCount": 7,
+      "transition": 2,
+      "returnAnimation": ""
+    },
+    {
+      "name": "GestureDown",
+      "internalName": "GESTUREDOWN",
+      "frameCount": 8,
+      "transition": 1,
+      "returnAnimation": ""
+    },
+    {
+      "name": "GestureLeft",
+      "internalName": "GESTURELEFT",
+      "frameCount": 8,
+      "transition": 1,
+      "returnAnimation": ""
+    },
+    {
+      "name": "GestureRight",
+      "internalName": "GESTURERIGHT",
+      "frameCount": 8,
+      "transition": 1,
+      "returnAnimation": ""
+    },
+    {
+      "name": "GestureUp",
+      "internalName": "GESTUREUP",
+      "frameCount": 7,
+      "transition": 1,
+      "returnAnimation": ""
+    },
+    {
+      "name": "GetAttention2",
+      "internalName": "GETATTENTION2",
+      "frameCount": 16,
+      "transition": 1,
+      "returnAnimation": ""
+    },
+    {
+      "name": "Greet",
+      "internalName": "GREET",
+      "frameCount": 11,
+      "transition": 1,
+      "returnAnimation": ""
+    },
+    {
+      "name": "Idle3_1",
+      "internalName": "IDLE3_1",
+      "frameCount": 26,
+      "transition": 1,
+      "returnAnimation": ""
+    },
+    {
+      "name": "LookDown",
+      "internalName": "LOOKDOWN",
+      "frameCount": 12,
+      "transition": 0,
+      "returnAnimation": "LOOKDOWNRETURN"
+    },
+    {
+      "name": "Reading",
+      "internalName": "READING",
+      "frameCount": 57,
+      "transition": 0,
+      "returnAnimation": "READRETURN"
+    },
+    {
+      "name": "Sad",
+      "internalName": "SAD",
+      "frameCount": 8,
+      "transition": 1,
+      "returnAnimation": ""
+    },
+    {
+      "name": "Searching",
+      "internalName": "SEARCHING",
+      "frameCount": 54,
+      "transition": 0,
+      "returnAnimation": "SEARCHINGRETURN"
+    },
+    {
+      "name": "Surprised",
+      "internalName": "SURPRISED",
+      "frameCount": 19,
+      "transition": 1,
+      "returnAnimation": ""
+    },
+    {
+      "name": "Uncertain",
+      "internalName": "UNCERTAIN",
+      "frameCount": 12,
+      "transition": 1,
+      "returnAnimation": ""
+    },
+    {
+      "name": "Wave",
+      "internalName": "WAVE",
+      "frameCount": 30,
+      "transition": 1,
+      "returnAnimation": ""
+    },
+    {
+      "name": "WriteReturn",
+      "internalName": "WRITERETURN",
+      "frameCount": 13,
+      "transition": 2,
+      "returnAnimation": ""
+    },
+    {
+      "name": "RestPose",
+      "internalName": "RESTPOSE",
+      "frameCount": 1,
+      "transition": 2,
+      "returnAnimation": ""
+    },
+    {
+      "name": "LookLeft",
+      "internalName": "LOOKLEFT",
+      "frameCount": 12,
+      "transition": 0,
+      "returnAnimation": "LOOKLEFTRETURN"
+    },
+    {
+      "name": "LookRight",
+      "internalName": "LOOKRIGHT",
+      "frameCount": 12,
+      "transition": 0,
+      "returnAnimation": "LOOKRIGHTRETURN"
+    },
+    {
+      "name": "Think",
+      "internalName": "THINK",
+      "frameCount": 18,
+      "transition": 1,
+      "returnAnimation": ""
+    },
+    {
+      "name": "Idle1_3",
+      "internalName": "IDLE1_3",
+      "frameCount": 15,
+      "transition": 1,
+      "returnAnimation": ""
+    },
+    {
+      "name": "Idle1_5",
+      "internalName": "IDLE1_5",
+      "frameCount": 15,
+      "transition": 1,
+      "returnAnimation": ""
+    },
+    {
+      "name": "Idle1_6",
+      "internalName": "IDLE1_6",
+      "frameCount": 15,
+      "transition": 1,
+      "returnAnimation": ""
+    },
+    {
+      "name": "GetAttention",
+      "internalName": "GETATTENTION",
+      "frameCount": 16,
+      "transition": 1,
+      "returnAnimation": ""
+    },
+    {
+      "name": "Idle1_24",
+      "internalName": "IDLE1_24",
+      "frameCount": 77,
+      "transition": 1,
+      "returnAnimation": ""
+    },
+    {
+      "name": "LookDownReturn",
+      "internalName": "LOOKDOWNRETURN",
+      "frameCount": 4,
+      "transition": 2,
+      "returnAnimation": ""
+    },
+    {
+      "name": "LookLeftReturn",
+      "internalName": "LOOKLEFTRETURN",
+      "frameCount": 5,
+      "transition": 2,
+      "returnAnimation": ""
+    },
+    {
+      "name": "LookRightReturn",
+      "internalName": "LOOKRIGHTRETURN",
+      "frameCount": 5,
+      "transition": 2,
+      "returnAnimation": ""
+    },
+    {
+      "name": "LookUp",
+      "internalName": "LOOKUP",
+      "frameCount": 11,
+      "transition": 0,
+      "returnAnimation": "LOOKUPRETURN"
+    },
+    {
+      "name": "LookUpReturn",
+      "internalName": "LOOKUPRETURN",
+      "frameCount": 4,
+      "transition": 2,
+      "returnAnimation": ""
+    },
+    {
+      "name": "StartListening",
+      "internalName": "STARTLISTENING",
+      "frameCount": 8,
+      "transition": 1,
+      "returnAnimation": ""
+    },
+    {
+      "name": "StopListening",
+      "internalName": "STOPLISTENING",
+      "frameCount": 9,
+      "transition": 1,
+      "returnAnimation": ""
+    },
+    {
+      "name": "SunglassesReturn",
+      "internalName": "SUNGLASSESRETURN",
+      "frameCount": 20,
+      "transition": 2,
+      "returnAnimation": ""
+    },
+    {
+      "name": "SunglassesContinued",
+      "internalName": "SUNGLASSESCONTINUED",
+      "frameCount": 52,
+      "transition": 0,
+      "returnAnimation": "SUNGLASSESRETURN"
+    },
+    {
+      "name": "Hug",
+      "internalName": "HUG",
+      "frameCount": 33,
+      "transition": 1,
+      "returnAnimation": ""
+    },
+    {
+      "name": "Idle3_2",
+      "internalName": "IDLE3_2",
+      "frameCount": 47,
+      "transition": 1,
+      "returnAnimation": ""
+    },
+    {
+      "name": "Idle1_7",
+      "internalName": "IDLE1_7",
+      "frameCount": 46,
+      "transition": 1,
+      "returnAnimation": ""
+    },
+    {
+      "name": "Idle1_11",
+      "internalName": "IDLE1_11",
+      "frameCount": 46,
+      "transition": 1,
+      "returnAnimation": ""
+    },
+    {
+      "name": "Idle1_13",
+      "internalName": "IDLE1_13",
+      "frameCount": 69,
+      "transition": 2,
+      "returnAnimation": ""
+    },
+    {
+      "name": "Search",
+      "internalName": "SEARCH",
+      "frameCount": 62,
+      "transition": 1,
+      "returnAnimation": ""
+    },
+    {
+      "name": "BlowKiss",
+      "internalName": "BLOWKISS",
+      "frameCount": 19,
+      "transition": 1,
+      "returnAnimation": ""
+    },
+    {
+      "name": "Blink",
+      "internalName": "BLINK",
+      "frameCount": 5,
+      "transition": 2,
+      "returnAnimation": ""
+    },
+    {
+      "name": "Idle1_14",
+      "internalName": "IDLE1_14",
+      "frameCount": 36,
+      "transition": 1,
+      "returnAnimation": ""
+    },
+    {
+      "name": "Read",
+      "internalName": "READ",
+      "frameCount": 31,
+      "transition": 2,
+      "returnAnimation": ""
+    },
+    {
+      "name": "ReadReturn",
+      "internalName": "READRETURN",
+      "frameCount": 25,
+      "transition": 2,
+      "returnAnimation": ""
+    },
+    {
+      "name": "ReadContinued",
+      "internalName": "READCONTINUED",
+      "frameCount": 22,
+      "transition": 2,
+      "returnAnimation": ""
+    },
+    {
+      "name": "WriteContinued",
+      "internalName": "WRITECONTINUED",
+      "frameCount": 11,
+      "transition": 0,
+      "returnAnimation": "WRITINGRETURN"
+    },
+    {
+      "name": "ReadLookUp",
+      "internalName": "READLOOKUP",
+      "frameCount": 35,
+      "transition": 2,
+      "returnAnimation": ""
+    },
+    {
+      "name": "ReadLookUpContinued",
+      "internalName": "READLOOKUPCONTINUED",
+      "frameCount": 34,
+      "transition": 2,
+      "returnAnimation": ""
+    },
+    {
+      "name": "SearchingReturn",
+      "internalName": "SEARCHINGRETURN",
+      "frameCount": 7,
+      "transition": 2,
+      "returnAnimation": ""
+    },
+    {
+      "name": "ReadLookUpReturn",
+      "internalName": "READLOOKUPRETURN",
+      "frameCount": 25,
+      "transition": 2,
+      "returnAnimation": ""
+    },
+    {
+      "name": "WritePre",
+      "internalName": "WRITEPRE",
+      "frameCount": 13,
+      "transition": 2,
+      "returnAnimation": ""
+    },
+    {
+      "name": "WriteOnce",
+      "internalName": "WRITEONCE",
+      "frameCount": 13,
+      "transition": 2,
+      "returnAnimation": ""
+    },
+    {
+      "name": "WriteOnceAgain",
+      "internalName": "WRITEONCEAGAIN",
+      "frameCount": 9,
+      "transition": 2,
+      "returnAnimation": ""
+    },
+    {
+      "name": "WritePause",
+      "internalName": "WRITEPAUSE",
+      "frameCount": 5,
+      "transition": 2,
+      "returnAnimation": ""
+    },
+    {
+      "name": "Write",
+      "internalName": "WRITE",
+      "frameCount": 37,
+      "transition": 0,
+      "returnAnimation": "WRITERETURN"
+    },
+    {
+      "name": "Writing",
+      "internalName": "WRITING",
+      "frameCount": 35,
+      "transition": 2,
+      "returnAnimation": ""
+    },
+    {
+      "name": "WritingReturn",
+      "internalName": "WRITINGRETURN",
+      "frameCount": 17,
+      "transition": 2,
+      "returnAnimation": ""
+    },
+    {
+      "name": "MailCheckEmpty",
+      "internalName": "MAILCHECKEMPTY",
+      "frameCount": 20,
+      "transition": 2,
+      "returnAnimation": ""
+    },
+    {
+      "name": "MailCheckFull",
+      "internalName": "MAILCHECKFULL",
+      "frameCount": 29,
+      "transition": 2,
+      "returnAnimation": ""
+    },
+    {
+      "name": "MailReturn",
+      "internalName": "MAILRETURN",
+      "frameCount": 8,
+      "transition": 2,
+      "returnAnimation": ""
+    },
+    {
+      "name": "MailRead",
+      "internalName": "MAILREAD",
+      "frameCount": 27,
+      "transition": 2,
+      "returnAnimation": ""
+    },
+    {
+      "name": "MailNext",
+      "internalName": "MAILNEXT",
+      "frameCount": 19,
+      "transition": 2,
+      "returnAnimation": ""
+    },
+    {
+      "name": "DoMagic1",
+      "internalName": "DOMAGIC1",
+      "frameCount": 1,
+      "transition": 2,
+      "returnAnimation": ""
+    },
+    {
+      "name": "DoMagic2",
+      "internalName": "DOMAGIC2",
+      "frameCount": 1,
+      "transition": 2,
+      "returnAnimation": ""
+    },
+    {
+      "name": "GetAttentionContinued",
+      "internalName": "GETATTENTIONCONTINUED",
+      "frameCount": 1,
+      "transition": 2,
+      "returnAnimation": ""
+    },
+    {
+      "name": "GetAttentionReturn",
+      "internalName": "GETATTENTIONRETURN",
+      "frameCount": 1,
+      "transition": 2,
+      "returnAnimation": ""
+    },
+    {
+      "name": "Hearing1",
+      "internalName": "HEARING1",
+      "frameCount": 1,
+      "transition": 2,
+      "returnAnimation": ""
+    },
+    {
+      "name": "Hearing2",
+      "internalName": "HEARING2",
+      "frameCount": 1,
+      "transition": 2,
+      "returnAnimation": ""
+    },
+    {
+      "name": "Hearing3",
+      "internalName": "HEARING3",
+      "frameCount": 1,
+      "transition": 2,
+      "returnAnimation": ""
+    },
+    {
+      "name": "Idle3_3",
+      "internalName": "IDLE3_3",
+      "frameCount": 1,
+      "transition": 2,
+      "returnAnimation": ""
+    },
+    {
+      "name": "LookDownBlink",
+      "internalName": "LOOKDOWNBLINK",
+      "frameCount": 1,
+      "transition": 2,
+      "returnAnimation": ""
+    },
+    {
+      "name": "LookDownLeft",
+      "internalName": "LOOKDOWNLEFT",
+      "frameCount": 1,
+      "transition": 2,
+      "returnAnimation": ""
+    },
+    {
+      "name": "LookDownLeftBlink",
+      "internalName": "LOOKDOWNLEFTBLINK",
+      "frameCount": 1,
+      "transition": 2,
+      "returnAnimation": ""
+    },
+    {
+      "name": "LookDownLeftReturn",
+      "internalName": "LOOKDOWNLEFTRETURN",
+      "frameCount": 1,
+      "transition": 2,
+      "returnAnimation": ""
+    },
+    {
+      "name": "LookDownRight",
+      "internalName": "LOOKDOWNRIGHT",
+      "frameCount": 1,
+      "transition": 2,
+      "returnAnimation": ""
+    },
+    {
+      "name": "LookDownRightBlink",
+      "internalName": "LOOKDOWNRIGHTBLINK",
+      "frameCount": 1,
+      "transition": 2,
+      "returnAnimation": ""
+    },
+    {
+      "name": "LookDownRightReturn",
+      "internalName": "LOOKDOWNRIGHTRETURN",
+      "frameCount": 1,
+      "transition": 2,
+      "returnAnimation": ""
+    },
+    {
+      "name": "LookLeftBlink",
+      "internalName": "LOOKLEFTBLINK",
+      "frameCount": 1,
+      "transition": 2,
+      "returnAnimation": ""
+    },
+    {
+      "name": "LookRightBlink",
+      "internalName": "LOOKRIGHTBLINK",
+      "frameCount": 1,
+      "transition": 2,
+      "returnAnimation": ""
+    },
+    {
+      "name": "LookUpBlink",
+      "internalName": "LOOKUPBLINK",
+      "frameCount": 1,
+      "transition": 2,
+      "returnAnimation": ""
+    },
+    {
+      "name": "LookUpLeft",
+      "internalName": "LOOKUPLEFT",
+      "frameCount": 1,
+      "transition": 2,
+      "returnAnimation": ""
+    },
+    {
+      "name": "LookUpLeftBlink",
+      "internalName": "LOOKUPLEFTBLINK",
+      "frameCount": 1,
+      "transition": 2,
+      "returnAnimation": ""
+    },
+    {
+      "name": "LookUpLeftReturn",
+      "internalName": "LOOKUPLEFTRETURN",
+      "frameCount": 1,
+      "transition": 2,
+      "returnAnimation": ""
+    },
+    {
+      "name": "LookUpRight",
+      "internalName": "LOOKUPRIGHT",
+      "frameCount": 1,
+      "transition": 2,
+      "returnAnimation": ""
+    },
+    {
+      "name": "LookUpRightBlink",
+      "internalName": "LOOKUPRIGHTBLINK",
+      "frameCount": 1,
+      "transition": 2,
+      "returnAnimation": ""
+    },
+    {
+      "name": "LookUpRightReturn",
+      "internalName": "LOOKUPRIGHTRETURN",
+      "frameCount": 1,
+      "transition": 2,
+      "returnAnimation": ""
+    },
+    {
+      "name": "Process",
+      "internalName": "PROCESS",
+      "frameCount": 1,
+      "transition": 2,
+      "returnAnimation": ""
+    },
+    {
+      "name": "Processing",
+      "internalName": "PROCESSING",
+      "frameCount": 1,
+      "transition": 2,
+      "returnAnimation": ""
+    },
+    {
+      "name": "Suggest",
+      "internalName": "SUGGEST",
+      "frameCount": 1,
+      "transition": 2,
+      "returnAnimation": ""
+    },
+    {
+      "name": "Thinking",
+      "internalName": "THINKING",
+      "frameCount": 1,
+      "transition": 2,
+      "returnAnimation": ""
+    },
+    {
+      "name": "HeadphonesContinued",
+      "internalName": "HEADPHONESCONTINUED",
+      "frameCount": 60,
+      "transition": 0,
+      "returnAnimation": "HEADPHONESRETURN"
+    },
+    {
+      "name": "HeadphonesReturn",
+      "internalName": "HEADPHONESRETURN",
+      "frameCount": 18,
+      "transition": 2,
+      "returnAnimation": ""
+    },
+    {
+      "name": "Banana",
+      "internalName": "BANANA",
+      "frameCount": 69,
+      "transition": 1,
+      "returnAnimation": ""
+    },
+    {
+      "name": "MailCheck",
+      "internalName": "MAILCHECK",
+      "frameCount": 9,
+      "transition": 2,
+      "returnAnimation": ""
+    },
+    {
+      "name": "Scout",
+      "internalName": "SCOUT",
+      "frameCount": 11,
+      "transition": 0,
+      "returnAnimation": "SCOUTRETURN"
+    },
+    {
+      "name": "ScoutLeft",
+      "internalName": "SCOUTLEFT",
+      "frameCount": 12,
+      "transition": 2,
+      "returnAnimation": ""
+    },
+    {
+      "name": "ScoutRight",
+      "internalName": "SCOUTRIGHT",
+      "frameCount": 12,
+      "transition": 2,
+      "returnAnimation": ""
+    },
+    {
+      "name": "Butternut",
+      "internalName": "BUTTERNUT",
+      "frameCount": 95,
+      "transition": 1,
+      "returnAnimation": ""
+    },
+    {
+      "name": "Juggle",
+      "internalName": "JUGGLE",
+      "frameCount": 62,
+      "transition": 1,
+      "returnAnimation": ""
+    },
+    {
+      "name": "Explain2",
+      "internalName": "EXPLAIN2",
+      "frameCount": 10,
+      "transition": 1,
+      "returnAnimation": ""
+    },
+    {
+      "name": "Explain3",
+      "internalName": "EXPLAIN3",
+      "frameCount": 8,
+      "transition": 1,
+      "returnAnimation": ""
+    },
+    {
+      "name": "Idle1_8",
+      "internalName": "IDLE1_8",
+      "frameCount": 24,
+      "transition": 1,
+      "returnAnimation": ""
+    },
+    {
+      "name": "HandsBehind",
+      "internalName": "HANDSBEHIND",
+      "frameCount": 10,
+      "transition": 1,
+      "returnAnimation": ""
+    },
+    {
+      "name": "Idle1_15",
+      "internalName": "IDLE1_15",
+      "frameCount": 17,
+      "transition": 1,
+      "returnAnimation": ""
+    },
+    {
+      "name": "Idle1_4",
+      "internalName": "IDLE1_4",
+      "frameCount": 15,
+      "transition": 1,
+      "returnAnimation": ""
+    },
+    {
+      "name": "Wink",
+      "internalName": "WINK",
+      "frameCount": 13,
+      "transition": 2,
+      "returnAnimation": ""
+    },
+    {
+      "name": "Giggle",
+      "internalName": "GIGGLE",
+      "frameCount": 22,
+      "transition": 2,
+      "returnAnimation": ""
+    },
+    {
+      "name": "BananaMiss",
+      "internalName": "BANANAMISS",
+      "frameCount": 64,
+      "transition": 1,
+      "returnAnimation": ""
+    },
+    {
+      "name": "Idle1_25",
+      "internalName": "IDLE1_25",
+      "frameCount": 129,
+      "transition": 1,
+      "returnAnimation": ""
+    },
+    {
+      "name": "Idle1_12",
+      "internalName": "IDLE1_12",
+      "frameCount": 100,
+      "transition": 1,
+      "returnAnimation": ""
+    },
+    {
+      "name": "PleasedHard",
+      "internalName": "PLEASEDHARD",
+      "frameCount": 16,
+      "transition": 1,
+      "returnAnimation": ""
+    },
+    {
+      "name": "Pleased",
+      "internalName": "PLEASED",
+      "frameCount": 44,
+      "transition": 1,
+      "returnAnimation": ""
+    },
+    {
+      "name": "Idle1_4 (2)",
+      "internalName": "IDLE1_4 (2)",
+      "frameCount": 15,
+      "transition": 1,
+      "returnAnimation": ""
+    },
+    {
+      "name": "Idle1_5 (2)",
+      "internalName": "IDLE1_5 (2)",
+      "frameCount": 15,
+      "transition": 1,
+      "returnAnimation": ""
+    },
+    {
+      "name": "Idle1_26",
+      "internalName": "IDLE1_26",
+      "frameCount": 80,
+      "transition": 1,
+      "returnAnimation": ""
+    },
+    {
+      "name": "Explain4",
+      "internalName": "EXPLAIN4",
+      "frameCount": 8,
+      "transition": 1,
+      "returnAnimation": ""
+    },
+    {
+      "name": "Shoosh",
+      "internalName": "SHOOSH",
+      "frameCount": 15,
+      "transition": 2,
+      "returnAnimation": ""
+    },
+    {
+      "name": "Unbelievable",
+      "internalName": "UNBELIEVABLE",
+      "frameCount": 17,
+      "transition": 1,
+      "returnAnimation": ""
+    },
+    {
+      "name": "Show",
+      "internalName": "SHOW",
+      "frameCount": 27,
+      "transition": 2,
+      "returnAnimation": ""
+    },
+    {
+      "name": "Hide",
+      "internalName": "HIDE",
+      "frameCount": 26,
+      "transition": 2,
+      "returnAnimation": ""
+    },
+    {
+      "name": "MoveDown",
+      "internalName": "MOVEDOWN",
+      "frameCount": 8,
+      "transition": 0,
+      "returnAnimation": "MOVEDOWNRETURN"
+    },
+    {
+      "name": "MoveDownReturn",
+      "internalName": "MOVEDOWNRETURN",
+      "frameCount": 9,
+      "transition": 2,
+      "returnAnimation": ""
+    },
+    {
+      "name": "MoveLeft",
+      "internalName": "MOVELEFT",
+      "frameCount": 10,
+      "transition": 0,
+      "returnAnimation": "MOVELEFTRETURN"
+    },
+    {
+      "name": "MoveLeftReturn",
+      "internalName": "MOVELEFTRETURN",
+      "frameCount": 8,
+      "transition": 2,
+      "returnAnimation": ""
+    },
+    {
+      "name": "MoveRight",
+      "internalName": "MOVERIGHT",
+      "frameCount": 10,
+      "transition": 0,
+      "returnAnimation": "MOVERIGHTRETURN"
+    },
+    {
+      "name": "MoveRightReturn",
+      "internalName": "MOVERIGHTRETURN",
+      "frameCount": 8,
+      "transition": 2,
+      "returnAnimation": ""
+    },
+    {
+      "name": "MoveUp",
+      "internalName": "MOVEUP",
+      "frameCount": 8,
+      "transition": 0,
+      "returnAnimation": "MOVEUPRETURN"
+    },
+    {
+      "name": "MoveUpReturn",
+      "internalName": "MOVEUPRETURN",
+      "frameCount": 8,
+      "transition": 2,
+      "returnAnimation": ""
+    },
+    {
+      "name": "HideShow",
+      "internalName": "HIDESHOW",
+      "frameCount": 52,
+      "transition": 2,
+      "returnAnimation": ""
+    },
+    {
+      "name": "PleasedSoft",
+      "internalName": "PLEASEDSOFT",
+      "frameCount": 30,
+      "transition": 1,
+      "returnAnimation": ""
+    },
+    {
+      "name": "Idle1_21",
+      "internalName": "IDLE1_21",
+      "frameCount": 53,
+      "transition": 1,
+      "returnAnimation": ""
+    },
+    {
+      "name": "Idle1_1 (2)",
+      "internalName": "IDLE1_1 (2)",
+      "frameCount": 13,
+      "transition": 2,
+      "returnAnimation": ""
+    },
+    {
+      "name": "Idle1_1 (3)",
+      "internalName": "IDLE1_1 (3)",
+      "frameCount": 13,
+      "transition": 2,
+      "returnAnimation": ""
+    },
+    {
+      "name": "Idle1_9 (2)",
+      "internalName": "IDLE1_9 (2)",
+      "frameCount": 5,
+      "transition": 2,
+      "returnAnimation": ""
+    },
+    {
+      "name": "Idle1_9 (3)",
+      "internalName": "IDLE1_9 (3)",
+      "frameCount": 5,
+      "transition": 2,
+      "returnAnimation": ""
+    },
+    {
+      "name": "ScoutAlert",
+      "internalName": "SCOUTALERT",
+      "frameCount": 13,
+      "transition": 1,
+      "returnAnimation": ""
+    },
+    {
+      "name": "ScoutReturn",
+      "internalName": "SCOUTRETURN",
+      "frameCount": 6,
+      "transition": 2,
+      "returnAnimation": ""
+    }
+  ]
+}

@@ -7,6 +7,7 @@ The app uses AppKit and MetalKit directly. `Scripts/build.sh` compiles Swift sou
 | `App.swift`, `main.swift` | Desktop panel, menus, local speech, launch flags, validation dispatch |
 | `Renderer.swift`, `Shaders.metal` | Mesh buffers, skinning and morph uniforms, MSAA, lighting, shadow passes, presentation and profiling |
 | `FanRig.swift`, `FanFaceMotion.swift` | Imported joint hierarchy, poses, choreography, interruption blends, automatic facial motion |
+| `Routines.swift`, `PropRenderer.swift` | Routine intentions, prop lifecycle, solved-joint attachment, and rigid polygon rendering |
 | `Animation.swift` | Action definitions, timing, reference curves, and procedural animation |
 | `ExpressionControls.swift` | Native sliders for facial morphs, gaze, and eye closure |
 | `Reminders.swift`, `ReminderControls.swift` | Local reminder persistence, delivery, and UI |

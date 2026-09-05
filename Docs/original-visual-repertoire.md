@@ -1,0 +1,50 @@
+# Original visual repertoire
+
+Research date: September 5, 2026. The original's repertoire is substantially broader than our ten current actions. See [source audit and full animation directory](../References/AnimationInventory/README.md) and [sampled sprite review](../References/AnimationInventory/surfboard-sprite-review.png).
+
+## Evidence levels
+
+**Visual** means sampled extracted sprites were inspected in this pass. **Extracted** means sampled base frames from the mirrored 3.0.7 file were inspected after decoding. **Asset** means a named multi-frame animation was found in the mirrored 3.0.7 file, but its complete choreography and prop appearance have not yet been reviewed. **Catalog** means a community description only. None establishes which original application events invoked every animation.
+
+## Props and large routines
+
+| Routine | Evidence | Our app |
+| --- | --- | --- |
+| Produce a globe and spin it while watching it | Visual: earlier `Search` / `Searching` sprites | First 3D routine implemented; further matching needed |
+| Peel/eat/toss banana, plus a miss variant | Extracted: `Banana` 69 frames; `BananaMiss` 64 frames | Missing |
+| Put on sunglasses, pose, adjust them, and remove them | Visual: earlier `Idle2_1`; later continued/return entries also exist | Missing |
+| Coconut-shell headphones, with continued and return segments | Extracted: `HeadphonesContinued` 60 frames; community GIF supplies another visual lead | Missing |
+| Juggling three coconuts | Extracted: `Juggle` 62 frames; exact trajectories still need matching | Missing |
+| Seated book reading, looking up, resuming, and putting away | Extracted: `Read` 31 frames plus related segments | Missing |
+| Pencil-and-pad writing, pausing, repeating a stroke, and returning | Extracted: `Write` 37 frames plus related segments | Missing |
+| Bamboo-style mailbox, empty/full outcomes, read a letter, advance, and return | Extracted: separate mail family | Missing; visual routines can work without email integration |
+| Surfboard entrance, exit, and directional travel | Visual: earlier `Show` / `Hide`; move families in metadata | Missing |
+| Vine entrance, exit, and travel | Extracted: later `Show` uses a vine and landing dust | Missing |
+| Backflip with a puff at landing | Visual: earlier `GetAttention2` | Missing |
+| Chest-beating gesture | Visual: earlier `GetAttention` | Missing |
+| Butterfly visit, finger landing, and departure (`Butternut`) | Extracted: 95 frames | Missing |
+
+## Gestures, face, and ambient behavior
+
+| Family | Original evidence | Our app |
+| --- | --- | --- |
+| Point/present in four directions; multiple explanation poses | Directional gesture and `Explain` families in asset; some earlier presentation sprites already tracked | Missing as dedicated actions |
+| Greet, wave, congratulate | Named asset sequences; earlier clap sprites already used as reference | Wave/clap approximations exist |
+| Shrug, confusion, uncertainty, sadness, pleased reactions, disbelief | Named asset families; earlier confusion/uncertainty sprites | Shrug/surprise exist; some facial components available manually |
+| Hug, blow a kiss, giggle, wink, shush, hands behind back | Named multi-frame sequences in asset | Missing choreography; independent eye closure supports a manual wink component |
+| Scout/look around, alert, listening | Named asset families, some placeholders; inspect individually | Thinking and gaze controls cover only part |
+| Look up/down/left/right and diagonally, blink while looking, return | Asset has separate directional/blink/return segments | Left/right actions, gaze sliders and automatic blink exist |
+| Numerous idle variations and rest poses | Many asset entries; sampled earlier idles show face and gaze changes | One authored idle with breathing/blinking |
+| Talking and singing performance | Original-era feature descriptions; speech can combine poses and mouth overlays | Local speech and approximate jaw cycle; no original singing choreography |
+
+## What this implies for implementation
+
+Build a small prop system before adding isolated tricks: hand attachment transforms, independent prop motion, visibility cues, and the same lighting/shadow pipeline as the character. Each routine should have an entrance, a hold or loop where needed, and a clean return. Interruptions must account for any object still in the hands or airborne.
+
+Suggested first group: **globe → banana → sunglasses → book/reading → vine entrance/exit**, followed by juggling, headphones, writing/mail, richer gestures, and ambient routines. This ordering is a project recommendation, not a historical claim. Preserve the approved character appearance.
+
+We should extract original frame timing and review full sequences before matching the motion. Frame counts are not durations; branching and loops matter. The new inventory makes this possible without installing a large editor.
+
+## Scope limits
+
+This is a complete name/header inventory for the inspected file, not a visual certification of every entry or every release. Community references report an unused newspaper routine; keep it separate from shipping behavior until verified. Modern BonziWORLD hats, recolors, memes, and fan-game powers do not automatically belong to the original repertoire. `DoMagic1` / `DoMagic2` names are not evidence of a visible magic act.
