@@ -158,3 +158,7 @@ The paused writing hand lowers toward the original chest-level pose, carrying th
 ### Single writing passes
 
 `WriteSingleRoutine` composes the common retrieval, one stroke pass, and the paused routine. Write Once uses the original 1.45-second stroke segment; Write Again uses 1.20 seconds. Both hold only the final pause, so a long hold never repeats the stroke. Their compatible entry starts after retrieval when the pad is already held. Requests during the stroke finish the pass before switching. The existing adapted 1.90-second retrieval is shared rather than matching WritePre’s original 1.45 seconds exactly.
+
+## Mailbox — empty check
+
+Initial Mail Empty combines MailCheck (0.90 seconds) and MailCheckEmpty (2.60 seconds). A hollow bamboo barrel grows from a planted post, Bonzi reaches to open its circular door, crouches to inspect it, and reaches back to close it before the mailbox disappears. The barrel, wall thickness, post nodes and leaves are indexed geometry; the banana flag reuses the fruit and closed-peel meshes. The mailbox and door share a frame with a ground-preserving appearance offset. Full-mail retrieval and letter/read/next/return routines remain unfinished. No email service is connected.

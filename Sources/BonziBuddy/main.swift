@@ -56,6 +56,10 @@ if CommandLine.arguments.contains("--validate-writing-transfers") {
     do {try validateWritingTransfers()} catch {fputs("Writing transfer validation failed: \(error)\n",stderr);exit(1)}
     exit(0)
 }
+if CommandLine.arguments.contains("--validate-mail") {
+    do {try validateMail()} catch {fputs("Mail validation failed: \(error)\n",stderr);exit(1)}
+    exit(0)
+}
 if CommandLine.arguments.contains("--validate-write") {
     do {try validateWrite()} catch {fputs("Write validation failed: \(error)\n",stderr);exit(1)}
     exit(0)

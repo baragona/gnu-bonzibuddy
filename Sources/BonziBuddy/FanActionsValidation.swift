@@ -56,7 +56,7 @@ func validateFanActions() throws {
                 NSImage(cgImage:bitmap.cgImage!,size:NSSize(width:400,height:320)).draw(in:NSRect(x:camera*400,y:0,width:400,height:320))
             }
             NSGraphicsContext.restoreGraphicsState()
-            if frame==min(15,frames/2) || frame==frames/2 || (action == .clap && frame<=6) || (action == .shrug && [5,7,9,22,27,33].contains(frame)) || (action == .think && [5,10,20,45,55,60].contains(frame)) || ((action == .dance || action == .juggle || action == .banana || action == .bananaMiss || action == .sunglasses || action == .headphones || action == .butterfly || action == .read || action == .readLookUp || action == .write || action == .writePause || action == .writeOnce || action == .writeAgain) && frame%10==0) {
+            if frame==min(15,frames/2) || frame==frames/2 || (action == .clap && frame<=6) || (action == .shrug && [5,7,9,22,27,33].contains(frame)) || (action == .think && [5,10,20,45,55,60].contains(frame)) || ((action == .dance || action == .juggle || action == .banana || action == .bananaMiss || action == .sunglasses || action == .headphones || action == .butterfly || action == .read || action == .readLookUp || action == .write || action == .writePause || action == .writeOnce || action == .writeAgain || action == .mailEmpty) && frame%10==0) {
                 try output.representation(using:.png,properties:[:])!.write(to:URL(fileURLWithPath:"\(folder)/\(name)-\(frame).png"))
             }
             CGImageDestinationAddImage(gif,output.cgImage!,[kCGImagePropertyGIFDictionary:[kCGImagePropertyGIFDelayTime:1.0/15]] as CFDictionary)

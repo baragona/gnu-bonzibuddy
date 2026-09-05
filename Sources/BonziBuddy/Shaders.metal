@@ -360,6 +360,11 @@ fragment float4 propFragment(PropVarying vertexIn [[stage_in]],depth2d<float> sh
             }
         }
     }
+    if (prop.material.x==13.0 || prop.material.x==14.0) {
+        float region=vertexIn.uv.w;
+        float grain=0.025*sin(vertexIn.uv.x*180.0);
+        in.color.rgb=region>2.5 ? float3(0.20,0.48,0.08):region>1.5 ? float3(0.88,0.66,0.24):region>0.5 ? float3(0.43,0.29,0.09):float3(0.90,0.68,0.26)+grain;
+    }
     float sheen=prop.material.x==4.0 ? 1.0:prop.material.x<0.5 ? 1.0:prop.material.x<1.5 ? 0.15:0.4;
     float4 shaded=shadeSurface(in,shadow,u,eyes,sheen,prop.material.z);
     if (prop.material.x==4.0) {

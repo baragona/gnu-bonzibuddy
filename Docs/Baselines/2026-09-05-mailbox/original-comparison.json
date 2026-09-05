@@ -1,0 +1,549 @@
+{
+  "foregroundRGBMeanAbsoluteError" : 0.34116693568709183,
+  "gate" : {
+    "maximumForegroundRGBMAE" : 0.050000000000000003,
+    "minimumSilhouetteIoU" : 0.94999999999999996
+  },
+  "materialRegions" : [
+
+  ],
+  "method" : "Selected pose, foreground matte removal (20 RGB distance), independent bounding-box fit preserving aspect ratio into 256x256 with 12px padding, nearest-neighbor sampling. RGB MAE measured over union of foreground. This is a diagnostic, not proof of perceptual identity.",
+  "panels" : [
+    "Original reference",
+    "Metal render",
+    "Absolute RGB difference"
+  ],
+  "passesNearIdenticalGate" : false,
+  "referencePath" : "Validation\/Mail\/original.png",
+  "renderPath" : "Validation\/Mail\/native.png",
+  "silhouetteIoU" : 0.46914437883524374,
+  "silhouetteRows" : [
+    {
+      "normalizedY" : 20,
+      "referenceXSpans" : [
+
+      ],
+      "renderXSpans" : [
+
+      ]
+    },
+    {
+      "normalizedY" : 30,
+      "referenceXSpans" : [
+
+      ],
+      "renderXSpans" : [
+
+      ]
+    },
+    {
+      "normalizedY" : 40,
+      "referenceXSpans" : [
+
+      ],
+      "renderXSpans" : [
+        [
+          137,
+          157
+        ]
+      ]
+    },
+    {
+      "normalizedY" : 50,
+      "referenceXSpans" : [
+        [
+          158,
+          193
+        ]
+      ],
+      "renderXSpans" : [
+        [
+          116,
+          168
+        ]
+      ]
+    },
+    {
+      "normalizedY" : 60,
+      "referenceXSpans" : [
+        [
+          76,
+          77
+        ],
+        [
+          146,
+          196
+        ]
+      ],
+      "renderXSpans" : [
+        [
+          108,
+          170
+        ]
+      ]
+    },
+    {
+      "normalizedY" : 70,
+      "referenceXSpans" : [
+        [
+          69,
+          77
+        ],
+        [
+          136,
+          200
+        ]
+      ],
+      "renderXSpans" : [
+        [
+          57,
+          60
+        ],
+        [
+          112,
+          119
+        ],
+        [
+          121,
+          131
+        ],
+        [
+          133,
+          174
+        ]
+      ]
+    },
+    {
+      "normalizedY" : 80,
+      "referenceXSpans" : [
+        [
+          63,
+          75
+        ],
+        [
+          139,
+          200
+        ]
+      ],
+      "renderXSpans" : [
+        [
+          50,
+          60
+        ],
+        [
+          108,
+          178
+        ]
+      ]
+    },
+    {
+      "normalizedY" : 90,
+      "referenceXSpans" : [
+        [
+          14,
+          92
+        ],
+        [
+          136,
+          201
+        ]
+      ],
+      "renderXSpans" : [
+        [
+          49,
+          57
+        ],
+        [
+          106,
+          179
+        ]
+      ]
+    },
+    {
+      "normalizedY" : 100,
+      "referenceXSpans" : [
+        [
+          12,
+          94
+        ],
+        [
+          132,
+          203
+        ]
+      ],
+      "renderXSpans" : [
+        [
+          16,
+          72
+        ],
+        [
+          107,
+          178
+        ]
+      ]
+    },
+    {
+      "normalizedY" : 110,
+      "referenceXSpans" : [
+        [
+          12,
+          94
+        ],
+        [
+          128,
+          203
+        ]
+      ],
+      "renderXSpans" : [
+        [
+          13,
+          75
+        ],
+        [
+          105,
+          177
+        ]
+      ]
+    },
+    {
+      "normalizedY" : 120,
+      "referenceXSpans" : [
+        [
+          14,
+          92
+        ],
+        [
+          127,
+          212
+        ]
+      ],
+      "renderXSpans" : [
+        [
+          12,
+          75
+        ],
+        [
+          114,
+          196
+        ]
+      ]
+    },
+    {
+      "normalizedY" : 130,
+      "referenceXSpans" : [
+        [
+          49,
+          61
+        ],
+        [
+          88,
+          96
+        ],
+        [
+          123,
+          221
+        ]
+      ],
+      "renderXSpans" : [
+        [
+          17,
+          73
+        ],
+        [
+          105,
+          206
+        ]
+      ]
+    },
+    {
+      "normalizedY" : 140,
+      "referenceXSpans" : [
+        [
+          51,
+          62
+        ],
+        [
+          88,
+          99
+        ],
+        [
+          114,
+          229
+        ]
+      ],
+      "renderXSpans" : [
+        [
+          41,
+          48
+        ],
+        [
+          67,
+          80
+        ],
+        [
+          97,
+          212
+        ]
+      ]
+    },
+    {
+      "normalizedY" : 150,
+      "referenceXSpans" : [
+        [
+          51,
+          64
+        ],
+        [
+          90,
+          101
+        ],
+        [
+          111,
+          133
+        ],
+        [
+          137,
+          238
+        ]
+      ],
+      "renderXSpans" : [
+        [
+          37,
+          45
+        ],
+        [
+          69,
+          84
+        ],
+        [
+          94,
+          216
+        ]
+      ]
+    },
+    {
+      "normalizedY" : 160,
+      "referenceXSpans" : [
+        [
+          49,
+          61
+        ],
+        [
+          93,
+          101
+        ],
+        [
+          114,
+          243
+        ]
+      ],
+      "renderXSpans" : [
+        [
+          36,
+          45
+        ],
+        [
+          74,
+          84
+        ],
+        [
+          116,
+          195
+        ],
+        [
+          202,
+          208
+        ]
+      ]
+    },
+    {
+      "normalizedY" : 170,
+      "referenceXSpans" : [
+        [
+          48,
+          59
+        ],
+        [
+          116,
+          231
+        ]
+      ],
+      "renderXSpans" : [
+        [
+          37,
+          45
+        ],
+        [
+          118,
+          193
+        ]
+      ]
+    },
+    {
+      "normalizedY" : 180,
+      "referenceXSpans" : [
+        [
+          44,
+          57
+        ],
+        [
+          62,
+          64
+        ],
+        [
+          118,
+          135
+        ],
+        [
+          143,
+          221
+        ]
+      ],
+      "renderXSpans" : [
+        [
+          41,
+          48
+        ],
+        [
+          118,
+          194
+        ]
+      ]
+    },
+    {
+      "normalizedY" : 190,
+      "referenceXSpans" : [
+        [
+          37,
+          41
+        ],
+        [
+          46,
+          62
+        ],
+        [
+          148,
+          170
+        ],
+        [
+          188,
+          212
+        ]
+      ],
+      "renderXSpans" : [
+        [
+          43,
+          52
+        ],
+        [
+          109,
+          202
+        ]
+      ]
+    },
+    {
+      "normalizedY" : 200,
+      "referenceXSpans" : [
+        [
+          42,
+          64
+        ],
+        [
+          141,
+          173
+        ],
+        [
+          185,
+          217
+        ]
+      ],
+      "renderXSpans" : [
+        [
+          31,
+          34
+        ],
+        [
+          45,
+          54
+        ],
+        [
+          104,
+          207
+        ]
+      ]
+    },
+    {
+      "normalizedY" : 210,
+      "referenceXSpans" : [
+        [
+          128,
+          154
+        ],
+        [
+          204,
+          229
+        ]
+      ],
+      "renderXSpans" : [
+        [
+          35,
+          38
+        ],
+        [
+          44,
+          51
+        ],
+        [
+          60,
+          72
+        ],
+        [
+          99,
+          99
+        ],
+        [
+          103,
+          219
+        ]
+      ]
+    },
+    {
+      "normalizedY" : 220,
+      "referenceXSpans" : [
+
+      ],
+      "renderXSpans" : [
+        [
+          43,
+          46
+        ],
+        [
+          107,
+          133
+        ],
+        [
+          182,
+          207
+        ]
+      ]
+    },
+    {
+      "normalizedY" : 230,
+      "referenceXSpans" : [
+
+      ],
+      "renderXSpans" : [
+
+      ]
+    },
+    {
+      "normalizedY" : 240,
+      "referenceXSpans" : [
+
+      ],
+      "renderXSpans" : [
+
+      ]
+    }
+  ]
+}

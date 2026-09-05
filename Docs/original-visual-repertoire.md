@@ -1,6 +1,6 @@
 # Original visual repertoire
 
-Research date: September 5, 2026. The original's repertoire is substantially broader than our current action catalog. The working tree has twenty-three action entries, including first globe, juggling, banana, butterfly, reading, headphones, and sunglasses implementations. See [source audit and full animation directory](../References/AnimationInventory/README.md) and [sampled sprite review](../References/AnimationInventory/surfboard-sprite-review.png).
+Research date: September 5, 2026. The original's repertoire is substantially broader than our current action catalog. The working tree has twenty-four action entries, including first globe, juggling, banana, butterfly, reading, headphones, and sunglasses implementations. See [source audit and full animation directory](../References/AnimationInventory/README.md) and [sampled sprite review](../References/AnimationInventory/surfboard-sprite-review.png).
 
 ## Evidence levels
 
@@ -17,7 +17,7 @@ Research date: September 5, 2026. The original's repertoire is substantially bro
 | Juggling three coconuts | Extracted: `Juggle` 62 frames; exact trajectories still need matching | Implemented; sampled clearance passes, visual fidelity remains approximate |
 | Seated book reading, looking up, resuming, and putting away | Extracted: `Read` 31 frames plus related segments | Seated reading/page turn plus look-up/continued gestures and stow/stand; reading aloud remains |
 | Pencil-and-pad writing, pausing, repeating a stroke, and returning | Extracted: `Write` 37 frames plus related segments | Initial pad/pencil retrieval, stroke loop, and stow; in-place pause/resume and once/again passes supported; ink and Writing variations remain |
-| Bamboo-style mailbox, empty/full outcomes, read a letter, advance, and return | Extracted: separate mail family | Missing; visual routines can work without email integration |
+| Bamboo-style mailbox, empty/full outcomes, read a letter, advance, and return | Extracted: separate mail family | Initial bamboo mailbox and empty check; full outcome and letter variants remain |
 | Surfboard entrance, exit, and directional travel | Visual: earlier `Show` / `Hide`; move families in metadata | Missing |
 | Vine entrance, exit, and travel | Extracted: later `Show` uses a vine and landing dust | Missing |
 | Backflip with a puff at landing | Visual: earlier `GetAttention2` | Missing |

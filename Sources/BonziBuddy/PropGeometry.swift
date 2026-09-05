@@ -10,6 +10,8 @@ struct PropMesh {
     init(device:MTLDevice,kind:PropKind) throws {
         var vertices:[PropVertex]=[],indices:[UInt32]=[]
         switch kind {
+        case .mailbox,.mailboxDoor:
+            (vertices,indices)=MailboxGeometry.mesh(kind)
         case .writingPad,.pencil:
             (vertices,indices)=WritingGeometry.mesh(kind)
         case .bookLeft,.bookRight,.bookLeaf:
