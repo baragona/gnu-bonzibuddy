@@ -1,0 +1,7 @@
+{
+  "maxChannelError" : 0.04919356107711792,
+  "note" : "Render consistency between baked and GPU-deformed geometry, not original Bonzi likeness.",
+  "premultipliedRGBAMAE" : 8.9508976088836792e-08,
+  "skinnedSource" : "Validation\/FanActions\/eye-catchlight-front-on.png",
+  "staticSource" : "References\/ApprovedFanAppearance\/front.png"
+}

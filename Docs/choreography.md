@@ -4,7 +4,7 @@ Implementation in progress; the complete visual-repertoire goal remains open.
 
 `Routines.swift` samples continuous hand intentions, body facing, head motion, gaze, and prop cues from an action's elapsed time. A routine owns its reveal/hold/stow beats. `FanRig` turns wrist targets into two-bone IK and blends palm/finger intentions with the approved rest pose. Existing actions retain their current reference curves.
 
-`PropMotion` resolves prop anchors after the rig has evaluated and blended its pose. Semantic wrist/head attachments support offsets in blended character axes or axes that rotate with the joint. Rigid attachment frames remove skeletal scale and shear. It preserves outgoing props during interruption and contracts them over 0.20 seconds. This is a first interruption policy; held books, headphones, and thrown objects will need dedicated return/release behavior rather than assuming every prop should contract.
+`PropMotion` resolves prop anchors after the rig has evaluated and blended its pose. Semantic wrist/head attachments support offsets in blended character axes or axes that rotate with the joint. Rigid attachment frames remove skeletal scale and shear. It preserves outgoing props during interruption and contracts them over 0.20 seconds. This is a first interruption policy; held books and thrown objects will need dedicated return/release behavior rather than assuming every prop should contract.
 
 `PropRenderer` owns reusable polygon buffers and the separate rigid-prop vertex pipeline. The prop and character color passes use the same lighting helper; both write the same soft-shadow depth pass. The globe uses a 1024×512 mipmapped land mask baked from public-domain Natural Earth polygons. No runtime network access is involved.
 
@@ -102,12 +102,15 @@ The final selected worn-pose comparison (original continued frame 19, native fra
 
 `HeadphonesGeometry` builds hollow coconut shells with cream interiors, a curved black headband, and an antenna. The shell surfaces have independent inside/outside normals and indexed rims; all parts share the prop color and shadow pipeline. The original reference shows the white interiors while Bonzi holds the headset upside down.
 
-`HeadphonesRoutine` follows the extracted 12.02-second continued sequence and 2.10-second return. It lifts and rotates the headset with both hands, seats it on a rigid head attachment, releases the hands, closes the eyes, and adds a small listening sway. The held range is 2.00–12.02 seconds. Selecting Headphones holds the listening routine; Return to rest plays its removal. Worn sunglasses remain independent.
+`HeadphonesRoutine` follows the extracted 12.02-second continued sequence and 2.10-second return. It lifts and rotates the headset with both hands, seats it on a rigid head attachment, releases the hands, closes the eyes, and adds a small listening sway. The held range is 2.00–12.02 seconds. The offline held preview retains the listening performance. In the app, Headphones is an independent toggle: it stays on during juggling, speech, and other actions without forcing closed eyes. Return to rest leaves both accessories equipped.
 
-A hold-capable routine marked `finishRoutine` now receives its return request before a sunglasses transfer, so held listening cannot block a toggle indefinitely or lose its headset mid-transfer. This serializes hand ownership; it does not yet make headphones a second independent wearable.
+A hold-capable routine marked `finishRoutine` now receives its return request before a sunglasses transfer, so held listening cannot block a toggle indefinitely or lose its headset mid-transfer. The shared wearable queue now also serializes transfers between independently toggled sunglasses and headphones. Taking off either leaves the other equipped.
 
 The procedural mesh and choreography are an initial reference-based implementation. Hand targets remain authored in character space, and finer fingertip contact and frame-by-frame original motion matching need further work.
 
 Validation: 7,852 headset vertices and 14,464 triangles, no reversed or degenerate triangles, sampled carry marker error 0.00347 model units, and head attachment error below 3e-7. The normal and held-with-sunglasses previews cover 516 frames from three angles (1,548 views) with no clipping. All 256 ordered skeletal transitions and 864 facial transition cases pass. The neutral render remains effectively unchanged (RGBA MAE 8.95e-8).
 
 The selected original listening frame 27 versus native frame 100 comparison improved after revising earcup and antenna proportions: silhouette IoU 0.743, RGB MAE 0.251. It still fails the near-identity gate. Reports and selected images are in `Baselines/2026-09-05-headphones/`; these checks do not establish exact original choreography or comprehensive collision avoidance.
+
+
+The user's tighter-fit revision moves each earcup inward by 0.045 model units and down by 0.015, with matching headband, antenna mount, and hand marker changes. Front, quarter, and profile combination renders confirm the cups meet the cheeks. The shared toggle checks cover both accessories across 1,694 body-action samples, queued reversals/cancellation, and removing one while retaining the other.

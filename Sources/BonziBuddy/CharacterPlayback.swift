@@ -12,23 +12,34 @@ struct CharacterPlayback {
     private mutating func adoptQueuedBody(at time:Double) {
         if let queued=queuedBody,time>=queued.start {playback=queued.player;queuedBody=nil}
     }
-    private var sunglasses=WearablePlayback(definition:.sunglasses)
-    var sunglassesEnabled:Bool {sunglasses.requested}
+    private var accessories=WearablePlayback()
+    var sunglassesEnabled:Bool {accessories.requested.contains(.sunglasses)}
+    var headphonesEnabled:Bool {accessories.requested.contains(.headphones)}
     func playbackSnapshot(at time:Double)->ActionSnapshot {
-        sunglasses.transfer(at:time)?.snapshot(at:time) ?? bodySnapshot(at:time)
+        accessories.transfer(at:time)?.snapshot(at:time) ?? bodySnapshot(at:time)
     }
-    func wearsSunglasses(at time:Double)->Bool {sunglasses.transfer(at:time)==nil && sunglasses.worn(at:time)}
+    func wears(_ wearable:Wearable,at time:Double)->Bool {
+        accessories.transfer(at:time)?.wearable != wearable && accessories.worn(at:time).contains(wearable)
+    }
+    func wearsSunglasses(at time:Double)->Bool {wears(.sunglasses,at:time)}
     func accessoryPose(at time:Double)->RoutinePose {
-        guard wearsSunglasses(at:time) else {return RoutinePose()}
-        return RoutinePose(face:FacialIntent(eyeClosure:0.45),props:[PropCue(id:"sunglasses",kind:.sunglasses,anchor:.attachment(.head,axes:.joint),offset:.zero)])
+        var pose=RoutinePose()
+        for wearable in Wearable.allCases where wears(wearable,at:time) {
+            let accessory=wearable.wornPose
+            pose.props += accessory.props
+            pose.face.eyeClosure=max(pose.face.eyeClosure,accessory.face.eyeClosure)
+        }
+        return pose
     }
-    mutating func setSunglassesEnabled(_ enabled:Bool,at time:Double) {
-        guard enabled != sunglasses.requested else {return}
+    mutating func setSunglassesEnabled(_ enabled:Bool,at time:Double) {setWearableEnabled(.sunglasses,enabled,at:time)}
+    mutating func setHeadphonesEnabled(_ enabled:Bool,at time:Double) {setWearableEnabled(.headphones,enabled,at:time)}
+    mutating func setWearableEnabled(_ wearable:Wearable,_ enabled:Bool,at time:Double) {
+        guard enabled != accessories.requested.contains(wearable) else {return}
         adoptQueuedBody(at:time)
-        let previousEnd=max(time,sunglasses.busyUntil)
+        let previousEnd=max(time,accessories.busyUntil)
         let body=bodySnapshot(at:time)
         var begin=time
-        if sunglasses.busyUntil<=time {
+        if accessories.busyUntil<=time {
             // Prop routines own their hands until their authored stow completes.
             // Wearing glasses does not reserve anything; only a transfer waits.
             let ownsProps=RoutineLibrary.definitions[body.action]?.accessoryTransferPolicy == .finishRoutine
@@ -44,11 +55,11 @@ struct CharacterPlayback {
                 } else {begin=time+max(0,body.action.duration-body.elapsed)}
             }
             suspendsBody=begin==time
-        } else if sunglasses.transfer(at:time)==nil {
-            begin=sunglasses.nextTransferStart ?? time
+        } else if accessories.transfer(at:time)==nil {
+            begin=accessories.nextTransferStart ?? time
         }
-        sunglasses.setEnabled(enabled,at:time,beginAt:begin)
-        let nextEnd=max(time,sunglasses.busyUntil)
+        accessories.setEnabled(wearable,enabled,at:time,beginAt:begin)
+        let nextEnd=max(time,accessories.busyUntil)
         if suspendsBody {playback.shift(by:nextEnd-previousEnd)}
         if var queued=queuedBody {
             queued.player.shift(by:nextEnd-queued.start);queued.start=nextEnd;queuedBody=queued
@@ -56,14 +67,14 @@ struct CharacterPlayback {
     }
     @discardableResult mutating func finishRoutine(at time:Double)->Bool {
         adoptQueuedBody(at:time)
-        if sunglasses.busyUntil>time {play(.idle,at:time);return true}
+        if accessories.busyUntil>time {play(.idle,at:time);return true}
         return playback.finish(at:time)
     }
     mutating func play(_ action: Action, at time: Double, mode:PlaybackMode = .once) {
         adoptQueuedBody(at:time)
-        if sunglasses.busyUntil>time {
-            var player=ActionPlayback();player.play(action,at:sunglasses.busyUntil,mode:mode)
-            queuedBody=(player,sunglasses.busyUntil)
+        if accessories.busyUntil>time {
+            var player=ActionPlayback();player.play(action,at:accessories.busyUntil,mode:mode)
+            queuedBody=(player,accessories.busyUntil)
         } else {playback.play(action,at:time,mode:mode);queuedBody=nil}
     }
 }

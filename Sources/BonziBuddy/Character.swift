@@ -9,6 +9,8 @@ struct Instance { var model: simd_float4x4; var color: SIMD4<Float> }
 
 final class Character {
     private var playback=CharacterPlayback()
+    var headphonesEnabled:Bool {playback.headphonesEnabled}
+    func setHeadphonesEnabled(_ enabled:Bool,at time:Double) {playback.setHeadphonesEnabled(enabled,at:time)}
     var sunglassesEnabled:Bool {playback.sunglassesEnabled}
     func playbackSnapshot(at time:Double)->ActionSnapshot {playback.playbackSnapshot(at:time)}
     func wearsSunglasses(at time:Double)->Bool {playback.wearsSunglasses(at:time)}

@@ -27,14 +27,14 @@ enum HeadphonesGeometry {
                     let angle=u*2*Float.pi,phi=(0.001+v*0.999)*Float.pi/2
                     let radius:Float=inner ? 0.136:0.160,depth:Float=inner ? 0.151:0.178
                     let rough:Float=inner ? 1:1+0.015*sin(angle*9+phi*5)*sin(phi)
-                    return [side*(0.375+depth*cos(phi)),0.260+radius*sin(phi)*cos(angle)*rough,0.085+radius*sin(phi)*sin(angle)*rough]
+                    return [side*(0.330+depth*cos(phi)),0.245+radius*sin(phi)*cos(angle)*rough,0.085+radius*sin(phi)*sin(angle)*rough]
                 }
             }
             patch(rows:1,columns:64,material:2,flip:side<0) {u,v in
                 let angle=u*2*Float.pi
                 let outer:Float=0.160*(1+0.015*sin(angle*9+Float.pi*2.5))
                 let radius:Float=0.136+(outer-0.136)*v
-                return [side*0.375,0.260+radius*cos(angle),0.085+radius*sin(angle)]
+                return [side*0.330,0.245+radius*cos(angle),0.085+radius*sin(angle)]
             }
         }
         func tube(points:Int,radius:Float,material:Float,curve:(Float)->SIMD3<Float>) {
@@ -47,11 +47,11 @@ enum HeadphonesGeometry {
         }
         tube(points:64,radius:0.013,material:1) {v in
             let a=v*Float.pi
-            return [0.415*cos(a),0.260+0.490*sin(a),0.055]
+            return [0.370*cos(a),0.245+0.505*sin(a),0.055]
         }
-        tube(points:4,radius:0.011,material:1) {v in [-0.365,0.350+0.075*v,0.085]}
-        tube(points:8,radius:0.006,material:3) {v in [-0.365+0.030*v,0.410+0.58*v,0.085]}
-        tube(points:4,radius:0.008,material:1) {v in [-0.335,0.980+0.025*v,0.085]}
+        tube(points:4,radius:0.011,material:1) {v in [-0.320,0.335+0.075*v,0.085]}
+        tube(points:8,radius:0.006,material:3) {v in [-0.320+0.030*v,0.395+0.58*v,0.085]}
+        tube(points:4,radius:0.008,material:1) {v in [-0.290,0.965+0.025*v,0.085]}
         return (vertices,indices)
     }
 }

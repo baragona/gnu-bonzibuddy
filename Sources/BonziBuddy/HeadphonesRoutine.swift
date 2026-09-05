@@ -25,7 +25,7 @@ enum HeadphonesRoutine {
         let handWeight=max(RoutineLibrary.smooth(t,0.05,0.45)*(1-RoutineLibrary.smooth(t,1.65,2.0)),RoutineLibrary.smooth(t,12.02,12.47)*(1-RoutineLibrary.smooth(t,13.65,14.12)))
         var hands:[HandSide:HandIntent]=[:]
         for side in [HandSide.left,.right] {
-            let wrist=origin+rotation.act(SIMD3<Float>(side.sign*0.55,0.260,0.085))
+            let wrist=origin+rotation.act(SIMD3<Float>(side.sign*0.505,0.245,0.085))
             hands[side]=HandIntent(wrist:wrist,fingers:rotation.act([-side.sign,0.25,0]),palm:rotation.act([0,0,1]),openness:0.7,weight:handWeight,grip:0.3)
         }
         let listening=RoutineLibrary.smooth(t,5.3,6.2)*(1-RoutineLibrary.smooth(t,11.62,12.02))

@@ -31,7 +31,7 @@ func validateHeadphones() throws {
             }
             if t>=0.8 && t<=1.3 {
                 for side in [HandSide.left,.right] {
-                    let marker=draw.model*SIMD4<Float>(side.sign*0.55,0.260,0.085,1)
+                    let marker=draw.model*SIMD4<Float>(side.sign*0.505,0.245,0.085,1)
                     let hand=rig.attachmentFrame(.wrist(side),axes:.character,bones:bones).columns.3
                     gripError=max(gripError,length(marker-hand))
                 }
