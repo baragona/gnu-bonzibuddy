@@ -1,0 +1,12 @@
+Bonzi Buddy fan model
+Original model and rig: YinyangGio
+Public listing/uploader and credited Blender port: Landon & Emma (NitroShell)
+https://sketchfab.com/3d-models/bonzi-buddy-bonzibuddy-made-by-yinyanggio-f1595764955242b7ba38695d5732df37
+The public listing declares Creative Commons Attribution.
+Creator-linked source library:
+https://www.mediafire.com/file/mqa9oc6hm2r2trk/The_good_the_bad_and_the_ugly.lib4d/file
+
+Modified for this local native macOS project: format conversion, subdivision,
+material palette mapping, native Metal skinning and facial morphs, and retargeted
+poses and animation. This is a modified fan model, not the original Windows asset.
+No endorsement by the original creator is implied.

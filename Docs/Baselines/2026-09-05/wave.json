@@ -1,0 +1,12 @@
+{
+  "clippedFrames" : [
+
+  ],
+  "forearmChangeFromWristSwing" : 0,
+  "frames" : 96,
+  "liveWaveSpeechIdleRouting" : true,
+  "maximumFingerTravelFromWristSwing" : 0.086935892701148987,
+  "note" : "Hand-authored fan-rig wave: checks the wrist swing center, preceding arm transforms, visible movement and framing. Not a match to original choreography or proof against mesh intersections.",
+  "previewFPS" : 30,
+  "wristPivotError" : 1.884864389012364e-07
+}

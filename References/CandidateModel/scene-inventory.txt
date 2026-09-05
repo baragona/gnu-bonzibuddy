@@ -1,0 +1,187 @@
+Bonzi Buddy type=5140
+  Subdivision Surface type=1007455
+    Null type=5140
+      head type=5100 points=402 polygons=420
+        tag Pose Morph type=1024237
+          morph 0 Base Pose points=402 strength=1
+            maximum point difference from base=0
+          morph 1 eyebrow up points=402 strength=0
+            maximum point difference from base=8.33922
+          morph 2 angry eyebrow points=402 strength=0
+            maximum point difference from base=27.7886
+          morph 3 eyebrow down points=402 strength=0
+            maximum point difference from base=15.047
+          morph 4 ? points=402 strength=0
+            maximum point difference from base=11.6902
+          morph 5 À points=402 strength=0
+            maximum point difference from base=16.6725
+          morph 6 sad eyebrow points=402 strength=0
+            maximum point difference from base=12.1894
+        tag Weight type=1019365
+          weighted joints=44
+        tag Texture type=5616
+        tag UVW type=5671
+        tag Phong type=5612
+        tag (null) type=5604
+        tag (null) type=5600
+        Skin type=1019363
+      mouth type=5100 points=1576 polygons=1572
+        tag Pose Morph type=1024237
+          morph 0 Base Pose points=1576 strength=1
+            maximum point difference from base=0
+          morph 1 smile points=1576 strength=0
+            maximum point difference from base=19.555
+          morph 2 sad points=1576 strength=0
+            maximum point difference from base=15.5969
+          morph 3 epic sad points=1576 strength=0
+            maximum point difference from base=27.8074
+          morph 4 little mouth points=1576 strength=0
+            maximum point difference from base=44.5191
+          morph 5 oh/kiss points=1576 strength=0
+            maximum point difference from base=59.7414
+          morph 6 cheeks points=1576 strength=0
+            maximum point difference from base=27.9192
+          morph 7  jaw points=1576 strength=0
+            maximum point difference from base=23.3246
+          morph 8 mouth points=1576 strength=0
+            maximum point difference from base=35.5666
+          morph 9 nose points=1576 strength=0
+            maximum point difference from base=9.94678
+        tag Weight type=1019365
+          weighted joints=44
+        tag Texture type=5616
+        tag Texture type=5616
+        tag Polygon Selection #0 type=5673
+        tag Polygon Selection #1 type=5673
+        tag UVW type=5671
+        tag Phong type=5612
+        tag (null) type=5604
+        tag (null) type=5600
+        tag B1 type=5673
+        tag C2 type=5673
+        tag C1 type=5673
+        Skin type=1019363
+      Sphere.1 type=5100 points=2095 polygons=2052
+        tag Weight type=1019365
+          weighted joints=44
+        tag Texture type=5616
+        tag Texture type=5616
+        tag Texture type=5616
+        tag Polygon Selection #0 type=5673
+        tag Polygon Selection #1 type=5673
+        tag UVW type=5671
+        tag Phong type=5612
+        tag (null) type=5604
+        tag (null) type=5600
+        tag Polygon Selection.1 type=5673
+        Skin type=1019363
+      eye type=5100 points=196 polygons=192
+        tag Weight type=1019365
+          weighted joints=44
+        tag Texture type=5616
+        tag Texture type=5616
+        tag UVW type=5671
+        tag Texture type=5616
+        tag UVW type=5671
+        tag Polygon Selection #0 type=5673
+        tag Polygon Selection #1 type=5673
+        tag UVW type=5671
+        tag Phong type=5612
+        tag (null) type=5604
+        tag (null) type=5600
+        Skin type=1019363
+  Rig type=5140
+    leg type=1019362
+      knee type=1019362
+        foot type=1019362
+          Joint.4 type=1019362
+    leg type=1019362
+      knee type=1019362
+        foot type=1019362
+          Joint.4 type=1019362
+    body type=1019362
+      spine type=1019362
+        arm type=1019362
+          elbow type=1019362
+            hand type=1019362
+              banana type=5100 points=3716 polygons=3712
+                tag Texture type=5616
+                tag Texture type=5616
+                tag Texture type=5616
+                tag Texture type=5616
+                tag Polygon Selection #0 type=5673
+                tag Polygon Selection #1 type=5673
+                tag UVW type=5671
+                tag Phong type=5612
+                tag (null) type=5604
+                tag (null) type=5600
+                tag B1 type=5673
+                tag C2 type=5673
+                tag C1 type=5673
+                tag Polygon Selection.1 type=5673
+              wrist type=1019362
+                f type=1019362
+                  Joint.7 type=1019362
+                    Joint.8 type=1019362
+                f type=1019362
+                  Joint.7 type=1019362
+                    Joint.8 type=1019362
+                f type=1019362
+                  Joint.7 type=1019362
+                    Joint.8 type=1019362
+                thumb type=1019362
+                  Joint.7 type=1019362
+                    Joint.8 type=1019362
+        arm type=1019362
+          elbow type=1019362
+            hand type=1019362
+              wrist type=1019362
+                f type=1019362
+                  Joint.7 type=1019362
+                    Joint.8 type=1019362
+                f type=1019362
+                  Joint.7 type=1019362
+                    Joint.8 type=1019362
+                f type=1019362
+                  Joint.7 type=1019362
+                    Joint.8 type=1019362
+                thumb type=1019362
+                  Joint.7 type=1019362
+                    Joint.8 type=1019362
+        neck type=1019362
+          head type=1019362
+            Glasses type=5100 points=2948 polygons=2912
+              tag Texture type=5616
+              tag Texture type=5616
+              tag Polygon Selection #0 type=5673
+              tag Polygon Selection #1 type=5673
+              tag UVW type=5671
+              tag Phong type=5612
+              tag (null) type=5604
+              tag (null) type=5600
+            eyelids type=5140
+              eyelid1 type=5100 points=114 polygons=96
+                tag Texture type=5616
+                tag UVW type=5671
+                tag Phong type=5612
+                tag (null) type=5604
+                tag (null) type=5600
+              eyelid2 type=5100 points=196 polygons=192
+                tag Texture type=5616
+                tag UVW type=5671
+                tag Phong type=5612
+                tag (null) type=5604
+                tag (null) type=5600
+            epic bonzi teeth type=5140
+              Symmetry type=5100 points=448 polygons=496
+                tag Texture type=5616
+                tag Phong type=5612
+                tag UVW type=5671
+                tag (null) type=5604
+                tag (null) type=5600
+              Symmetry.2 type=5100 points=448 polygons=496
+                tag Texture type=5616
+                tag Phong type=5612
+                tag UVW type=5671
+                tag (null) type=5604
+                tag (null) type=5600

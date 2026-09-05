@@ -1,0 +1,8 @@
+{
+  "References/CandidateModel/FanRigged.mesh": "b518bdaac77ed9911cd734822ced83b23a41d0ebb32d04a5f5079ab396560457",
+  "References/CandidateModel/FanRig.json": "9e1691adb928d8108231983a8017709ba9974ef77a4da3ab31acddd89bd4936b",
+  "References/CandidateModel/FanMorphs.bin": "324b2a0695e03d8e9fca1676b17ac5b67efb74b3e6ca5a412772575fdf695c73",
+  "References/CandidateModel/FanTeeth.mesh": "8ea9ab614de683b69fd81ba305ea7277ce7f95fdc1975381747e46cc9c423aa3",
+  "Sources/BonziBuddy/Shaders.metal": "5f97a4eaecd7c968569ab9fd90676d20fe2df96b5d7f27cc32186b128bb45986",
+  "Sources/BonziBuddy/FanRig.swift": "57781198f2dd83fa72b87edfd7b97af338abc1cdb361950d4b9eb0a899963c5c"
+}

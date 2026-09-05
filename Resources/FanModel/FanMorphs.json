@@ -1,0 +1,113 @@
+{
+  "version": 1,
+  "names": [
+    "smile",
+    "jaw",
+    "eyebrow up",
+    "angry eyebrow",
+    "eyebrow down",
+    "?",
+    "\u00bf",
+    "sad eyebrow",
+    "sad",
+    "epic sad",
+    "little mouth",
+    "oh/kiss",
+    "cheeks",
+    "mouth",
+    "nose"
+  ],
+  "vertices": 68673,
+  "targets": [
+    {
+      "name": "smile",
+      "folder": "smile",
+      "changedVertices": 18028,
+      "maximumPositionDelta": 0.064973307357206
+    },
+    {
+      "name": "jaw",
+      "folder": "jaw",
+      "changedVertices": 6615,
+      "maximumPositionDelta": 0.07621097123399206
+    },
+    {
+      "name": "eyebrow up",
+      "folder": "eyebrow-up",
+      "changedVertices": 1013,
+      "maximumPositionDelta": 0.026501784948534533
+    },
+    {
+      "name": "angry eyebrow",
+      "folder": "angry-eyebrow",
+      "changedVertices": 1065,
+      "maximumPositionDelta": 0.06778341006480275
+    },
+    {
+      "name": "eyebrow down",
+      "folder": "eyebrow-down",
+      "changedVertices": 1295,
+      "maximumPositionDelta": 0.046833377576628595
+    },
+    {
+      "name": "?",
+      "folder": "brow-variant-1",
+      "changedVertices": 1097,
+      "maximumPositionDelta": 0.027858996649078416
+    },
+    {
+      "name": "\u00bf",
+      "folder": "brow-variant-2",
+      "changedVertices": 1114,
+      "maximumPositionDelta": 0.03635680528497524
+    },
+    {
+      "name": "sad eyebrow",
+      "folder": "sad-eyebrow",
+      "changedVertices": 1177,
+      "maximumPositionDelta": 0.03364647845261511
+    },
+    {
+      "name": "sad",
+      "folder": "sad",
+      "changedVertices": 16039,
+      "maximumPositionDelta": 0.05162700071747537
+    },
+    {
+      "name": "epic sad",
+      "folder": "epic-sad",
+      "changedVertices": 22498,
+      "maximumPositionDelta": 0.09206193879006155
+    },
+    {
+      "name": "little mouth",
+      "folder": "little-mouth",
+      "changedVertices": 17309,
+      "maximumPositionDelta": 0.147694340634165
+    },
+    {
+      "name": "oh/kiss",
+      "folder": "oh-kiss",
+      "changedVertices": 17309,
+      "maximumPositionDelta": 0.19768997149186301
+    },
+    {
+      "name": "cheeks",
+      "folder": "cheeks",
+      "changedVertices": 17871,
+      "maximumPositionDelta": 0.07679086455201885
+    },
+    {
+      "name": "mouth",
+      "folder": "mouth",
+      "changedVertices": 4497,
+      "maximumPositionDelta": 0.11689379383248825
+    },
+    {
+      "name": "nose",
+      "folder": "nose",
+      "changedVertices": 4072,
+      "maximumPositionDelta": 0.02986284200810686
+    }
+  ]
+}

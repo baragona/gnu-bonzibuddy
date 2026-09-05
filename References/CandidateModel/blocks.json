@@ -1,0 +1,125 @@
+{
+  "sourceSHA256": "854015a046ba2548f2c527b64a88af9c26c5da83de96010152ace83b26e6dc56",
+  "blocks": [
+    {
+      "file": "References/CandidateModel/block-0.c4d",
+      "offset": 16,
+      "size": 1636285,
+      "nameMatches": [
+        [
+          "Peedy",
+          172934,
+          "utf-16-be"
+        ],
+        [
+          "Peedy",
+          172935,
+          "utf-16-le"
+        ]
+      ]
+    },
+    {
+      "file": "References/CandidateModel/block-1.c4d",
+      "offset": 542930,
+      "size": 156480,
+      "nameMatches": [
+        [
+          "Peedy",
+          64095,
+          "utf-16-be"
+        ],
+        [
+          "Peedy",
+          64096,
+          "utf-16-le"
+        ]
+      ]
+    },
+    {
+      "file": "References/CandidateModel/block-2.png",
+      "offset": 596395,
+      "size": 122586,
+      "nameMatches": []
+    },
+    {
+      "file": "References/CandidateModel/block-3.c4d",
+      "offset": 717392,
+      "size": 88615,
+      "nameMatches": [
+        [
+          "Bonzi",
+          37921,
+          "utf-16-be"
+        ],
+        [
+          "Bonzi",
+          37922,
+          "utf-16-le"
+        ]
+      ]
+    },
+    {
+      "file": "References/CandidateModel/block-4.c4d",
+      "offset": 764401,
+      "size": 149160,
+      "nameMatches": [
+        [
+          "Bonzi",
+          36941,
+          "utf-16-be"
+        ],
+        [
+          "Bonzi",
+          36942,
+          "utf-16-le"
+        ]
+      ]
+    },
+    {
+      "file": "References/CandidateModel/block-5.c4d",
+      "offset": 815323,
+      "size": 1679213,
+      "nameMatches": [
+        [
+          "Bonzi",
+          164082,
+          "utf-16-be"
+        ],
+        [
+          "Buddy",
+          164094,
+          "utf-16-be"
+        ],
+        [
+          "Bonzi",
+          164083,
+          "utf-16-le"
+        ]
+      ]
+    },
+    {
+      "file": "References/CandidateModel/block-6.c4d",
+      "offset": 1525741,
+      "size": 151104,
+      "nameMatches": []
+    },
+    {
+      "file": "References/CandidateModel/block-7.c4d",
+      "offset": 1573773,
+      "size": 308524,
+      "nameMatches": []
+    },
+    {
+      "file": "References/CandidateModel/block-8.png",
+      "offset": 1651727,
+      "size": 20565,
+      "nameMatches": []
+    },
+    {
+      "file": "References/CandidateModel/block-9.c4d",
+      "offset": 3128627,
+      "size": 2815114,
+      "nameMatches": []
+    }
+  ]
+}

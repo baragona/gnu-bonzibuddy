@@ -1,0 +1,65 @@
+{
+  "averageFPS" : 119.90386208255421,
+  "frameIntervalP95MS" : 8.6287916637957096,
+  "frames" : 1200,
+  "msaaSampleCount" : 4,
+  "note" : "Top-level FPS\/intervals measure draw callbacks; the presentation object separately measures drawable presentation timestamps.",
+  "presentation" : {
+    "available" : true,
+    "averageFPS" : 119.89980816059095,
+    "duplicateTimestamps" : 0,
+    "intervalP50MS" : 8.333333331393078,
+    "intervalP95MS" : 8.3334166556596756,
+    "intervalsOver12_5MS" : 1,
+    "maximumIntervalMS" : 16.670000011799857,
+    "samples" : 1200,
+    "source" : "MTLDrawable.presentedTime after 120 submitted warmup frames"
+  },
+  "renderer" : "skinned polygon mesh",
+  "screenMaximumFPS" : 120,
+  "secondsPerAction" : 1,
+  "softShadows" : true,
+  "stages" : {
+    "commandEncodingAndCommit" : {
+      "maxMS" : 0.35483331885188818,
+      "p50MS" : 0.16741667059250176,
+      "p95MS" : 0.28783333254978061,
+      "samples" : 1200
+    },
+    "cpuSubmission" : {
+      "maxMS" : 12.925958348205313,
+      "p50MS" : 7.9647916427347809,
+      "p95MS" : 8.4636666579172015,
+      "samples" : 1200
+    },
+    "drawableAcquire" : {
+      "maxMS" : 12.745041662128642,
+      "p50MS" : 7.7442500041797757,
+      "p95MS" : 8.2699583144858479,
+      "samples" : 1200
+    },
+    "drawableUnavailableSkips" : 0,
+    "gpuExecution" : {
+      "maxMS" : 7.3426250019110739,
+      "p50MS" : 4.3561250204220414,
+      "p95MS" : 6.2708333425689489,
+      "samples" : 1200
+    },
+    "inFlightLimitSkips" : 0,
+    "note" : "Stage timings cover the 1200-frame presentation sampling window. Skip counters include warmup. CPU submission includes drawable acquisition and command encoding; GPU timings exclude compositor work."
+  },
+  "targetFPS" : 120,
+  "workload" : [
+    "Wave",
+    "Clap",
+    "Shrug",
+    "Look Left",
+    "Look Right",
+    "Dance",
+    "Think",
+    "Surprised",
+    "Speak",
+    "Idle"
+  ],
+  "workloadStartSeconds" : 1
+}

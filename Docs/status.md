@@ -1,0 +1,27 @@
+# Current status — September 5, 2026
+
+The user-approved appearance is about 90% satisfactory. Preserve its palette, shading, proportions, relaxed brow, and 20% neutral smile while improving motion and behavior.
+
+## Implemented
+
+- Native transparent desktop panel, local speech and controls.
+- Rigged polygon fan model, real-time Metal skinning, antialiasing, and soft shadows.
+- Fifteen facial morphs, gaze, shared and independent eye closure, automatic blinking.
+- Idle, left/right glances, clap, shrug, wave, dance, think, surprise, and speech actions.
+- Wrist-centered waving, planted idle feet, gesture IK, and 0.20-second skeletal interruption blends.
+- Local reminders with persistence and delivery while the app runs.
+
+## Remaining work
+
+- Resolve live drawable/presentation pacing: recent runs present near 60 fps, with GPU p95 around 3.1 ms. Earlier runs reached approximately 119.6 fps. The 120 fps target is not currently verified.
+- Improve original animation fidelity and extend choreography/coverage. Contact checks measure proximity, not comprehensive collision avoidance.
+- Improve facial expressiveness and mouth behavior. Blinking currently uses an eye-surface cover, and speech jaw motion is approximate rather than phoneme animation.
+- Polish reminder window layout and controls.
+- Continue visual comparison: last recorded original-image silhouette IoU 0.821 and RGB MAE 0.205 fail the 0.95 / 0.05 likeness gate.
+- Original feature parity remains future work; no third-party APIs are integrated.
+
+## Recorded animation checks
+
+The pre-organization pass rendered 1,515 views across ten full actions and three camera angles without clipping. It checked 100 ordered skeletal transitions and 300 facial transitions. Wave wrist-pivot error was approximately 1.9e-7; clap palm proximity was below 0.001 at sampled contact frames. These are sampled checks, not proof of original animation identity.
+
+Selected numerical reports are preserved under `Baselines/2026-09-05/`. Full generated images, GIFs, and performance experiments remain local under the ignored `Validation/` directory. Appearance checkpoints are tracked under `References/ApprovedFanAppearance/` and `References/ApprovedAppearance/`. Historical iteration notes are in [the development log](History/development.md) and [model conversion history](../References/CandidateModel/README.md).

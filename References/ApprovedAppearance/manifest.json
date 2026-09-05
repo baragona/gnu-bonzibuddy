@@ -1,0 +1,10 @@
+{
+  "Sources/BonziBuddy/Character.swift": "c0308ce101651c3f31706684bad7d9a8e29542f7edee453c84d6e58655612f92",
+  "Sources/BonziBuddy/Shaders.metal": "f8023add384d70971cfb057add21306c4e39cc82d2de5187fb64bc705fe055f7",
+  "Sources/BonziBuddy/Renderer.swift": "b6a31eb5ae10a9615772b9810e687c92d97b39cef3f4b86ceaaf790f5e8f0cc2",
+  "Validation/angle-front.png": "68eaf6f31e75f36e99a1b02e8e6eb54927e994b225c57a905af01ff5d480f460",
+  "Validation/onscreen-performance.json": "5415e991c9d0b9cd55ffde200e46fd80809dfc5597bf87e0b434b3efa57afffe",
+  "Validation/angle-left-side.png": "c5924def0780936d21e622d91a567a5b211e5004c598fb4aeeaa1f7c21d0bf05",
+  "Validation/angle-left-quarter.png": "4c82a1c4b38d61c0292f4c7a14c3c89d9ee8ad0ab2c5a9a6a0a6ae1418010ae5",
+  "Validation/angles.png": "eab662cc7dd962d19f2b0a806af3ce3ed610e7b5b4e6c713aa5c6a0c95e301e9"
+}

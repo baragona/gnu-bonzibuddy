@@ -1,0 +1,23 @@
+# Local build products and generated validation
+/.build/
+/Build/
+/Validation/
+/Resources/Bonzi.mesh
+/Resources/Bonzi.obj
+
+# Conversion research: retain only documentation and portable source interchange
+/References/CandidateModel/*
+!/References/CandidateModel/README.md
+!/References/CandidateModel/scene.json
+!/References/CandidateModel/blocks.json
+!/References/CandidateModel/scene-inventory.txt
+
+# Generated preview alongside runtime assets
+/Resources/FanModel/FanPreview.mesh
+
+# Editor / OS / Python caches
+.DS_Store
+__pycache__/
+*.py[cod]
+*.swp
+*.swo

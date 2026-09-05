@@ -1,0 +1,73 @@
+{
+  "actions": [
+    {
+      "action": "Idle",
+      "clippedViews": 0,
+      "frames": 70
+    },
+    {
+      "action": "Look Left",
+      "clippedViews": 0,
+      "frames": 21
+    },
+    {
+      "action": "Look Right",
+      "clippedViews": 0,
+      "frames": 21
+    },
+    {
+      "action": "Clap",
+      "clippedViews": 0,
+      "frames": 24
+    },
+    {
+      "action": "Shrug",
+      "clippedViews": 0,
+      "frames": 34
+    },
+    {
+      "action": "Wave",
+      "clippedViews": 0,
+      "frames": 61
+    },
+    {
+      "action": "Dance",
+      "clippedViews": 0,
+      "frames": 121
+    },
+    {
+      "action": "Think",
+      "clippedViews": 0,
+      "frames": 61
+    },
+    {
+      "action": "Surprised",
+      "clippedViews": 0,
+      "frames": 61
+    },
+    {
+      "action": "Speak",
+      "clippedViews": 0,
+      "frames": 31
+    }
+  ],
+  "morphNames": [
+    "smile",
+    "jaw",
+    "eyebrow up",
+    "angry eyebrow",
+    "eyebrow down",
+    "?",
+    "\u00bf",
+    "sad eyebrow",
+    "sad",
+    "epic sad",
+    "little mouth",
+    "oh/kiss",
+    "cheeks",
+    "mouth",
+    "nose"
+  ],
+  "note": "Full action duration and three-view framing review. Reuses the existing local action curves, retargeted to the fan joints; not proof of original choreography or collision-free motion. Blink is an animated skin-colored cover on the eye mesh surface.",
+  "previewFPS": 15
+}
