@@ -4,7 +4,7 @@ Implementation in progress; the complete visual-repertoire goal remains open.
 
 `Routines.swift` samples continuous hand intentions, body facing, head motion, gaze, and prop cues from an action's elapsed time. A routine owns its reveal/hold/stow beats. `FanRig` turns wrist targets into two-bone IK and blends palm/finger intentions with the approved rest pose. Existing actions retain their current reference curves.
 
-`PropMotion` resolves prop anchors after the rig has evaluated and blended its pose. A joint anchor currently tracks joint position, with offsets expressed in the blended character axes; prop rotation is explicit. It preserves outgoing props during interruption and contracts them over 0.20 seconds. This is a first interruption policy; held books, headphones, and thrown objects will need dedicated return/release behavior rather than assuming every prop should contract.
+`PropMotion` resolves prop anchors after the rig has evaluated and blended its pose. Semantic wrist/head attachments support offsets in blended character axes or axes that rotate with the joint. Rigid attachment frames remove skeletal scale and shear. It preserves outgoing props during interruption and contracts them over 0.20 seconds. This is a first interruption policy; held books, headphones, and thrown objects will need dedicated return/release behavior rather than assuming every prop should contract.
 
 `PropRenderer` owns reusable polygon buffers and the separate rigid-prop vertex pipeline. The prop and character color passes use the same lighting helper; both write the same soft-shadow depth pass. The globe uses a 1024×512 mipmapped land mask baked from public-domain Natural Earth polygons. No runtime network access is involved.
 
@@ -25,7 +25,7 @@ The action filter enables focused three-angle reviews while keeping the full sui
 
 ## Outstanding scope
 
-Banana and miss variation; sunglasses; coconut headphones; butterfly interaction; seated book reading; writing pad/pencil; bamboo mailbox/letter variants; vine and surfboard movement/entrance/exit; chest beating/backflip; hugs/kisses/giggles/shushing; directional presentations and explanations; richer facial/gaze/idle sequences. Each needs actual geometry where applicable, reference-based choreography, clean entry/return/interruption behavior, multiple-angle review, and runtime profiling. This list is the remaining scope, not a list of completed features.
+Refine banana and miss variation; sunglasses; coconut headphones; butterfly interaction; seated book reading; writing pad/pencil; bamboo mailbox/letter variants; vine and surfboard movement/entrance/exit; chest beating/backflip; hugs/kisses/giggles/shushing; directional presentations and explanations; richer facial/gaze/idle sequences. Each needs actual geometry where applicable, reference-based choreography, clean entry/return/interruption behavior, multiple-angle review, and runtime profiling. This list is the remaining scope, not a list of completed features.
 
 The facing transform is included before hierarchical interruption blending, so interrupting a turned pose does not snap the body back to front. Props derive orientation from the blended root matrix. Stationary-leg regression assertions exclude actions with an intentional facing turn; their full skeleton is still checked for transition continuity and convergence.
 
@@ -55,3 +55,23 @@ To reproduce the selected comparison:
 swift -module-cache-path .build/clang-cache Scripts/crop-prop-comparison.swift Validation/FanActions/juggle-51.png Validation/Original/Juggle/frames.png 30 0 Validation/Juggle
 swift -module-cache-path .build/clang-cache Scripts/compare.swift Validation/Juggle/native.png Validation/Juggle/Comparison Validation/Juggle/original.png
 ```
+
+## Shared routine architecture and banana work
+
+See [architecture boundaries and extension points](architecture.md#routine-and-prop-boundaries). Playback sampling is now read-only, new routine timing is registered centrally, hand targets/attachments use semantic body parts, and facial channels blend together. Prop scene state is separate from Metal; typed peel/fruit parameters are packed only by the renderer. Both shadow and color passes share deformation.
+
+The first banana implementation exercises two separate polygon assets: a curved fruit with a capped shortening surface, and three thick peel ribbons with independently animated closed/open shapes. The original Banana sequence is 7.20 seconds; BananaMiss is 11.33 seconds, including its long waiting/looking beats. The sampler coordinates two bites/chewing or a missed fruit launch, then a peel toss and return. A reusable grip channel supplies the hand curl.
+
+The initial three-angle review exposed overlong peel ribbons, incorrect inner-surface orientation, a bite positioned too far in front of the face, and clipping during the peel toss. Those were adjusted. Detailed lip contact, the original's very wide mouth opening, finger wrapping, material matching, and object-specific interruption/stow still need work. These are first implementations demonstrating the shared interfaces, not finished visual matches.
+
+```sh
+Build/BonziBuddy.app/Contents/MacOS/BonziBuddy --validate-routines
+Build/BonziBuddy.app/Contents/MacOS/BonziBuddy --validate-fan-actions --action banana
+Build/BonziBuddy.app/Contents/MacOS/BonziBuddy --validate-fan-actions --action 'banana miss'
+```
+
+The architecture checkpoint samples 3,776 routine frames and 5,400 prop cues. Semantic attachment, rigid-frame, camera-change, playback-seek, globe-attachment, and juggling-contact checks pass. Banana and Banana Miss rendered 109 and 171 frames respectively from three cameras (840 views), without clipping. Neutral appearance remains effectively unchanged (RGBA MAE 8.95e-8).
+
+A selected first-bite comparison (original frame 18, native frame 30) has silhouette IoU 0.767 and RGB MAE 0.281, failing the existing near-identity gate. It remains a whole-character selected-pose diagnostic, not time-aligned choreography or mouth-contact proof. Reports and the comparison image are in `Baselines/2026-09-05-routines/`.
+
+All 196 ordered action transitions and 644 facial interruption cases pass, including the later banana jaw/gaze/smile beats.

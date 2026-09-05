@@ -159,15 +159,14 @@ final class Renderer: NSObject, MTKViewDelegate {
     }
     func encode(_ command: MTLCommandBuffer, pass: MTLRenderPassDescriptor, width: Int, height: Int, at time: Double, buffer: MTLBuffer) {
         var objects:[Instance]
-        var actionEyeClosure:Float=0
+        var automaticFace=FacialIntent()
+        let playback=character.playbackSnapshot(at:time)
         if let fanRig {
             if fanLiveActions {
-                let elapsed=max(0,time-character.started)
-                if elapsed>character.action.duration { character.action = .idle }
-                fanRig.updateLiveAction(character.action,started:character.started,at:time)
+                fanRig.updateLiveAction(playback.action,started:playback.started,at:time)
                 fanMorphIndices=[2,1]
-                let face=fanFaceMotion.sample(character.action,started:character.started,at:time)
-                fanMorphWeights=[1,face.x];actionEyeClosure=face.y
+                automaticFace=fanFaceMotion.sample(playback.action,started:playback.started,at:time)
+                fanMorphWeights=[1,automaticFace.jawOpening]
             }
             if fanValidationMotion {
                 character.yaw=0.65*sin(Float(time)*0.5)
@@ -180,7 +179,7 @@ final class Renderer: NSObject, MTKViewDelegate {
         }
         let props: [PropDraw]
         if let rig=fanRig,fanLiveActions {
-            props=propMotion.sample(action:character.action,started:character.started,at:time,cues:rig.routine.props,rig:rig,bones:objects)
+            props=propMotion.sample(action:playback.action,started:playback.started,at:time,cues:rig.routine.props,rig:rig,bones:objects)
         } else { props=[] }
         objects.withUnsafeBytes { buffer.contents().copyMemory(from: $0.baseAddress!, byteCount: $0.count) }
         let lightDirection = normalize(SIMD3<Float>(-0.5,0.8,1.4))
@@ -188,13 +187,13 @@ final class Renderer: NSObject, MTKViewDelegate {
         let lightMatrix = simd_float4x4(columns:(SIMD4(right.x/1.6,up.x/1.6,-lightDirection.x/5,0),SIMD4(right.y/1.6,up.y/1.6,-lightDirection.y/5,0),SIMD4(right.z/1.6,up.z/1.6,-lightDirection.z/5,0),SIMD4(0,0,0.5,1)))
         var uniforms = RenderUniforms(projection:projection(width:width,height:height),light:lightMatrix,ground:rotate(character.pitch,[1,0,0])*translation([0,-0.92,0]),options:[shadowsEnabled ? 1 : 0,0.28,character.mouthOpening,0],jawAxis:fanRig == nil ? normalize(objects[character.headBoneStart].model.columns.1) : SIMD4<Float>(0,1,0,0))
         var faceWeights=[Float](repeating:0,count:16)
-        if fanLiveActions { faceWeights[0]=fanNeutralSmile }
+        if fanLiveActions { faceWeights[0]=min(1,max(0,fanNeutralSmile+automaticFace.smileOffset)) }
         for lane in 0..<2 where fanMorphIndices[lane]<fanMorphCount { faceWeights[Int(fanMorphIndices[lane])]+=fanMorphWeights[lane] }
         for (index,value) in fanExpressionOverrides where index>=0 && index<Int(fanMorphCount) { faceWeights[index]=min(1,max(0,value)) }
         func chunk(_ i:Int)->SIMD4<Float> { SIMD4(faceWeights[i],faceWeights[i+1],faceWeights[i+2],faceWeights[i+3]) }
         var blink=(fanLiveActions || fanValidationMotion) && fanAutoBlink ? 1-BlinkAnimation.eyeOpen(at:time) : 0
-        if fanLiveActions && fanAutoBlink { blink=max(blink,actionEyeClosure) }
-        let gaze=fanGaze+(fanLiveActions ? (fanRig?.routine.gaze ?? .zero):.zero)
+        if fanLiveActions && fanAutoBlink { blink=max(blink,automaticFace.eyeClosure) }
+        let gaze=fanGaze+automaticFace.gaze
         var morphUniforms=FanMorphUniforms(selection:[fanUpperFaceLift && fanRig?.sourcePose == false ? 1:0,0,fanMorphVertexCount,fanMorphCount],weights:(chunk(0),chunk(4),chunk(8),chunk(12)),face:[max(blink,fanEyeClosure),gaze.x,gaze.y,fanRig == nil ? 0:(fanEyeCatchlights ? 1:2)])
         let shadowPass = MTLRenderPassDescriptor()
         shadowPass.depthAttachment.texture = shadowTexture

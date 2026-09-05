@@ -1,0 +1,11 @@
+{
+  "bananaVertices" : 7781,
+  "maximumAttachmentCameraError" : 1.7881393432617188e-07,
+  "maximumAttachmentRigidityError" : 1.1920928955078125e-07,
+  "note" : "Routine channel\/lifecycle contracts, semantic attachment frames, topology and camera invariance. Does not establish original visual fidelity or comprehensive collision avoidance.",
+  "playbackSeekPassed" : true,
+  "propSamples" : 5400,
+  "registeredRoutines" : 4,
+  "retiringPropCameraError" : 5.9604644775390625e-08,
+  "sampledFrames" : 3776
+}

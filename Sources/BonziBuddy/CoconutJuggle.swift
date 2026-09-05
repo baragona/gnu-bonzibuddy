@@ -48,7 +48,7 @@ enum CoconutJuggle {
     }
     static func sample(at t:Double)->RoutinePose {
         let engagement=RoutineLibrary.smooth(t,0,0.7)*(1-RoutineLibrary.smooth(t,6.0,duration))
-        var hands:[Int:HandIntent]=[:]
+        var hands:[HandSide:HandIntent]=[:]
         for side:Float in [-1,1] {
             let finalCatch=side>0 ? 5.69:5.33
             var center=handCenter(side:side,at:max(firstRelease,t))
@@ -64,7 +64,7 @@ enum CoconutJuggle {
             let flourish:Float=freeHand ? RoutineLibrary.smooth(phase,0,0.08)*(1-RoutineLibrary.smooth(phase,0.25,0.47)):0
             let fingers=SIMD3<Float>(-side*0.65,0.15,0.3)*(1-flourish)+SIMD3<Float>(0,1,0)*flourish
             let palm=SIMD3<Float>(0,1,0)*(1-flourish)+SIMD3<Float>(0,0,1)*flourish
-            hands[side<0 ? 26:42]=HandIntent(wrist:center-[0,radius,0],fingers:fingers,palm:palm,openness:0.8+0.2*flourish,weight:engagement)
+            hands[HandSide(sign:side)]=HandIntent(wrist:center-[0,radius,0],fingers:fingers,palm:palm,openness:0.8+0.2*flourish,weight:engagement)
         }
         let reveal=RoutineLibrary.smooth(t,0.35,0.65)*(1-RoutineLibrary.smooth(t,5.95,6.25))
         var props:[PropCue]=[]
@@ -77,7 +77,7 @@ enum CoconutJuggle {
             var anchor:PropAnchor = .character
             var position:SIMD3<Float>
             if elapsed<0 {
-                anchor = .jointPosition(side(ball,0)<0 ? 26:42)
+                anchor = .attachment(.wrist(HandSide(sign:side(ball,0))))
                 position=ball==2 ? [-0.48,radius,0]:[0,radius,0]
                 if ball==2 {
                     let gather=RoutineLibrary.smooth(t,firstRelease+0.04,firstRelease+0.24)
@@ -86,7 +86,7 @@ enum CoconutJuggle {
             } else if local<flight {
                 position=airborne(side:direction,phase:Float(local/flight))
             } else {
-                anchor = .jointPosition(direction<0 ? 42:26)
+                anchor = .attachment(.wrist(HandSide(sign:-direction)))
                 position=[0,radius,0]
                 if cycle==3 && ball==0 {
                     // Make room in the catching hand for the final coconut.
@@ -97,6 +97,6 @@ enum CoconutJuggle {
             let rotation=simd_quatf(angle:spin,axis:normalize(SIMD3<Float>(0.3,1,0.5)))
             props.append(PropCue(id:"juggle.\(ball)",kind:.coconut,anchor:anchor,offset:position,rotation:rotation,scale:SIMD3(repeating:radius),visibility:reveal))
         }
-        return RoutinePose(hands:hands,headTilt:0.025*sin(Float(t)*4)*engagement,gaze:[0,0.28*engagement],props:reveal>0 ? props:[])
+        return RoutinePose(hands:hands,headTilt:0.025*sin(Float(t)*4)*engagement,face:FacialIntent(gaze:[0,0.28*engagement]),props:reveal>0 ? props:[])
     }
 }

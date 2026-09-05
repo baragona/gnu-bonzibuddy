@@ -227,22 +227,47 @@ vertex float4 fanShadowVertex(const device FanVertex* vertices [[buffer(0)]],con
 }
 
 // Rigid polygon props share the character's lighting and the same shadow map.
-struct PropVertex { float4 position; float4 normal; float4 uv; };
-struct PropUniforms { float4x4 model; float4 color; float4 material; };
+struct PropVertex { float4 position; float4 normal; float4 uv; float4 openedPosition; float4 openedNormal; };
+struct PropUniforms { float4x4 model; float4 color; float4 material; float4 deformation; };
+float3 bananaFruitPosition(float u,float v,float cap,float remaining) {
+    float t=cap>1.5 ? 0.0:cap>0.5 ? remaining:v*remaining;
+    float angle=u*2.0*M_PI_F;
+    float3 radial=normalize(float3(1,-0.44*t,0))*cos(angle)+float3(0,0,sin(angle));
+    float radius=0.105*pow(max(0.0,sin(M_PI_F*t)),0.35)+0.01;
+    return float3(0.22*t*t,t,0)+radial*radius*(1.0+0.035*cos(5.0*angle))*(cap>0.5 ? v:1.0);
+}
+PropVertex deformProp(PropVertex v,constant PropUniforms& prop) {
+    if (prop.material.y==1.0) {
+        float amount=prop.deformation[min(uint(v.uv.z),2u)];
+        v.position=mix(v.position,v.openedPosition,amount);
+        v.normal=float4(normalize(mix(v.normal.xyz,v.openedNormal.xyz,amount)),0);
+    } else if (prop.material.y==2.0) {
+        float remaining=max(0.001,prop.deformation.w);
+        v.position=float4(bananaFruitPosition(v.uv.x,v.uv.y,v.uv.z,remaining),1);
+        if(v.uv.z>0.5) {
+            v.normal=float4(v.uv.z>1.5 ? float3(0,-1,0):normalize(float3(0.44*remaining,1,0)),0);
+        } else {
+            float3 du=bananaFruitPosition(v.uv.x+0.0001,v.uv.y,0,remaining)-bananaFruitPosition(v.uv.x-0.0001,v.uv.y,0,remaining);
+            float3 dv=bananaFruitPosition(v.uv.x,min(1.0,v.uv.y+0.0001),0,remaining)-bananaFruitPosition(v.uv.x,max(0.0,v.uv.y-0.0001),0,remaining);
+            v.normal=float4(normalize(cross(dv,du)),0);
+        }
+    }
+    return v;
+}
 vertex Varying propVertex(const device PropVertex* vertices [[buffer(0)]],constant Uniforms& u [[buffer(2)]],constant PropUniforms& prop [[buffer(5)]],uint id [[vertex_id]]) {
-    PropVertex v=vertices[id];float4 world=prop.model*v.position;Varying out;
+    PropVertex v=deformProp(vertices[id],prop);float4 world=prop.model*v.position;Varying out;
     out.position=u.projection*world;out.world=world.xyz;out.normal=transformNormal(prop.model,v.normal.xyz);
-    out.color=prop.color;out.jaw=0;out.eyeUV=float3(v.uv.xy,0);out.eyeHeight=0;return out;
+    out.color=prop.color;out.jaw=0;out.eyeUV=float3(v.uv.xy,0);out.eyeHeight=v.uv.w;return out;
 }
 vertex float4 propShadowVertex(const device PropVertex* vertices [[buffer(0)]],constant Uniforms& u [[buffer(2)]],constant PropUniforms& prop [[buffer(5)]],uint id [[vertex_id]]) {
-    return u.light*prop.model*vertices[id].position;
+    return u.light*prop.model*deformProp(vertices[id],prop).position;
 }
 fragment float4 propFragment(Varying in [[stage_in]],depth2d<float> shadow [[texture(0)]],texture2d<float> land [[texture(1)]],constant Uniforms& u [[buffer(2)]],constant FanEyeUniforms& eyes [[buffer(3)]],constant PropUniforms& prop [[buffer(5)]]) {
     constexpr sampler mapSampler(s_address::repeat,t_address::clamp_to_edge,filter::linear,mip_filter::linear);
-    if (prop.material.x<0.5) {
+    if (prop.material.x==0.0) {
         float mask=land.sample(mapSampler,in.eyeUV.xy).r;
         in.color.rgb=mix(float3(0.23,0.025,0.72),float3(0.02,0.92,0.13),mask);
-    } else {
+    } else if (prop.material.x==1.0) {
         float2 uv=in.eyeUV.xy;
         float gx=uv.x*603.0+sin(uv.y*123.0)*2.0,gy=uv.y*347.0+sin(uv.x*79.0);
         float grain=sin(gx)*sin(gy)*exp(-0.35*(fwidth(gx)+fwidth(gy)));
@@ -259,5 +284,17 @@ fragment float4 propFragment(Varying in [[stage_in]],depth2d<float> shadow [[tex
         }
         in.color.rgb*=1.0-pores*0.7;
     }
-    return shadeSurface(in,shadow,u,eyes,prop.material.x>0.5 ? 0.15:1.0);
+    if (prop.material.x==2.0) {
+        float fiber=sin(in.eyeUV.x*83.0+sin(in.eyeUV.y*27.0))*0.015;
+        in.color.rgb=float3(0.98,0.91,0.66)+fiber;
+    } else if (prop.material.x==3.0) {
+        float t=in.eyeUV.y;
+        float stripe=pow(abs(cos(in.eyeUV.x*M_PI_F)),12.0);
+        float tip=smoothstep(0.91,0.99,t)+(1.0-smoothstep(0.01,0.07,t));
+        float3 yellow=mix(float3(1.0,0.83,0.018),float3(0.70,0.50,0.025),stripe*0.3);
+        float3 shell=mix(yellow,float3(0.30,0.15,0.018),clamp(tip,0.0,1.0));
+        in.color.rgb=mix(shell,float3(0.98,0.91,0.62),in.eyeHeight*0.92);
+    }
+    float sheen=prop.material.x<0.5 ? 1.0:prop.material.x<1.5 ? 0.15:0.4;
+    return shadeSurface(in,shadow,u,eyes,sheen);
 }

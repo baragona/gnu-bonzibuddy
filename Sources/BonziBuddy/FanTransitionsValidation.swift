@@ -49,22 +49,26 @@ func validateFanTransitions() throws {
     let rewindError=error(scrubbed.instances(yaw:0,pitch:0,at:0),fresh.instances(yaw:0,pitch:0,at:0))
     guard rewindError<0.000001 else {throw failure("Future pose leaked into a rewound timeline")}
     var faceJump:Float=0,faceSettled:Float=0
-    for from in Action.allCases { for to in Action.allCases { for interrupt in [0.12,0.5,0.8] {
+    var facialCases=0
+    for from in Action.allCases { for to in Action.allCases {
+        let lateBeats:[Double]=from == .banana ? [2.1,4.3]:from == .bananaMiss ? [2.2,5.8]:[]
+        for interrupt in [0.12,0.5,0.8]+lateBeats {
+        facialCases += 1
         let face=FanFaceMotion()
         _=face.sample(from,started:0,at:0)
         let before=face.sample(from,started:0,at:interrupt)
         let after=face.sample(to,started:interrupt,at:interrupt)
-        faceJump=max(faceJump,length(before-after))
+        faceJump=max(faceJump,before.distance(to:after))
         let finished=face.sample(to,started:interrupt,at:interrupt+0.2)
-        faceSettled=max(faceSettled,length(finished-FanFaceMotion.target(to,elapsed:0.2)))
+        faceSettled=max(faceSettled,finished.distance(to:FanFaceMotion.target(to,elapsed:0.2)))
         _=face.sample(from,started:interrupt+0.2,at:interrupt+0.2)
         let middle=face.sample(from,started:interrupt+0.2,at:interrupt+0.25)
-        faceJump=max(faceJump,length(middle-face.sample(to,started:interrupt+0.25,at:interrupt+0.25)))
+        faceJump=max(faceJump,middle.distance(to:face.sample(to,started:interrupt+0.25,at:interrupt+0.25)))
     } } }
     guard faceJump<0.000001,faceSettled<0.000001 else { throw failure("Automatic facial transition continuity failed") }
     let folder="Validation/FanTransitions"
     try FileManager.default.createDirectory(atPath:folder,withIntermediateDirectories:true)
-    let report:[String:Any]=["maximumRewindMatrixError":rewindError,"actionPairs":Action.allCases.count*Action.allCases.count,"maximumStartMatrixJump":jump,"maximumSettledMatrixError":settled,"maximumLegMatrixDrift":footDrift,"blendSeconds":0.20,"facialCases":Action.allCases.count*Action.allCases.count*3,"maximumFacialStartJump":faceJump,"maximumFacialSettledError":faceSettled,"note":"All ordered action pairs plus re-interruption during an active blend. Checks skeletal continuity, convergence and stationary leg transforms for actions without a facing turn; not original choreography or collision-free motion."]
+    let report:[String:Any]=["maximumRewindMatrixError":rewindError,"actionPairs":Action.allCases.count*Action.allCases.count,"maximumStartMatrixJump":jump,"maximumSettledMatrixError":settled,"maximumLegMatrixDrift":footDrift,"blendSeconds":0.20,"facialCases":facialCases,"maximumFacialStartJump":faceJump,"maximumFacialSettledError":faceSettled,"note":"All ordered action pairs plus re-interruption during an active blend. Checks skeletal continuity, convergence and stationary leg transforms for actions without a facing turn; not original choreography or collision-free motion."]
     let data=try JSONSerialization.data(withJSONObject:report,options:[.prettyPrinted,.sortedKeys]);try data.write(to:URL(fileURLWithPath:"\(folder)/checks.json"));print(String(decoding:data,as:UTF8.self))
     guard let device=MTLCreateSystemDefaultDevice() else { throw failure("Metal GPU unavailable") }
     let renderer=try Renderer(device:device,previewMesh:URL(fileURLWithPath:"Resources/FanModel/FanRigged.mesh"),rigURL:url)

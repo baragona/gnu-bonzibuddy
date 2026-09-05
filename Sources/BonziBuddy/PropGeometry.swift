@@ -9,6 +9,10 @@ struct PropMesh {
     let indexCount:Int
     init(device:MTLDevice,kind:PropKind) {
         var vertices:[PropVertex]=[],indices:[UInt32]=[]
+        switch kind {
+        case .bananaFruit,.bananaPeel:
+            (vertices,indices)=BananaGeometry.mesh(kind)
+        case .globe,.coconut:
         let rings=48,sides=96
         func surface(_ u:Float,_ v:Float)->SIMD3<Float> {
             let latitude=Float.pi*(0.5-v),longitude=(u-0.5)*2*Float.pi
@@ -33,6 +37,7 @@ struct PropMesh {
                     if row<rings-1 {indices += [a+1,b,b+1]}
                 }
             }
+        }
         }
         self.vertices=device.makeBuffer(bytes:vertices,length:vertices.count*MemoryLayout<PropVertex>.stride)!
         self.indices=device.makeBuffer(bytes:indices,length:indices.count*4)!

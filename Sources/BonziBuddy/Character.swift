@@ -8,8 +8,8 @@ enum SurfaceKind { case skin, detail, nose, mouth, lid }
 struct Instance { var model: simd_float4x4; var color: SIMD4<Float> }
 
 final class Character {
-    var action: Action = .idle
-    var started: Double = 0
+    private var playback=ActionPlayback()
+    func playbackSnapshot(at time:Double)->ActionSnapshot {playback.sample(at:time)}
     var yaw: Float = 0
     var pitch: Float = 0.18
     var bindPose = false
@@ -24,7 +24,7 @@ final class Character {
     private var transitionFrom: [Instance] = []
     func play(_ action: Action, at time: Double) {
         let previous = localInstances(at:time)
-        self.action = action; started = time; transitionFrom = previous; transitionMouth = mouthOpening
+        playback.play(action,at:time); transitionFrom = previous; transitionMouth = mouthOpening
     }
     func instances(at time: Double) -> [Instance] {
         var pose=localInstances(at:time)
@@ -34,8 +34,8 @@ final class Character {
     }
     // Capture and blend poses in character space; camera changes apply afterward.
     private func localInstances(at time: Double) -> [Instance] {
-        let elapsed = max(0,time-started)
-        if elapsed > action.duration { action = .idle }
+        let snapshot=playback.sample(at:time)
+        let action=snapshot.action,elapsed=snapshot.elapsed
         let t = Float(time), a = Float(elapsed)
         let envelope = min(1, a*4) * min(1, Float(max(0,action.duration-elapsed))*3)
         let dance: Float = action == .dance ? sin(a*7)*envelope : 0

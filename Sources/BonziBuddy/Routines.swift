@@ -1,6 +1,7 @@
 import Foundation
 import simd
 
+// Distances use character model units; rotations use radians; time uses seconds.
 // Choreography describes intent in character space. FanRig solves limbs; PropRenderer
 // resolves attachment frames after skinning. Neither needs to know the other's geometry.
 struct HandIntent {
@@ -10,24 +11,15 @@ struct HandIntent {
     var openness: Float = 1
     var weight: Float = 1
     var pointing: Bool = false
-}
-enum PropKind: Int, CaseIterable { case globe, coconut }
-enum PropAnchor { case character; case jointPosition(Int) }
-struct PropCue {
-    var id: String
-    var kind: PropKind
-    var anchor: PropAnchor
-    var offset: SIMD3<Float>
-    var rotation: simd_quatf = simd_quatf(angle:0,axis:[0,1,0])
-    var scale: SIMD3<Float> = SIMD3(repeating:1)
-    var visibility: Float = 1
+    var grip: Float = 0
 }
 struct RoutinePose {
-    var hands: [Int:HandIntent] = [:] // Source wrist joints 26 and 42.
+    var hands: [HandSide:HandIntent] = [:] // Semantic sides, resolved by the rig.
     var bodyYaw: Float = 0
     var headYaw: Float = 0
     var headTilt: Float = 0
-    var gaze = SIMD2<Float>.zero
+    var headPitch: Float = 0
+    var face=FacialIntent()
     var props: [PropCue] = []
 }
 enum RoutineLibrary {
@@ -35,17 +27,22 @@ enum RoutineLibrary {
         let x=Float(min(1,max(0,(t-start)/(end-start))))
         return x*x*x*(x*(x*6-15)+10)
     }
-    static func sample(_ action:Action, at t:Double) -> RoutinePose {
-        if action == .juggle { return CoconutJuggle.sample(at:t) }
-        guard action == .globe else { return RoutinePose() }
-        // Search: raise, reveal, spin while following the globe, lower and stow.
-        // Authored continuous poses follow the extracted Search/SearchingReturn beats.
-        let weight=smooth(t,0,0.75)*(1-smooth(t,5.4,6.2))
-        let reveal=smooth(t,0.55,0.85)*(1-smooth(t,5.25,5.55))
-        let left=HandIntent(wrist:[-0.88,0.32,0.32],fingers:[-0.15,1,0],palm:[0,0,1],weight:weight,pointing:true)
-        let right=HandIntent(wrist:[-0.33,0.25,0.46],fingers:[-0.8,0.45,0],palm:[0,0,1],openness:0.65,weight:weight,pointing:true)
-        let spin=Float(max(0,t-0.85))*2.8*smooth(t,0.85,1.2)
-        let globe=PropCue(id:"search.globe",kind:.globe,anchor:.jointPosition(26),offset:[-0.025,0.50,0],rotation:simd_quatf(angle:spin,axis:[0,1,0]),scale:SIMD3(repeating:0.35),visibility:reveal)
-        return RoutinePose(hands:[26:left,42:right],bodyYaw:-0.65*weight,headYaw:-0.10*weight,headTilt:0.04*weight,gaze:[-0.40*weight,0.15*weight],props:reveal>0 ? [globe]:[])
+    static let definitions:[Action:RoutineDefinition]=[
+        .globe:RoutineDefinition(duration:GlobeRoutine.duration,changesFacing:true,sample:GlobeRoutine.sample),
+        .juggle:RoutineDefinition(duration:CoconutJuggle.duration,sample:CoconutJuggle.sample),
+        .banana:RoutineDefinition(duration:BananaRoutine.duration(miss:false),changesFacing:true,sample:{BananaRoutine.sample(at:$0,miss:false)}),
+        .bananaMiss:RoutineDefinition(duration:BananaRoutine.duration(miss:true),changesFacing:true,sample:{BananaRoutine.sample(at:$0,miss:true)})
+    ]
+    static func sample(_ action:Action,at t:Double)->RoutinePose {
+        guard let definition=definitions[action],t>=0,t<=definition.duration else {return RoutinePose()}
+        return definition.sample(t)
     }
+}
+
+// One definition owns each routine's timing, movement policy, and pure sampler.
+// The action catalog, rig, face system, and validators share this definition.
+struct RoutineDefinition {
+    let duration:Double
+    var changesFacing=false
+    let sample:(Double)->RoutinePose
 }
