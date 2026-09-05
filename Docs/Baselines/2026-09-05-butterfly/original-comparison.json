@@ -1,0 +1,499 @@
+{
+  "foregroundRGBMeanAbsoluteError" : 0.29076476864847034,
+  "gate" : {
+    "maximumForegroundRGBMAE" : 0.050000000000000003,
+    "minimumSilhouetteIoU" : 0.94999999999999996
+  },
+  "materialRegions" : [
+
+  ],
+  "method" : "Selected pose, foreground matte removal (20 RGB distance), independent bounding-box fit preserving aspect ratio into 256x256 with 12px padding, nearest-neighbor sampling. RGB MAE measured over union of foreground. This is a diagnostic, not proof of perceptual identity.",
+  "panels" : [
+    "Original reference",
+    "Metal render",
+    "Absolute RGB difference"
+  ],
+  "passesNearIdenticalGate" : false,
+  "referencePath" : "Validation\/Butterfly\/original.png",
+  "renderPath" : "Validation\/Butterfly\/native.png",
+  "silhouetteIoU" : 0.62867564951983923,
+  "silhouetteRows" : [
+    {
+      "normalizedY" : 20,
+      "referenceXSpans" : [
+        [
+          138,
+          177
+        ]
+      ],
+      "renderXSpans" : [
+        [
+          124,
+          162
+        ]
+      ]
+    },
+    {
+      "normalizedY" : 30,
+      "referenceXSpans" : [
+        [
+          125,
+          183
+        ]
+      ],
+      "renderXSpans" : [
+        [
+          13,
+          25
+        ],
+        [
+          54,
+          66
+        ],
+        [
+          112,
+          173
+        ]
+      ]
+    },
+    {
+      "normalizedY" : 40,
+      "referenceXSpans" : [
+        [
+          121,
+          185
+        ]
+      ],
+      "renderXSpans" : [
+        [
+          22,
+          61
+        ],
+        [
+          106,
+          174
+        ]
+      ]
+    },
+    {
+      "normalizedY" : 50,
+      "referenceXSpans" : [
+        [
+          35,
+          51
+        ],
+        [
+          54,
+          91
+        ],
+        [
+          119,
+          185
+        ]
+      ],
+      "renderXSpans" : [
+        [
+          23,
+          35
+        ],
+        [
+          38,
+          56
+        ],
+        [
+          107,
+          122
+        ],
+        [
+          124,
+          131
+        ],
+        [
+          135,
+          175
+        ]
+      ]
+    },
+    {
+      "normalizedY" : 60,
+      "referenceXSpans" : [
+        [
+          39,
+          80
+        ],
+        [
+          111,
+          183
+        ]
+      ],
+      "renderXSpans" : [
+        [
+          31,
+          40
+        ],
+        [
+          98,
+          178
+        ]
+      ]
+    },
+    {
+      "normalizedY" : 70,
+      "referenceXSpans" : [
+        [
+          56,
+          67
+        ],
+        [
+          104,
+          183
+        ]
+      ],
+      "renderXSpans" : [
+        [
+          33,
+          41
+        ],
+        [
+          98,
+          179
+        ]
+      ]
+    },
+    {
+      "normalizedY" : 80,
+      "referenceXSpans" : [
+        [
+          47,
+          57
+        ],
+        [
+          104,
+          185
+        ]
+      ],
+      "renderXSpans" : [
+        [
+          35,
+          58
+        ],
+        [
+          64,
+          70
+        ],
+        [
+          98,
+          179
+        ]
+      ]
+    },
+    {
+      "normalizedY" : 90,
+      "referenceXSpans" : [
+        [
+          43,
+          61
+        ],
+        [
+          106,
+          181
+        ]
+      ],
+      "renderXSpans" : [
+        [
+          36,
+          66
+        ],
+        [
+          101,
+          177
+        ]
+      ]
+    },
+    {
+      "normalizedY" : 100,
+      "referenceXSpans" : [
+        [
+          41,
+          65
+        ],
+        [
+          108,
+          175
+        ]
+      ],
+      "renderXSpans" : [
+        [
+          45,
+          60
+        ],
+        [
+          103,
+          174
+        ]
+      ]
+    },
+    {
+      "normalizedY" : 110,
+      "referenceXSpans" : [
+        [
+          45,
+          65
+        ],
+        [
+          94,
+          179
+        ]
+      ],
+      "renderXSpans" : [
+        [
+          50,
+          69
+        ],
+        [
+          96,
+          189
+        ]
+      ]
+    },
+    {
+      "normalizedY" : 120,
+      "referenceXSpans" : [
+        [
+          47,
+          188
+        ]
+      ],
+      "renderXSpans" : [
+        [
+          54,
+          195
+        ]
+      ]
+    },
+    {
+      "normalizedY" : 130,
+      "referenceXSpans" : [
+        [
+          52,
+          196
+        ]
+      ],
+      "renderXSpans" : [
+        [
+          62,
+          101
+        ],
+        [
+          112,
+          199
+        ]
+      ]
+    },
+    {
+      "normalizedY" : 140,
+      "referenceXSpans" : [
+        [
+          58,
+          207
+        ]
+      ],
+      "renderXSpans" : [
+        [
+          107,
+          202
+        ]
+      ]
+    },
+    {
+      "normalizedY" : 150,
+      "referenceXSpans" : [
+        [
+          87,
+          217
+        ]
+      ],
+      "renderXSpans" : [
+        [
+          105,
+          198
+        ]
+      ]
+    },
+    {
+      "normalizedY" : 160,
+      "referenceXSpans" : [
+        [
+          87,
+          221
+        ]
+      ],
+      "renderXSpans" : [
+        [
+          105,
+          193
+        ]
+      ]
+    },
+    {
+      "normalizedY" : 170,
+      "referenceXSpans" : [
+        [
+          85,
+          183
+        ],
+        [
+          193,
+          215
+        ]
+      ],
+      "renderXSpans" : [
+        [
+          108,
+          192
+        ]
+      ]
+    },
+    {
+      "normalizedY" : 180,
+      "referenceXSpans" : [
+        [
+          83,
+          185
+        ]
+      ],
+      "renderXSpans" : [
+        [
+          108,
+          192
+        ]
+      ]
+    },
+    {
+      "normalizedY" : 190,
+      "referenceXSpans" : [
+        [
+          85,
+          122
+        ],
+        [
+          130,
+          188
+        ]
+      ],
+      "renderXSpans" : [
+        [
+          103,
+          193
+        ]
+      ]
+    },
+    {
+      "normalizedY" : 200,
+      "referenceXSpans" : [
+        [
+          89,
+          120
+        ],
+        [
+          146,
+          188
+        ]
+      ],
+      "renderXSpans" : [
+        [
+          101,
+          139
+        ],
+        [
+          161,
+          194
+        ]
+      ]
+    },
+    {
+      "normalizedY" : 210,
+      "referenceXSpans" : [
+        [
+          94,
+          120
+        ],
+        [
+          149,
+          181
+        ]
+      ],
+      "renderXSpans" : [
+        [
+          106,
+          135
+        ],
+        [
+          169,
+          194
+        ]
+      ]
+    },
+    {
+      "normalizedY" : 220,
+      "referenceXSpans" : [
+        [
+          92,
+          124
+        ],
+        [
+          142,
+          175
+        ]
+      ],
+      "renderXSpans" : [
+        [
+          109,
+          227
+        ]
+      ]
+    },
+    {
+      "normalizedY" : 230,
+      "referenceXSpans" : [
+        [
+          77,
+          124
+        ],
+        [
+          142,
+          190
+        ]
+      ],
+      "renderXSpans" : [
+        [
+          89,
+          151
+        ],
+        [
+          155,
+          219
+        ]
+      ]
+    },
+    {
+      "normalizedY" : 240,
+      "referenceXSpans" : [
+        [
+          77,
+          99
+        ],
+        [
+          168,
+          190
+        ]
+      ],
+      "renderXSpans" : [
+        [
+          164,
+          197
+        ]
+      ]
+    }
+  ]
+}

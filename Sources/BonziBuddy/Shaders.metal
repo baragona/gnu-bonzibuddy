@@ -254,15 +254,19 @@ PropVertex deformProp(PropVertex v,constant PropUniforms& prop) {
     }
     return v;
 }
-vertex Varying propVertex(const device PropVertex* vertices [[buffer(0)]],constant Uniforms& u [[buffer(2)]],constant PropUniforms& prop [[buffer(5)]],uint id [[vertex_id]]) {
-    PropVertex v=deformProp(vertices[id],prop);float4 world=prop.model*v.position;Varying out;
+struct PropVarying {float4 position [[position]];float3 world;float3 normal;float4 color;float4 uv;};
+vertex PropVarying propVertex(const device PropVertex* vertices [[buffer(0)]],constant Uniforms& u [[buffer(2)]],constant PropUniforms& prop [[buffer(5)]],uint id [[vertex_id]]) {
+    PropVertex v=deformProp(vertices[id],prop);float4 world=prop.model*v.position;PropVarying out;
     out.position=u.projection*world;out.world=world.xyz;out.normal=transformNormal(prop.model,v.normal.xyz);
-    out.color=prop.color;out.jaw=0;out.eyeUV=float3(v.uv.xy,0);out.eyeHeight=v.uv.w;return out;
+    out.color=prop.color;out.uv=v.uv;return out;
 }
 vertex float4 propShadowVertex(const device PropVertex* vertices [[buffer(0)]],constant Uniforms& u [[buffer(2)]],constant PropUniforms& prop [[buffer(5)]],uint id [[vertex_id]]) {
     return u.light*prop.model*deformProp(vertices[id],prop).position;
 }
-fragment float4 propFragment(Varying in [[stage_in]],depth2d<float> shadow [[texture(0)]],texture2d<float> land [[texture(1)]],constant Uniforms& u [[buffer(2)]],constant FanEyeUniforms& eyes [[buffer(3)]],constant PropUniforms& prop [[buffer(5)]]) {
+fragment float4 propFragment(PropVarying vertexIn [[stage_in]],depth2d<float> shadow [[texture(0)]],texture2d<float> land [[texture(1)]],constant Uniforms& u [[buffer(2)]],constant FanEyeUniforms& eyes [[buffer(3)]],constant PropUniforms& prop [[buffer(5)]]) {
+    // Props share lighting, never anatomical pupil/eyelid or mouth shading.
+    Varying in;in.position=vertexIn.position;in.world=vertexIn.world;in.normal=vertexIn.normal;
+    in.color=vertexIn.color;in.jaw=0;in.eyeUV=float3(vertexIn.uv.xy,0);in.eyeHeight=vertexIn.uv.w;
     constexpr sampler mapSampler(s_address::repeat,t_address::clamp_to_edge,filter::linear,mip_filter::linear);
     if (prop.material.x==0.0) {
         float mask=land.sample(mapSampler,in.eyeUV.xy).r;
@@ -303,6 +307,14 @@ fragment float4 propFragment(Varying in [[stage_in]],depth2d<float> shadow [[tex
         else if (in.eyeHeight>1.5) in.color.rgb=float3(0.94,0.88,0.66);
         else if (in.eyeHeight>0.5) in.color.rgb=float3(0.025,0.023,0.030);
     }
+    if (prop.material.x==6.0) {
+        float2 uv=in.eyeUV.xy;
+        float edge=smoothstep(0.78,0.98,vertexIn.uv.z);
+        float spot=1.0-smoothstep(0.11,0.15,length((uv-float2(0.63,0.70))*float2(0.8,1.0)));
+        float lower=1.0-smoothstep(0.10,0.14,length(uv-float2(0.38,0.20)));
+        in.color.rgb=mix(float3(1.0,0.88,0.08),float3(0.97,0.46,0.025),edge);
+        in.color.rgb=mix(in.color.rgb,float3(0.49,0.46,0.08),max(spot,lower));
+    } else if (prop.material.x==7.0) in.color.rgb=float3(0.37,0.35,0.06);
     float sheen=prop.material.x==4.0 ? 1.0:prop.material.x<0.5 ? 1.0:prop.material.x<1.5 ? 0.15:0.4;
     float4 shaded=shadeSurface(in,shadow,u,eyes,sheen,prop.material.z);
     if (prop.material.x==4.0) {

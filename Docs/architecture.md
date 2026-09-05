@@ -22,7 +22,7 @@ Speech uses `AVSpeechSynthesizer`. Mute settings and reminders use local UserDef
 
 ## Routine and prop boundaries
 
-New routines use one registered `RoutineDefinition` for duration, facing policy, and a deterministic pose sampler. `GlobeRoutine`, `CoconutJuggle`, the two `BananaRoutine` variants, `SunglassesRoutine`, and `HeadphonesRoutine` exercise this path. The older ten actions still contain legacy rig-specific curves; moving those curves into routine samplers remains work.
+New routines use one registered `RoutineDefinition` for duration, facing policy, and a deterministic pose sampler. `GlobeRoutine`, `CoconutJuggle`, the two `BananaRoutine` variants, `SunglassesRoutine`, `HeadphonesRoutine`, and `ButterflyRoutine` exercise this path. The older ten actions still contain legacy rig-specific curves; moving those curves into routine samplers remains work.
 
 ```mermaid
 flowchart TD
@@ -66,3 +66,7 @@ The app exposes Sunglasses and Headphones as independent checked toggles. Their 
 `--validate-wearables` checks rapid reversals, repeated sets, action requests during transfers, resumed body time, deferred prop stow, cancelling a deferred removal, and head attachment across all other actions. It checks both accessories across all fourteen body actions, and renders seven combinations and removal from front, quarter, and profile views.
 
 A hold-capable prop routine with `finishRoutine` transfer policy receives an explicit return request before a pending accessory transfer. Its return finishes before the hand slot changes owner. The legacy headphone reference performance exercises this case. Independently toggled headphones do not occupy that routine slot, so removing sunglasses leaves the headphones on. `--validate-headphones` covers this ordering as well as indexed mesh winding, finite normals, two-handed carry, and the rigid head attachment.
+
+`MotionPath` supplies continuous-velocity spatial interpolation for flight, while `MotionTrack` retains eased stops for deliberate pose holds. Butterfly wings are separate rigid prop meshes sharing the body's anchor; their rotations do not require a special rig or shader deformation. `RigAttachment.indexTip` uses a terminal-joint marker calibrated to the fan mesh's distal finger samples. The rig computes pointing curls around the cross product of the authored finger and palm directions, so fingers curl toward the palm even with the hand raised vertically.
+
+Props have their own `PropVarying` shader interpolants. Before shared lighting, the fragment shader explicitly clears anatomical eye/mouth channels. UV components used for wing patterns therefore cannot trigger eyelids, pupils, or lip shading. `--validate-butterfly-materials` compares a populated butterfly crop at the same pose with open versus closed eyes and changed gaze; shadows are disabled to isolate material behavior.

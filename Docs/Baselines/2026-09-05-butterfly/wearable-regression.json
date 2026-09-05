@@ -1,0 +1,9 @@
+{
+  "actionDuringTransferPassed" : true,
+  "equippedAccessories" : 2,
+  "maximumHeadAttachmentError" : 1.7881393432617188e-07,
+  "rapidToggleAndIdempotencePassed" : true,
+  "renderedCombinationViews" : 21,
+  "samples" : 1815,
+  "sharedTransferQueuePassed" : true
+}

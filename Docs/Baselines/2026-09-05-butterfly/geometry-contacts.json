@@ -1,0 +1,9 @@
+{
+  "indexAboveCurledMiddle" : 0.24828237295150757,
+  "maximumPerchAttachmentError" : 1.5067867309426219e-07,
+  "maximumTouchTipDistance" : 0.17079074680805206,
+  "maximumWaypointVelocityMismatch" : 0.0013328003697097301,
+  "note" : "Perch uses a terminal-joint marker calibrated to distal mesh samples. Does not prove exact surface contact or collision avoidance. Touch distance remains a diagnostic during choreography refinement.",
+  "triangles" : 1488,
+  "vertices" : 1295
+}

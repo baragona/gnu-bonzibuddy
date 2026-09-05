@@ -10,6 +10,8 @@ struct PropMesh {
     init(device:MTLDevice,kind:PropKind) throws {
         var vertices:[PropVertex]=[],indices:[UInt32]=[]
         switch kind {
+        case .butterflyWing,.butterflyBody:
+            (vertices,indices)=ButterflyGeometry.mesh(kind)
         case .headphones:
             (vertices,indices)=HeadphonesGeometry.mesh()
         case .sunglasses:

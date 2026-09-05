@@ -1,0 +1,12 @@
+{
+  "changedChannels" : 0,
+  "goldPixels" : 2646,
+  "maximumByteDifference" : 0,
+  "note" : "Same-time butterfly crop with shadows disabled, eyes open versus closed and gaze changed. Facial inputs must not enter prop materials.",
+  "propBounds" : [
+    139,
+    183,
+    257,
+    238
+  ]
+}

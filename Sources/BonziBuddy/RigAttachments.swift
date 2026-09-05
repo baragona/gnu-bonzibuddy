@@ -6,7 +6,7 @@ enum HandSide: String, CaseIterable {
     init(sign:Float) {self=sign<0 ? .left:.right}
     var sign:Float {self == .left ? -1:1}
 }
-enum RigAttachment {case wrist(HandSide), head}
+enum RigAttachment {case wrist(HandSide), indexTip(HandSide), head}
 enum AttachmentAxes {case character, joint}
 
 extension FanRig {
@@ -14,9 +14,15 @@ extension FanRig {
         let joint:Int
         switch attachment {
         case let .wrist(side): joint=side == .left ? 26:42
+        case let .indexTip(side): joint=side == .left ? 29:45
         case .head: joint=56
         }
-        let origin=bones[joint].model*rest[joint].columns.3
+        var restPoint=rest[joint].columns.3
+        if case .indexTip=attachment {
+            // Distal fan-mesh samples extend ~0.0185 beyond a 0.1039 terminal segment.
+            restPoint += (rest[joint].columns.3-rest[joint-1].columns.3)*0.18
+        }
+        let origin=bones[joint].model*restPoint
         var frame=bones[0].model
         if axes == .joint {
             // Remove scale/shear from the skin transform: a held rigid object

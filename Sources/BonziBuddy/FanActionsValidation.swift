@@ -8,7 +8,9 @@ func validateFanActions() throws {
     let renderer=try Renderer(device:device,previewMesh:URL(fileURLWithPath:"Resources/FanModel/FanRigged.mesh"),rigURL:URL(fileURLWithPath:"Resources/FanModel/FanRig.json"))
     renderer.fanLiveActions=true;renderer.fanTeethEnabled=true
     let withSunglasses=CommandLine.arguments.contains("--with-sunglasses")
-    if withSunglasses {renderer.character.setSunglassesEnabled(true,at:-2)}
+    let withHeadphones=CommandLine.arguments.contains("--with-headphones")
+    if withSunglasses {renderer.character.setSunglassesEnabled(true,at:-5)}
+    if withHeadphones {renderer.character.setHeadphonesEnabled(true,at:-5)}
     let faceOnly=CommandLine.arguments.contains("--face-only")
     let folder=faceOnly ? "Validation/FanFace" : "Validation/FanActions"
     try FileManager.default.createDirectory(atPath:folder,withIntermediateDirectories:true)
@@ -27,7 +29,7 @@ func validateFanActions() throws {
         if let holdSeconds,let loop=RoutineLibrary.definitions[action]?.holdRange {
             duration=max(holdSeconds,loop.lowerBound)+action.duration-loop.upperBound
         } else {duration=action == .idle ? 4.6:action == .speak ? 2.0:action.duration}
-        let frames=Int(ceil(duration*15))+1,name=action.rawValue.lowercased().replacingOccurrences(of:" ",with:"-")+(holdSeconds == nil ? "":"-held")+(withSunglasses ? "-sunglasses":"")
+        let frames=Int(ceil(duration*15))+1,name=action.rawValue.lowercased().replacingOccurrences(of:" ",with:"-")+(holdSeconds == nil ? "":"-held")+(withSunglasses ? "-sunglasses":"")+(withHeadphones ? "-headphones":"")
         guard let gif=CGImageDestinationCreateWithURL(URL(fileURLWithPath:"\(folder)/\(name).gif") as CFURL,"com.compuserve.gif" as CFString,frames,nil) else { throw failure("Cannot create action preview") }
         CGImageDestinationSetProperties(gif,[kCGImagePropertyGIFDictionary:[kCGImagePropertyGIFLoopCount:0]] as CFDictionary)
         var clipped=0,requestedReturn=false
@@ -52,7 +54,7 @@ func validateFanActions() throws {
                 NSImage(cgImage:bitmap.cgImage!,size:NSSize(width:400,height:320)).draw(in:NSRect(x:camera*400,y:0,width:400,height:320))
             }
             NSGraphicsContext.restoreGraphicsState()
-            if frame==min(15,frames/2) || frame==frames/2 || (action == .clap && frame<=6) || (action == .shrug && [5,7,9,22,27,33].contains(frame)) || (action == .think && [5,10,20,45,55,60].contains(frame)) || ((action == .dance || action == .juggle || action == .banana || action == .bananaMiss || action == .sunglasses || action == .headphones) && frame%10==0) {
+            if frame==min(15,frames/2) || frame==frames/2 || (action == .clap && frame<=6) || (action == .shrug && [5,7,9,22,27,33].contains(frame)) || (action == .think && [5,10,20,45,55,60].contains(frame)) || ((action == .dance || action == .juggle || action == .banana || action == .bananaMiss || action == .sunglasses || action == .headphones || action == .butterfly) && frame%10==0) {
                 try output.representation(using:.png,properties:[:])!.write(to:URL(fileURLWithPath:"\(folder)/\(name)-\(frame).png"))
             }
             CGImageDestinationAddImage(gif,output.cgImage!,[kCGImagePropertyGIFDictionary:[kCGImagePropertyGIFDelayTime:1.0/15]] as CFDictionary)

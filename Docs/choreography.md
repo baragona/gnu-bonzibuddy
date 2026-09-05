@@ -25,7 +25,7 @@ The action filter enables focused three-angle reviews while keeping the full sui
 
 ## Outstanding scope
 
-Refine banana and miss variation; refine sunglasses finger contact; refine coconut headphones contact; butterfly interaction; seated book reading; writing pad/pencil; bamboo mailbox/letter variants; vine and surfboard movement/entrance/exit; chest beating/backflip; hugs/kisses/giggles/shushing; directional presentations and explanations; richer facial/gaze/idle sequences. Each needs actual geometry where applicable, reference-based choreography, clean entry/return/interruption behavior, multiple-angle review, and runtime profiling. This list is the remaining scope, not a list of completed features.
+Refine banana and miss variation; refine sunglasses finger contact; refine coconut headphones contact; refine butterfly interaction; seated book reading; writing pad/pencil; bamboo mailbox/letter variants; vine and surfboard movement/entrance/exit; chest beating/backflip; hugs/kisses/giggles/shushing; directional presentations and explanations; richer facial/gaze/idle sequences. Each needs actual geometry where applicable, reference-based choreography, clean entry/return/interruption behavior, multiple-angle review, and runtime profiling. This list is the remaining scope, not a list of completed features.
 
 The facing transform is included before hierarchical interruption blending, so interrupting a turned pose does not snap the body back to front. Props derive orientation from the blended root matrix. Stationary-leg regression assertions exclude actions with an intentional facing turn; their full skeleton is still checked for transition continuity and convergence.
 
@@ -114,3 +114,16 @@ The selected original listening frame 27 versus native frame 100 comparison impr
 
 
 The user's tighter-fit revision moves each earcup inward by 0.045 model units and down by 0.015, with matching headband, antenna mount, and hand marker changes. Front, quarter, and profile combination renders confirm the cups meet the cheeks. The shared toggle checks cover both accessories across 1,694 body-action samples, queued reversals/cancellation, and removing one while retaining the other.
+
+
+## Butterfly interaction
+
+The original ACS `Butternut` sequence has 95 base frames and 10.30 seconds of timing. Its yellow-orange butterfly enters from the left, lands on the extended index finger, stays while Bonzi reaches toward a wing, and departs over his head. `ButterflyRoutine` implements those beats with flight, perch, touch, and return phases. Its small mouth change before departure approximates a blowing gesture; full lip articulation remains unfinished.
+
+The butterfly uses thick two-sided wing meshes with independent thorax rotations, plus a body, antennae, and six legs. Wing patterning is procedural. A shared `MotionPath` carries continuous velocity through flight waypoints; the same prop anchors blend into and away from a semantic index-tip attachment. The marker extends 0.18 terminal-bone lengths beyond the last joint, based on approximately 0.0185 model units of distal mesh extension for a 0.1039 segment. This replaces the first estimate that left a visible gap above the finger.
+
+Pointing exposed a rig bug: fixed-world-axis curls twisted the non-index fingers when the hand pointed upward. The curl axis now follows the authored finger/palm frame. The butterfly validation checks that the index remains above the curled middle finger, along with mesh winding, waypoint velocity continuity, and stable perching. Fine contact remains visual/diagnostic rather than a general collision solver. Independently worn accessories remain compatible.
+
+The plain and both-accessories previews each render 156 frames from three angles: 936 views without clipping. Unique butterfly meshes total 1,295 vertices and 1,488 triangles. Perch attachment error is below 1.6e-7, waypoint velocity mismatch below 0.00134, and the curled middle finger remains 0.248 model units below the index tip at the checked pointing pose. The other index tip stays within 0.171 of the perch center during touching, reaching the wing region; this is not an exact collision/contact proof.
+
+The original-frame comparison prompted a wider/larger butterfly and more olive markings. The final selected pose still fails whole-character near-identity: silhouette IoU 0.629, RGB MAE 0.291. The neutral render is preserved (RGBA MAE 8.95e-8), and 289 ordered action transitions plus 969 facial cases pass. A material regression checks 2,646 gold-colored wing pixels and finds zero changed channels under blink/gaze changes. Reports and representative views are in `Baselines/2026-09-05-butterfly/`.

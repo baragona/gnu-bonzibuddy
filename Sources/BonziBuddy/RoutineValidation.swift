@@ -42,7 +42,7 @@ func validateRoutines() throws {
                 propSamples += 1
                 guard validAnchor(prop.anchor),finite(prop.offset),finite(prop.scale),prop.scale.min()>0,(0...1).contains(prop.visibility),prop.rotation.vector.x.isFinite,abs(length(prop.rotation.vector)-1)<0.001 else {throw failure("Invalid prop transform")}
                 switch (prop.kind,prop.deformation) {
-                case (.globe,.rigid),(.coconut,.rigid),(.sunglasses,.rigid),(.headphones,.rigid): break
+                case (.globe,.rigid),(.coconut,.rigid),(.sunglasses,.rigid),(.headphones,.rigid),(.butterflyWing,.rigid),(.butterflyBody,.rigid): break
                 case let (.bananaFruit,.fruit(remaining)):
                     guard remaining.isFinite,(0...1).contains(remaining) else {throw failure("Invalid fruit amount")}
                 case let (.bananaPeel,.peel(openings)):
@@ -66,7 +66,7 @@ func validateRoutines() throws {
     let front=rig.instances(yaw:0,pitch:0,at:0.8),quarter=rig.instances(yaw:-0.7,pitch:0.15,at:0.8)
     let cameraChange=quarter[0].model*front[0].model.inverse
     var attachmentError:Float=0,rigidityError:Float=0
-    for attachment in [RigAttachment.head,.wrist(.left),.wrist(.right)] {
+    for attachment in [RigAttachment.head,.wrist(.left),.wrist(.right),.indexTip(.left),.indexTip(.right)] {
         for axes in [AttachmentAxes.character,.joint] {
             let a=rig.attachmentFrame(attachment,axes:axes,bones:front),b=rig.attachmentFrame(attachment,axes:axes,bones:quarter)
             attachmentError=max(attachmentError,matrixError(cameraChange*a,b))

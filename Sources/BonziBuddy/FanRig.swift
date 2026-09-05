@@ -228,7 +228,8 @@ final class FanRig {
                     if intent.pointing && ([30,31,32,33,34,35,46,47,48,49,50,51].contains(i)) {
                         let angle:Float=[30,33,46,49].contains(i) ? 1.1:[31,34,47,50].contains(i) ? 1.35:0.65
                         let p=xyz(inherited)
-                        result=blendRotation(result,translation(p)*rotate(-side*angle,[0,1,0])*translation(-p)*inherited,intent.weight)
+                        let curlAxis=normalize(cross(intent.fingers,intent.palm))
+                        result=blendRotation(result,translation(p)*rotate(angle,curlAxis)*translation(-p)*inherited,intent.weight)
                     }
 
                 }

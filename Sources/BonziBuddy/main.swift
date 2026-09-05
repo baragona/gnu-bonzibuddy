@@ -52,6 +52,14 @@ func validate() throws {
     let data = try JSONSerialization.data(withJSONObject:report,options:[.prettyPrinted,.sortedKeys])
     try data.write(to:URL(fileURLWithPath:"Validation/performance.json")); print(String(decoding:data,as:UTF8.self))
 }
+if CommandLine.arguments.contains("--validate-butterfly-materials") {
+    do {try validateButterflyMaterials()} catch {fputs("Butterfly material validation failed: \(error)\n",stderr);exit(1)}
+    exit(0)
+}
+if CommandLine.arguments.contains("--validate-butterfly") {
+    do {try validateButterfly()} catch {fputs("Butterfly validation failed: \(error)\n",stderr);exit(1)}
+    exit(0)
+}
 if CommandLine.arguments.contains("--validate-headphones") {
     do {try validateHeadphones()} catch {fputs("Headphones validation failed: \(error)\n",stderr);exit(1)}
     exit(0)
