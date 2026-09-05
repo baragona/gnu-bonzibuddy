@@ -11,8 +11,8 @@ struct HandIntent {
     var weight: Float = 1
     var pointing: Bool = false
 }
-enum PropKind: Int { case globe }
-enum PropAnchor { case character; case joint(Int) }
+enum PropKind: Int, CaseIterable { case globe, coconut }
+enum PropAnchor { case character; case jointPosition(Int) }
 struct PropCue {
     var id: String
     var kind: PropKind
@@ -36,6 +36,7 @@ enum RoutineLibrary {
         return x*x*x*(x*(x*6-15)+10)
     }
     static func sample(_ action:Action, at t:Double) -> RoutinePose {
+        if action == .juggle { return CoconutJuggle.sample(at:t) }
         guard action == .globe else { return RoutinePose() }
         // Search: raise, reveal, spin while following the globe, lower and stow.
         // Authored continuous poses follow the extracted Search/SearchingReturn beats.
@@ -44,7 +45,7 @@ enum RoutineLibrary {
         let left=HandIntent(wrist:[-0.88,0.32,0.32],fingers:[-0.15,1,0],palm:[0,0,1],weight:weight,pointing:true)
         let right=HandIntent(wrist:[-0.33,0.25,0.46],fingers:[-0.8,0.45,0],palm:[0,0,1],openness:0.65,weight:weight,pointing:true)
         let spin=Float(max(0,t-0.85))*2.8*smooth(t,0.85,1.2)
-        let globe=PropCue(id:"search.globe",kind:.globe,anchor:.joint(26),offset:[-0.025,0.50,0],rotation:simd_quatf(angle:spin,axis:[0,1,0]),scale:SIMD3(repeating:0.35),visibility:reveal)
+        let globe=PropCue(id:"search.globe",kind:.globe,anchor:.jointPosition(26),offset:[-0.025,0.50,0],rotation:simd_quatf(angle:spin,axis:[0,1,0]),scale:SIMD3(repeating:0.35),visibility:reveal)
         return RoutinePose(hands:[26:left,42:right],bodyYaw:-0.65*weight,headYaw:-0.10*weight,headTilt:0.04*weight,gaze:[-0.40*weight,0.15*weight],props:reveal>0 ? [globe]:[])
     }
 }

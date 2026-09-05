@@ -106,7 +106,7 @@ float visibility(float3 world,float3 normal,depth2d<float> shadow,constant Unifo
     return lit/32.0;
 }
 struct FanEyeUniforms { float4 face; float4 closures; };
-float4 shadeSurface(Varying in,depth2d<float> shadow,constant Uniforms& u,constant FanEyeUniforms& eyes) {
+float4 shadeSurface(Varying in,depth2d<float> shadow,constant Uniforms& u,constant FanEyeUniforms& eyes,float sheenScale) {
     float4 face=eyes.face;
     float3 n = normalize(in.normal);
     float3 geometric = normalize(cross(dfdx(in.world),dfdy(in.world)));
@@ -145,12 +145,12 @@ float4 shadeSurface(Varying in,depth2d<float> shadow,constant Uniforms& u,consta
         }
     }
     float sheen = smoothstep(0.42,0.65,max(surfaceColor.r,max(surfaceColor.g,surfaceColor.b)));
-    float3 color = surfaceColor.rgb * (0.36 + 0.60*diffuse*shade + 0.12*fill) + 0.16*spec*shade*sheen;
+    float3 color = surfaceColor.rgb * (0.36 + 0.60*diffuse*shade + 0.12*fill) + 0.16*spec*shade*sheen*sheenScale;
     color=mix(color,float3(0.98,0.98,1.0),eyeCatchlight*0.94);
     return float4(color * in.color.a, in.color.a);
 }
 fragment float4 fragmentMain(Varying in [[stage_in]],depth2d<float> shadow [[texture(0)]],constant Uniforms& u [[buffer(2)]],constant FanEyeUniforms& eyes [[buffer(3)]]) {
-    return shadeSurface(in,shadow,u,eyes);
+    return shadeSurface(in,shadow,u,eyes,1.0);
 }
 vertex Varying groundVertex(uint v [[vertex_id]],constant Uniforms& u [[buffer(2)]]) {
     const float2 corners[6] = {float2(-1.4,-1.4),float2(1.4,-1.4),float2(-1.4,1.4),float2(-1.4,1.4),float2(1.4,-1.4),float2(1.4,1.4)};
@@ -239,7 +239,25 @@ vertex float4 propShadowVertex(const device PropVertex* vertices [[buffer(0)]],c
 }
 fragment float4 propFragment(Varying in [[stage_in]],depth2d<float> shadow [[texture(0)]],texture2d<float> land [[texture(1)]],constant Uniforms& u [[buffer(2)]],constant FanEyeUniforms& eyes [[buffer(3)]],constant PropUniforms& prop [[buffer(5)]]) {
     constexpr sampler mapSampler(s_address::repeat,t_address::clamp_to_edge,filter::linear,mip_filter::linear);
-    float mask=land.sample(mapSampler,in.eyeUV.xy).r;
-    in.color.rgb=mix(float3(0.23,0.025,0.72),float3(0.02,0.92,0.13),mask);
-    return shadeSurface(in,shadow,u,eyes);
+    if (prop.material.x<0.5) {
+        float mask=land.sample(mapSampler,in.eyeUV.xy).r;
+        in.color.rgb=mix(float3(0.23,0.025,0.72),float3(0.02,0.92,0.13),mask);
+    } else {
+        float2 uv=in.eyeUV.xy;
+        float gx=uv.x*603.0+sin(uv.y*123.0)*2.0,gy=uv.y*347.0+sin(uv.x*79.0);
+        float grain=sin(gx)*sin(gy)*exp(-0.35*(fwidth(gx)+fwidth(gy)));
+        float strand=uv.x*1301.0+sin(uv.y*31.0)*5.0;
+        float fiber=pow(0.5+0.5*sin(strand),8.0)*exp(-0.35*fwidth(strand));
+        float coarse=sin(uv.x*187.0+sin(uv.y*49.0)*3.0)*sin(uv.y*149.0+cos(uv.x*35.0));
+        float detail=clamp(0.5+coarse*0.23+grain*0.25+fiber*0.20,0.0,1.0);
+        in.color.rgb=mix(float3(0.50,0.235,0.045),float3(0.93,0.64,0.22),detail);
+        float pores=0;
+        for (int i=0;i<3;i++) {
+            float2 center=float2(0.48+0.025*cos(float(i)*2.094),0.20+0.04*sin(float(i)*2.094));
+            float d=length((uv-center)/float2(0.012,0.019));
+            pores=max(pores,1.0-smoothstep(0.7,1.1,d));
+        }
+        in.color.rgb*=1.0-pores*0.7;
+    }
+    return shadeSurface(in,shadow,u,eyes,prop.material.x>0.5 ? 0.15:1.0);
 }

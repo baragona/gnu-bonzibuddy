@@ -52,7 +52,9 @@ func validate() throws {
     let data = try JSONSerialization.data(withJSONObject:report,options:[.prettyPrinted,.sortedKeys])
     try data.write(to:URL(fileURLWithPath:"Validation/performance.json")); print(String(decoding:data,as:UTF8.self))
 }
-if CommandLine.arguments.contains("--validate-props") {
+if CommandLine.arguments.contains("--validate-juggle") {
+    do { try validateJuggle() } catch { fputs("Juggle failed: \(error)\n",stderr); exit(1) }
+} else if CommandLine.arguments.contains("--validate-props") {
     do { try validateProps() } catch { fputs("Props failed: \(error)\n",stderr); exit(1) }
 } else if CommandLine.arguments.contains("--validate-fan-contacts") {
     do { try validateFanContacts() } catch { fputs("Fan contacts failed: \(error)\n",stderr); exit(1) }

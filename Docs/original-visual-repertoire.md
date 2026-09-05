@@ -1,6 +1,6 @@
 # Original visual repertoire
 
-Research date: September 5, 2026. The original's repertoire is substantially broader than our ten current actions. See [source audit and full animation directory](../References/AnimationInventory/README.md) and [sampled sprite review](../References/AnimationInventory/surfboard-sprite-review.png).
+Research date: September 5, 2026. The original's repertoire is substantially broader than our current action catalog. The working tree has twelve action entries, including first globe and juggling implementations. See [source audit and full animation directory](../References/AnimationInventory/README.md) and [sampled sprite review](../References/AnimationInventory/surfboard-sprite-review.png).
 
 ## Evidence levels
 
@@ -14,7 +14,7 @@ Research date: September 5, 2026. The original's repertoire is substantially bro
 | Peel/eat/toss banana, plus a miss variant | Extracted: `Banana` 69 frames; `BananaMiss` 64 frames | Missing |
 | Put on sunglasses, pose, adjust them, and remove them | Visual: earlier `Idle2_1`; later continued/return entries also exist | Missing |
 | Coconut-shell headphones, with continued and return segments | Extracted: `HeadphonesContinued` 60 frames; community GIF supplies another visual lead | Missing |
-| Juggling three coconuts | Extracted: `Juggle` 62 frames; exact trajectories still need matching | Missing |
+| Juggling three coconuts | Extracted: `Juggle` 62 frames; exact trajectories still need matching | Implemented; sampled clearance passes, visual fidelity remains approximate |
 | Seated book reading, looking up, resuming, and putting away | Extracted: `Read` 31 frames plus related segments | Missing |
 | Pencil-and-pad writing, pausing, repeating a stroke, and returning | Extracted: `Write` 37 frames plus related segments | Missing |
 | Bamboo-style mailbox, empty/full outcomes, read a letter, advance, and return | Extracted: separate mail family | Missing; visual routines can work without email integration |

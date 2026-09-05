@@ -7,7 +7,7 @@ The user-approved appearance is about 90% satisfactory. Preserve its palette, sh
 - Native transparent desktop panel, local speech and controls.
 - Rigged polygon fan model, real-time Metal skinning, antialiasing, and soft shadows.
 - Fifteen facial morphs, gaze, shared and independent eye closure, automatic blinking.
-- Idle, left/right glances, clap, shrug, wave, dance, think, surprise, speech, and a first globe prop routine.
+- Idle, left/right glances, clap, shrug, wave, dance, think, surprise, speech, globe spinning, and coconut juggling.
 - Shared rigid-prop lighting/shadows, wrist attachment, and interruption retirement; remaining routines tracked in [choreography](choreography.md).
 - Wrist-centered waving, planted idle feet, gesture IK, and 0.20-second skeletal interruption blends.
 - Local reminders with persistence and delivery while the app runs.

@@ -25,7 +25,14 @@ final class FanRig {
     private var transitionPose:[simd_float4x4] = []
     private var transitionStarted:Double = 0
     private var actionStarted:Double?
+    private var lastActionTime:Double = -.infinity
     func updateLiveAction(_ next:Action, started:Double, at time:Double) {
+        if time<lastActionTime {
+            // Offline scrubbing starts a new timeline; future transition poses
+            // must not contaminate an earlier frame or another camera review.
+            displayedPose=[];transitionPose=[];actionStarted=nil
+        }
+        lastActionTime=time
         if actionStarted != started || action != next {
             transitionPose=displayedPose
             transitionStarted=time

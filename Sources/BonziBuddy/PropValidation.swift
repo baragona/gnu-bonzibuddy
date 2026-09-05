@@ -10,7 +10,7 @@ func validateProps() throws {
         let t=Double(frame)/120
         rig.updateLiveAction(.globe,started:0,at:t)
         let bones=rig.instances(yaw:-0.7,pitch:0.1,at:t)
-        let draws=motion.sample(action:.globe,started:0,at:t,cues:rig.routine.props,rig:rig,bones:bones,yaw:-0.7,pitch:0.1)
+        let draws=motion.sample(action:.globe,started:0,at:t,cues:rig.routine.props,rig:rig,bones:bones)
         for draw in draws {
             guard (0..<4).allSatisfy({ c in (0..<4).allSatisfy({draw.model[c][$0].isFinite}) }) else {throw failure("Nonfinite prop")}
         }
@@ -26,12 +26,12 @@ func validateProps() throws {
     let interrupted=PropMotion()
     rig.updateLiveAction(.globe,started:0,at:2)
     let bones=rig.instances(yaw:0,pitch:0,at:2)
-    let before=interrupted.sample(action:.globe,started:0,at:2,cues:rig.routine.props,rig:rig,bones:bones,yaw:0,pitch:0)
-    let first=interrupted.sample(action:.wave,started:2,at:2,cues:[],rig:rig,bones:bones,yaw:0,pitch:0)
+    let before=interrupted.sample(action:.globe,started:0,at:2,cues:rig.routine.props,rig:rig,bones:bones)
+    let first=interrupted.sample(action:.wave,started:2,at:2,cues:[],rig:rig,bones:bones)
     guard before.count==1,first.count==1,length(before[0].model.columns.3-first[0].model.columns.3)<0.00001 else {throw failure("Prop disappeared at interruption")}
-    _=interrupted.sample(action:.wave,started:2,at:2.08,cues:[],rig:rig,bones:bones,yaw:0,pitch:0)
-    _=interrupted.sample(action:.idle,started:2.08,at:2.08,cues:[],rig:rig,bones:bones,yaw:0,pitch:0)
-    let after=interrupted.sample(action:.idle,started:2.08,at:2.4,cues:[],rig:rig,bones:bones,yaw:0,pitch:0)
+    _=interrupted.sample(action:.wave,started:2,at:2.08,cues:[],rig:rig,bones:bones)
+    _=interrupted.sample(action:.idle,started:2.08,at:2.08,cues:[],rig:rig,bones:bones)
+    let after=interrupted.sample(action:.idle,started:2.08,at:2.4,cues:[],rig:rig,bones:bones)
     guard after.isEmpty,!last.isEmpty else {throw failure("Interrupted prop was not retired")}
     let report:[String:Any]=["sampledFrames":745,"maximumWristAnchorError":maxAnchorError,"interruptionRetirementPassed":true,"note":"Numerical attachment and lifecycle checks; visual match is reviewed separately."]
     try FileManager.default.createDirectory(atPath:"Validation/Props",withIntermediateDirectories:true)

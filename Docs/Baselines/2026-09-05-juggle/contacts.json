@@ -1,0 +1,11 @@
+{
+  "coconutDiameter" : 0.40000000596046448,
+  "headSamples" : 4347,
+  "maximumAuthoredHandoffVelocityMismatch" : 0.0036870748735964298,
+  "maximumHandoffJump" : 0.0035048744175583124,
+  "minimumAirborneCenterSeparation" : 0.48600566387176514,
+  "minimumAllCenterSeparation" : 0.44975018501281738,
+  "minimumSampledHeadClearance" : 0.10135510563850403,
+  "note" : "Handoffs are checked against solved wrists, not only authored targets. Does not establish original visual fidelity.",
+  "worstHeadTime" : 2.0083333333333333
+}

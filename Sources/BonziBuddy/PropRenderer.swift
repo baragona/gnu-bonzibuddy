@@ -14,7 +14,7 @@ final class PropMotion {
     private var shown:[PropDraw]=[]
     private var retiring:[PropDraw]=[]
     private var retiredAt:Double=0
-    func sample(action next:Action,started nextStart:Double,at time:Double,cues:[PropCue],rig:FanRig,bones:[Instance],yaw:Float,pitch:Float)->[PropDraw] {
+    func sample(action next:Action,started nextStart:Double,at time:Double,cues:[PropCue],rig:FanRig,bones:[Instance])->[PropDraw] {
         if time<lastTime { shown=[];retiring=[];action=nil;started=nil }
         if action != next || started != nextStart {
             retiring=shown;retiredAt=time;action=next;started=nextStart
@@ -24,7 +24,7 @@ final class PropMotion {
         var draws:[PropDraw]=[]
         for cue in cues where cue.visibility>0.001 {
             var origin=bones[0].model*SIMD4(cue.offset,1)
-            if case let .joint(joint)=cue.anchor {
+            if case let .jointPosition(joint)=cue.anchor {
                 // Offsets stay in character axes; the anchor tracks the solved wrist.
                 origin=bones[joint].model*rig.rest[joint].columns.3+camera*SIMD4(cue.offset,0)
             }
@@ -49,9 +49,7 @@ final class PropMotion {
 final class PropRenderer {
     let pipeline:MTLRenderPipelineState
     let shadowPipeline:MTLRenderPipelineState
-    let vertices:MTLBuffer
-    let indices:MTLBuffer
-    let count:Int
+    let meshes:[PropKind:PropMesh]
     let globeTexture:MTLTexture
     init(device:MTLDevice,library:MTLLibrary,sampleCount:Int) throws {
         let descriptor=MTLRenderPipelineDescriptor()
@@ -68,23 +66,7 @@ final class PropRenderer {
         shadow.vertexFunction=library.makeFunction(name:"propShadowVertex")
         shadow.depthAttachmentPixelFormat = .depth32Float
         shadowPipeline=try device.makeRenderPipelineState(descriptor:shadow)
-        var v:[PropVertex]=[],idx:[UInt32]=[]
-        let rings=48,sides=96
-        for row in 0...rings {
-            let t=Float(row)/Float(rings),latitude=Float.pi*(0.5-t)
-            for column in 0...sides {
-                let u=Float(column)/Float(sides),longitude=(u-0.5)*2*Float.pi
-                let p=SIMD3<Float>(sin(longitude)*cos(latitude),sin(latitude),cos(longitude)*cos(latitude))
-                v.append(PropVertex(position:SIMD4(p,1),normal:SIMD4(p,0),uv:[u,t,0,0]))
-                if row<rings && column<sides {
-                    let a=UInt32(row*(sides+1)+column),b=a+UInt32(sides+1)
-                    if row>0 {idx += [a,b,a+1]}
-                    if row<rings-1 {idx += [a+1,b,b+1]}
-                }
-            }
-        }
-        vertices=device.makeBuffer(bytes:v,length:v.count*MemoryLayout<PropVertex>.stride)!
-        indices=device.makeBuffer(bytes:idx,length:idx.count*4)!;count=idx.count
+        meshes=Dictionary(uniqueKeysWithValues:PropKind.allCases.map { ($0,PropMesh(device:device,kind:$0)) })
         let url=Bundle.main.resourceURL?.appendingPathComponent("Props/globe-land.png")
         let path=url.flatMap { FileManager.default.fileExists(atPath:$0.path) ? $0:nil } ?? URL(fileURLWithPath:"Resources/Props/globe-land.png")
         globeTexture=try MTKTextureLoader(device:device).newTexture(URL:path,options:[.SRGB:false,.generateMipmaps:true])
@@ -92,13 +74,14 @@ final class PropRenderer {
     func draw(_ draws:[PropDraw],encoder:MTLRenderCommandEncoder,shadow:Bool) {
         guard !draws.isEmpty else {return}
         encoder.setRenderPipelineState(shadow ? shadowPipeline:pipeline)
-        encoder.setVertexBuffer(vertices,offset:0,index:0)
         if !shadow {encoder.setFragmentTexture(globeTexture,index:1)}
         for draw in draws {
+            let mesh=meshes[draw.kind]!
+            encoder.setVertexBuffer(mesh.vertices,offset:0,index:0)
             var uniforms=PropUniforms(model:draw.model,color:[1,1,1,1],material:[Float(draw.kind.rawValue),0,0,0])
             encoder.setVertexBytes(&uniforms,length:MemoryLayout<PropUniforms>.stride,index:5)
             if !shadow {encoder.setFragmentBytes(&uniforms,length:MemoryLayout<PropUniforms>.stride,index:5)}
-            encoder.drawIndexedPrimitives(type:.triangle,indexCount:count,indexType:.uint32,indexBuffer:indices,indexBufferOffset:0)
+            encoder.drawIndexedPrimitives(type:.triangle,indexCount:mesh.indexCount,indexType:.uint32,indexBuffer:mesh.indices,indexBufferOffset:0)
         }
     }
 }

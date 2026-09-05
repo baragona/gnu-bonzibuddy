@@ -180,7 +180,7 @@ final class Renderer: NSObject, MTKViewDelegate {
         }
         let props: [PropDraw]
         if let rig=fanRig,fanLiveActions {
-            props=propMotion.sample(action:character.action,started:character.started,at:time,cues:rig.routine.props,rig:rig,bones:objects,yaw:character.yaw,pitch:character.pitch)
+            props=propMotion.sample(action:character.action,started:character.started,at:time,cues:rig.routine.props,rig:rig,bones:objects)
         } else { props=[] }
         objects.withUnsafeBytes { buffer.contents().copyMemory(from: $0.baseAddress!, byteCount: $0.count) }
         let lightDirection = normalize(SIMD3<Float>(-0.5,0.8,1.4))

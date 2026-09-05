@@ -1,0 +1,41 @@
+import Metal
+import simd
+
+// Geometry is built once, then reused by the color and shadow passes. New prop
+// types provide their own indexed surface here without changing choreography.
+struct PropMesh {
+    let vertices:MTLBuffer
+    let indices:MTLBuffer
+    let indexCount:Int
+    init(device:MTLDevice,kind:PropKind) {
+        var vertices:[PropVertex]=[],indices:[UInt32]=[]
+        let rings=48,sides=96
+        func surface(_ u:Float,_ v:Float)->SIMD3<Float> {
+            let latitude=Float.pi*(0.5-v),longitude=(u-0.5)*2*Float.pi
+            let normal=SIMD3<Float>(sin(longitude)*cos(latitude),sin(latitude),cos(longitude)*cos(latitude))
+            if kind == .globe {return normal}
+            let irregularity=1+0.008*sin(longitude*7+normal.y*5)*cos(latitude)*cos(latitude)+0.004*sin(longitude*13)*cos(latitude)
+            return normal*SIMD3<Float>(0.96,1.08,0.92)*irregularity
+        }
+        for row in 0...rings {
+            let v=Float(row)/Float(rings)
+            for column in 0...sides {
+                let u=Float(column)/Float(sides),p=surface(u,v)
+                let tangent=surface(u+0.0001,v)-surface(u-0.0001,v)
+                let vertical=surface(u,min(1,v+0.0001))-surface(u,max(0,v-0.0001))
+                var normal=cross(tangent,vertical)
+                normal=length(normal)>0.00000001 ? normalize(normal):normalize(p)
+                if dot(normal,p)<0 {normal = -normal}
+                vertices.append(PropVertex(position:SIMD4(p,1),normal:SIMD4(normal,0),uv:[u,v,0,0]))
+                if row<rings && column<sides {
+                    let a=UInt32(row*(sides+1)+column),b=a+UInt32(sides+1)
+                    if row>0 {indices += [a,b,a+1]}
+                    if row<rings-1 {indices += [a+1,b,b+1]}
+                }
+            }
+        }
+        self.vertices=device.makeBuffer(bytes:vertices,length:vertices.count*MemoryLayout<PropVertex>.stride)!
+        self.indices=device.makeBuffer(bytes:indices,length:indices.count*4)!
+        indexCount=indices.count
+    }
+}
