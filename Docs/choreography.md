@@ -192,3 +192,5 @@ Shush follows the original Shoosh’s 1.95-second timeline, with an index raised
 ## Wink
 
 Wink follows the original thirteen-frame, 1.80-second performance: a small head turn, left-eye closure at 0.65 seconds, reopening by 1.05 seconds, and return to rest by 1.70 seconds. Its hands remain at rest. Independent eyelid intentions share the facial transition system and compose with the existing user controls. This implements visual choreography; the original sound cue is not reproduced.
+
+The wink head turn now has one travel interval (0.10–0.60 seconds), a stationary hold while the eyelid closes/reopens, and one return (1.30–1.70 seconds). Eyelid closure no longer contributes to yaw. The earlier extra turn and intermediate eased return key caused visible stop/start motion. `--validate-wink-motion` checks actual rig head direction and its angular-speed shape at 120 Hz to catch this regression.
