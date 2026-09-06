@@ -17,7 +17,7 @@ The user-approved appearance is about 90% satisfactory. Preserve its palette, sh
 ## Remaining work
 
 - Resolve live drawable/presentation pacing: recent runs present near 60 fps, with GPU p95 around 3.1 ms. Earlier runs reached approximately 119.6 fps. The 120 fps target is not currently verified.
-- Improve original animation fidelity and extend choreography/coverage. Contact checks measure proximity, not comprehensive collision avoidance.
+- Improve original animation fidelity and extend choreography/coverage. The new full-catalog geometry audit confirms bad hand/prop intersections; correct shared resting contacts, paper transfers, and headphone grips before treating choreography as finished.
 - Improve facial expressiveness and mouth behavior. Blinking currently uses an eye-surface cover, and speech jaw motion is approximate rather than phoneme animation.
 - Polish reminder window layout and controls.
 - Continue visual comparison: the selected reading pose has original-image silhouette IoU 0.724 and RGB MAE 0.285, failing the unchanged 0.95 / 0.05 likeness gate.
@@ -25,8 +25,10 @@ The user-approved appearance is about 90% satisfactory. Preserve its palette, sh
 
 ## Recorded animation checks
 
-The pre-organization pass rendered 1,515 views across ten full actions and three camera angles without clipping. It checked 100 ordered skeletal transitions and 300 facial transitions. Wave wrist-pivot error was approximately 1.9e-7; clap palm proximity was below 0.001 at sampled contact frames. These are sampled checks, not proof of original animation identity.
+The pre-organization pass rendered 1,515 views across ten full actions and three camera angles without viewport clipping. It did not establish absence of mesh intersections. It checked 100 ordered skeletal transitions and 300 facial transitions. Wave wrist-pivot error was approximately 1.9e-7; clap palm proximity was below 0.001 at sampled contact frames. These are sampled checks, not proof of original animation identity.
 
 Selected numerical reports are preserved under `Baselines/2026-09-05/`. Full generated images, GIFs, and performance experiments remain local under the ignored `Validation/` directory. Appearance checkpoints are tracked under `References/ApprovedFanAppearance/` and `References/ApprovedAppearance/`. Historical iteration notes are in [the development log](History/development.md) and [model conversion history](../References/CandidateModel/README.md).
 
 The [reading checkpoint](Baselines/2026-09-05-reading/README.md) records seated grounding, page-safe returns, wearable combinations, and three-angle original comparisons.
+
+The [hand geometry audit](Audits/2026-09-05-hand-geometry/README.md) covers all 28 routines at 120 Hz in two accessory configurations (42,082 poses), using Metal-deformed geometry and multi-angle review. Hand/palm axes follow authored targets within 0.04 degrees when fully engaged, but shared rest poses and several prop transfers visibly penetrate. Findings are recorded, not fixed. The [proposed character motion architecture](character-motion-design.md) describes contact constraints and per-character anatomy profiles before selective physics integration.

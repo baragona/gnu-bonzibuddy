@@ -91,3 +91,9 @@ Continuations can also declare an outgoing clip phase. The paused writing varian
 PropMotion caches retiring draws relative to the stage frame. This preserves their world pose when the actor changes facing while still following camera changes. Mail Full transfers the letter from a stage-authored extraction trajectory to the common held-letter pose at a matching boundary, sharing its IDs with Mail Read and Mail Next.
 
 `HandIntent.fist` provides continuous closed-hand articulation separately from `grip`. The generic rig handler owns finger-base alignment, curl, and thumb wrapping; choreography only chooses the amount and hand frame. Prop grips retain their spread and curl values when fist is zero.
+
+## Geometry audit and future character support
+
+`AnimationGeometryAudit.swift` captures the rendered bone/morph/prop snapshot and uses Metal compute kernels sharing the actual deformation functions. `AuditGeometry.swift` provides refitted triangle BVHs and noncoplanar crossing checks. These run only through `--audit-animation-geometry`; normal rendering has no readback or collision scan. See the [audit and limitations](Audits/2026-09-05-hand-geometry/README.md).
+
+Current semantic intentions and prop attachments are a useful foundation, but anatomy mappings and many offsets remain Bonzi-specific. The [proposed shared motion design](character-motion-design.md) adds character profiles, surface contacts, constrained grips, and optional dynamics. It is not implemented by this audit checkpoint.

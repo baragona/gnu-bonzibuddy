@@ -387,3 +387,11 @@ fragment float4 propFragment(PropVarying vertexIn [[stage_in]],depth2d<float> sh
     }
     return shaded;
 }
+
+// Offline audit readback uses the same deformation functions as rendering.
+kernel void auditFanPositions(const device FanVertex* vertices [[buffer(0)]],const device Instance* bones [[buffer(1)]],const device FanMorphDelta* morphs [[buffer(3)]],constant FanMorphUniforms& mu [[buffer(4)]],device float4* output [[buffer(6)]],uint id [[thread_position_in_grid]]) {
+    if(id<mu.selection.z) output[id]=deformFan(morphFan(vertices[id],id,morphs,mu),bones).world;
+}
+kernel void auditPropPositions(const device PropVertex* vertices [[buffer(0)]],constant PropUniforms& prop [[buffer(5)]],device float4* output [[buffer(6)]],constant uint& count [[buffer(7)]],uint id [[thread_position_in_grid]]) {
+    if(id<count) output[id]=prop.model*deformProp(vertices[id],prop).position;
+}

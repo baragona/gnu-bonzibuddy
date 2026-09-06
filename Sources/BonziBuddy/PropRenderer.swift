@@ -33,7 +33,7 @@ final class PropRenderer {
         let path=url.flatMap { FileManager.default.fileExists(atPath:$0.path) ? $0:nil } ?? URL(fileURLWithPath:"Resources/Props/globe-land.png")
         globeTexture=try MTKTextureLoader(device:device).newTexture(URL:path,options:[.SRGB:false,.generateMipmaps:true])
     }
-    private func packedDeformation(_ deformation:PropDeformation)->(Float,SIMD4<Float>) {
+    func packedDeformation(_ deformation:PropDeformation)->(Float,SIMD4<Float>) {
         switch deformation {
         case .rigid: return (0,[0,0,0,1])
         case let .peel(openings): return (1,SIMD4(simd_clamp(openings,SIMD3(repeating:0),SIMD3(repeating:1)),1))

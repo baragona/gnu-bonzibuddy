@@ -88,6 +88,10 @@ if CommandLine.arguments.contains("--validate-sunglasses") {
     do {try validateSunglasses()} catch {fputs("Sunglasses validation failed: \(error)\n",stderr);exit(1)}
     exit(0)
 }
+if CommandLine.arguments.contains("--audit-animation-geometry") {
+    do {try auditAnimationGeometry()} catch {fputs("Animation geometry audit failed: \(error)\n",stderr);exit(1)}
+    exit(0)
+}
 if CommandLine.arguments.contains("--validate-routines") {
     do {try validateRoutines()} catch {fputs("Routine validation failed: \(error)\n",stderr);exit(1)}
     exit(0)

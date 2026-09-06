@@ -30,6 +30,8 @@ final class Renderer: NSObject, MTKViewDelegate {
     var fanTeethIndexCount=0
     var fanValidationMotion=false
     var fanLiveActions=false
+    // Offline geometry audits capture the exact palette, props, and facial inputs.
+    var onAuditFrame: (([Instance],[PropDraw],FanMorphUniforms)->Void)?
     let fanFaceMotion=FanFaceMotion()
     var propRenderer:PropRenderer?
     let propMotion=PropMotion()
@@ -199,6 +201,7 @@ final class Renderer: NSObject, MTKViewDelegate {
         if fanLiveActions && fanAutoBlink { blink=max(blink,automaticFace.eyeClosure) }
         let gaze=fanGaze+automaticFace.gaze
         var morphUniforms=FanMorphUniforms(selection:[fanUpperFaceLift && fanRig?.sourcePose == false ? 1:0,0,fanMorphVertexCount,fanMorphCount],weights:(chunk(0),chunk(4),chunk(8),chunk(12)),face:[max(blink,fanEyeClosure),gaze.x,gaze.y,fanRig == nil ? 0:(fanEyeCatchlights ? 1:2)])
+        onAuditFrame?(objects,props,morphUniforms)
         let shadowPass = MTLRenderPassDescriptor()
         shadowPass.depthAttachment.texture = shadowTexture
         shadowPass.depthAttachment.loadAction = .clear; shadowPass.depthAttachment.storeAction = .store; shadowPass.depthAttachment.clearDepth = 1

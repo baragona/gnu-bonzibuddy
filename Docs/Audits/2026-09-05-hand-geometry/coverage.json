@@ -1,0 +1,14 @@
+{
+  "actions": 28,
+  "configurations": 2,
+  "auditFPS": 120,
+  "samplesPerConfiguration": {
+    "normal": 21041,
+    "wearables": 21041
+  },
+  "fullyEngagedHandSamples": 38942,
+  "maximumHandAxisIntentErrorDegrees": 0.03956468403339386,
+  "maximumPalmNormalIntentErrorDegrees": 0.03426402434706688,
+  "coordinateFrame": "Default view: yaw 0, pitch 0.18 radians; +X screen right, +Y screen up, +Z toward viewer.",
+  "limits": "Sampled non-coplanar surface crossings, not penetration depth. No full containment, same-hand finger self-collision, floor, separate teeth mesh, or exhaustive interruption/hold/toggle timelines."
+}
