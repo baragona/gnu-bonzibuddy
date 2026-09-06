@@ -1,0 +1,51 @@
+{
+  "meshSHA256": "b518bdaac77ed9911cd734822ced83b23a41d0ebb32d04a5f5079ab396560457",
+  "headScaleX": 1.13,
+  "rows": [
+    {
+      "yawRadians": 0,
+      "leftRightOffsets": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "yawRadians": 0.1,
+      "leftRightOffsets": [
+        0.951388,
+        0.704654
+      ]
+    },
+    {
+      "yawRadians": 0.2,
+      "leftRightOffsets": [
+        1.864965,
+        1.0901
+      ]
+    },
+    {
+      "yawRadians": 0.3,
+      "leftRightOffsets": [
+        2.813174,
+        1.428596
+      ]
+    },
+    {
+      "yawRadians": 0.4,
+      "leftRightOffsets": [
+        3.365407,
+        1.689114
+      ]
+    },
+    {
+      "yawRadians": 0.5,
+      "leftRightOffsets": [
+        3.737618,
+        1.871708
+      ]
+    }
+  ],
+  "surfaceNormalSamples": 202,
+  "maximumAngularCompensationErrorRadians": 0.016640999875228824,
+  "note": "Preserves each eye's neutral horizontal surface-normal direction through head yaw; not arbitrary camera-target tracking or a perceptual gaze guarantee."
+}

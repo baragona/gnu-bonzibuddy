@@ -1,0 +1,7 @@
+# Wink gaze compensation
+
+The eyes now counter-rotate against the wink’s smooth head turn. `FacialIntent.gazeYawCompensation` uses the opposite head-yaw angle and shares expression interruption blending. The fan-specific calibration maps that angle to separate horizontal pupil offsets, since the imported eye UV maps have different slopes. The renderer adds these to existing gaze controls; the approved neutral pupil positions are preserved.
+
+`Scripts/calibrate-fan-gaze.py` reproduces the calibration from the imported mesh’s front eye triangles, interpolated UVs/normals, the shader’s pupil-center V offset, and the rig’s horizontal head scale. Across 202 samples, maximum horizontal surface-normal compensation error is 0.016641 radians (about 0.95 degrees). This preserves each eye’s neutral horizontal direction; it is not arbitrary camera-target tracking, vertical compensation, or a perceptual gaze guarantee. Calibration clamps at the wink’s 0.5-radian maximum and mirrors the eye mappings for negative angles.
+
+Reviewed closed-eye and reopened frames from front, three-quarter, and profile, with the full three-angle GIF included. The head-motion regression remains clear: one acceleration/deceleration each way and zero hold drift. All 900 skeletal transition pairs, 2,880 facial cases, and 20 routine contracts passed. Neutral renders remain pixel-identical to the rest-contact checkpoint. Mesh geometry and head motion were not changed in this correction.

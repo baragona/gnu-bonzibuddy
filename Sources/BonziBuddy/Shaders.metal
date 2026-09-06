@@ -124,6 +124,8 @@ float4 shadeSurface(Varying in,depth2d<float> shadow,constant Uniforms& u,consta
         // Preserve the source gradient edge, shaping fan pupils into the original tall ovals.
         float eyeSide=in.eyeUV.z>1.5 ? -1.0:1.0;
         float2 pupilUV=(in.eyeUV.xy-float2(0.5))*eyeSide-face.yz*0.20;
+        // Character-calibrated per-eye horizontal offsets for head counter-motion.
+        pupilUV.x-=(in.eyeUV.z>1.5 ? eyes.closures.w:eyes.closures.z)*0.20;
         float2 pupilShape=face.w>0.5 ? float2(1.15,1.6):float2(1.0);
         if (face.w>0.5) pupilUV.y-=0.035;
         float radius=2.0*length(pupilUV/pupilShape);
