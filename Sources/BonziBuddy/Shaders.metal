@@ -240,6 +240,7 @@ float3 bananaFruitPosition(float u,float v,float cap,float remaining) {
     float radius=0.105*pow(max(0.0,sin(M_PI_F*t)),0.35)+0.01;
     return float3(0.22*t*t,t,0)+radial*radius*(1.0+0.035*cos(5.0*angle))*(cap>0.5 ? v:1.0);
 }
+float vineSinc(float x) {return abs(x)<0.001 ? 1.0-x*x/6.0:sin(x)/x;}
 PropVertex deformProp(PropVertex v,constant PropUniforms& prop) {
     if (prop.material.y==1.0) {
         float amount=prop.deformation[min(uint(v.uv.z),2u)];
@@ -259,6 +260,14 @@ PropVertex deformProp(PropVertex v,constant PropUniforms& prop) {
     if (prop.material.y==3.0) {
         v.position=mix(v.position,v.openedPosition,prop.deformation.x);
         v.normal=float4(normalize(mix(v.normal.xyz,v.openedNormal.xyz,prop.deformation.x)),0);
+    }
+    if (prop.material.y==4.0) {
+        float bend=prop.deformation.x,length=prop.deformation.y,t=v.uv.z;
+        float angle=bend*t,c=cos(angle),s=sin(angle);
+        float3 center=length*t*float3(-sin(angle*0.5)*vineSinc(angle*0.5),vineSinc(angle),0);
+        float3 offset=v.position.xyz-float3(0,t*length,0),n=v.normal.xyz;
+        v.position=float4(center+float3(c*offset.x-s*offset.y,s*offset.x+c*offset.y,offset.z),1);
+        v.normal=float4(c*n.x-s*n.y,s*n.x+c*n.y,n.z,0);
     }
     return v;
 }
@@ -368,6 +377,14 @@ fragment float4 propFragment(PropVarying vertexIn [[stage_in]],depth2d<float> sh
         float region=vertexIn.uv.w;
         float grain=0.025*sin(vertexIn.uv.x*180.0);
         in.color.rgb=region>2.5 ? float3(0.20,0.48,0.08):region>1.5 ? float3(0.88,0.66,0.24):region>0.5 ? float3(0.43,0.29,0.09):float3(0.90,0.68,0.26)+grain;
+    }
+    if (prop.material.x==17.0) {
+        float grain=0.04*sin(vertexIn.uv.x*19.0+vertexIn.uv.y*73.0);
+        in.color.rgb=vertexIn.uv.w>0.5 ? float3(0.10,0.66,0.015):float3(0.12,0.30,0.025)+grain;
+        if (vertexIn.uv.w>0.5) {
+            float rib=1.0-smoothstep(0.02,0.12,abs(cos(vertexIn.uv.y*2.0*M_PI_F)));
+            in.color.rgb=mix(in.color.rgb,float3(0.20,0.46,0.03),rib*0.5);
+        }
     }
     if (prop.material.x==15.0 || prop.material.x==16.0) {
         float2 uv=vertexIn.uv.xy;

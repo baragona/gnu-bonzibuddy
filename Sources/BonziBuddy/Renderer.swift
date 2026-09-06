@@ -30,6 +30,7 @@ final class Renderer: NSObject, MTKViewDelegate {
     var fanTeethIndexCount=0
     var fanValidationMotion=false
     var fanLiveActions=false
+    var drawCharacterGeometry=true // Asset-only previews can retain the prop scene.
     // Offline geometry audits capture the exact palette, props, and facial inputs.
     var onAuditFrame: (([Instance],[PropDraw],FanMorphUniforms)->Void)?
     let fanFaceMotion=FanFaceMotion()
@@ -226,8 +227,8 @@ final class Renderer: NSObject, MTKViewDelegate {
             shadowEncoder.setVertexBuffer(fanMorphBuffer,offset:0,index:3)
             shadowEncoder.setVertexBytes(&morphUniforms,length:MemoryLayout<FanMorphUniforms>.stride,index:4)
         }
-        if shadowsEnabled { shadowEncoder.drawIndexedPrimitives(type:.triangle,indexCount:indexCount,indexType:.uint32,indexBuffer:indices,indexBufferOffset:0) }
-        if shadowsEnabled { drawFanTeeth(shadowEncoder);propRenderer?.draw(props,encoder:shadowEncoder,shadow:true) }
+        if shadowsEnabled && drawCharacterGeometry { shadowEncoder.drawIndexedPrimitives(type:.triangle,indexCount:indexCount,indexType:.uint32,indexBuffer:indices,indexBufferOffset:0);drawFanTeeth(shadowEncoder) }
+        if shadowsEnabled { propRenderer?.draw(props,encoder:shadowEncoder,shadow:true) }
         shadowEncoder.endEncoding()
         let encoder = command.makeRenderCommandEncoder(descriptor: pass)!
         encoder.label = "Skinned mesh and soft desktop shadow"
@@ -245,8 +246,10 @@ final class Renderer: NSObject, MTKViewDelegate {
         encoder.setFragmentBytes(&faceControl,length:MemoryLayout<FanEyeUniforms>.stride,index:3)
         encoder.setFragmentBytes(&uniforms,length:MemoryLayout<RenderUniforms>.stride,index:2)
         encoder.setFragmentTexture(shadowTexture,index:0)
-        encoder.drawIndexedPrimitives(type: .triangle,indexCount: indexCount,indexType: .uint32,indexBuffer: indices,indexBufferOffset: 0)
-        drawFanTeeth(encoder)
+        if drawCharacterGeometry {
+            encoder.drawIndexedPrimitives(type: .triangle,indexCount: indexCount,indexType: .uint32,indexBuffer: indices,indexBufferOffset: 0)
+            drawFanTeeth(encoder)
+        }
         propRenderer?.draw(props,encoder:encoder,shadow:false)
         if !wireframe && shadowsEnabled {
             encoder.setRenderPipelineState(groundPipeline)

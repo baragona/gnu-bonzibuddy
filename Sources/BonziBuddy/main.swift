@@ -52,6 +52,10 @@ func validate() throws {
     let data = try JSONSerialization.data(withJSONObject:report,options:[.prettyPrinted,.sortedKeys])
     try data.write(to:URL(fileURLWithPath:"Validation/performance.json")); print(String(decoding:data,as:UTF8.self))
 }
+if CommandLine.arguments.contains("--validate-vine") {
+    do {try validateVine()} catch {fputs("Vine validation failed: \(error)\n",stderr);exit(1)}
+    exit(0)
+}
 if CommandLine.arguments.contains("--validate-torso-targets") {
     do {try validateTorsoTargets()} catch {fputs("Torso targets validation failed: \(error)\n",stderr);exit(1)}
     exit(0)

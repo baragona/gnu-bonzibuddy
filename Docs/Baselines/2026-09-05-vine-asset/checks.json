@@ -1,0 +1,10 @@
+{
+  "bendSamples" : 124,
+  "maximumGPUPositionError" : 7.4766643365364871e-07,
+  "maximumGripAnchorDrift" : 2.4801218501124822e-07,
+  "msaaSamples" : 4,
+  "note" : "GPU positions versus an independent double-precision circular-arc reference, including zero bend, both directions, and attached leaves. Shared color\/shadow\/audit deformation. This validates the asset; entrance\/exit choreography, grip fitting, dust, and presence lifecycle remain unimplemented.",
+  "renderedViews" : 16,
+  "triangles" : 2640,
+  "vertices" : 1536
+}

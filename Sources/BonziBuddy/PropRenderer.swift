@@ -38,6 +38,7 @@ final class PropRenderer {
         case .rigid: return (0,[0,0,0,1])
         case let .peel(openings): return (1,SIMD4(simd_clamp(openings,SIMD3(repeating:0),SIMD3(repeating:1)),1))
         case let .page(curl): return (3,[min(1,max(0,curl)),0,0,1])
+        case let .vine(bend): return (4,[min(2.5,max(-2.5,bend)),VineGeometry.length,0,1])
         case let .fruit(remaining): return (2,[0,0,0,min(1,max(0.001,remaining))])
         }
     }
