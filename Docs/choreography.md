@@ -178,3 +178,9 @@ The letter-opening hand now reaches onto the flap, keeps its finger/palm frame a
 Mail Full combines MailCheck (0.90 seconds), MailCheckFull (4.30 seconds), and MailReturn (1.00 second). Bonzi opens the stationary mailbox, turns toward it, pulls out a compact white packet with one hand, and joins with the other hand after the packet clears the opening. The letter expands as he brings it forward, the mailbox shrinks away, and he reads before the shared stow. Holding repeats only reading. Mail Read and Mail Next can continue from the held letter without another retrieval; early requests wait for extraction to finish.
 
 The compact packet reuses the two letter meshes with a stylized size expansion, rather than physically folding every crease. Validation checks its fit inside the barrel and separation from the opening during expansion. This and the simplified body lean remain fidelity refinements; the implementation is not an exact reconstruction of the original. See [the full-mail checkpoint](Baselines/2026-09-05-mail-full/README.md).
+
+## Chest beating
+
+Chest Beat follows the extracted GetAttention timeline: fifteen 100 ms frames followed by a zero-duration rest frame. Separate left/right outward-swing tracks alternate closed fists between chest-level contact and outward raised-arm poses. A small pelvis sway uses the existing planted-foot solve, accompanied by head tilt and a slight open-mouth smile. This is a one-shot performance; the original continued/return entries in this asset are single-frame placeholders, so they are not exposed as invented hold loops.
+
+`HandIntent.fist` is independent of a prop grip. The rig aligns the finger bases, curls the fingers, and brings the thumb across the palm. Existing prop grips retain their authored spread. The routine uses the common catalog, interruption blends, and independent wearables. See [the chest-beating checkpoint](Baselines/2026-09-05-chest-beat/README.md).

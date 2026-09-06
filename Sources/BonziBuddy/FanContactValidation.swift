@@ -30,7 +30,8 @@ func validateFanContacts() throws {
         records.append(["frame":frame,"closestPalmSurfaceDistance":closest,"palmCenterDistance":length(centers[0]-centers[1]),"centers":centers.map { [$0.x,$0.y,$0.z] }])
     }
     guard (records[0]["closestPalmSurfaceDistance"] as! Float)>0.04,records.dropFirst().allSatisfy({ ($0["closestPalmSurfaceDistance"] as! Float)<0.01 }) else { throw failure("Clap did not separate and make palm contact") }
-    let report:[String:Any]=["palmSamples":palms.map(\.count),"clap":records,"note":"Distances between weighted palm-surface samples at open and contact beats; does not prove absence of penetration."]
+    let chest=try chestBeatContacts(mesh:mesh)
+    let report:[String:Any]=["chestBeat":chest,"palmSamples":palms.map(\.count),"clap":records,"note":"Distances between weighted palm-surface samples at open and contact beats; does not prove absence of penetration."]
     try FileManager.default.createDirectory(atPath:"Validation/FanActions",withIntermediateDirectories:true)
     let data=try JSONSerialization.data(withJSONObject:report,options:[.prettyPrinted,.sortedKeys]);try data.write(to:URL(fileURLWithPath:"Validation/FanActions/contacts.json"));print(String(decoding:data,as:UTF8.self))
 }

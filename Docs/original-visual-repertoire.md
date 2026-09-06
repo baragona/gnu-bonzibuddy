@@ -1,6 +1,6 @@
 # Original visual repertoire
 
-Research date: September 5, 2026. The original's repertoire is substantially broader than our current action catalog. The working tree has twenty-six action entries, including first globe, juggling, banana, butterfly, reading, headphones, and sunglasses implementations. See [source audit and full animation directory](../References/AnimationInventory/README.md) and [sampled sprite review](../References/AnimationInventory/surfboard-sprite-review.png).
+Research date: September 5, 2026. The original's repertoire is substantially broader than our current action catalog. The working tree has twenty-eight action entries, including first globe, juggling, banana, butterfly, reading, headphones, and sunglasses implementations. See [source audit and full animation directory](../References/AnimationInventory/README.md) and [sampled sprite review](../References/AnimationInventory/surfboard-sprite-review.png).
 
 ## Evidence levels
 
@@ -21,7 +21,7 @@ Research date: September 5, 2026. The original's repertoire is substantially bro
 | Surfboard entrance, exit, and directional travel | Visual: earlier `Show` / `Hide`; move families in metadata | Missing |
 | Vine entrance, exit, and travel | Extracted: later `Show` uses a vine and landing dust | Missing |
 | Backflip with a puff at landing | Visual: earlier `GetAttention2` | Missing |
-| Chest-beating gesture | Visual: earlier `GetAttention` | Missing |
+| Chest-beating gesture | Extracted and visually reviewed: `GetAttention`, 1.50 seconds | Alternating fist/arm choreography added; finer contact and reference matching remain |
 | Butterfly visit, finger landing, and departure (`Butternut`) | Extracted and visually reviewed: 95 frames | Initial articulated-wing mesh, fingertip perch, touch gesture, and departure; finer choreography remains |
 
 ## Gestures, face, and ambient behavior

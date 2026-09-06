@@ -89,3 +89,5 @@ Continuations can also declare an outgoing clip phase. The paused writing varian
 `PropAnchor.stage` resolves to the camera-oriented, grounded scene frame, independent of the actor's authored body turn. `MailboxScene` supplies one shared mailbox layout for empty and full checks. Character attachments and carried objects retain their existing anchors. `FanRig.instances` updates the stage frame together with the current bone palette; callers sample props against that same frame.
 
 PropMotion caches retiring draws relative to the stage frame. This preserves their world pose when the actor changes facing while still following camera changes. Mail Full transfers the letter from a stage-authored extraction trajectory to the common held-letter pose at a matching boundary, sharing its IDs with Mail Read and Mail Next.
+
+`HandIntent.fist` provides continuous closed-hand articulation separately from `grip`. The generic rig handler owns finger-base alignment, curl, and thumb wrapping; choreography only chooses the amount and hand frame. Prop grips retain their spread and curl values when fist is zero.

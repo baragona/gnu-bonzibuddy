@@ -12,6 +12,7 @@ struct HandIntent {
     var weight: Float = 1
     var pointing: Bool = false
     var grip: Float = 0
+    var fist: Float = 0
 }
 struct RoutinePose {
     var hands: [HandSide:HandIntent] = [:] // Semantic sides, resolved by the rig.
@@ -29,6 +30,7 @@ enum RoutineLibrary {
         return x*x*x*(x*(x*6-15)+10)
     }
     static let definitions:[Action:RoutineDefinition]=[
+        .chestBeat:RoutineDefinition(duration:ChestBeatRoutine.duration,changesStance:true,sample:ChestBeatRoutine.sample),
         .mailFull:RoutineDefinition(duration:MailFullRoutine.duration,changesFacing:true,holdRange:MailFullRoutine.holdRange,handoffPolicy:.finishRoutine,continuation:MailFullRoutine.continuation,sample:MailFullRoutine.sample),
         .mailNext:RoutineDefinition(duration:MailNextRoutine.duration,holdRange:MailNextRoutine.holdRange,handoffPolicy:.finishRoutine,continuation:MailNextRoutine.continuation,sample:MailNextRoutine.sample),
         .mailRead:RoutineDefinition(duration:MailReadRoutine.duration,holdRange:MailReadRoutine.holdRange,handoffPolicy:.finishRoutine,continuation:MailReadRoutine.continuation,sample:MailReadRoutine.sample),

@@ -224,14 +224,22 @@ final class FanRig {
                         result=blendRotation(baseline,handFrame(i==26 ? 30:46,intent.fingers,intent.palm),intent.weight)
                     }
                     if (27...38).contains(i) || (43...54).contains(i) { result=blendRotation(result,inherited,intent.openness*intent.weight) }
-                    if intent.grip>0 && ((27...38).contains(i) || (43...54).contains(i)) {
+                    if max(intent.grip,intent.fist)>0 && ((27...38).contains(i) || (43...54).contains(i)) {
                         let first=side<0 ? 27:43,segment=(i-first)%3
                         let thumb=i>=(side<0 ? 36:52)
-                        let curl:Float=thumb ? 0.65:[Float(1.05),1.35,0.80][segment]
+                        let gripCurl:Float=thumb ? 0.65:[Float(1.05),1.35,0.80][segment]
+                        let fistCurl:Float=thumb ? [Float(0.40),0.80,0.60][segment]:[Float(1.35),1.70,1.10][segment]
+                        let curl=gripCurl+(fistCurl-gripCurl)*intent.fist
                         let p=xyz(inherited)
-                        let axis=thumb ? SIMD3<Float>(0,-side,0):normalize(cross(intent.fingers,intent.palm))
-                        let grasp=translation(p)*rotate(curl,axis)*translation(-p)*inherited
-                        result=blendRotation(result,grasp,intent.grip*intent.weight)
+                        let thumbTurn=simd_slerp(simd_quatf(angle:0,axis:[1,0,0]),simd_quatf(from:SIMD3<Float>(0,-side,0),to:normalize(intent.fingers)*(-side)),intent.fist)
+                        let thumbAxis=thumbTurn.act(SIMD3<Float>(0,-side,0))
+                        let axis=thumb ? normalize(thumbAxis):normalize(cross(intent.fingers,intent.palm))
+                        // A fist aligns the finger bases before curling and lays
+                        // the thumb across them; prop grips retain their spread.
+                        let direction=thumb ? normalize(cross(intent.fingers,intent.palm))*side+normalize(intent.palm)*0.4:intent.fingers
+                        let base=segment==0 ? blendRotation(inherited,aim(i+1,direction),intent.fist):inherited
+                        let grasp=translation(p)*rotate(curl,axis)*translation(-p)*base
+                        result=blendRotation(result,grasp,max(intent.grip,intent.fist)*intent.weight)
                     }
                     if intent.pointing && ([30,31,32,33,34,35,46,47,48,49,50,51].contains(i)) {
                         let angle:Float=[30,33,46,49].contains(i) ? 1.1:[31,34,47,50].contains(i) ? 1.35:0.65
