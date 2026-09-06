@@ -202,3 +202,7 @@ The winking brow dips with the eyelid at 40% of the imported brow-lowering morph
 ## Blowing a kiss
 
 Blow Kiss follows the original 2.08-second hand-to-mouth, palm-up release, held kiss, and return sequence. The left palm uses the shared calibrated contact frame; the free hand uses the lower-belly pose. The mouth puckers and the eyes blink during approach. The extracted reference contains no heart prop; this performance introduces no invented object or external service. Original sound cues are outside this visual implementation.
+
+## Giggle
+
+Giggle follows the original 22-frame, 2.30-second grin and closed-eye performance. The repeated source poses drive five small downward body pulses, with hands at rest and feet planted. Smile, eyelids, and a slight bilateral brow dip use shared facial channels. The stance solver absorbs the pelvis motion at the knees and ankles. Original sound cues are outside this visual implementation.

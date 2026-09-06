@@ -1,0 +1,7 @@
+{
+  "action" : "Chest Beat",
+  "maximumFootMatrixDrift" : 0,
+  "maximumPelvisTravel" : 0.016970576718449593,
+  "note" : "Actual ankle\/toe matrices across a standing routine at 120 Hz. This does not establish collision avoidance or live frame pacing.",
+  "samples" : 181
+}

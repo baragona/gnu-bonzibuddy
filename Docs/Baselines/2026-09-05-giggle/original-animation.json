@@ -1,0 +1,419 @@
+{
+  "sha256": "f3d4425238b5f68b4d41ed5be271d2f4118a245baf808a62dc1a9e6e619b2f95",
+  "animation": {
+    "name": "Giggle",
+    "internalName": "GIGGLE",
+    "transition": 2,
+    "returnAnimation": "",
+    "frames": [
+      {
+        "images": [
+          [
+            0,
+            0,
+            0
+          ]
+        ],
+        "durationMS": 100,
+        "sound": 65535,
+        "exitFrame": -1,
+        "branches": [],
+        "overlays": [
+          {
+            "kind": 0,
+            "replace": 0,
+            "image": 1,
+            "x": 0,
+            "y": 0
+          },
+          {
+            "kind": 1,
+            "replace": 0,
+            "image": 2,
+            "x": 0,
+            "y": 0
+          },
+          {
+            "kind": 2,
+            "replace": 0,
+            "image": 3,
+            "x": 0,
+            "y": 0
+          },
+          {
+            "kind": 3,
+            "replace": 0,
+            "image": 4,
+            "x": 0,
+            "y": 0
+          },
+          {
+            "kind": 4,
+            "replace": 0,
+            "image": 5,
+            "x": 0,
+            "y": 0
+          },
+          {
+            "kind": 5,
+            "replace": 0,
+            "image": 6,
+            "x": 0,
+            "y": 0
+          },
+          {
+            "kind": 6,
+            "replace": 0,
+            "image": 7,
+            "x": 0,
+            "y": 0
+          }
+        ]
+      },
+      {
+        "images": [
+          [
+            1019,
+            0,
+            0
+          ]
+        ],
+        "durationMS": 100,
+        "sound": 65535,
+        "exitFrame": -2,
+        "branches": [],
+        "overlays": []
+      },
+      {
+        "images": [
+          [
+            1020,
+            0,
+            0
+          ]
+        ],
+        "durationMS": 100,
+        "sound": 65535,
+        "exitFrame": -2,
+        "branches": [],
+        "overlays": []
+      },
+      {
+        "images": [
+          [
+            1021,
+            0,
+            0
+          ]
+        ],
+        "durationMS": 100,
+        "sound": 16,
+        "exitFrame": -2,
+        "branches": [],
+        "overlays": []
+      },
+      {
+        "images": [
+          [
+            1022,
+            0,
+            0
+          ]
+        ],
+        "durationMS": 100,
+        "sound": 65535,
+        "exitFrame": -2,
+        "branches": [],
+        "overlays": []
+      },
+      {
+        "images": [
+          [
+            1023,
+            0,
+            0
+          ]
+        ],
+        "durationMS": 100,
+        "sound": 65535,
+        "exitFrame": -2,
+        "branches": [],
+        "overlays": []
+      },
+      {
+        "images": [
+          [
+            1021,
+            0,
+            0
+          ]
+        ],
+        "durationMS": 100,
+        "sound": 65535,
+        "exitFrame": -2,
+        "branches": [],
+        "overlays": []
+      },
+      {
+        "images": [
+          [
+            1022,
+            0,
+            0
+          ]
+        ],
+        "durationMS": 100,
+        "sound": 65535,
+        "exitFrame": -2,
+        "branches": [],
+        "overlays": []
+      },
+      {
+        "images": [
+          [
+            1021,
+            0,
+            0
+          ]
+        ],
+        "durationMS": 100,
+        "sound": 65535,
+        "exitFrame": -2,
+        "branches": [],
+        "overlays": []
+      },
+      {
+        "images": [
+          [
+            1023,
+            0,
+            0
+          ]
+        ],
+        "durationMS": 100,
+        "sound": 65535,
+        "exitFrame": -2,
+        "branches": [],
+        "overlays": []
+      },
+      {
+        "images": [
+          [
+            1022,
+            0,
+            0
+          ]
+        ],
+        "durationMS": 100,
+        "sound": 65535,
+        "exitFrame": -2,
+        "branches": [],
+        "overlays": []
+      },
+      {
+        "images": [
+          [
+            1021,
+            0,
+            0
+          ]
+        ],
+        "durationMS": 100,
+        "sound": 65535,
+        "exitFrame": -2,
+        "branches": [],
+        "overlays": []
+      },
+      {
+        "images": [
+          [
+            1023,
+            0,
+            0
+          ]
+        ],
+        "durationMS": 100,
+        "sound": 65535,
+        "exitFrame": -2,
+        "branches": [],
+        "overlays": []
+      },
+      {
+        "images": [
+          [
+            1022,
+            0,
+            0
+          ]
+        ],
+        "durationMS": 100,
+        "sound": 65535,
+        "exitFrame": -2,
+        "branches": [],
+        "overlays": []
+      },
+      {
+        "images": [
+          [
+            1023,
+            0,
+            0
+          ]
+        ],
+        "durationMS": 100,
+        "sound": 65535,
+        "exitFrame": -2,
+        "branches": [],
+        "overlays": []
+      },
+      {
+        "images": [
+          [
+            1021,
+            0,
+            0
+          ]
+        ],
+        "durationMS": 100,
+        "sound": 65535,
+        "exitFrame": -2,
+        "branches": [],
+        "overlays": []
+      },
+      {
+        "images": [
+          [
+            1022,
+            0,
+            0
+          ]
+        ],
+        "durationMS": 100,
+        "sound": 65535,
+        "exitFrame": -2,
+        "branches": [],
+        "overlays": []
+      },
+      {
+        "images": [
+          [
+            1023,
+            0,
+            0
+          ]
+        ],
+        "durationMS": 100,
+        "sound": 65535,
+        "exitFrame": -2,
+        "branches": [],
+        "overlays": []
+      },
+      {
+        "images": [
+          [
+            1021,
+            0,
+            0
+          ]
+        ],
+        "durationMS": 200,
+        "sound": 65535,
+        "exitFrame": -2,
+        "branches": [],
+        "overlays": []
+      },
+      {
+        "images": [
+          [
+            1020,
+            0,
+            0
+          ]
+        ],
+        "durationMS": 100,
+        "sound": 65535,
+        "exitFrame": -2,
+        "branches": [],
+        "overlays": []
+      },
+      {
+        "images": [
+          [
+            1019,
+            0,
+            0
+          ]
+        ],
+        "durationMS": 100,
+        "sound": 65535,
+        "exitFrame": -2,
+        "branches": [],
+        "overlays": []
+      },
+      {
+        "images": [
+          [
+            0,
+            0,
+            0
+          ]
+        ],
+        "durationMS": 100,
+        "sound": 65535,
+        "exitFrame": 0,
+        "branches": [],
+        "overlays": [
+          {
+            "kind": 0,
+            "replace": 0,
+            "image": 1,
+            "x": 0,
+            "y": 0
+          },
+          {
+            "kind": 1,
+            "replace": 0,
+            "image": 2,
+            "x": 0,
+            "y": 0
+          },
+          {
+            "kind": 2,
+            "replace": 0,
+            "image": 3,
+            "x": 0,
+            "y": 0
+          },
+          {
+            "kind": 3,
+            "replace": 0,
+            "image": 4,
+            "x": 0,
+            "y": 0
+          },
+          {
+            "kind": 4,
+            "replace": 0,
+            "image": 5,
+            "x": 0,
+            "y": 0
+          },
+          {
+            "kind": 5,
+            "replace": 0,
+            "image": 6,
+            "x": 0,
+            "y": 0
+          },
+          {
+            "kind": 6,
+            "replace": 0,
+            "image": 7,
+            "x": 0,
+            "y": 0
+          }
+        ]
+      }
+    ]
+  }
+}

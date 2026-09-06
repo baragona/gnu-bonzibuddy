@@ -34,7 +34,8 @@ Research date: September 5, 2026. The original's repertoire is substantially bro
 | Shush | Shoosh: 15 frames, 1.95 seconds | Authored index-to-lips gesture, free hand at belly, three blinks, and mouth pucker; visual fidelity remains under review |
 | Wink | Thirteen-frame, 1.80-second sequence | Head turn and independent left-eye closure/reopening through shared facial channels |
 | Blow a kiss | BlowKiss: 2.08-second sequence | Hand-to-mouth approach, palm-up release, pucker, and return through shared routine channels |
-| Hug, giggle, hands behind back | Named multi-frame sequences in asset | Missing choreography |
+| Giggle | 22-frame, 2.30-second sequence | Broad grin, closed eyes, and small planted-foot body pulses |
+| Hug, hands behind back | Named multi-frame sequences in asset | Missing choreography |
 | Scout/look around, alert, listening | Named asset families, some placeholders; inspect individually | Thinking and gaze controls cover only part |
 | Look up/down/left/right and diagonally, blink while looking, return | Asset has separate directional/blink/return segments | Left/right actions, gaze sliders and automatic blink exist |
 | Numerous idle variations and rest poses | Many asset entries; sampled earlier idles show face and gaze changes | One authored idle with breathing/blinking |

@@ -44,6 +44,7 @@ enum RoutineLibrary {
         return x*x*x*(x*(x*6-15)+10)
     }
     static let definitions:[Action:RoutineDefinition]=[
+        .giggle:RoutineDefinition(duration:GiggleRoutine.duration,changesStance:true,sample:GiggleRoutine.sample),
         .blowKiss:RoutineDefinition(duration:BlowKissRoutine.duration,sample:BlowKissRoutine.sample),
         .wink:RoutineDefinition(duration:WinkRoutine.duration,sample:WinkRoutine.sample),
         .shush:RoutineDefinition(duration:ShushRoutine.duration,sample:ShushRoutine.sample),
