@@ -73,6 +73,7 @@ func auditAnimationGeometry() throws {
     for action in actions {
         let renderer=try Renderer(device:device,previewMesh:URL(fileURLWithPath:"Resources/FanModel/FanRigged.mesh"),rigURL:URL(fileURLWithPath:"Resources/FanModel/FanRig.json"))
         renderer.fanLiveActions=true;renderer.fanTeethEnabled=true
+        if let path=argument("--audit-hand-patch") {renderer.fanRig!.auditPoseAdjustment=try AuditHandPosePatch.load(path)}
         if wearables {renderer.character.setSunglassesEnabled(true,at:-5);renderer.character.setHeadphonesEnabled(true,at:-5)}
         renderer.character.play(action,at:0)
         var captured:AuditFrame?
@@ -104,8 +105,13 @@ func auditAnimationGeometry() throws {
         var propBVHs:[String:AuditBVH]=[:]
         let duration=action == .idle ? 4.6:action == .speak ? 2:action.duration
         var frames:[[String:Any]]=[],peaks:[String:[String:Any]]=[:],occurrences:[String:Int]=[:]
-        for frameIndex in 0...Int(ceil(duration*fps)) {
-            let t=min(duration,Double(frameIndex)/fps)
+        let sampleTime=argument("--audit-sample-time").flatMap(Double.init)
+        if argument("--audit-sample-time") != nil {
+            guard let sampleTime,sampleTime.isFinite,sampleTime>=0,sampleTime<=duration else {throw failure("Invalid audit sample time")}
+            _=try renderer.offscreen(width:160,height:128,at:0)
+        }
+        let times=sampleTime.map {[$0]} ?? (0...Int(ceil(duration*fps))).map {min(duration,Double($0)/fps)}
+        for t in times {
             _=try renderer.offscreen(width:160,height:128,at:t)
             guard let snapshot=captured else {throw failure("Missing audit frame")}
             let (points,props)=try gpu.positions(snapshot)
@@ -164,7 +170,9 @@ func auditAnimationGeometry() throws {
             frames.append(["time":t,"hands":directions,"crossings":collisions])
         }
         let peakRows=peaks.keys.sorted().map {key -> [String:Any] in var row=peaks[key]!;row["sampledFramesWithCrossing"]=occurrences[key]!;return row}
-        let summary:[String:Any]=["cameraYawRadians":renderer.character.yaw,"cameraPitchRadians":renderer.character.pitch,"action":action.rawValue,"fps":fps,"frames":frames.count,"wearables":wearables,"peaks":peakRows]
+        var summary:[String:Any]=["cameraYawRadians":renderer.character.yaw,"cameraPitchRadians":renderer.character.pitch,"action":action.rawValue,"fps":fps,"frames":frames.count,"wearables":wearables,"peaks":peakRows]
+        if let sampleTime {summary["singleSampleTime"]=sampleTime}
+        if let path=argument("--audit-hand-patch") {summary["poseStudyPatch"]=path}
         try save(["summary":summary,"frames":frames],"\(root)/\(auditName(action.rawValue)).json")
         summaries.append(summary)
         try save(summaries,"\(root)/summary.json")

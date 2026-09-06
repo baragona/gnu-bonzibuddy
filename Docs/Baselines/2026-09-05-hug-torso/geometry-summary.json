@@ -1,0 +1,91 @@
+{
+  "action": "Hug",
+  "cameraPitchRadians": 0.18000000715255737,
+  "cameraYawRadians": 0,
+  "fps": 120,
+  "frames": 438,
+  "peaks": [
+    {
+      "center": [
+        -0.0008741621859371662,
+        -0.15224747359752655,
+        0.3812502324581146
+      ],
+      "pair": "left.hand / right.hand",
+      "sampledFramesWithCrossing": 8,
+      "span": [
+        0.02697312831878662,
+        0.01423269510269165,
+        0.01557457447052002
+      ],
+      "time": 3.5416666666666665,
+      "trianglePairs": 50
+    },
+    {
+      "center": [
+        0.3564748167991638,
+        -0.013811973854899406,
+        0.24038022756576538
+      ],
+      "pair": "left.hand / right.upper-arm",
+      "sampledFramesWithCrossing": 21,
+      "span": [
+        0.069997638463974,
+        0.11144617199897766,
+        0.07759808003902435
+      ],
+      "time": 3,
+      "trianglePairs": 181
+    },
+    {
+      "center": [
+        -0.22452864050865173,
+        0.27425915002822876,
+        0.1548168808221817
+      ],
+      "pair": "left.upper-arm / body",
+      "sampledFramesWithCrossing": 288,
+      "span": [
+        0.03871913254261017,
+        0.031138241291046143,
+        0.13711637258529663
+      ],
+      "time": 0.4583333333333333,
+      "trianglePairs": 86
+    },
+    {
+      "center": [
+        -0.29103410243988037,
+        0.03264133259654045,
+        0.2133786678314209
+      ],
+      "pair": "left.upper-arm / right.hand",
+      "sampledFramesWithCrossing": 14,
+      "span": [
+        0.052533090114593506,
+        0.03729633986949921,
+        0.07046185433864594
+      ],
+      "time": 3.0166666666666666,
+      "trianglePairs": 98
+    },
+    {
+      "center": [
+        -0.06420803815126419,
+        -0.1666107326745987,
+        0.24038410186767578
+      ],
+      "pair": "right.hand / body",
+      "sampledFramesWithCrossing": 7,
+      "span": [
+        0.07219672203063965,
+        0.1362273097038269,
+        0.009080186486244202
+      ],
+      "time": 3.25,
+      "trianglePairs": 157
+    }
+  ],
+  "wearables": false,
+  "summedTrianglePairCrossings": 8740
+}

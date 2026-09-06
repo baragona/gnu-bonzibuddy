@@ -1,6 +1,6 @@
 # Original visual repertoire
 
-Research date: September 5, 2026. The original's repertoire is substantially broader than our current action catalog. The working tree has twenty-eight action entries, including first globe, juggling, banana, butterfly, reading, headphones, and sunglasses implementations. See [source audit and full animation directory](../References/AnimationInventory/README.md) and [sampled sprite review](../References/AnimationInventory/surfboard-sprite-review.png).
+Research date: September 5, 2026. The original's repertoire is substantially broader than our current action catalog. The working tree has thirty-three action entries, including first globe, juggling, banana, butterfly, reading, headphones, and sunglasses implementations. See [source audit and full animation directory](../References/AnimationInventory/README.md) and [sampled sprite review](../References/AnimationInventory/surfboard-sprite-review.png).
 
 ## Evidence levels
 

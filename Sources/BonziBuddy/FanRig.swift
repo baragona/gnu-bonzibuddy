@@ -16,6 +16,8 @@ final class FanRig {
     let local:[simd_float4x4]
     let inverseRest:[simd_float4x4]
     var sourcePose=false
+    // Offline pose studies only; normal playback leaves this nil.
+    var auditPoseAdjustment:((inout RoutinePose)->Void)?
     private(set) var routine=RoutinePose()
     private(set) var stageFrame=matrix_identity_float4x4
     var waveTime:Double?
@@ -59,8 +61,10 @@ final class FanRig {
     func instances(yaw:Float,pitch:Float,at time:Double)->[Instance] {
         var posed:[simd_float4x4]=[]
         var gestureElbows:[Int:SIMD3<Float>]=[:],gestureWrists:[Int:SIMD3<Float>]=[:]
+        var torsoTargetFrame=matrix_identity_float4x4
         func ease(_ x:Float)->Float { let t=min(1,max(0,x));return t*t*(3-2*t) }
         routine=sourcePose ? RoutinePose():RoutineLibrary.sample(action,at:actionTime)
+        auditPoseAdjustment?(&routine)
         for side in HandSide.allCases {
             if let hand=routine.hands[side] {routine.hands[side]=handAnatomy(side).resolve(hand)}
         }
@@ -111,13 +115,32 @@ final class FanRig {
             var inherited=node.parent<0 ? rest[i] : posed[node.parent]*local[i]
             if !sourcePose {
                 if [12,16,20].contains(i) { inherited=translation(SIMD3<Float>(0,-0.09,0)+routine.stance.pelvisOffset)*inherited }
+                if i==20 && routine.torsoTilt != 0 {
+                    let p=xyz(inherited)
+                    inherited=translation(p)*rotate(routine.torsoTilt,[0,0,1])*translation(-p)*inherited
+                }
                 if [23,40,24,41].contains(i) {
                     let reach:Float=(i==23 || i==40) ? 2.3:1.12
                     var extended=local[i];extended.columns.3.x *= reach;extended.columns.3.y *= reach;extended.columns.3.z *= reach
                     inherited=posed[node.parent]*extended
                 }
             }
-            if !sourcePose && (i==22 || i==39),let hand=routine.hands[i==22 ? .left:.right] {
+            if !sourcePose && (i==22 || i==39),var hand=routine.hands[i==22 ? .left:.right] {
+                if hand.targetSpace == .torso {
+                    // Author in the normal standing character frame; carry the
+                    // target with the torso's actual displacement and rotation.
+                    let frame=posed[21]*(translation([0,-0.09,0])*rest[21]).inverse
+                    torsoTargetFrame=frame
+                    func point(_ p:SIMD3<Float>)->SIMD3<Float> {let q=frame*SIMD4(p,1);return SIMD3(q.x,q.y,q.z)}
+                    func vector(_ p:SIMD3<Float>)->SIMD3<Float> {let q=frame*SIMD4(p,0);return SIMD3(q.x,q.y,q.z)}
+                    hand.wrist=point(hand.wrist)
+                    hand.palmContact=hand.palmContact.map(point)
+                    hand.indexTipContact=hand.indexTipContact.map(point)
+                    hand.fingers=vector(hand.fingers);hand.palm=vector(hand.palm)
+                    hand.shoulderOffset=vector(hand.shoulderOffset)
+                    hand.elbowBend=hand.elbowBend.map(vector)
+                    routine.hands[i==22 ? .left:.right]=hand
+                }
                 inherited=translation(hand.shoulderOffset*hand.weight)*inherited
             }
             var result=inherited
@@ -128,8 +151,13 @@ final class FanRig {
             }
             if !sourcePose {
                 let side:Float=i<39 ? -1:1
-                let restingUpper=FanRestPose.upperArm(side)
-                let restingForearm=FanRestPose.forearm(side)
+                func restingDirection(_ v:SIMD3<Float>)->SIMD3<Float> {
+                    guard routine.hands[HandSide(sign:side)]?.targetSpace == .torso else {return v}
+                    let q=torsoTargetFrame*SIMD4(v,0);return SIMD3(q.x,q.y,q.z)
+                }
+                let restingUpper=restingDirection(FanRestPose.upperArm(side))
+                let restingForearm=restingDirection(FanRestPose.forearm(side))
+                let restingFingers=restingDirection(FanRestPose.fingers(side)),restingPalm=restingDirection(FanRestPose.palm)
                 func aim(_ child:Int,_ direction:SIMD3<Float>)->simd_float4x4 {
                     let childPosition=inherited*local[child].columns.3
                     let pivot=SIMD3(inherited.columns.3.x,inherited.columns.3.y,inherited.columns.3.z)
@@ -187,7 +215,7 @@ final class FanRig {
                 }
                 if i==22 || i==39 { result=aim(i==22 ? 23:40,restingUpper) }
                 if i==23 || i==40 { result=aim(i==23 ? 24:41,restingForearm) }
-                if i==26 || i==42 { result=handFrame(i==26 ? 30:46,FanRestPose.fingers(side),FanRestPose.palm) }
+                if i==26 || i==42 { result=handFrame(i==26 ? 30:46,restingFingers,restingPalm) }
                 var articulationWeight=routine.hands[HandSide(sign:side)]?.weight ?? 0
                 if routine.hands[HandSide(sign:side)] == nil,let pose=arms[side] {
                     let baseline=ArmPose.rest(side)
@@ -202,11 +230,11 @@ final class FanRig {
                 if [29,32,35,45,48,51].contains(i) { curl=FanRestPose.fingerCurl[2]+(0.35-FanRestPose.fingerCurl[2])*articulationWeight }
                 if curl>0 {
                     let p=inherited.columns.3
-                    result=translation([p.x,p.y,p.z])*rotate(-side*curl,[0,1,0])*translation([-p.x,-p.y,-p.z])*inherited
+                    result=translation([p.x,p.y,p.z])*rotate(-side*curl,restingDirection([0,1,0]))*translation([-p.x,-p.y,-p.z])*inherited
                 }
                 if i==36 || i==52 {
                     let p=inherited.columns.3
-                    result=translation([p.x,p.y,p.z])*rotate(side*0.40,[0,0,1])*translation([-p.x,-p.y,-p.z])*inherited
+                    result=translation([p.x,p.y,p.z])*rotate(side*0.40,restingDirection([0,0,1]))*translation([-p.x,-p.y,-p.z])*inherited
                 }
                 if let pose=arms[side] {
                     let restPose=ArmPose.rest(side),de=pose.elbow-restPose.elbow,dw=pose.wrist-restPose.wrist
@@ -214,11 +242,11 @@ final class FanRig {
                     if i==23 || i==40 { result=aim(i==23 ? 24:41,gestureWrists[i].map { $0-xyz(inherited) } ?? (restingForearm+(dw-de)*2)) }
                     if i==26 || i==42 {
                         let p=xyz(inherited),turn=pose.angle-restPose.angle
-                        let direction=FanRestPose.fingers(side)
-                        result=translation(p)*rotate(turn,[0,0,1])*rotate(pose.palmTurn,normalize(direction))*translation(-p)*handFrame(i==26 ? 30:46,direction,FanRestPose.palm)
+                        let direction=restingFingers
+                        result=translation(p)*rotate(turn,[0,0,1])*rotate(pose.palmTurn,normalize(direction))*translation(-p)*handFrame(i==26 ? 30:46,direction,restingPalm)
                         if action == .dance { result=blendRotation(result,handFrame(i==26 ? 30:46,[side,0.25,0.05],[0,0,1]),actionEnvelope) }
                         if action == .think && side>0 { result=blendRotation(result,handFrame(46,[-1,0.10,0],[0,0,-1]),actionEnvelope) }
-                        if action == .shrug { result=blendRotation(handFrame(i==26 ? 30:46,FanRestPose.fingers(side),FanRestPose.palm),handFrame(i==26 ? 30:46,[side,0.08,0],[0,1,0.1]),pose.spread) }
+                        if action == .shrug { result=blendRotation(handFrame(i==26 ? 30:46,restingFingers,restingPalm),handFrame(i==26 ? 30:46,[side,0.08,0],[0,1,0.1]),pose.spread) }
                         if action == .clap { result=blendRotation(result,handFrame(i==26 ? 30:46,[-side,0,0],[0,side<0 ? 1:-1,0]),min(1,(length(dw)+length(de))*6)) }
                     }
                     if routine.hands[HandSide(sign:side)] == nil && ((27...38).contains(i) || (43...54).contains(i)) { result=blendRotation(result,inherited,pose.spread) }
@@ -237,7 +265,7 @@ final class FanRig {
                 }
                 if let intent=routine.hands[HandSide(sign:side)] {
                     if i==26 || i==42 {
-                        let baseline=handFrame(i==26 ? 30:46,FanRestPose.fingers(side),FanRestPose.palm)
+                        let baseline=handFrame(i==26 ? 30:46,restingFingers,restingPalm)
                         result=blendRotation(baseline,handFrame(i==26 ? 30:46,intent.fingers,intent.palm),intent.weight)
                     }
                     if (27...38).contains(i) || (43...54).contains(i) { result=blendRotation(result,inherited,intent.openness*intent.weight) }

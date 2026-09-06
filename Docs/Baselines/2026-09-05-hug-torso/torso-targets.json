@@ -1,0 +1,14 @@
+{
+  "handJoints" : 29,
+  "maximumTorsoRelativeHandDrift" : 5.0751526714520878e-07,
+  "maximumTorsoRelativeJointDrift" : 1.5646219253540039e-06,
+  "note" : "All hand-joint matrices and the actual Metal-deformed vertices with exclusively hand-joint weights, mapped back through the torso transform during the fixed-contact Hug hold. Other hand vertices have small non-hand skin influences and remain covered by the full mesh scan. Does not establish collision avoidance or original likeness.",
+  "pureHandVertices" : 9,
+  "samples" : [
+    0.80000000000000004,
+    1.3200000000000001,
+    1.6799999999999999,
+    2.04,
+    2.7999999999999998
+  ]
+}

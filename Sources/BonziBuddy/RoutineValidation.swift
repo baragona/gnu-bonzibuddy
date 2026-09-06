@@ -38,7 +38,7 @@ func validateRoutines() throws {
         }
         for t in [-0.1,0,definition.duration,definition.duration+0.1] {
             let pose=RoutineLibrary.sample(action,at:t)
-            guard pose.props.isEmpty,pose.face.distance(to:FacialIntent())<0.0001,pose.hands.values.allSatisfy({$0.weight<0.0001}),length(pose.stance.pelvisOffset)<0.0001,pose.stance.feet.values.allSatisfy({$0.weight<0.0001}) else {throw failure("Routine leaks beyond entry/return: \(action)")}
+            guard abs(pose.torsoTilt)<0.0001,pose.props.isEmpty,pose.face.distance(to:FacialIntent())<0.0001,pose.hands.values.allSatisfy({$0.weight<0.0001}),length(pose.stance.pelvisOffset)<0.0001,pose.stance.feet.values.allSatisfy({$0.weight<0.0001}) else {throw failure("Routine leaks beyond entry/return: \(action)")}
         }
         for frame in 0...Int(ceil(definition.duration*120)) {
             let elapsed=Double(frame)/120
@@ -48,7 +48,7 @@ func validateRoutines() throws {
             guard (0...1).contains(pose.face.individualEyeClosure.x),(0...1).contains(pose.face.individualEyeClosure.y) else {throw failure("Invalid individual eyelid closure")}
             guard (0...1).contains(pose.face.individualBrowLower.x),(0...1).contains(pose.face.individualBrowLower.y) else {throw failure("Invalid individual brow lowering")}
             sampled += 1
-            guard [pose.bodyYaw,pose.headYaw,pose.headTilt,pose.headPitch,pose.face.jawOpening,pose.face.eyeClosure,pose.face.mouthPucker,pose.face.smileOffset,pose.face.gaze.x,pose.face.gaze.y,pose.face.gazeYawCompensation].allSatisfy(\.isFinite),
+            guard [pose.bodyYaw,pose.torsoTilt,pose.headYaw,pose.headTilt,pose.headPitch,pose.face.jawOpening,pose.face.eyeClosure,pose.face.mouthPucker,pose.face.smileOffset,pose.face.gaze.x,pose.face.gaze.y,pose.face.gazeYawCompensation].allSatisfy(\.isFinite),
                   (0...1).contains(pose.face.jawOpening),(0...1).contains(pose.face.eyeClosure),(0...1).contains(pose.face.mouthPucker) else {throw failure("Invalid facial or body channels: \(action)")}
             guard finite(pose.stance.pelvisOffset) else {throw failure("Invalid pelvis target")}
             for foot in pose.stance.feet.values {

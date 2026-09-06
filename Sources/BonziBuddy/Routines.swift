@@ -4,10 +4,12 @@ import simd
 // Distances use character model units; rotations use radians; time uses seconds.
 // Choreography describes intent in character space. FanRig solves limbs; PropRenderer
 // resolves attachment frames after skinning. Neither needs to know the other's geometry.
+enum HandTargetSpace {case character, torso}
 struct HandIntent {
     var wrist: SIMD3<Float>
     var fingers: SIMD3<Float>
     var palm: SIMD3<Float>
+    var targetSpace:HandTargetSpace = .character
     var openness: Float = 1
     var weight: Float = 1
     var pointing: Bool = false
@@ -23,6 +25,7 @@ struct HandIntent {
 struct RoutinePose {
     var hands: [HandSide:HandIntent] = [:] // Semantic sides, resolved by the rig.
     var bodyYaw: Float = 0
+    var torsoTilt: Float = 0
     var headYaw: Float = 0
     var headTilt: Float = 0
     var headPitch: Float = 0
