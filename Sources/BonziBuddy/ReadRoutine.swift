@@ -17,17 +17,22 @@ enum ReadRoutine {
         }
         let opened=RoutineLibrary.smooth(t,1.95,2.25)*(1-RoutineLibrary.smooth(t,9.30,9.60))
         let angle=Float.pi/2+(0.35-Float.pi/2)*opened
-        let rotation=simd_quatf(angle:0.45*opened,axis:[1,0,0])
-        let anchor=PropAnchor.transformed(.character,offset:center.sample(at:t),rotation:rotation)
+        // Tilt the open book toward horizontal before turning: the leaf must sweep over the
+        // lap, rather than through the chest behind a nearly vertical book.
+        let turnSpace=RoutineLibrary.smooth(t,5.70,6.10)*(1-RoutineLibrary.smooth(t,6.90,7.20))
+        let bookCenter=center.sample(at:t)+SIMD3<Float>(0,0,0.35*turnSpace)
+        let rotation=simd_quatf(angle:0.45*opened+0.90*turnSpace,axis:[1,0,0])
+        let anchor=PropAnchor.transformed(.character,offset:bookCenter,rotation:rotation)
         let visible=RoutineLibrary.smooth(t,1.60,1.80)*(1-RoutineLibrary.smooth(t,10.00,10.20))
         var props:[PropCue]=[]
         if visible>0 {
             props=[PropCue(id:"read.left",kind:.bookLeft,anchor:anchor,offset:[-0.065*bookScale*(1-opened),0,0],rotation:simd_quatf(angle:-angle,axis:[0,1,0]),scale:SIMD3(repeating:bookScale),visibility:visible),PropCue(id:"read.right",kind:.bookRight,anchor:anchor,offset:[0.065*bookScale*(1-opened),0,0],rotation:simd_quatf(angle:angle,axis:[0,1,0]),scale:SIMD3(repeating:bookScale),visibility:visible)]
         }
         let page=RoutineLibrary.smooth(t,6.10,6.85)
+        let pageRotation=simd_quatf(angle:0.35+(Float.pi-0.70)*page,axis:[0,1,0])
         if t>=6.10 && t<=6.90 {
             let reveal=RoutineLibrary.smooth(t,6.10,6.18)*(1-RoutineLibrary.smooth(t,6.82,6.90))
-            props.append(PropCue(id:"read.page",kind:.bookLeaf,anchor:anchor,offset:[0,0,-0.08*bookScale],rotation:simd_quatf(angle:0.35+(Float.pi-0.70)*page,axis:[0,1,0]),scale:SIMD3(repeating:bookScale),visibility:reveal,deformation:.page(curl:sin(Float.pi*page))))
+            props.append(PropCue(id:"read.page",kind:.bookLeaf,anchor:anchor,offset:[0,0,-0.08*bookScale],rotation:pageRotation,scale:SIMD3(repeating:bookScale),visibility:reveal,deformation:.page(curl:sin(Float.pi*page))))
         }
         let held=RoutineLibrary.smooth(t,1.80,2.20)*(1-RoutineLibrary.smooth(t,9.30,9.70))
         let retrieval=RoutineLibrary.smooth(t,0.95,1.35)*(1-RoutineLibrary.smooth(t,1.95,2.20))
@@ -37,7 +42,7 @@ enum ReadRoutine {
         var hands:[HandSide:HandIntent]=[:]
         for side in [HandSide.left,.right] {
             let halfRotation=simd_quatf(angle:side.sign*angle,axis:[0,1,0])
-            var wrist=center.sample(at:t)+rotation.act(halfRotation.act(SIMD3<Float>(side.sign*0.42,-0.18,0.070)*bookScale))
+            var wrist=bookCenter+rotation.act(halfRotation.act(SIMD3<Float>(side.sign*0.42,-0.18,0.070)*bookScale))
             var weight=held
             if side == .right {
                 let reach=max(retrieval,stow)
@@ -45,16 +50,18 @@ enum ReadRoutine {
                 weight=max(weight,reach)
             } else {
                 let wet=1-RoutineLibrary.smooth(t,6.10,6.30)
-                let target=SIMD3<Float>((0.22-0.44*page)*(1-wet)-0.08*wet,0.02-0.10*wet,0.32+0.10*wet)
+                let curl=sin(Float.pi*page),u:Float=0.30/BookGeometry.width
+                let edge=bookCenter+rotation.act((SIMD3<Float>(0,0,-0.08)+pageRotation.act([0.30,-0.30,0.13*sin(Float.pi*u)*u*curl-0.085]))*bookScale)
+                let target=SIMD3<Float>(-0.08,-0.08,0.42)*wet+edge*(1-wet)
                 wrist += (target-wrist)*turnHand
                 weight=max(weight,turnHand)
             }
             wrist += (SIMD3<Float>(side.sign*0.53,-0.70,0.12)-wrist)*push
             weight=max(weight,push)
             let pageReach=side == .left ? turnHand*RoutineLibrary.smooth(t,6.05,6.25):0
-            let turnRotation=simd_quatf(angle:Float.pi*pageReach,axis:[1,0,0])
-            let heldFingers=turnRotation.act(rotation.act(halfRotation.act(SIMD3<Float>(0,1,0))))
-            let heldPalm=turnRotation.act(rotation.act(halfRotation.act(SIMD3<Float>(0,0,-1))))
+            let handRotation=side == .left ? simd_slerp(halfRotation,pageRotation,pageReach):halfRotation
+            let heldFingers=rotation.act(handRotation.act(SIMD3<Float>(0,1,0)))
+            let heldPalm=rotation.act(handRotation.act(SIMD3<Float>(0,0,-1)))
             let fingers=heldFingers+(SIMD3<Float>(side.sign,0,-0.1)-heldFingers)*push
             let palm=heldPalm+(SIMD3<Float>(0,-1,0)-heldPalm)*push
             hands[side]=HandIntent(wrist:wrist,fingers:fingers,palm:palm,weight:weight,grip:0.22*(1-push))

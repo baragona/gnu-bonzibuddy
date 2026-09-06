@@ -1,4 +1,5 @@
 import Foundation
+import MetalKit
 import simd
 
 func validateRead() throws {
@@ -42,6 +43,8 @@ func validateRead() throws {
           lookup.playbackSnapshot(at:9.42).action == .readLookUp,
           lookup.playbackSnapshot(at:9.44).action == .wave else {throw failure("Look-up gesture/return handoff was cut short")}
     let rig=try FanRig(url:URL(fileURLWithPath:"Resources/FanModel/FanRig.json")),mesh=try FanMeshData(url:URL(fileURLWithPath:"Resources/FanModel/FanRigged.mesh"))
+    let pageIntersections=bookCharacterIntersections(rig:rig,mesh:mesh)
+    guard pageIntersections==0 else {throw failure("Turning sheet intersects the skinned character: \(pageIntersections)")}
     struct FootSample {let p:SIMD4<Float>;let bones:[Int];let weights:[Float]}
     var feet:[FootSample]=[]
     for i in 0..<(mesh.vertices.count/128) {
@@ -88,7 +91,19 @@ func validateRead() throws {
     guard turning.playbackSnapshot(at:6.8).elapsed<9.05,turning.playbackSnapshot(at:9.7).action == .read,turning.playbackSnapshot(at:9.8).action == .wave else {throw failure("Page turn was cut off before stow")}
     guard minimumFootY>=(-0.925),abs(seatedFootY+0.92)<0.015 else {throw failure("Seated feet float or intersect the floor: \(minimumFootY), \(seatedFootY)")}
     guard ankleError<0.00001 else {throw failure("Seated feet lost their targets")}
-    let report:[String:Any]=["minimumPageBlockClearance":minimumPageClearance,"lookupGestureReturnPassed":true,"vertices":verticesCount,"triangles":trianglesCount,"footSurfaceSamples":feet.count,"maximumSeatedAnkleError":ankleError,"minimumFootY":minimumFootY,"minimumSeatedFootY":seatedFootY,"groundY":-0.92,"pageTurnCompletedBeforeReturn":true,"menuRequestWaitedForStand":true,"heldAndRequestedReturnPassed":true,"accessoryWaitedForStow":true,"note":"Foot surface heights are sampled diagnostics. These checks do not establish full-body collision avoidance or original choreography fidelity."]
+    let report:[String:Any]=["pageCharacterTriangleIntersections":pageIntersections,"pageCollisionTimelineSamples":97,"minimumPageBlockClearance":minimumPageClearance,"lookupGestureReturnPassed":true,"vertices":verticesCount,"triangles":trianglesCount,"footSurfaceSamples":feet.count,"maximumSeatedAnkleError":ankleError,"minimumFootY":minimumFootY,"minimumSeatedFootY":seatedFootY,"groundY":-0.92,"pageTurnCompletedBeforeReturn":true,"menuRequestWaitedForStand":true,"heldAndRequestedReturnPassed":true,"accessoryWaitedForStow":true,"note":"Foot surface heights are sampled diagnostics. These checks do not establish full-body collision avoidance or original choreography fidelity."]
     try FileManager.default.createDirectory(atPath:"Validation/Read",withIntermediateDirectories:true)
     let data=try JSONSerialization.data(withJSONObject:report,options:[.prettyPrinted,.sortedKeys]);try data.write(to:URL(fileURLWithPath:"Validation/Read/checks.json"));print(String(decoding:data,as:UTF8.self))
+    if CommandLine.arguments.contains("--render-page-turn") {
+        guard let device=MTLCreateSystemDefaultDevice() else {throw failure("Metal GPU unavailable")}
+        let renderer=try Renderer(device:device,previewMesh:URL(fileURLWithPath:"Resources/FanModel/FanRigged.mesh"),rigURL:URL(fileURLWithPath:"Resources/FanModel/FanRig.json"))
+        renderer.fanLiveActions=true;renderer.fanTeethEnabled=true
+        for (view,yaw) in [("front",Float(0)),("quarter",-Float.pi/4),("left",-Float.pi/2),("inside",Float.pi)] {
+            renderer.character.play(.read,at:0);renderer.character.yaw=yaw
+            for frame in 0...12 {
+                let (texture,_)=try renderer.offscreen(width:800,height:640,at:6.1+Double(frame)/15)
+                try writePNG(texture,to:"Validation/Read/page-\(view)-\(frame).png")
+            }
+        }
+    }
 }
