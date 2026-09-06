@@ -13,9 +13,21 @@ struct AuditHandPosePatch:Decodable {
     var thumbFold:Float?
 
     static func load(_ path:String) throws -> ((inout RoutinePose)->Void) {
-        let patches=try JSONDecoder().decode([String:AuditHandPosePatch].self,from:Data(contentsOf:URL(fileURLWithPath:path)))
+        let data=try Data(contentsOf:URL(fileURLWithPath:path))
+        let fields:Set<String>=["palmContact","shoulderOffset","elbowBend","fingers","palm","grip","thumbFold"]
+        guard let object=try JSONSerialization.jsonObject(with:data) as? [String:Any] else {throw failure("Pose-study patch must be an object")}
+        for (side,value) in object {
+            guard let values=value as? [String:Any],Set(values.keys).isSubset(of:fields),!values.values.contains(where:{$0 is NSNull}) else {
+                throw failure("Unknown or null pose-study field for \(side)")
+            }
+        }
+        let patches=try JSONDecoder().decode([String:AuditHandPosePatch].self,from:data)
         guard patches.keys.allSatisfy({HandSide(rawValue:$0) != nil}) else {throw failure("Unknown pose-study hand side")}
         for patch in patches.values {
+            guard (patch.fingers == nil) == (patch.palm == nil) else {throw failure("Pose-study fingers and palm must be supplied together")}
+            if let fingers=patch.fingers,let palm=patch.palm {
+                guard length(cross(normalize(fingers),normalize(palm)))>0.001 else {throw failure("Collinear pose-study hand frame")}
+            }
             for vector in [patch.palmContact,patch.shoulderOffset,patch.elbowBend,patch.fingers,patch.palm].compactMap({$0}) {
                 guard (0..<3).allSatisfy({vector[$0].isFinite}) else {throw failure("Nonfinite pose-study vector")}
             }
@@ -37,7 +49,6 @@ struct AuditHandPosePatch:Decodable {
                 if let v=patch.palm {hand.palm=v}
                 if let v=patch.grip {hand.grip=v}
                 if let v=patch.thumbFold {hand.thumbFold=v}
-                precondition(length(cross(hand.fingers,hand.palm))>0.001,"Collinear pose-study hand frame")
                 pose.hands[side]=hand
             }
         }

@@ -37,3 +37,15 @@ the useful adjustments into its sampler, and repeat the full 120 Hz scan
 without a patch. A single-time patch overrides contact coordinates directly;
 applying it across a full clip also overrides the clip's contact trajectory.
 It is not a substitute for authoring entry and return paths.
+
+Input contracts: supply exactly one of `time` or a nonempty `times` list;
+samples must be finite and nonnegative. Variables must name existing vector
+coordinates, start within their bounds, and use a positive step. Unknown fields
+are errors. When overriding hand orientation, supply both `fingers` and `palm`;
+the native loader rejects zero or collinear directions before rendering.
+This paired override prevents validity from changing with an unpatched,
+animated direction. Omit both to preserve the authored hand frame.
+
+The script can run from any directory. Each completed trial and the initial
+best result are saved immediately, preserving completed work if a later native
+audit fails. Run `python3 Scripts/test-pose-study.py` for input regression checks.

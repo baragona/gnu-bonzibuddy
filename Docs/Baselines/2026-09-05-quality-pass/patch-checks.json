@@ -1,0 +1,27 @@
+{
+  "unknown": {
+    "passed": true,
+    "exitCode": 1,
+    "message": "Animation geometry audit failed: Error Domain=BonziBuddy Code=1 \"Unknown or null pose-study field for left\" UserInfo={NSLocalizedDescription=Unknown or null pose-study field for left}\n"
+  },
+  "collinear": {
+    "passed": true,
+    "exitCode": 1,
+    "message": "Animation geometry audit failed: Error Domain=BonziBuddy Code=1 \"Collinear pose-study hand frame\" UserInfo={NSLocalizedDescription=Collinear pose-study hand frame}\n"
+  },
+  "partial": {
+    "passed": true,
+    "exitCode": 1,
+    "message": "Animation geometry audit failed: Error Domain=BonziBuddy Code=1 \"Pose-study fingers and palm must be supplied together\" UserInfo={NSLocalizedDescription=Pose-study fingers and palm must be supplied together}\n"
+  },
+  "null": {
+    "passed": true,
+    "exitCode": 1,
+    "message": "Animation geometry audit failed: Error Domain=BonziBuddy Code=1 \"Unknown or null pose-study field for left\" UserInfo={NSLocalizedDescription=Unknown or null pose-study field for left}\n"
+  },
+  "empty": {
+    "passed": true,
+    "exitCode": 0,
+    "message": "Audited Hug: 1 samples, 1 crossing pairs\n"
+  }
+}
