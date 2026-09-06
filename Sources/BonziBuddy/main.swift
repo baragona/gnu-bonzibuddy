@@ -52,6 +52,10 @@ func validate() throws {
     let data = try JSONSerialization.data(withJSONObject:report,options:[.prettyPrinted,.sortedKeys])
     try data.write(to:URL(fileURLWithPath:"Validation/performance.json")); print(String(decoding:data,as:UTF8.self))
 }
+if CommandLine.arguments.contains("--validate-wink-brow") {
+    do {try validateWinkBrow()} catch {fputs("Wink brow validation failed: \(error)\n",stderr);exit(1)}
+    exit(0)
+}
 if CommandLine.arguments.contains("--validate-wink-motion") {
     do {try validateWinkMotion()} catch {fputs("Wink motion validation failed: \(error)\n",stderr);exit(1)}
     exit(0)

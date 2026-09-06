@@ -6,7 +6,7 @@ struct RenderUniforms { var projection: simd_float4x4; var light: simd_float4x4;
 
 struct FanEyeUniforms { var face:SIMD4<Float>; var closures:SIMD4<Float> }
 
-struct FanMorphUniforms { var selection:SIMD4<UInt32>; var weights:(SIMD4<Float>,SIMD4<Float>,SIMD4<Float>,SIMD4<Float>); var face:SIMD4<Float> }
+struct FanMorphUniforms { var selection:SIMD4<UInt32>; var weights:(SIMD4<Float>,SIMD4<Float>,SIMD4<Float>,SIMD4<Float>); var face:SIMD4<Float>; var browLower=SIMD4<Float>.zero }
 
 final class Renderer: NSObject, MTKViewDelegate {
     let device: MTLDevice
@@ -204,6 +204,9 @@ final class Renderer: NSObject, MTKViewDelegate {
         if fanLiveActions && fanAutoBlink { blink=max(blink,automaticFace.eyeClosure) }
         let gaze=fanGaze+automaticFace.gaze
         var morphUniforms=FanMorphUniforms(selection:[fanUpperFaceLift && fanRig?.sourcePose == false ? 1:0,0,fanMorphVertexCount,fanMorphCount],weights:(chunk(0),chunk(4),chunk(8),chunk(12)),face:[max(blink,fanEyeClosure),gaze.x,gaze.y,fanRig == nil ? 0:(fanEyeCatchlights ? 1:2)])
+        if fanExpressionOverrides[4] == nil {
+            morphUniforms.browLower=SIMD4(automaticFace.individualBrowLower.x,automaticFace.individualBrowLower.y,0,0)
+        }
         onAuditFrame?(objects,props,morphUniforms)
         let shadowPass = MTLRenderPassDescriptor()
         shadowPass.depthAttachment.texture = shadowTexture

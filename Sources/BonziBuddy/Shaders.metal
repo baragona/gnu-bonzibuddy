@@ -170,7 +170,7 @@ fragment float4 groundFragment(Varying in [[stage_in]],depth2d<float> shadow [[t
 // Eight-influence native skinning of the imported fan mesh, shared by both passes.
 struct FanVertex { float4 position; float4 normal; float4 color; float4 uv; float4 joints0; float4 joints1; float4 weights0; float4 weights1; };
 struct FanMorphDelta { float4 position; float4 normal; };
-struct FanMorphUniforms { uint4 selection; float4 weights[4]; float4 face; };
+struct FanMorphUniforms { uint4 selection; float4 weights[4]; float4 face; float4 browLower; };
 FanVertex morphFan(FanVertex v,uint id,const device FanMorphDelta* morphs,constant FanMorphUniforms& u) {
     if(v.uv.w>0.5) {
         float opening=clamp(u.weights[0].x*0.8+u.weights[0].y,0.0,1.8);
@@ -185,8 +185,10 @@ FanVertex morphFan(FanVertex v,uint id,const device FanMorphDelta* morphs,consta
         v.normal.x/=1.0-narrow;v.normal.xyz=normalize(v.normal.xyz);
         return v;
     }
+    float browSide=smoothstep(-0.05,0.05,v.position.x);
     for(uint i=0;i<u.selection.w;i++) {
         float weight=u.weights[i/4][i%4];
+        if(i==4) weight+=mix(u.browLower.y,u.browLower.x,browSide);
         if(weight==0)continue;
         FanMorphDelta d=morphs[i*u.selection.z+id];
         v.position+=d.position*weight;v.normal+=d.normal*weight;

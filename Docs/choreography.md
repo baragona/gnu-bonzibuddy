@@ -196,3 +196,5 @@ Wink follows the original thirteen-frame, 1.80-second performance: a small head 
 The wink head turn now has one travel interval (0.10–0.60 seconds), a stationary hold while the eyelid closes/reopens, and one return (1.30–1.70 seconds). Eyelid closure no longer contributes to yaw. The earlier extra turn and intermediate eased return key caused visible stop/start motion. `--validate-wink-motion` checks actual rig head direction and its angular-speed shape at 120 Hz to catch this regression.
 
 During Wink, the eyes counter the head yaw using per-eye fan calibration, retaining the neutral forward-looking direction through the turn, closed-eye hold, reopening, and return. The independent eyelid and head-motion tracks remain unchanged. See the [gaze checkpoint](Baselines/2026-09-05-wink-gaze/README.md).
+
+The winking brow dips with the eyelid at 40% of the imported brow-lowering morph and relaxes as the eye reopens. The opposite brow keeps its resting shape. This uses shared independent brow intentions rather than adding rig-specific logic to the wink sampler.

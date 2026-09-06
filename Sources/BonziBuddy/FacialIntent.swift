@@ -10,6 +10,7 @@ struct FacialIntent {
     var mouthPucker:Float=0
     var individualEyeClosure=SIMD2<Float>.zero // Character left, right.
     var gazeYawCompensation:Float=0 // Radians opposing head yaw; mapped by the character.
+    var individualBrowLower=SIMD2<Float>.zero
     func blended(to other:FacialIntent,amount:Float)->FacialIntent {
         FacialIntent(jawOpening:jawOpening+(other.jawOpening-jawOpening)*amount,
                      eyeClosure:eyeClosure+(other.eyeClosure-eyeClosure)*amount,
@@ -17,9 +18,10 @@ struct FacialIntent {
                      smileOffset:smileOffset+(other.smileOffset-smileOffset)*amount,
                      mouthPucker:mouthPucker+(other.mouthPucker-mouthPucker)*amount,
                      individualEyeClosure:individualEyeClosure+(other.individualEyeClosure-individualEyeClosure)*amount,
-                     gazeYawCompensation:gazeYawCompensation+(other.gazeYawCompensation-gazeYawCompensation)*amount)
+                     gazeYawCompensation:gazeYawCompensation+(other.gazeYawCompensation-gazeYawCompensation)*amount,
+                     individualBrowLower:individualBrowLower+(other.individualBrowLower-individualBrowLower)*amount)
     }
     func distance(to other:FacialIntent)->Float {
-        max(abs(gazeYawCompensation-other.gazeYawCompensation),max(length(individualEyeClosure-other.individualEyeClosure),max(abs(mouthPucker-other.mouthPucker),max(abs(jawOpening-other.jawOpening),max(abs(eyeClosure-other.eyeClosure),max(length(gaze-other.gaze),abs(smileOffset-other.smileOffset)))))))
+        max(length(individualBrowLower-other.individualBrowLower),max(abs(gazeYawCompensation-other.gazeYawCompensation),max(length(individualEyeClosure-other.individualEyeClosure),max(abs(mouthPucker-other.mouthPucker),max(abs(jawOpening-other.jawOpening),max(abs(eyeClosure-other.eyeClosure),max(length(gaze-other.gaze),abs(smileOffset-other.smileOffset))))))))
     }
 }

@@ -14,6 +14,6 @@ enum WinkRoutine {
     static func sample(at t:Double)->RoutinePose {
         let facing=turn.sample(at:t),lid=closure.sample(at:t)
         return RoutinePose(headYaw:-0.50*facing,headTilt:0.035*facing,
-                           face:FacialIntent(smileOffset:0.04*facing,individualEyeClosure:[lid,0],gazeYawCompensation:0.50*facing))
+                           face:FacialIntent(smileOffset:0.04*facing,individualEyeClosure:[lid,0],gazeYawCompensation:0.50*facing,individualBrowLower:[0.40*lid,0]))
     }
 }
