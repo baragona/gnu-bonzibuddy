@@ -1,0 +1,7 @@
+{
+  "duration" : 2.7000000000000002,
+  "frames" : 325,
+  "gripSamples" : 98,
+  "maximumPalmTargetError" : 0.0034636198543012142,
+  "note" : "Actual rig palm-frame markers versus authored contact targets during the two-hand hold. Surface intersections and original fidelity are evaluated separately; contact error is reported, not treated as proof of a fitted grip."
+}

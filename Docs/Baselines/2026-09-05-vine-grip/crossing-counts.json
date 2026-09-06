@@ -1,0 +1,8 @@
+{
+  "summedNonPropTriangleCrossings": {
+    "previous": 116351,
+    "revised": 18167,
+    "revisedWearables": 18167
+  },
+  "method": "Sum across all 325 frames at 120 Hz; excludes vine/dust pairs by entrance prop ID. Counts are diagnostic, not penetration depth."
+}

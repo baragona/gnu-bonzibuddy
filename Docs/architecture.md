@@ -149,3 +149,10 @@ travel with `ActorPlacement`, local hand/foot intent, and stage-anchored dust.
 `RoutineEntryPose.authored` permits a non-rest entry at time zero without relaxing
 per-frame channel checks or the rest contract at completion/outside the clip.
 The explicit entrance action does not yet implement a hidden-state lifecycle.
+
+`HandOrientation` constructs an orthonormal frame from semantic finger/palm
+vectors and blends that frame with quaternion interpolation. The vine entrance
+uses it to turn from a free hand into a crosswise cylindrical grip and then an
+open landing hand. This avoids interpolating independent direction vectors
+through near-collinear frames during large orientation changes. Rig-specific
+palm offsets and skinning remain in `HandAnatomy` and `FanRig`.

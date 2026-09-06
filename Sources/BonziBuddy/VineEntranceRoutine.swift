@@ -29,17 +29,23 @@ enum VineEntranceRoutine {
         for side in HandSide.allCases {
             let second=side == .right ? RoutineLibrary.smooth(t,1.30,1.55):Float(1)
             let contact=side == .left ? grip:vineOrigin
-            let airborne=HandIntent(wrist:.zero,fingers:[0,1,0],palm:[-side.sign,0,0],openness:0.3,weight:second,grip:0.85,fingersTogether:1,thumbFold:0.65,palmContact:contact,shoulderOffset:[0,0.04,0.12],elbowBend:[side.sign,0.8,0.7])
+            let gripping=HandOrientation(fingers:[-side.sign,0,0],palm:[0,0,side.sign])
+            let free=RoutineLibrary.handOnBelly(side,weight:1)
+            let reaching=HandOrientation(fingers:free.fingers,palm:free.palm).blended(to:gripping,weight:second)
+            let landingFrame=HandOrientation(fingers:[0,-1,0],palm:[-side.sign,0,0])
+            let orientation=reaching.blended(to:landingFrame,weight:release)
+            let settleArms=RoutineLibrary.smooth(t,2.12,2.21)
+            var shoulder=SIMD3<Float>(side.sign*0.11,0.04,side == .left ? 1/3:0.40)
+            var elbow=side == .left ? SIMD3<Float>(-1,1.20,0.10):SIMD3<Float>(1,-0.40,1.90)
+            shoulder += (SIMD3<Float>(0,0.04,0.12)-shoulder)*settleArms
+            elbow += (SIMD3<Float>(side.sign,0,0.4)-elbow)*settleArms
+            let airborne=HandIntent(wrist:.zero,fingers:orientation.fingers,palm:orientation.palm,openness:0.3,weight:second,grip:1,fingersTogether:1,thumbFold:0.90,palmContact:contact,shoulderOffset:shoulder,elbowBend:elbow)
             var hand=airborne
             let landing=SIMD3<Float>(side.sign*0.55,-0.48-0.12*crouch,0.23)
-            hand.palmContact=contact+(landing-contact)*release+SIMD3<Float>(side.sign*0.32,0,0.25)*sin(Float.pi*release)
-            hand.fingers=SIMD3<Float>(0,1-2*release,0.25*sin(Float.pi*release))
-            // Keep the frame nondegenerate while the fingers turn downward.
-            hand.palm=[-side.sign,0,0]
-            hand.grip *= 1-release;hand.thumbFold *= 1-release
+            hand.palmContact=contact+(landing-contact)*release+SIMD3<Float>(side.sign*0.32,0,0.40)*sin(Float.pi*release)
+            hand.grip *= second*(1-release);hand.thumbFold *= second*(1-release)
             hand.weight=max(second,release)*(1-recover)
             if side == .right && second<1 && release==0 {
-                let free=RoutineLibrary.handOnBelly(side,weight:1)
                 hand.palmContact=free.wrist+(contact-free.wrist)*second+SIMD3<Float>(0,0,0.30*sin(Float.pi*second))
                 hand.weight=1
             }
@@ -49,8 +55,8 @@ enum VineEntranceRoutine {
             let drift=RoutineLibrary.smooth(t,2.02,2.20)
             pose.props.append(PropCue(id:"entrance.vine",kind:.vine,anchor:.character,offset:vineOrigin+SIMD3(0,2*drift,0),rotation:vineRotation,visibility:1-drift,deformation:.vine(bend:0.2+1.6*release)))
         }
-        if t>2.19 && t<2.60 {
-            let age=Float((t-2.19)/0.41),grow=RoutineLibrary.smooth(t,2.19,2.25),fade=1-RoutineLibrary.smooth(t,2.35,2.60)
+        if t>2.15 && t<2.60 {
+            let age=Float((t-2.15)/0.45),grow=RoutineLibrary.smooth(t,2.15,2.20),fade=1-RoutineLibrary.smooth(t,2.35,2.60)
             for side:Float in [-1,1] {for i in 0..<3 {
                 let radius:Float=(0.055+0.015*Float(i))*grow*fade
                 if radius>0.001 {
