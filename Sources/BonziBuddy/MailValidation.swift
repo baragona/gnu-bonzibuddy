@@ -57,7 +57,57 @@ func validateMail() throws {
     interrupted.request(.wave,at:1.30)
     guard interrupted.playbackSnapshot(at:2.05).elapsed<3.85,
           interrupted.playbackSnapshot(at:3.11).action == .wave else {throw failure("Letter was interrupted during unfolding")}
-    let report:[String:Any]=["minimumLetterPanelClearance":clearance,"letterHoldAndStowPassed":true,"letterUnfoldBeforeReturnPassed":true,"maximumAnkleDrift":ankleDrift,"vertices":vertices,"triangles":triangles,"maximumGroundError":groundError,"maximumDoorHingeError":hingeError,"queuedActionWaitedForClose":true,"samples":421,"note":"Mesh winding, ground anchoring, door hinge and action scheduling checks. Not proof of original fidelity or comprehensive collision avoidance."]
+    var next=CharacterPlayback();next.play(.mailRead,at:0,mode:.hold)
+    next.request(.mailNext,at:5,mode:.hold)
+    guard next.playbackSnapshot(at:5).action == .mailNext,
+          abs(next.playbackSnapshot(at:5).elapsed-1.10)<0.00001 else {throw failure("Next letter replayed retrieval")}
+    for frame in 0...180 {
+        let snapshot=next.playbackSnapshot(at:5+Double(frame)/60)
+        let pose=RoutineLibrary.sample(snapshot.action,at:snapshot.elapsed)
+        guard pose.props.count==2,pose.props.allSatisfy({$0.visibility==1}) else {throw failure("Next letter lost its held panels")}
+    }
+    next.request(.mailRead,at:5.35,mode:.hold)
+    guard next.playbackSnapshot(at:5.94).action == .mailNext,
+          next.playbackSnapshot(at:5.96).action == .mailRead else {throw failure("Letter switch cut off unfolding")}
+    var repeated=CharacterPlayback();repeated.play(.mailNext,at:0,mode:.hold)
+    let folded=MailReadRoutine.sample(at:2.10).props[1].rotation
+    for t in [5.0,7.0,10.0] {
+        let snapshot=repeated.playbackSnapshot(at:t),pose=RoutineLibrary.sample(snapshot.action,at:snapshot.elapsed)
+        guard abs(dot(pose.props[1].rotation.vector,folded.vector))>0.99999 else {throw failure("Held next-letter pass repeated its fold")}
+    }
+    repeated.request(.mailNext,at:10,mode:.hold)
+    guard abs(repeated.playbackSnapshot(at:10).elapsed-1.10)<0.00001 else {throw failure("Repeat next-letter request failed")}
+    repeated.setHeadphonesEnabled(true,at:10.2)
+    guard repeated.playbackSnapshot(at:13.79).action == .mailNext,
+          repeated.playbackSnapshot(at:13.81).action == .headphones else {throw failure("Accessory transfer skipped next-letter completion/stow")}
+    var fingertipClearance:Float=100,fingertipSamples=0,heldTipClearance:Float=100
+    for action in [Action.mailRead,.mailNext] {
+        for frame in 0...252 {
+            let t=Double(frame)/120
+            rig.updateLiveAction(action,started:0,at:t,elapsed:t)
+            let bones=rig.instances(yaw:0,pitch:0,at:t)
+            let pose=RoutineLibrary.sample(action,at:t)
+            let draws=motion.sample(action:action,started:0,at:t,cues:pose.props,rig:rig,bones:bones)
+            if action == .mailRead,frame==252,let sheet=draws.first(where:{$0.kind == .letterFlap}) {
+                for side in HandSide.allCases {
+                    let tip=rig.attachmentFrame(.indexTip(side),axes:.character,bones:bones).columns.3
+                    let p=sheet.model.inverse*tip
+                    heldTipClearance=min(heldTipClearance,p.z-0.018*sin(Float.pi*p.x/0.56)-0.001)
+                }
+            }
+            let turning=action == .mailRead ? (1.05...1.85).contains(t):(1.20...1.70).contains(t)
+            if turning,let sheet=draws.first(where:{$0.kind == .letterFlap}) {
+                let tip=rig.attachmentFrame(.indexTip(.left),axes:.character,bones:bones).columns.3
+                let p=sheet.model.inverse*tip
+                if p.x>0 && p.x<0.56 && abs(p.y)<0.32 {
+                    fingertipSamples+=1
+                    fingertipClearance=min(fingertipClearance,p.z-0.018*sin(Float.pi*p.x/0.56)-0.001)
+                }
+            }
+        }
+    }
+    guard fingertipSamples>0,fingertipClearance>=0,heldTipClearance>=0 else {throw failure("Turning finger crosses the letter: \(fingertipClearance), samples \(fingertipSamples)")}
+    let report:[String:Any]=["minimumLetterPanelClearance":clearance,"minimumHeldFingertipClearance":heldTipClearance,"minimumTurningFingertipClearance":fingertipClearance,"turningFingertipSamples":fingertipSamples,"nextLetterInPlacePassed":true,"nextLetterHoldAndRepeatPassed":true,"letterHoldAndStowPassed":true,"letterUnfoldBeforeReturnPassed":true,"maximumAnkleDrift":ankleDrift,"vertices":vertices,"triangles":triangles,"maximumGroundError":groundError,"maximumDoorHingeError":hingeError,"queuedActionWaitedForClose":true,"samples":421,"note":"Mesh winding, ground anchoring, door hinge and action scheduling checks. Not proof of original fidelity or comprehensive collision avoidance."]
     try FileManager.default.createDirectory(atPath:"Validation/Mail",withIntermediateDirectories:true)
     let data=try JSONSerialization.data(withJSONObject:report,options:[.prettyPrinted,.sortedKeys])
     try data.write(to:URL(fileURLWithPath:"Validation/Mail/checks.json"));print(String(decoding:data,as:UTF8.self))

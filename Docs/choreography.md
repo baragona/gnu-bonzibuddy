@@ -166,3 +166,9 @@ Initial Mail Empty combines MailCheck (0.90 seconds) and MailCheckEmpty (2.60 se
 ## Letter reading
 
 Initial Mail Read combines the original MailRead (3.85 seconds) and MailReturn (1.00 second). It retrieves a folded letter, opens its left flap, folds it back, scans the page, and stows it. The held region repeats only reading. Both paper panels have indexed front/back surfaces, closed thin edges, and a gentle bow. The flap has a separate hinge frame with clearance from the rear panel. The letter shares a mail continuation family for future full-mail and next-letter handoffs. Full-mail retrieval and next-letter choreography remain unfinished. Printed marks are local procedural shading, not email content.
+
+## Next letter
+
+Mail Next composes standalone retrieval with the original 2.80-second MailNext pass, then holds the folded reading pose and uses the shared return. When selected from Mail Read or Mail Next, the compatible entry skips retrieval. The flap opens once and closes before another compatible action can start. Holding does not repeat the gesture; selecting Mail Next again does. An accessory transfer waits through the current pass and stow. This is visual choreography with placeholder printed marks, not navigation through real email.
+
+The letter-opening hand now reaches onto the flap, keeps its finger/palm frame aligned with the flap while turning, and releases only after closure. Both Mail Read and Mail Next use the same geometry and grip calculation; the latter uses the original quick 0.10–0.60-second opening/closing beat, followed by release by 0.95 seconds.

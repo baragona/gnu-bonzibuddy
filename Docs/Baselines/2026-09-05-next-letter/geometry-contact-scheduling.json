@@ -1,0 +1,18 @@
+{
+  "letterHoldAndStowPassed" : true,
+  "letterUnfoldBeforeReturnPassed" : true,
+  "maximumAnkleDrift" : 0,
+  "maximumDoorHingeError" : 8.4314272896790499e-08,
+  "maximumGroundError" : 1.7881393432617188e-07,
+  "minimumHeldFingertipClearance" : 0.0014796751784160733,
+  "minimumLetterPanelClearance" : 0.0039949491620063782,
+  "minimumTurningFingertipClearance" : 0.041326183825731277,
+  "nextLetterHoldAndRepeatPassed" : true,
+  "nextLetterInPlacePassed" : true,
+  "note" : "Mesh winding, ground anchoring, door hinge and action scheduling checks. Not proof of original fidelity or comprehensive collision avoidance.",
+  "queuedActionWaitedForClose" : true,
+  "samples" : 421,
+  "triangles" : 6312,
+  "turningFingertipSamples" : 158,
+  "vertices" : 3965
+}
