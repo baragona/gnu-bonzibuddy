@@ -117,6 +117,9 @@ final class FanRig {
                     inherited=posed[node.parent]*extended
                 }
             }
+            if !sourcePose && (i==22 || i==39),let hand=routine.hands[i==22 ? .left:.right] {
+                inherited=translation(hand.shoulderOffset*hand.weight)*inherited
+            }
             var result=inherited
             if !sourcePose && i==21 { result=translation([0,0.004*sin(Float(time)*2),0])*inherited }
             if !sourcePose && i==20 && action == .dance {

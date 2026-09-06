@@ -5,7 +5,7 @@ enum Action: String, CaseIterable {
     case idle = "Idle"
     case lookLeft = "Look Left", lookRight = "Look Right"
     case chestBeat = "Chest Beat"
-    case shush = "Shush", wink = "Wink", blowKiss = "Blow Kiss", giggle = "Giggle"
+    case shush = "Shush", wink = "Wink", blowKiss = "Blow Kiss", giggle = "Giggle", hug = "Hug"
     case clap = "Clap", shrug = "Shrug", wave = "Wave"
     case dance = "Dance", think = "Think", surprised = "Surprised", speak = "Speak"
     case mailFull = "Mail Full", mailEmpty = "Mail Empty", mailRead = "Mail Read", mailNext = "Mail Next"
@@ -25,7 +25,7 @@ enum Action: String, CaseIterable {
         case .clap: return ClapAnimation.duration
         case .shrug: return ShrugAnimation.duration
         case .dance: return 8
-        case .giggle, .blowKiss, .wink, .shush, .chestBeat, .globe, .juggle, .banana, .bananaMiss, .sunglasses, .headphones, .butterfly, .read, .readLookUp, .write, .writePause, .writeOnce, .writeAgain, .mailEmpty, .mailRead, .mailNext, .mailFull: preconditionFailure("Missing routine definition")
+        case .hug, .giggle, .blowKiss, .wink, .shush, .chestBeat, .globe, .juggle, .banana, .bananaMiss, .sunglasses, .headphones, .butterfly, .read, .readLookUp, .write, .writePause, .writeOnce, .writeAgain, .mailEmpty, .mailRead, .mailNext, .mailFull: preconditionFailure("Missing routine definition")
         case .wave, .think, .surprised: return 4
         }
     }

@@ -16,6 +16,7 @@ struct HandIntent {
     var fingersTogether: Float = 0
     var thumbFold: Float = 0
     var palmContact: SIMD3<Float>? = nil // Surface target; rig resolves wrist from its anatomy.
+    var shoulderOffset=SIMD3<Float>.zero
     var elbowBend: SIMD3<Float>? = nil // Preferred bend direction in character space.
     var indexTipContact: SIMD3<Float>? = nil // Straight index only; resolved using the imported hand frame.
 }
@@ -44,6 +45,7 @@ enum RoutineLibrary {
         return x*x*x*(x*(x*6-15)+10)
     }
     static let definitions:[Action:RoutineDefinition]=[
+        .hug:RoutineDefinition(duration:HugRoutine.duration,changesStance:true,sample:HugRoutine.sample),
         .giggle:RoutineDefinition(duration:GiggleRoutine.duration,changesStance:true,sample:GiggleRoutine.sample),
         .blowKiss:RoutineDefinition(duration:BlowKissRoutine.duration,sample:BlowKissRoutine.sample),
         .wink:RoutineDefinition(duration:WinkRoutine.duration,sample:WinkRoutine.sample),

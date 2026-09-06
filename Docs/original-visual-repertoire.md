@@ -35,7 +35,8 @@ Research date: September 5, 2026. The original's repertoire is substantially bro
 | Wink | Thirteen-frame, 1.80-second sequence | Head turn and independent left-eye closure/reopening through shared facial channels |
 | Blow a kiss | BlowKiss: 2.08-second sequence | Hand-to-mouth approach, palm-up release, pucker, and return through shared routine channels |
 | Giggle | 22-frame, 2.30-second sequence | Broad grin, closed eyes, and small planted-foot body pulses |
-| Hug, hands behind back | Named multi-frame sequences in asset | Missing choreography |
+| Hug | Extracted and visually reviewed; 3.64-second played sequence with a deterministic skipped hold frame | Draft self-hug and planted-foot sway; arm wrapping and intersections remain unresolved |
+| Hands behind back | Named multi-frame sequence in asset | Missing choreography |
 | Scout/look around, alert, listening | Named asset families, some placeholders; inspect individually | Thinking and gaze controls cover only part |
 | Look up/down/left/right and diagonally, blink while looking, return | Asset has separate directional/blink/return segments | Left/right actions, gaze sliders and automatic blink exist |
 | Numerous idle variations and rest poses | Many asset entries; sampled earlier idles show face and gaze changes | One authored idle with breathing/blinking |

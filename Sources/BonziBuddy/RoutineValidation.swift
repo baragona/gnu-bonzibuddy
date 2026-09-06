@@ -55,6 +55,7 @@ func validateRoutines() throws {
                 guard finite(foot.ankle),finite(foot.kneeBend),length(foot.kneeBend)>0.001,(0...1).contains(foot.weight),abs(length(foot.rotation.vector)-1)<0.001 else {throw failure("Invalid foot target")}
             }
             for hand in pose.hands.values {
+                guard finite(hand.shoulderOffset) else {throw failure("Invalid shoulder offset")}
                 if let bend=hand.elbowBend {guard finite(bend),length(bend)>0.001 else {throw failure("Invalid elbow bend direction")}}
                 if let tip=hand.indexTipContact {
                     guard finite(tip),hand.palmContact == nil,hand.pointing,hand.openness==1,hand.grip==0,hand.fist==0,hand.fingersTogether==0,hand.thumbFold==0 else {throw failure("Fingertip contact requires a straight index pose")}

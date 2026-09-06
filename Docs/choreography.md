@@ -206,3 +206,7 @@ Blow Kiss follows the original 2.08-second hand-to-mouth, palm-up release, held 
 ## Giggle
 
 Giggle follows the original 22-frame, 2.30-second grin and closed-eye performance. The repeated source poses drive five small downward body pulses, with hands at rest and feet planted. Smile, eyelids, and a slight bilateral brow dip use shared facial channels. The stance solver absorbs the pelvis motion at the knees and ankles. Original sound cues are outside this visual implementation.
+
+## Hug — draft
+
+Hug follows a 3.64-second played timeline: cross the arms, close the eyes, rock gently, hold, and release. The stored original frames total 3.74 seconds, but the deterministic branch from frame 24 to frame 26 skips a duplicate 100 ms hold. Hand weights and clearance offsets separate the two arms during entry and release; authored shoulder offsets allow them to move forward. The feet remain planted during the pelvis sway. This routine is not visually finished: its arm stacking, hand wrapping, and shoulder skin contacts still differ from the original and produce audited intersections. The [draft checkpoint](Baselines/2026-09-05-hug-draft/README.md) records these failures alongside the passing lifecycle checks.
