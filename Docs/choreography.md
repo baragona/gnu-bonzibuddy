@@ -184,3 +184,7 @@ The compact packet reuses the two letter meshes with a stylized size expansion, 
 Chest Beat follows the extracted GetAttention timeline: fifteen 100 ms frames followed by a zero-duration rest frame. Separate left/right outward-swing tracks alternate closed fists between chest-level contact and outward raised-arm poses. A small pelvis sway uses the existing planted-foot solve, accompanied by head tilt and a slight open-mouth smile. This is a one-shot performance; the original continued/return entries in this asset are single-frame placeholders, so they are not exposed as invented hold loops.
 
 `HandIntent.fist` is independent of a prop grip. The rig aligns the finger bases, curls the fingers, and brings the thumb across the palm. Existing prop grips retain their authored spread. The routine uses the common catalog, interruption blends, and independent wearables. See [the chest-beating checkpoint](Baselines/2026-09-05-chest-beat/README.md).
+
+## Shushing
+
+Shush follows the original Shoosh’s 1.95-second timeline, with an index raised to the lips, the other hand at the belly, and three authored blinks. It uses a calibrated fingertip target and a shared mouth-pucker channel, including the existing facial interruption and manual-override behavior. Feet retain the rest placement. The source has no separate hold/return performance or prop. The rendered contact and original-image comparison remain separate fidelity checks.

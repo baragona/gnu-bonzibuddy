@@ -10,6 +10,26 @@ struct AuditTriangle {
     let a:SIMD3<Float>,b:SIMD3<Float>,c:SIMD3<Float>
     var bounds:AuditBounds {var b=AuditBounds();b.include(a);b.include(self.b);b.include(c);return b}
     var center:SIMD3<Float> {(a+b+c)/3}
+    func closestPoint(to point:SIMD3<Float>)->SIMD3<Float> {
+        let ab=b-a,ac=c-a,n=cross(ab,ac),area=length_squared(n)
+        if area>1e-16 {
+            let projected=point-n*(dot(point-a,n)/area),v=projected-a
+            let aa=dot(ab,ab),bb=dot(ab,ac),cc=dot(ac,ac),denominator=aa*cc-bb*bb
+            if denominator>1e-16 {
+                let u=(dot(v,ab)*cc-dot(v,ac)*bb)/denominator
+                let w=(dot(v,ac)*aa-dot(v,ab)*bb)/denominator
+                if u>=0 && w>=0 && u+w<=1 {return projected}
+            }
+        }
+        var closest=a,distance=length_squared(point-a)
+        for (start,end) in [(a,b),(b,c),(c,a)] {
+            let edge=end-start,scale=length_squared(edge)
+            let t=scale>1e-16 ? min(1,max(0,dot(point-start,edge)/scale)):0
+            let candidate=start+edge*t,d=length_squared(point-candidate)
+            if d<distance {closest=candidate;distance=d}
+        }
+        return closest
+    }
     // Non-coplanar surface crossings. Tangencies and coplanar contact are excluded.
     func crossings(_ other:AuditTriangle)->[SIMD3<Float>] {
         func hit(_ from:SIMD3<Float>,_ to:SIMD3<Float>,_ t:AuditTriangle)->SIMD3<Float>? {

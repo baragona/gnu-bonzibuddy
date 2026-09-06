@@ -1,0 +1,97 @@
+{
+  "chestBeat" : {
+    "beats" : [
+      {
+        "hand" : "left",
+        "nearestSurfaceDistance" : 0.017169589176774025,
+        "time" : 0.40000000000000002
+      },
+      {
+        "hand" : "right",
+        "nearestSurfaceDistance" : 0.013708152808248997,
+        "time" : 0.59999999999999998
+      },
+      {
+        "hand" : "left",
+        "nearestSurfaceDistance" : 0.016218643635511398,
+        "time" : 0.80000000000000004
+      },
+      {
+        "hand" : "right",
+        "nearestSurfaceDistance" : 0.013729539699852467,
+        "time" : 1
+      },
+      {
+        "hand" : "left",
+        "nearestSurfaceDistance" : 0.022100450471043587,
+        "time" : 1.2
+      }
+    ],
+    "chestSamples" : 1989,
+    "handSamples" : [
+      1435,
+      1436
+    ],
+    "maximumFootMatrixDrift" : 0,
+    "note" : "Nearest skinned surface samples measure fist\/chest proximity; they do not prove absence of penetration.",
+    "timelineSamples" : 181
+  },
+  "clap" : [
+    {
+      "centers" : [
+        [
+          0.0046612368896603584,
+          -0.051847923547029495,
+          0.36274024844169617
+        ],
+        [
+          0.054290171712636948,
+          0.022486226633191109,
+          0.36695787310600281
+        ]
+      ],
+      "closestPalmSurfaceDistance" : 0.050604972988367081,
+      "frame" : 3,
+      "palmCenterDistance" : 0.08947841078042984
+    },
+    {
+      "centers" : [
+        [
+          0.0046598785556852818,
+          -0.051855046302080154,
+          0.36271211504936218
+        ],
+        [
+          -0.0099296420812606812,
+          -0.046914752572774887,
+          0.35468664765357971
+        ]
+      ],
+      "closestPalmSurfaceDistance" : 0.00077544525265693665,
+      "frame" : 4,
+      "palmCenterDistance" : 0.017368612810969353
+    },
+    {
+      "centers" : [
+        [
+          0.0046587195247411728,
+          -0.051861755549907684,
+          0.36268609762191772
+        ],
+        [
+          -0.0099258283153176308,
+          -0.046921532601118088,
+          0.35465320944786072
+        ]
+      ],
+      "closestPalmSurfaceDistance" : 0.00078350165858864784,
+      "frame" : 5,
+      "palmCenterDistance" : 0.017367847263813019
+    }
+  ],
+  "note" : "Distances between weighted palm-surface samples at open and contact beats; does not prove absence of penetration.",
+  "palmSamples" : [
+    81,
+    74
+  ]
+}

@@ -14,6 +14,7 @@ struct HandIntent {
     var grip: Float = 0
     var fist: Float = 0
     var palmContact: SIMD3<Float>? = nil // Surface target; rig resolves wrist from its anatomy.
+    var indexTipContact: SIMD3<Float>? = nil // Straight index only; resolved using the imported hand frame.
 }
 struct RoutinePose {
     var hands: [HandSide:HandIntent] = [:] // Semantic sides, resolved by the rig.
@@ -32,11 +33,15 @@ enum RoutineLibrary {
         HandIntent(wrist:[side.sign*0.58,-0.15,0.30],fingers:[side.sign*0.15,-1,0.10],palm:[0,0,1],openness:0.8,weight:weight,grip:0.15)
     }
 
+    static func handOnBelly(_ side:HandSide,weight:Float)->HandIntent {
+        HandIntent(wrist:[side.sign*0.34,-0.18,0.46],fingers:[-side.sign,0,0.10],palm:[0,-0.20,-1],openness:0.75,weight:weight,grip:0.10)
+    }
     static func smooth(_ t: Double, _ start: Double, _ end: Double) -> Float {
         let x=Float(min(1,max(0,(t-start)/(end-start))))
         return x*x*x*(x*(x*6-15)+10)
     }
     static let definitions:[Action:RoutineDefinition]=[
+        .shush:RoutineDefinition(duration:ShushRoutine.duration,sample:ShushRoutine.sample),
         .chestBeat:RoutineDefinition(duration:ChestBeatRoutine.duration,changesStance:true,sample:ChestBeatRoutine.sample),
         .mailFull:RoutineDefinition(duration:MailFullRoutine.duration,changesFacing:true,holdRange:MailFullRoutine.holdRange,handoffPolicy:.finishRoutine,continuation:MailFullRoutine.continuation,sample:MailFullRoutine.sample),
         .mailNext:RoutineDefinition(duration:MailNextRoutine.duration,holdRange:MailNextRoutine.holdRange,handoffPolicy:.finishRoutine,continuation:MailNextRoutine.continuation,sample:MailNextRoutine.sample),

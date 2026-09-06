@@ -2,7 +2,7 @@ import AppKit
 import MetalKit
 import simd
 
-private struct AuditFrame {let bones:[Instance];let props:[PropDraw];let morphs:FanMorphUniforms}
+struct AuditFrame {let bones:[Instance];let props:[PropDraw];let morphs:FanMorphUniforms}
 private func auditXYZ(_ p:SIMD4<Float>)->SIMD3<Float> {SIMD3(p.x,p.y,p.z)}
 private func auditArray(_ p:SIMD3<Float>)->[Float] {[p.x,p.y,p.z]}
 private func auditName(_ s:String)->String {s.lowercased().replacingOccurrences(of:" ",with:"-")}
@@ -18,7 +18,7 @@ private func auditDirections(_ rig:FanRig,_ bones:[Instance],_ side:HandSide)->(
     let pointing=normalize(tip-auditXYZ(bones[index].model*rig.rest[index].columns.3))
     return (origin,hand,palm,pointing)
 }
-private final class AuditGPU {
+final class AuditGPU {
     let renderer:Renderer,fan:MTLComputePipelineState,prop:MTLComputePipelineState
     let palette:MTLBuffer,fanOutput:MTLBuffer
     var outputs:[String:MTLBuffer]=[:]
@@ -176,6 +176,9 @@ func auditAnimationGeometry() throws {
 private func renderAuditPose(renderer:Renderer,action:Action,time:Double,folder:String) throws {
     var capturedBones:[Instance]=[]
     renderer.onAuditFrame={bones,_,_ in capturedBones=bones}
+    // Prime playback at the clip start so a random-access diagnostic frame
+    // includes its authored facial state, just like sequential playback.
+    _=try renderer.offscreen(width:160,height:128,at:0)
     for (name,yaw) in [("front",Float(0)),("quarter",-Float.pi/4),("left",-Float.pi/2),("right",Float.pi/2)] {
         renderer.character.yaw=yaw
         let (texture,_)=try renderer.offscreen(width:800,height:640,at:time)

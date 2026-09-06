@@ -193,7 +193,10 @@ final class Renderer: NSObject, MTKViewDelegate {
         let lightMatrix = simd_float4x4(columns:(SIMD4(right.x/1.6,up.x/1.6,-lightDirection.x/5,0),SIMD4(right.y/1.6,up.y/1.6,-lightDirection.y/5,0),SIMD4(right.z/1.6,up.z/1.6,-lightDirection.z/5,0),SIMD4(0,0,0.5,1)))
         var uniforms = RenderUniforms(projection:projection(width:width,height:height),light:lightMatrix,ground:rotate(character.pitch,[1,0,0])*translation([0,-0.92,0]),options:[shadowsEnabled ? 1 : 0,0.28,character.mouthOpening,0],jawAxis:fanRig == nil ? normalize(objects[character.headBoneStart].model.columns.1) : SIMD4<Float>(0,1,0,0))
         var faceWeights=[Float](repeating:0,count:16)
-        if fanLiveActions { faceWeights[0]=min(1,max(0,fanNeutralSmile+automaticFace.smileOffset)) }
+        if fanLiveActions {
+            faceWeights[0]=min(1,max(0,fanNeutralSmile+automaticFace.smileOffset))
+            faceWeights[11]=min(1,max(0,automaticFace.mouthPucker)) // Fan model's oh/kiss target.
+        }
         for lane in 0..<2 where fanMorphIndices[lane]<fanMorphCount { faceWeights[Int(fanMorphIndices[lane])]+=fanMorphWeights[lane] }
         for (index,value) in fanExpressionOverrides where index>=0 && index<Int(fanMorphCount) { faceWeights[index]=min(1,max(0,value)) }
         func chunk(_ i:Int)->SIMD4<Float> { SIMD4(faceWeights[i],faceWeights[i+1],faceWeights[i+2],faceWeights[i+3]) }

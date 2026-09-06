@@ -46,13 +46,16 @@ func validateRoutines() throws {
             guard delay.isFinite,delay>=0,delay<=definition.duration else {throw failure("Invalid return delay")}
             let pose=RoutineLibrary.sample(action,at:elapsed)
             sampled += 1
-            guard [pose.bodyYaw,pose.headYaw,pose.headTilt,pose.headPitch,pose.face.jawOpening,pose.face.eyeClosure,pose.face.smileOffset,pose.face.gaze.x,pose.face.gaze.y].allSatisfy(\.isFinite),
-                  (0...1).contains(pose.face.jawOpening),(0...1).contains(pose.face.eyeClosure) else {throw failure("Invalid facial or body channels: \(action)")}
+            guard [pose.bodyYaw,pose.headYaw,pose.headTilt,pose.headPitch,pose.face.jawOpening,pose.face.eyeClosure,pose.face.mouthPucker,pose.face.smileOffset,pose.face.gaze.x,pose.face.gaze.y].allSatisfy(\.isFinite),
+                  (0...1).contains(pose.face.jawOpening),(0...1).contains(pose.face.eyeClosure),(0...1).contains(pose.face.mouthPucker) else {throw failure("Invalid facial or body channels: \(action)")}
             guard finite(pose.stance.pelvisOffset) else {throw failure("Invalid pelvis target")}
             for foot in pose.stance.feet.values {
                 guard finite(foot.ankle),finite(foot.kneeBend),length(foot.kneeBend)>0.001,(0...1).contains(foot.weight),abs(length(foot.rotation.vector)-1)<0.001 else {throw failure("Invalid foot target")}
             }
             for hand in pose.hands.values {
+                if let tip=hand.indexTipContact {
+                    guard finite(tip),hand.palmContact == nil,hand.pointing,hand.openness==1,hand.grip==0,hand.fist==0 else {throw failure("Fingertip contact requires a straight index pose")}
+                }
                 guard hand.palmContact.map(finite) ?? true,finite(hand.wrist),finite(hand.fingers),finite(hand.palm),length(cross(hand.fingers,hand.palm))>0.001,(0...1).contains(hand.weight),(0...1).contains(hand.grip),(0...1).contains(hand.fist) else {throw failure("Invalid hand frame: \(action)")}
             }
             guard Set(pose.props.map(\.id)).count==pose.props.count else {throw failure("Duplicate prop IDs")}
