@@ -38,6 +38,8 @@ func validateRoutines() throws {
         }
         for t in [-0.1,0,definition.duration,definition.duration+0.1] {
             let pose=RoutineLibrary.sample(action,at:t)
+            if t==0 && definition.entryPose == .authored {continue}
+            guard matrixError(pose.actorPlacement.matrix,ActorPlacement().matrix)<0.0001 else {throw failure("Actor placement leaks beyond routine boundary")}
             guard abs(pose.torsoTilt)<0.0001,pose.props.isEmpty,pose.face.distance(to:FacialIntent())<0.0001,pose.hands.values.allSatisfy({$0.weight<0.0001}),length(pose.stance.pelvisOffset)<0.0001,pose.stance.feet.values.allSatisfy({$0.weight<0.0001}) else {throw failure("Routine leaks beyond entry/return: \(action)")}
         }
         for frame in 0...Int(ceil(definition.duration*120)) {
@@ -70,6 +72,7 @@ func validateRoutines() throws {
                 switch (prop.kind,prop.deformation) {
                 case let (.vine,.vine(bend)):
                     guard bend.isFinite,abs(bend)<=2.5 else {throw failure("Invalid vine bend")}
+                case (.dustCloud,.rigid): break
                 case (.letterBack,.rigid),(.letterFlap,.rigid),(.mailbox,.rigid),(.mailboxDoor,.rigid),(.writingPad,.rigid),(.pencil,.rigid),(.globe,.rigid),(.coconut,.rigid),(.sunglasses,.rigid),(.headphones,.rigid),(.butterflyWing,.rigid),(.butterflyBody,.rigid),(.bookLeft,.rigid),(.bookRight,.rigid): break
                 case let (.bookLeaf,.page(curl)):
                     guard curl.isFinite,(0...1).contains(curl) else {throw failure("Invalid page curl")}

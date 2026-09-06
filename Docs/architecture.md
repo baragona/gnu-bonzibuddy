@@ -139,3 +139,13 @@ Stage anchors remain independent of actor placement. `--validate-actor-placement
 checks actual GPU positions for the body, worn accessories, held/blended props,
 and a fixed stage object across camera angles and scales. This infrastructure
 does not itself add an entrance, exit, or persistent hidden state.
+
+
+`ContinuousTrack` is a scalar, shape-preserving cubic track for continuous travel:
+interior monotone keys retain velocity, extrema have zero tangent, and positive
+scale keys do not overshoot below their bounds. It complements the eased
+`MotionTrack` used for deliberate gestures. `VineEntranceRoutine` composes scalar
+travel with `ActorPlacement`, local hand/foot intent, and stage-anchored dust.
+`RoutineEntryPose.authored` permits a non-rest entry at time zero without relaxing
+per-frame channel checks or the rest contract at completion/outside the clip.
+The explicit entrance action does not yet implement a hidden-state lifecycle.

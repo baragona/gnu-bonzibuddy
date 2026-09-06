@@ -32,12 +32,13 @@ struct PropMesh {
             return
         case .bananaFruit,.bananaPeel:
             (vertices,indices)=BananaGeometry.mesh(kind)
-        case .globe,.coconut:
-        let rings=48,sides=96
+        case .globe,.coconut,.dustCloud:
+        let rings=kind == .dustCloud ? 12:48,sides=kind == .dustCloud ? 16:96
         func surface(_ u:Float,_ v:Float)->SIMD3<Float> {
             let latitude=Float.pi*(0.5-v),longitude=(u-0.5)*2*Float.pi
             let normal=SIMD3<Float>(sin(longitude)*cos(latitude),sin(latitude),cos(longitude)*cos(latitude))
             if kind == .globe {return normal}
+            if kind == .dustCloud {return normal*(1+0.12*sin(longitude*5)*cos(latitude*3))}
             let irregularity=1+0.008*sin(longitude*7+normal.y*5)*cos(latitude)*cos(latitude)+0.004*sin(longitude*13)*cos(latitude)
             return normal*SIMD3<Float>(0.96,1.08,0.92)*irregularity
         }

@@ -49,6 +49,7 @@ enum RoutineLibrary {
         return x*x*x*(x*(x*6-15)+10)
     }
     static let definitions:[Action:RoutineDefinition]=[
+        .vineEntrance:RoutineDefinition(duration:VineEntranceRoutine.duration,changesFacing:true,changesStance:true,entryPose:.authored,handoffPolicy:.finishRoutine,sample:VineEntranceRoutine.sample),
         .hug:RoutineDefinition(duration:HugRoutine.duration,changesStance:true,sample:HugRoutine.sample),
         .giggle:RoutineDefinition(duration:GiggleRoutine.duration,changesStance:true,sample:GiggleRoutine.sample),
         .blowKiss:RoutineDefinition(duration:BlowKissRoutine.duration,sample:BlowKissRoutine.sample),
@@ -81,6 +82,7 @@ enum RoutineLibrary {
 
 // One definition owns each routine's timing, movement policy, and pure sampler.
 // The action catalog, rig, face system, and validators share this definition.
+enum RoutineEntryPose {case rest,authored}
 enum RoutineHandoffPolicy {case interruptible, finishRoutine}
 enum RoutineFamily {case writing,mail}
 struct RoutineContinuation {
@@ -94,6 +96,7 @@ struct RoutineDefinition {
     let duration:Double
     var changesFacing=false
     var changesStance=false
+    var entryPose:RoutineEntryPose = .rest
     var holdRange:Range<Double>?
     var handoffPolicy:RoutineHandoffPolicy = .interruptible
     var returnDelay:(Double)->Double = {_ in 0}

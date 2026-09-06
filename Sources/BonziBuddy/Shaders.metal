@@ -378,6 +378,12 @@ fragment float4 propFragment(PropVarying vertexIn [[stage_in]],depth2d<float> sh
         float grain=0.025*sin(vertexIn.uv.x*180.0);
         in.color.rgb=region>2.5 ? float3(0.20,0.48,0.08):region>1.5 ? float3(0.88,0.66,0.24):region>0.5 ? float3(0.43,0.29,0.09):float3(0.90,0.68,0.26)+grain;
     }
+    if (prop.material.x==18.0) {
+        // Small, optically dense white cartoon puffs. A narrow lighting range
+        // avoids the dark solid-rock shading used by opaque carried props.
+        float white=0.96+0.04*max(0.0,normalize(in.normal).y);
+        return float4(float3(white)*in.color.a,in.color.a);
+    }
     if (prop.material.x==17.0) {
         float grain=0.04*sin(vertexIn.uv.x*19.0+vertexIn.uv.y*73.0);
         in.color.rgb=vertexIn.uv.w>0.5 ? float3(0.10,0.66,0.015):float3(0.12,0.30,0.025)+grain;
