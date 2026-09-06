@@ -45,6 +45,7 @@ func validateRoutines() throws {
             let delay=definition.returnDelay(elapsed)
             guard delay.isFinite,delay>=0,delay<=definition.duration else {throw failure("Invalid return delay")}
             let pose=RoutineLibrary.sample(action,at:elapsed)
+            guard (0...1).contains(pose.face.individualEyeClosure.x),(0...1).contains(pose.face.individualEyeClosure.y) else {throw failure("Invalid individual eyelid closure")}
             sampled += 1
             guard [pose.bodyYaw,pose.headYaw,pose.headTilt,pose.headPitch,pose.face.jawOpening,pose.face.eyeClosure,pose.face.mouthPucker,pose.face.smileOffset,pose.face.gaze.x,pose.face.gaze.y].allSatisfy(\.isFinite),
                   (0...1).contains(pose.face.jawOpening),(0...1).contains(pose.face.eyeClosure),(0...1).contains(pose.face.mouthPucker) else {throw failure("Invalid facial or body channels: \(action)")}

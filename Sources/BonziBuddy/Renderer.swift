@@ -232,7 +232,8 @@ final class Renderer: NSObject, MTKViewDelegate {
             encoder.setVertexBuffer(fanMorphBuffer,offset:0,index:3)
             encoder.setVertexBytes(&morphUniforms,length:MemoryLayout<FanMorphUniforms>.stride,index:4)
         }
-        var faceControl=FanEyeUniforms(face:fanRig == nil ? SIMD4<Float>(repeating:0) : morphUniforms.face,closures:fanRig == nil ? .zero : SIMD4(fanIndividualEyeClosure.x,fanIndividualEyeClosure.y,0,0))
+        let individualClosure=simd_max(fanIndividualEyeClosure,automaticFace.individualEyeClosure)
+        var faceControl=FanEyeUniforms(face:fanRig == nil ? SIMD4<Float>(repeating:0) : morphUniforms.face,closures:fanRig == nil ? .zero : SIMD4(individualClosure.x,individualClosure.y,0,0))
         encoder.setFragmentBytes(&faceControl,length:MemoryLayout<FanEyeUniforms>.stride,index:3)
         encoder.setFragmentBytes(&uniforms,length:MemoryLayout<RenderUniforms>.stride,index:2)
         encoder.setFragmentTexture(shadowTexture,index:0)

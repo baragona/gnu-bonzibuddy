@@ -188,3 +188,7 @@ Chest Beat follows the extracted GetAttention timeline: fifteen 100 ms frames fo
 ## Shushing
 
 Shush follows the original Shoosh’s 1.95-second timeline, with an index raised to the lips, the other hand at the belly, and three authored blinks. It uses a calibrated fingertip target and a shared mouth-pucker channel, including the existing facial interruption and manual-override behavior. Feet retain the rest placement. The source has no separate hold/return performance or prop. The rendered contact and original-image comparison remain separate fidelity checks.
+
+## Wink
+
+Wink follows the original thirteen-frame, 1.80-second performance: a small head turn, left-eye closure at 0.65 seconds, reopening by 1.05 seconds, and return to rest by 1.70 seconds. Its hands remain at rest. Independent eyelid intentions share the facial transition system and compose with the existing user controls. This implements visual choreography; the original sound cue is not reproduced.

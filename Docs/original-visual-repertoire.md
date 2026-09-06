@@ -32,7 +32,8 @@ Research date: September 5, 2026. The original's repertoire is substantially bro
 | Greet, wave, congratulate | Named asset sequences; earlier clap sprites already used as reference | Wave/clap approximations exist |
 | Shrug, confusion, uncertainty, sadness, pleased reactions, disbelief | Named asset families; earlier confusion/uncertainty sprites | Shrug/surprise exist; some facial components available manually |
 | Shush | Shoosh: 15 frames, 1.95 seconds | Authored index-to-lips gesture, free hand at belly, three blinks, and mouth pucker; visual fidelity remains under review |
-| Hug, blow a kiss, giggle, wink, hands behind back | Named multi-frame sequences in asset | Missing choreography; independent eye closure supports a manual wink component |
+| Wink | Thirteen-frame, 1.80-second sequence | Head turn and independent left-eye closure/reopening through shared facial channels |
+| Hug, blow a kiss, giggle, hands behind back | Named multi-frame sequences in asset | Missing choreography |
 | Scout/look around, alert, listening | Named asset families, some placeholders; inspect individually | Thinking and gaze controls cover only part |
 | Look up/down/left/right and diagonally, blink while looking, return | Asset has separate directional/blink/return segments | Left/right actions, gaze sliders and automatic blink exist |
 | Numerous idle variations and rest poses | Many asset entries; sampled earlier idles show face and gaze changes | One authored idle with breathing/blinking |
