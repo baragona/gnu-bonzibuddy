@@ -1,0 +1,7 @@
+{
+  "changedLeftVertices" : 542,
+  "manualOverridePassed" : true,
+  "maximumLeftLowering" : 0.016545295715332031,
+  "maximumOppositeDisplacement" : 0,
+  "note" : "Actual GPU-deformed mesh at the identical head pose, automatic left brow versus a manual zero override. Excludes the smoothly blended center strip from the opposite-side bound."
+}

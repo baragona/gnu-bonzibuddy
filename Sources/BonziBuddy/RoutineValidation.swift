@@ -55,10 +55,11 @@ func validateRoutines() throws {
                 guard finite(foot.ankle),finite(foot.kneeBend),length(foot.kneeBend)>0.001,(0...1).contains(foot.weight),abs(length(foot.rotation.vector)-1)<0.001 else {throw failure("Invalid foot target")}
             }
             for hand in pose.hands.values {
+                if let bend=hand.elbowBend {guard finite(bend),length(bend)>0.001 else {throw failure("Invalid elbow bend direction")}}
                 if let tip=hand.indexTipContact {
-                    guard finite(tip),hand.palmContact == nil,hand.pointing,hand.openness==1,hand.grip==0,hand.fist==0 else {throw failure("Fingertip contact requires a straight index pose")}
+                    guard finite(tip),hand.palmContact == nil,hand.pointing,hand.openness==1,hand.grip==0,hand.fist==0,hand.fingersTogether==0,hand.thumbFold==0 else {throw failure("Fingertip contact requires a straight index pose")}
                 }
-                guard hand.palmContact.map(finite) ?? true,finite(hand.wrist),finite(hand.fingers),finite(hand.palm),length(cross(hand.fingers,hand.palm))>0.001,(0...1).contains(hand.weight),(0...1).contains(hand.grip),(0...1).contains(hand.fist) else {throw failure("Invalid hand frame: \(action)")}
+                guard hand.palmContact.map(finite) ?? true,finite(hand.wrist),finite(hand.fingers),finite(hand.palm),length(cross(hand.fingers,hand.palm))>0.001,(0...1).contains(hand.weight),(0...1).contains(hand.grip),(0...1).contains(hand.fist),(0...1).contains(hand.fingersTogether),(0...1).contains(hand.thumbFold) else {throw failure("Invalid hand frame: \(action)")}
             }
             guard Set(pose.props.map(\.id)).count==pose.props.count else {throw failure("Duplicate prop IDs")}
             for prop in pose.props {

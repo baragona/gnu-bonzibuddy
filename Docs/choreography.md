@@ -198,3 +198,7 @@ The wink head turn now has one travel interval (0.10–0.60 seconds), a stationa
 During Wink, the eyes counter the head yaw using per-eye fan calibration, retaining the neutral forward-looking direction through the turn, closed-eye hold, reopening, and return. The independent eyelid and head-motion tracks remain unchanged. See the [gaze checkpoint](Baselines/2026-09-05-wink-gaze/README.md).
 
 The winking brow dips with the eyelid at 40% of the imported brow-lowering morph and relaxes as the eye reopens. The opposite brow keeps its resting shape. This uses shared independent brow intentions rather than adding rig-specific logic to the wink sampler.
+
+## Blowing a kiss
+
+Blow Kiss follows the original 2.08-second hand-to-mouth, palm-up release, held kiss, and return sequence. The left palm uses the shared calibrated contact frame; the free hand uses the lower-belly pose. The mouth puckers and the eyes blink during approach. The extracted reference contains no heart prop; this performance introduces no invented object or external service. Original sound cues are outside this visual implementation.

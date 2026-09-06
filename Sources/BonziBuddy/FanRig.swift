@@ -174,8 +174,11 @@ final class FanRig {
                     let wanted=restWrist+(target-restWrist)*engagement
                     let direction=normalize(wanted-shoulder),distance=min(upper+lower-0.002,max(abs(upper-lower)+0.002,length(wanted-shoulder)))
                     let along=(upper*upper-lower*lower+distance*distance)/(2*distance)
-                    let pole=restElbow-shoulder
-                    let bend=normalize(pole-direction*dot(pole,direction))
+                    let restPole=restElbow-shoulder
+                    let preference=routine.hands[wrist==26 ? .left:.right]?.elbowBend
+                    let pole=preference.map {restPole+(normalize($0)*length(restPole)-restPole)*engagement} ?? restPole
+                    let projected=pole-direction*dot(pole,direction)
+                    let bend=normalize(length(projected)>0.0001 ? projected:restPole-direction*dot(restPole,direction))
                     gestureElbows[elbow]=shoulder+direction*along+bend*sqrt(max(0,upper*upper-along*along))
                     gestureWrists[elbow]=shoulder+direction*distance
                 }
@@ -235,7 +238,12 @@ final class FanRig {
                         result=blendRotation(baseline,handFrame(i==26 ? 30:46,intent.fingers,intent.palm),intent.weight)
                     }
                     if (27...38).contains(i) || (43...54).contains(i) { result=blendRotation(result,inherited,intent.openness*intent.weight) }
-                    if max(intent.grip,intent.fist)>0 && ((27...38).contains(i) || (43...54).contains(i)) {
+                    if [27,30,33,43,46,49].contains(i) && intent.fingersTogether>0 {
+                        result=blendRotation(result,aim(i+1,intent.fingers),intent.fingersTogether*intent.weight)
+                    }
+                    let thumbJoint=(36...38).contains(i) || (52...54).contains(i)
+                    let closing=max(max(intent.grip,intent.fist),thumbJoint ? intent.thumbFold:0)
+                    if closing>0 && ((27...38).contains(i) || (43...54).contains(i)) {
                         let first=side<0 ? 27:43,segment=(i-first)%3
                         let thumb=i>=(side<0 ? 36:52)
                         let gripCurl:Float=thumb ? 0.65:[Float(1.05),1.35,0.80][segment]
@@ -255,9 +263,9 @@ final class FanRig {
                         // A fist aligns the finger bases before curling and lays
                         // the thumb across them; prop grips retain their spread.
                         let direction=thumb ? normalize(cross(intent.fingers,intent.palm))*side+normalize(intent.palm)*0.4:intent.fingers
-                        let base=segment==0 ? blendRotation(inherited,aim(i+1,direction),intent.fist):inherited
+                        let base=segment==0 ? blendRotation(inherited,aim(i+1,direction),max(intent.fist,thumb ? intent.thumbFold:intent.fingersTogether)):inherited
                         let grasp=translation(p)*rotate(curl,axis)*translation(-p)*base
-                        result=blendRotation(result,grasp,max(intent.grip,intent.fist)*intent.weight)
+                        result=blendRotation(result,grasp,closing*intent.weight)
                     }
                     if intent.pointing && ([30,31,32,33,34,35,46,47,48,49,50,51].contains(i)) {
                         let angle:Float=[30,33,46,49].contains(i) ? 1.1:[31,34,47,50].contains(i) ? 1.35:0.65
