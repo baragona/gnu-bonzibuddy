@@ -1,0 +1,7 @@
+{
+  "revalidatedActions": [
+    "Sunglasses",
+    "Banana"
+  ],
+  "note": "After the full shared-rest scan, only these routines and their new hand-aside helper changed. Their fresh full-clip scans replace the corresponding entries."
+}

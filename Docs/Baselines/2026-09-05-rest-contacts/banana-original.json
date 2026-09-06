@@ -1,0 +1,459 @@
+{
+  "foregroundRGBMeanAbsoluteError" : 0.23576508877701519,
+  "gate" : {
+    "maximumForegroundRGBMAE" : 0.050000000000000003,
+    "minimumSilhouetteIoU" : 0.94999999999999996
+  },
+  "materialRegions" : [
+
+  ],
+  "method" : "Selected pose, foreground matte removal (20 RGB distance), independent bounding-box fit preserving aspect ratio into 256x256 with 12px padding, nearest-neighbor sampling. RGB MAE measured over union of foreground. This is a diagnostic, not proof of perceptual identity.",
+  "panels" : [
+    "Original reference",
+    "Metal render",
+    "Absolute RGB difference"
+  ],
+  "passesNearIdenticalGate" : false,
+  "referencePath" : "Validation\/RestContacts\/banana-original\/original.png",
+  "renderPath" : "Validation\/RestContacts\/banana-original\/native.png",
+  "silhouetteIoU" : 0.7636229749631811,
+  "silhouetteRows" : [
+    {
+      "normalizedY" : 20,
+      "referenceXSpans" : [
+        [
+          110,
+          150
+        ]
+      ],
+      "renderXSpans" : [
+        [
+          106,
+          143
+        ]
+      ]
+    },
+    {
+      "normalizedY" : 30,
+      "referenceXSpans" : [
+        [
+          100,
+          158
+        ]
+      ],
+      "renderXSpans" : [
+        [
+          92,
+          154
+        ]
+      ]
+    },
+    {
+      "normalizedY" : 40,
+      "referenceXSpans" : [
+        [
+          100,
+          160
+        ]
+      ],
+      "renderXSpans" : [
+        [
+          90,
+          156
+        ]
+      ]
+    },
+    {
+      "normalizedY" : 50,
+      "referenceXSpans" : [
+        [
+          98,
+          160
+        ]
+      ],
+      "renderXSpans" : [
+        [
+          88,
+          108
+        ],
+        [
+          110,
+          118
+        ],
+        [
+          120,
+          121
+        ],
+        [
+          128,
+          157
+        ]
+      ]
+    },
+    {
+      "normalizedY" : 60,
+      "referenceXSpans" : [
+        [
+          72,
+          80
+        ],
+        [
+          91,
+          167
+        ]
+      ],
+      "renderXSpans" : [
+        [
+          76,
+          164
+        ]
+      ]
+    },
+    {
+      "normalizedY" : 70,
+      "referenceXSpans" : [
+        [
+          83,
+          171
+        ]
+      ],
+      "renderXSpans" : [
+        [
+          79,
+          165
+        ]
+      ]
+    },
+    {
+      "normalizedY" : 80,
+      "referenceXSpans" : [
+        [
+          85,
+          165
+        ]
+      ],
+      "renderXSpans" : [
+        [
+          82,
+          163
+        ]
+      ]
+    },
+    {
+      "normalizedY" : 90,
+      "referenceXSpans" : [
+        [
+          89,
+          160
+        ]
+      ],
+      "renderXSpans" : [
+        [
+          60,
+          68
+        ],
+        [
+          83,
+          162
+        ]
+      ]
+    },
+    {
+      "normalizedY" : 100,
+      "referenceXSpans" : [
+        [
+          47,
+          165
+        ]
+      ],
+      "renderXSpans" : [
+        [
+          41,
+          72
+        ],
+        [
+          90,
+          160
+        ]
+      ]
+    },
+    {
+      "normalizedY" : 110,
+      "referenceXSpans" : [
+        [
+          36,
+          180
+        ]
+      ],
+      "renderXSpans" : [
+        [
+          32,
+          46
+        ],
+        [
+          49,
+          174
+        ]
+      ]
+    },
+    {
+      "normalizedY" : 120,
+      "referenceXSpans" : [
+        [
+          38,
+          197
+        ]
+      ],
+      "renderXSpans" : [
+        [
+          28,
+          41
+        ],
+        [
+          47,
+          182
+        ]
+      ]
+    },
+    {
+      "normalizedY" : 130,
+      "referenceXSpans" : [
+        [
+          83,
+          214
+        ]
+      ],
+      "renderXSpans" : [
+        [
+          24,
+          30
+        ],
+        [
+          45,
+          91
+        ],
+        [
+          95,
+          188
+        ]
+      ]
+    },
+    {
+      "normalizedY" : 140,
+      "referenceXSpans" : [
+        [
+          81,
+          220
+        ]
+      ],
+      "renderXSpans" : [
+        [
+          44,
+          75
+        ],
+        [
+          88,
+          170
+        ],
+        [
+          172,
+          193
+        ]
+      ]
+    },
+    {
+      "normalizedY" : 150,
+      "referenceXSpans" : [
+        [
+          78,
+          212
+        ]
+      ],
+      "renderXSpans" : [
+        [
+          48,
+          68
+        ],
+        [
+          84,
+          172
+        ],
+        [
+          175,
+          195
+        ]
+      ]
+    },
+    {
+      "normalizedY" : 160,
+      "referenceXSpans" : [
+        [
+          81,
+          180
+        ]
+      ],
+      "renderXSpans" : [
+        [
+          84,
+          192
+        ]
+      ]
+    },
+    {
+      "normalizedY" : 170,
+      "referenceXSpans" : [
+        [
+          81,
+          178
+        ]
+      ],
+      "renderXSpans" : [
+        [
+          86,
+          173
+        ]
+      ]
+    },
+    {
+      "normalizedY" : 180,
+      "referenceXSpans" : [
+        [
+          78,
+          182
+        ]
+      ],
+      "renderXSpans" : [
+        [
+          88,
+          171
+        ]
+      ]
+    },
+    {
+      "normalizedY" : 190,
+      "referenceXSpans" : [
+        [
+          76,
+          182
+        ]
+      ],
+      "renderXSpans" : [
+        [
+          81,
+          175
+        ]
+      ]
+    },
+    {
+      "normalizedY" : 200,
+      "referenceXSpans" : [
+        [
+          81,
+          114
+        ],
+        [
+          144,
+          180
+        ]
+      ],
+      "renderXSpans" : [
+        [
+          78,
+          116
+        ],
+        [
+          142,
+          178
+        ]
+      ]
+    },
+    {
+      "normalizedY" : 210,
+      "referenceXSpans" : [
+        [
+          87,
+          116
+        ],
+        [
+          142,
+          171
+        ]
+      ],
+      "renderXSpans" : [
+        [
+          79,
+          107
+        ],
+        [
+          152,
+          177
+        ]
+      ]
+    },
+    {
+      "normalizedY" : 220,
+      "referenceXSpans" : [
+        [
+          87,
+          120
+        ],
+        [
+          138,
+          171
+        ]
+      ],
+      "renderXSpans" : [
+        [
+          87,
+          195
+        ]
+      ]
+    },
+    {
+      "normalizedY" : 230,
+      "referenceXSpans" : [
+        [
+          72,
+          120
+        ],
+        [
+          138,
+          186
+        ]
+      ],
+      "renderXSpans" : [
+        [
+          73,
+          227
+        ]
+      ]
+    },
+    {
+      "normalizedY" : 240,
+      "referenceXSpans" : [
+        [
+          72,
+          95
+        ],
+        [
+          164,
+          186
+        ]
+      ],
+      "renderXSpans" : [
+        [
+          72,
+          74
+        ],
+        [
+          79,
+          98
+        ],
+        [
+          151,
+          185
+        ]
+      ]
+    }
+  ]
+}

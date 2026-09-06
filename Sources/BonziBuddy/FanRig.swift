@@ -125,8 +125,8 @@ final class FanRig {
             }
             if !sourcePose {
                 let side:Float=i<39 ? -1:1
-                let restingUpper=SIMD3<Float>(side*0.78,-0.62,0.10)
-                let restingForearm=SIMD3<Float>(-side*1.05,i<39 ? 0.62:0.46,0.60)
+                let restingUpper=FanRestPose.upperArm(side)
+                let restingForearm=FanRestPose.forearm(side)
                 func aim(_ child:Int,_ direction:SIMD3<Float>)->simd_float4x4 {
                     let childPosition=inherited*local[child].columns.3
                     let pivot=SIMD3(inherited.columns.3.x,inherited.columns.3.y,inherited.columns.3.z)
@@ -181,11 +181,19 @@ final class FanRig {
                 }
                 if i==22 || i==39 { result=aim(i==22 ? 23:40,restingUpper) }
                 if i==23 || i==40 { result=aim(i==23 ? 24:41,restingForearm) }
-                if i==26 || i==42 { result=handFrame(i==26 ? 30:46,[-side,0.04,0.08],[0,-0.35,-1]) }
+                if i==26 || i==42 { result=handFrame(i==26 ? 30:46,FanRestPose.fingers(side),FanRestPose.palm) }
+                var articulationWeight=routine.hands[HandSide(sign:side)]?.weight ?? 0
+                if routine.hands[HandSide(sign:side)] == nil,let pose=arms[side] {
+                    let baseline=ArmPose.rest(side)
+                    articulationWeight=(action == .think || action == .dance) ? actionEnvelope:min(1,(length(pose.wrist-baseline.wrist)+length(pose.elbow-baseline.elbow))*5)
+                }
+                articulationWeight=max(articulationWeight,side>0 ? wave:0)
                 var curl:Float=0
-                if [27,30,33,43,46,49].contains(i) { curl=0.30 }
-                if [28,31,34,44,47,50].contains(i) { curl=0.85 }
-                if [29,32,35,45,48,51].contains(i) { curl=0.35 }
+                // Preserve authored active finger shapes while improving the shared
+                // rest shape. Prop-specific grip/open channels still apply below.
+                if [27,30,33,43,46,49].contains(i) { curl=FanRestPose.fingerCurl[0]+(0.30-FanRestPose.fingerCurl[0])*articulationWeight }
+                if [28,31,34,44,47,50].contains(i) { curl=FanRestPose.fingerCurl[1]+(0.85-FanRestPose.fingerCurl[1])*articulationWeight }
+                if [29,32,35,45,48,51].contains(i) { curl=FanRestPose.fingerCurl[2]+(0.35-FanRestPose.fingerCurl[2])*articulationWeight }
                 if curl>0 {
                     let p=inherited.columns.3
                     result=translation([p.x,p.y,p.z])*rotate(-side*curl,[0,1,0])*translation([-p.x,-p.y,-p.z])*inherited
@@ -200,11 +208,11 @@ final class FanRig {
                     if i==23 || i==40 { result=aim(i==23 ? 24:41,gestureWrists[i].map { $0-xyz(inherited) } ?? (restingForearm+(dw-de)*2)) }
                     if i==26 || i==42 {
                         let p=xyz(inherited),turn=pose.angle-restPose.angle
-                        let direction=SIMD3<Float>(-side,0.04,0.08)
-                        result=translation(p)*rotate(turn,[0,0,1])*rotate(pose.palmTurn,normalize(direction))*translation(-p)*handFrame(i==26 ? 30:46,direction,[0,-0.35,-1])
+                        let direction=FanRestPose.fingers(side)
+                        result=translation(p)*rotate(turn,[0,0,1])*rotate(pose.palmTurn,normalize(direction))*translation(-p)*handFrame(i==26 ? 30:46,direction,FanRestPose.palm)
                         if action == .dance { result=blendRotation(result,handFrame(i==26 ? 30:46,[side,0.25,0.05],[0,0,1]),actionEnvelope) }
                         if action == .think && side>0 { result=blendRotation(result,handFrame(46,[-1,0.10,0],[0,0,-1]),actionEnvelope) }
-                        if action == .shrug { result=blendRotation(handFrame(i==26 ? 30:46,[-side,0.04,0.08],[0,-0.35,-1]),handFrame(i==26 ? 30:46,[side,0.08,0],[0,1,0.1]),pose.spread) }
+                        if action == .shrug { result=blendRotation(handFrame(i==26 ? 30:46,FanRestPose.fingers(side),FanRestPose.palm),handFrame(i==26 ? 30:46,[side,0.08,0],[0,1,0.1]),pose.spread) }
                         if action == .clap { result=blendRotation(result,handFrame(i==26 ? 30:46,[-side,0,0],[0,side<0 ? 1:-1,0]),min(1,(length(dw)+length(de))*6)) }
                     }
                     if routine.hands[HandSide(sign:side)] == nil && ((27...38).contains(i) || (43...54).contains(i)) { result=blendRotation(result,inherited,pose.spread) }
@@ -223,7 +231,7 @@ final class FanRig {
                 }
                 if let intent=routine.hands[HandSide(sign:side)] {
                     if i==26 || i==42 {
-                        let baseline=handFrame(i==26 ? 30:46,[-side,0.04,0.08],[0,-0.35,-1])
+                        let baseline=handFrame(i==26 ? 30:46,FanRestPose.fingers(side),FanRestPose.palm)
                         result=blendRotation(baseline,handFrame(i==26 ? 30:46,intent.fingers,intent.palm),intent.weight)
                     }
                     if (27...38).contains(i) || (43...54).contains(i) { result=blendRotation(result,inherited,intent.openness*intent.weight) }

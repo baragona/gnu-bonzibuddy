@@ -2,7 +2,7 @@
 
 Implementation in progress; the complete visual-repertoire goal remains open.
 
-`Routines.swift` samples continuous hand intentions, body facing, head motion, gaze, and prop cues from an action's elapsed time. A routine owns its reveal/hold/stow beats. `FanRig` turns wrist targets into two-bone IK and blends palm/finger intentions with the approved rest pose. Existing actions retain their current reference curves.
+`Routines.swift` samples continuous hand intentions, body facing, head motion, gaze, and prop cues from an action's elapsed time. A routine owns its reveal/hold/stow beats. `FanRig` turns wrist targets into two-bone IK and blends palm/finger intentions with the shared rest pose. Existing actions retain their current reference curves.
 
 `PropMotion` resolves prop anchors after the rig has evaluated and blended its pose. Semantic wrist/head attachments support offsets in blended character axes or axes that rotate with the joint. Rigid attachment frames remove skeletal scale and shear. It preserves outgoing props during interruption and contracts them over 0.20 seconds. This is a first interruption policy; held books and thrown objects will need dedicated return/release behavior rather than assuming every prop should contract.
 

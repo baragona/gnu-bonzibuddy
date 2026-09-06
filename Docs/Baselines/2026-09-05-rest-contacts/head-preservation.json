@@ -1,0 +1,15 @@
+{
+  "cropTopLeftXYWH" : [
+    280,
+    140,
+    240,
+    195
+  ],
+  "maximumChannelError" : 0.50196078431372548,
+  "note" : "Fixed head-region comparison against the approved appearance. Resting arms and their shadows intentionally change elsewhere; the approved reference is retained.",
+  "premultipliedRGBAMAE" : 3.6717557505170197e-05,
+  "sources" : [
+    "References\/ApprovedFanAppearance\/front.png",
+    "Validation\/FanActions\/eye-catchlight-front-on.png"
+  ]
+}

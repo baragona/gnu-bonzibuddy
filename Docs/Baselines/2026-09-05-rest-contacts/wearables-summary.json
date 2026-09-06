@@ -1,0 +1,3174 @@
+[
+  {
+    "action": "Idle",
+    "cameraPitchRadians": 0.18000000715255737,
+    "cameraYawRadians": 0,
+    "fps": 120,
+    "frames": 553,
+    "peaks": [],
+    "wearables": true
+  },
+  {
+    "action": "Look Left",
+    "cameraPitchRadians": 0.18000000715255737,
+    "cameraYawRadians": 0,
+    "fps": 120,
+    "frames": 161,
+    "peaks": [],
+    "wearables": true
+  },
+  {
+    "action": "Look Right",
+    "cameraPitchRadians": 0.18000000715255737,
+    "cameraYawRadians": 0,
+    "fps": 120,
+    "frames": 161,
+    "peaks": [],
+    "wearables": true
+  },
+  {
+    "action": "Chest Beat",
+    "cameraPitchRadians": 0.18000000715255737,
+    "cameraYawRadians": 0,
+    "fps": 120,
+    "frames": 181,
+    "peaks": [
+      {
+        "center": [
+          -0.011843295767903328,
+          0.0672588050365448,
+          0.2554455101490021
+        ],
+        "pair": "left.hand / body",
+        "sampledFramesWithCrossing": 17,
+        "span": [
+          0.12244072556495667,
+          0.28067004680633545,
+          0.07433493435382843
+        ],
+        "time": 1.325,
+        "trianglePairs": 128
+      },
+      {
+        "center": [
+          -0.0008339900523424149,
+          0.06395964324474335,
+          0.2865637242794037
+        ],
+        "pair": "left.hand / right.hand",
+        "sampledFramesWithCrossing": 23,
+        "span": [
+          0.09096398949623108,
+          0.23546701669692993,
+          0.19864721596240997
+        ],
+        "time": 1.2916666666666667,
+        "trianglePairs": 1276
+      },
+      {
+        "center": [
+          0.10471157729625702,
+          0.1074163019657135,
+          0.2234431803226471
+        ],
+        "pair": "right.hand / body",
+        "sampledFramesWithCrossing": 14,
+        "span": [
+          0.12836292386054993,
+          0.2608011066913605,
+          0.09137357771396637
+        ],
+        "time": 0.13333333333333333,
+        "trianglePairs": 313
+      }
+    ],
+    "wearables": true
+  },
+  {
+    "action": "Clap",
+    "cameraPitchRadians": 0.18000000715255737,
+    "cameraYawRadians": 0,
+    "fps": 120,
+    "frames": 185,
+    "peaks": [
+      {
+        "center": [
+          -0.1141715794801712,
+          -0.10608668625354767,
+          0.3644082844257355
+        ],
+        "pair": "left.forearm / right.hand",
+        "sampledFramesWithCrossing": 74,
+        "span": [
+          0.04349752515554428,
+          0.0020041316747665405,
+          0.007355034351348877
+        ],
+        "time": 0.6666666666666666,
+        "trianglePairs": 21
+      },
+      {
+        "center": [
+          0.09841856360435486,
+          -0.0758201852440834,
+          0.22520333528518677
+        ],
+        "pair": "left.hand / body",
+        "sampledFramesWithCrossing": 169,
+        "span": [
+          0.08670955896377563,
+          0.06126785650849342,
+          0.02798442542552948
+        ],
+        "time": 0.06666666666666667,
+        "trianglePairs": 112
+      },
+      {
+        "center": [
+          0.19225788116455078,
+          -0.1024305671453476,
+          0.24542146921157837
+        ],
+        "pair": "left.hand / right.forearm",
+        "sampledFramesWithCrossing": 136,
+        "span": [
+          0.07746797800064087,
+          0.07380684465169907,
+          0.12205474078655243
+        ],
+        "time": 1.25,
+        "trianglePairs": 142
+      },
+      {
+        "center": [
+          0.01396777480840683,
+          -0.021277397871017456,
+          0.3007572591304779
+        ],
+        "pair": "left.hand / right.hand",
+        "sampledFramesWithCrossing": 152,
+        "span": [
+          0.31607818603515625,
+          0.08788560330867767,
+          0.22454912960529327
+        ],
+        "time": 0.08333333333333333,
+        "trianglePairs": 634
+      },
+      {
+        "center": [
+          0.21098482608795166,
+          -0.13289961218833923,
+          0.17584604024887085
+        ],
+        "pair": "right.forearm / body",
+        "sampledFramesWithCrossing": 78,
+        "span": [
+          0.1272992491722107,
+          0.10179754346609116,
+          0.08833757042884827
+        ],
+        "time": 0.26666666666666666,
+        "trianglePairs": 101
+      },
+      {
+        "center": [
+          0.014858610928058624,
+          0.03018505498766899,
+          0.13940763473510742
+        ],
+        "pair": "right.hand / body",
+        "sampledFramesWithCrossing": 175,
+        "span": [
+          0.25189220905303955,
+          0.10450159758329391,
+          0.12073878943920135
+        ],
+        "time": 1.4333333333333333,
+        "trianglePairs": 584
+      }
+    ],
+    "wearables": true
+  },
+  {
+    "action": "Shrug",
+    "cameraPitchRadians": 0.18000000715255737,
+    "cameraYawRadians": 0,
+    "fps": 120,
+    "frames": 265,
+    "peaks": [
+      {
+        "center": [
+          -0.20801983773708344,
+          0.2948227524757385,
+          0.30230122804641724
+        ],
+        "pair": "left.hand / body",
+        "sampledFramesWithCrossing": 18,
+        "span": [
+          0.17343726754188538,
+          0.14512751996517181,
+          0.262564480304718
+        ],
+        "time": 1.7583333333333333,
+        "trianglePairs": 1064
+      },
+      {
+        "center": [
+          0.0008400715887546539,
+          0.09967897087335587,
+          0.3169996738433838
+        ],
+        "pair": "left.hand / right.hand",
+        "sampledFramesWithCrossing": 14,
+        "span": [
+          0.19539344310760498,
+          0.26533156633377075,
+          0.131972998380661
+        ],
+        "time": 0.3333333333333333,
+        "trianglePairs": 1119
+      },
+      {
+        "center": [
+          0.21897661685943604,
+          0.30901485681533813,
+          0.28706854581832886
+        ],
+        "pair": "right.hand / body",
+        "sampledFramesWithCrossing": 18,
+        "span": [
+          0.18612255156040192,
+          0.16419115662574768,
+          0.24281927943229675
+        ],
+        "time": 1.7583333333333333,
+        "trianglePairs": 1135
+      }
+    ],
+    "wearables": true
+  },
+  {
+    "action": "Wave",
+    "cameraPitchRadians": 0.18000000715255737,
+    "cameraYawRadians": 0,
+    "fps": 120,
+    "frames": 481,
+    "peaks": [
+      {
+        "center": [
+          0.2358814775943756,
+          0.29715949296951294,
+          0.0026119407266378403
+        ],
+        "pair": "right.upper-arm / body",
+        "sampledFramesWithCrossing": 297,
+        "span": [
+          0.07011939585208893,
+          0.07158830761909485,
+          0.1006254106760025
+        ],
+        "time": 0.48333333333333334,
+        "trianglePairs": 94
+      },
+      {
+        "center": [
+          0.4409634470939636,
+          0.41377148032188416,
+          0.029811857268214226
+        ],
+        "pair": "right.upper-arm / headphones",
+        "sampledFramesWithCrossing": 245,
+        "span": [
+          0.04424884915351868,
+          0.03032052516937256,
+          0.021966297179460526
+        ],
+        "time": 0.5,
+        "trianglePairs": 34
+      }
+    ],
+    "wearables": true
+  },
+  {
+    "action": "Dance",
+    "cameraPitchRadians": 0.18000000715255737,
+    "cameraYawRadians": 0,
+    "fps": 120,
+    "frames": 961,
+    "peaks": [
+      {
+        "center": [
+          0.308210551738739,
+          -0.05248475819826126,
+          -0.10899373143911362
+        ],
+        "pair": "right.upper-arm / body",
+        "sampledFramesWithCrossing": 102,
+        "span": [
+          0.05912071466445923,
+          0.08928725123405457,
+          0.06002102792263031
+        ],
+        "time": 5.3,
+        "trianglePairs": 48
+      }
+    ],
+    "wearables": true
+  },
+  {
+    "action": "Think",
+    "cameraPitchRadians": 0.18000000715255737,
+    "cameraYawRadians": 0,
+    "fps": 120,
+    "frames": 481,
+    "peaks": [
+      {
+        "center": [
+          0.08696162700653076,
+          0.24262213706970215,
+          0.4618542492389679
+        ],
+        "pair": "right.hand / body",
+        "sampledFramesWithCrossing": 26,
+        "span": [
+          0.07917270064353943,
+          0.06566929817199707,
+          0.0437319278717041
+        ],
+        "time": 0.225,
+        "trianglePairs": 277
+      }
+    ],
+    "wearables": true
+  },
+  {
+    "action": "Surprised",
+    "cameraPitchRadians": 0.18000000715255737,
+    "cameraYawRadians": 0,
+    "fps": 120,
+    "frames": 481,
+    "peaks": [
+      {
+        "center": [
+          -0.23099073767662048,
+          0.28562021255493164,
+          0.003083832561969757
+        ],
+        "pair": "left.upper-arm / body",
+        "sampledFramesWithCrossing": 429,
+        "span": [
+          0.044232726097106934,
+          0.043182939291000366,
+          0.09139407426118851
+        ],
+        "time": 0.3416666666666667,
+        "trianglePairs": 64
+      },
+      {
+        "center": [
+          0.029895860701799393,
+          -0.08673455566167831,
+          0.240211620926857
+        ],
+        "pair": "right.hand / body",
+        "sampledFramesWithCrossing": 6,
+        "span": [
+          0.02980627305805683,
+          0.03530097007751465,
+          0.009280622005462646
+        ],
+        "time": 0.09166666666666666,
+        "trianglePairs": 58
+      },
+      {
+        "center": [
+          0.2308196723461151,
+          0.2853250801563263,
+          0.0030592791736125946
+        ],
+        "pair": "right.upper-arm / body",
+        "sampledFramesWithCrossing": 429,
+        "span": [
+          0.04333353042602539,
+          0.042780280113220215,
+          0.09099613130092621
+        ],
+        "time": 0.3333333333333333,
+        "trianglePairs": 64
+      }
+    ],
+    "wearables": true
+  },
+  {
+    "action": "Speak",
+    "cameraPitchRadians": 0.18000000715255737,
+    "cameraYawRadians": 0,
+    "fps": 120,
+    "frames": 241,
+    "peaks": [],
+    "wearables": true
+  },
+  {
+    "action": "Mail Full",
+    "cameraPitchRadians": 0.18000000715255737,
+    "cameraYawRadians": 0,
+    "fps": 120,
+    "frames": 745,
+    "peaks": [
+      {
+        "center": [
+          -0.5495631694793701,
+          -0.023656334728002548,
+          0.05993650481104851
+        ],
+        "pair": "left.forearm / mail.door",
+        "sampledFramesWithCrossing": 7,
+        "span": [
+          0.07616537809371948,
+          0.029853368178009987,
+          0.12347840517759323
+        ],
+        "time": 0.6416666666666667,
+        "trianglePairs": 52
+      },
+      {
+        "center": [
+          -0.36638855934143066,
+          -0.1031646803021431,
+          0.293313592672348
+        ],
+        "pair": "left.forearm / mail.letter.back",
+        "sampledFramesWithCrossing": 87,
+        "span": [
+          0.2110043466091156,
+          0.11687682569026947,
+          0.07197707891464233
+        ],
+        "time": 1.7583333333333333,
+        "trianglePairs": 245
+      },
+      {
+        "center": [
+          -0.3537285625934601,
+          -0.09254021942615509,
+          0.29725056886672974
+        ],
+        "pair": "left.forearm / mail.letter.flap",
+        "sampledFramesWithCrossing": 87,
+        "span": [
+          0.20438379049301147,
+          0.11178266257047653,
+          0.06140720844268799
+        ],
+        "time": 1.75,
+        "trianglePairs": 245
+      },
+      {
+        "center": [
+          -0.29132524132728577,
+          -0.240811288356781,
+          0.010597525164484978
+        ],
+        "pair": "left.hand / body",
+        "sampledFramesWithCrossing": 48,
+        "span": [
+          0.10378910601139069,
+          0.2937161326408386,
+          0.09510944783687592
+        ],
+        "time": 5.983333333333333,
+        "trianglePairs": 657
+      },
+      {
+        "center": [
+          -0.9477787017822266,
+          0.05343824625015259,
+          0.1294276863336563
+        ],
+        "pair": "left.hand / mail.box",
+        "sampledFramesWithCrossing": 76,
+        "span": [
+          0.22763395309448242,
+          0.2930935025215149,
+          0.2194458395242691
+        ],
+        "time": 1.175,
+        "trianglePairs": 812
+      },
+      {
+        "center": [
+          -0.7703167200088501,
+          -0.24317637085914612,
+          0.11718501895666122
+        ],
+        "pair": "left.hand / mail.door",
+        "sampledFramesWithCrossing": 98,
+        "span": [
+          0.12149053812026978,
+          0.28717106580734253,
+          0.0826471596956253
+        ],
+        "time": 0.8916666666666667,
+        "trianglePairs": 480
+      },
+      {
+        "center": [
+          -0.5198787450790405,
+          -0.3440287411212921,
+          -0.12976373732089996
+        ],
+        "pair": "left.hand / mail.letter.back",
+        "sampledFramesWithCrossing": 558,
+        "span": [
+          0.35859760642051697,
+          0.36348956823349,
+          0.07535941153764725
+        ],
+        "time": 5.641666666666667,
+        "trianglePairs": 1347
+      },
+      {
+        "center": [
+          -0.42514318227767944,
+          -0.3164363503456116,
+          0.22099050879478455
+        ],
+        "pair": "left.hand / mail.letter.flap",
+        "sampledFramesWithCrossing": 563,
+        "span": [
+          0.3757047653198242,
+          0.3583762049674988,
+          0.07314984500408173
+        ],
+        "time": 5.533333333333333,
+        "trianglePairs": 1447
+      },
+      {
+        "center": [
+          -0.017675859853625298,
+          -0.061355121433734894,
+          0.47210264205932617
+        ],
+        "pair": "left.hand / right.hand",
+        "sampledFramesWithCrossing": 11,
+        "span": [
+          0.09587886929512024,
+          0.1760561317205429,
+          0.061118870973587036
+        ],
+        "time": 1.825,
+        "trianglePairs": 358
+      },
+      {
+        "center": [
+          -0.2067667692899704,
+          0.08385471999645233,
+          -0.07937493920326233
+        ],
+        "pair": "left.upper-arm / body",
+        "sampledFramesWithCrossing": 37,
+        "span": [
+          0.05048483610153198,
+          0.10266482830047607,
+          0.06914796680212021
+        ],
+        "time": 1.6083333333333334,
+        "trianglePairs": 75
+      },
+      {
+        "center": [
+          -0.057114824652671814,
+          -0.09121421724557877,
+          0.4064217209815979
+        ],
+        "pair": "right.hand / mail.letter.back",
+        "sampledFramesWithCrossing": 449,
+        "span": [
+          0.2146342694759369,
+          0.29707640409469604,
+          0.056149691343307495
+        ],
+        "time": 1.8,
+        "trianglePairs": 782
+      },
+      {
+        "center": [
+          -0.02747850865125656,
+          -0.09833082556724548,
+          0.42710748314857483
+        ],
+        "pair": "right.hand / mail.letter.flap",
+        "sampledFramesWithCrossing": 449,
+        "span": [
+          0.22101645171642303,
+          0.30298906564712524,
+          0.05511516332626343
+        ],
+        "time": 1.8083333333333333,
+        "trianglePairs": 810
+      }
+    ],
+    "wearables": true
+  },
+  {
+    "action": "Mail Empty",
+    "cameraPitchRadians": 0.18000000715255737,
+    "cameraYawRadians": 0,
+    "fps": 120,
+    "frames": 421,
+    "peaks": [
+      {
+        "center": [
+          -0.5495631694793701,
+          -0.023656334728002548,
+          0.05993650481104851
+        ],
+        "pair": "left.forearm / mail.door",
+        "sampledFramesWithCrossing": 15,
+        "span": [
+          0.07616537809371948,
+          0.029853368178009987,
+          0.12347840517759323
+        ],
+        "time": 0.6416666666666667,
+        "trianglePairs": 52
+      },
+      {
+        "center": [
+          -0.8521071672439575,
+          0.07089819759130478,
+          0.1435045301914215
+        ],
+        "pair": "left.hand / mail.box",
+        "sampledFramesWithCrossing": 66,
+        "span": [
+          0.08156830072402954,
+          0.2930029630661011,
+          0.11426225304603577
+        ],
+        "time": 0.4583333333333333,
+        "trianglePairs": 240
+      },
+      {
+        "center": [
+          -0.7692745923995972,
+          -0.2463672012090683,
+          0.11777335405349731
+        ],
+        "pair": "left.hand / mail.door",
+        "sampledFramesWithCrossing": 129,
+        "span": [
+          0.12173551321029663,
+          0.2842113673686981,
+          0.08292242884635925
+        ],
+        "time": 2.283333333333333,
+        "trianglePairs": 486
+      },
+      {
+        "center": [
+          -0.04415666311979294,
+          -0.0830104723572731,
+          0.3527586758136749
+        ],
+        "pair": "left.hand / right.hand",
+        "sampledFramesWithCrossing": 1,
+        "span": [
+          0.024047698825597763,
+          0.02595151960849762,
+          0.015002071857452393
+        ],
+        "time": 1.025,
+        "trianglePairs": 63
+      },
+      {
+        "center": [
+          -0.3022095561027527,
+          0.06854379177093506,
+          -0.05547671020030975
+        ],
+        "pair": "left.upper-arm / body",
+        "sampledFramesWithCrossing": 170,
+        "span": [
+          0.055219799280166626,
+          0.0527229979634285,
+          0.1477563977241516
+        ],
+        "time": 1.3416666666666666,
+        "trianglePairs": 119
+      }
+    ],
+    "wearables": true
+  },
+  {
+    "action": "Mail Read",
+    "cameraPitchRadians": 0.18000000715255737,
+    "cameraYawRadians": 0,
+    "fps": 120,
+    "frames": 583,
+    "peaks": [
+      {
+        "center": [
+          -0.11914238333702087,
+          -0.12309469282627106,
+          0.47232359647750854
+        ],
+        "pair": "left.forearm / mail.letter.back",
+        "sampledFramesWithCrossing": 147,
+        "span": [
+          0.2635469436645508,
+          0.16774562001228333,
+          0.03565084934234619
+        ],
+        "time": 1.0416666666666667,
+        "trianglePairs": 218
+      },
+      {
+        "center": [
+          -0.2620896100997925,
+          -0.015675276517868042,
+          0.6598684191703796
+        ],
+        "pair": "left.forearm / mail.letter.flap",
+        "sampledFramesWithCrossing": 148,
+        "span": [
+          0.16170915961265564,
+          0.1729482263326645,
+          0.30164051055908203
+        ],
+        "time": 1.7083333333333333,
+        "trianglePairs": 244
+      },
+      {
+        "center": [
+          -0.26864495873451233,
+          -0.2228255718946457,
+          0.04355297610163689
+        ],
+        "pair": "left.hand / body",
+        "sampledFramesWithCrossing": 86,
+        "span": [
+          0.10454477369785309,
+          0.294315904378891,
+          0.08854436129331589
+        ],
+        "time": 0.35833333333333334,
+        "trianglePairs": 657
+      },
+      {
+        "center": [
+          -0.5198640823364258,
+          -0.344033420085907,
+          -0.12976455688476562
+        ],
+        "pair": "left.hand / mail.letter.back",
+        "sampledFramesWithCrossing": 326,
+        "span": [
+          0.35857006907463074,
+          0.36349204182624817,
+          0.07535996288061142
+        ],
+        "time": 4.291666666666667,
+        "trianglePairs": 1346
+      },
+      {
+        "center": [
+          -0.419682115316391,
+          -0.31488826870918274,
+          0.23852723836898804
+        ],
+        "pair": "left.hand / mail.letter.flap",
+        "sampledFramesWithCrossing": 329,
+        "span": [
+          0.3760231137275696,
+          0.3583393096923828,
+          0.0731406956911087
+        ],
+        "time": 0.775,
+        "trianglePairs": 1443
+      },
+      {
+        "center": [
+          -0.05731920897960663,
+          -0.11478760093450546,
+          0.33128461241722107
+        ],
+        "pair": "left.hand / right.hand",
+        "sampledFramesWithCrossing": 10,
+        "span": [
+          0.023945357650518417,
+          0.13487474620342255,
+          0.03910350799560547
+        ],
+        "time": 4.75,
+        "trianglePairs": 150
+      },
+      {
+        "center": [
+          -0.18328657746315002,
+          0.16655251383781433,
+          0.0825628712773323
+        ],
+        "pair": "left.upper-arm / body",
+        "sampledFramesWithCrossing": 85,
+        "span": [
+          0.13621538877487183,
+          0.2475772500038147,
+          0.17040888965129852
+        ],
+        "time": 1.7416666666666667,
+        "trianglePairs": 379
+      },
+      {
+        "center": [
+          0.041886888444423676,
+          -0.16087795794010162,
+          0.38496342301368713
+        ],
+        "pair": "right.hand / mail.letter.back",
+        "sampledFramesWithCrossing": 395,
+        "span": [
+          0.19622628390789032,
+          0.33995822072029114,
+          0.05311626195907593
+        ],
+        "time": 0.975,
+        "trianglePairs": 715
+      },
+      {
+        "center": [
+          0.06612993776798248,
+          -0.16111084818840027,
+          0.40232425928115845
+        ],
+        "pair": "right.hand / mail.letter.flap",
+        "sampledFramesWithCrossing": 315,
+        "span": [
+          0.20008492469787598,
+          0.34374862909317017,
+          0.053410887718200684
+        ],
+        "time": 0.9833333333333333,
+        "trianglePairs": 744
+      }
+    ],
+    "wearables": true
+  },
+  {
+    "action": "Mail Next",
+    "cameraPitchRadians": 0.18000000715255737,
+    "cameraYawRadians": 0,
+    "fps": 120,
+    "frames": 799,
+    "peaks": [
+      {
+        "center": [
+          -0.08018854260444641,
+          -0.10404443740844727,
+          0.48984023928642273
+        ],
+        "pair": "left.forearm / mail.letter.back",
+        "sampledFramesWithCrossing": 138,
+        "span": [
+          0.26288488507270813,
+          0.17016032338142395,
+          0.03629213571548462
+        ],
+        "time": 1.7416666666666667,
+        "trianglePairs": 218
+      },
+      {
+        "center": [
+          -0.2801964581012726,
+          -0.00886327400803566,
+          0.6485376358032227
+        ],
+        "pair": "left.forearm / mail.letter.flap",
+        "sampledFramesWithCrossing": 140,
+        "span": [
+          0.14182232320308685,
+          0.18359410762786865,
+          0.3198491930961609
+        ],
+        "time": 1.6166666666666667,
+        "trianglePairs": 237
+      },
+      {
+        "center": [
+          -0.26864495873451233,
+          -0.2228255718946457,
+          0.04355297610163689
+        ],
+        "pair": "left.hand / body",
+        "sampledFramesWithCrossing": 86,
+        "span": [
+          0.10454477369785309,
+          0.294315904378891,
+          0.08854436129331589
+        ],
+        "time": 0.35833333333333334,
+        "trianglePairs": 657
+      },
+      {
+        "center": [
+          -0.5198743343353271,
+          -0.34402984380722046,
+          -0.12976394593715668
+        ],
+        "pair": "left.hand / mail.letter.back",
+        "sampledFramesWithCrossing": 570,
+        "span": [
+          0.3585893511772156,
+          0.36349043250083923,
+          0.07535962015390396
+        ],
+        "time": 6.091666666666667,
+        "trianglePairs": 1345
+      },
+      {
+        "center": [
+          -0.42515891790390015,
+          -0.3164299726486206,
+          0.2209918200969696
+        ],
+        "pair": "left.hand / mail.letter.flap",
+        "sampledFramesWithCrossing": 575,
+        "span": [
+          0.37573423981666565,
+          0.35837844014167786,
+          0.0731499195098877
+        ],
+        "time": 5.983333333333333,
+        "trianglePairs": 1444
+      },
+      {
+        "center": [
+          -0.05735207721590996,
+          -0.11272500455379486,
+          0.3316747844219208
+        ],
+        "pair": "left.hand / right.hand",
+        "sampledFramesWithCrossing": 10,
+        "span": [
+          0.023817040026187897,
+          0.13502326607704163,
+          0.03917527198791504
+        ],
+        "time": 0.25,
+        "trianglePairs": 148
+      },
+      {
+        "center": [
+          -0.19316723942756653,
+          0.16969311237335205,
+          0.10065653175115585
+        ],
+        "pair": "left.upper-arm / body",
+        "sampledFramesWithCrossing": 73,
+        "span": [
+          0.1355098932981491,
+          0.24438230693340302,
+          0.21245504915714264
+        ],
+        "time": 1.6333333333333333,
+        "trianglePairs": 464
+      },
+      {
+        "center": [
+          0.04188627377152443,
+          -0.16333262622356415,
+          0.38451799750328064
+        ],
+        "pair": "right.hand / mail.letter.back",
+        "sampledFramesWithCrossing": 611,
+        "span": [
+          0.19622749090194702,
+          0.3399556577205658,
+          0.053115010261535645
+        ],
+        "time": 5.775,
+        "trianglePairs": 716
+      },
+      {
+        "center": [
+          0.06612993776798248,
+          -0.16111084818840027,
+          0.40232425928115845
+        ],
+        "pair": "right.hand / mail.letter.flap",
+        "sampledFramesWithCrossing": 560,
+        "span": [
+          0.20008492469787598,
+          0.34374862909317017,
+          0.053410887718200684
+        ],
+        "time": 0.9833333333333333,
+        "trianglePairs": 744
+      }
+    ],
+    "wearables": true
+  },
+  {
+    "action": "Globe",
+    "cameraPitchRadians": 0.18000000715255737,
+    "cameraYawRadians": 0,
+    "fps": 120,
+    "frames": 745,
+    "peaks": [
+      {
+        "center": [
+          -0.9440435171127319,
+          0.5087960958480835,
+          -0.1828986555337906
+        ],
+        "pair": "left.hand / search.globe",
+        "sampledFramesWithCrossing": 559,
+        "span": [
+          0.1734609603881836,
+          0.04356497526168823,
+          0.20543470978736877
+        ],
+        "time": 1.9083333333333334,
+        "trianglePairs": 449
+      },
+      {
+        "center": [
+          -0.0020951642654836178,
+          -0.09135133028030396,
+          0.2558063864707947
+        ],
+        "pair": "right.forearm / body",
+        "sampledFramesWithCrossing": 635,
+        "span": [
+          0.019081536680459976,
+          0.046449773013591766,
+          0.011904865503311157
+        ],
+        "time": 0.5333333333333333,
+        "trianglePairs": 18
+      },
+      {
+        "center": [
+          0.07445748895406723,
+          0.04948916286230087,
+          0.18330898880958557
+        ],
+        "pair": "right.upper-arm / body",
+        "sampledFramesWithCrossing": 663,
+        "span": [
+          0.2576144337654114,
+          0.26482653617858887,
+          0.1519719362258911
+        ],
+        "time": 0.675,
+        "trianglePairs": 303
+      }
+    ],
+    "wearables": true
+  },
+  {
+    "action": "Juggle",
+    "cameraPitchRadians": 0.18000000715255737,
+    "cameraYawRadians": 0,
+    "fps": 120,
+    "frames": 805,
+    "peaks": [
+      {
+        "center": [
+          -0.5798635482788086,
+          -0.3736944794654846,
+          0.24256715178489685
+        ],
+        "pair": "left.forearm / juggle.0",
+        "sampledFramesWithCrossing": 69,
+        "span": [
+          0.13681775331497192,
+          0.2015501856803894,
+          0.0496855229139328
+        ],
+        "time": 1.8833333333333333,
+        "trianglePairs": 164
+      },
+      {
+        "center": [
+          -0.6450052261352539,
+          -0.37198975682258606,
+          0.2149764597415924
+        ],
+        "pair": "left.forearm / juggle.1",
+        "sampledFramesWithCrossing": 209,
+        "span": [
+          0.1411035656929016,
+          0.21344846487045288,
+          0.04263101518154144
+        ],
+        "time": 3.283333333333333,
+        "trianglePairs": 273
+      },
+      {
+        "center": [
+          -0.5862998366355896,
+          -0.37632495164871216,
+          0.24103321135044098
+        ],
+        "pair": "left.forearm / juggle.2",
+        "sampledFramesWithCrossing": 68,
+        "span": [
+          0.13755285739898682,
+          0.20403346419334412,
+          0.0481511652469635
+        ],
+        "time": 2.6,
+        "trianglePairs": 165
+      },
+      {
+        "center": [
+          -0.6861453056335449,
+          -0.5120304822921753,
+          0.3790753483772278
+        ],
+        "pair": "left.hand / juggle.0",
+        "sampledFramesWithCrossing": 93,
+        "span": [
+          0.20130926370620728,
+          0.08693331480026245,
+          0.2519315779209137
+        ],
+        "time": 3.9916666666666667,
+        "trianglePairs": 625
+      },
+      {
+        "center": [
+          -0.7274811267852783,
+          0.026690706610679626,
+          0.7510195970535278
+        ],
+        "pair": "left.hand / juggle.1",
+        "sampledFramesWithCrossing": 238,
+        "span": [
+          0.19030314683914185,
+          0.07293802499771118,
+          0.2240595817565918
+        ],
+        "time": 0.6083333333333333,
+        "trianglePairs": 754
+      },
+      {
+        "center": [
+          -0.23170989751815796,
+          -0.1033208966255188,
+          0.6774728298187256
+        ],
+        "pair": "left.hand / juggle.2",
+        "sampledFramesWithCrossing": 93,
+        "span": [
+          0.21211588382720947,
+          0.08279610425233841,
+          0.18861305713653564
+        ],
+        "time": 4.875,
+        "trianglePairs": 625
+      },
+      {
+        "center": [
+          -0.2419944703578949,
+          0.2681769132614136,
+          0.032250016927719116
+        ],
+        "pair": "left.upper-arm / body",
+        "sampledFramesWithCrossing": 13,
+        "span": [
+          0.005264535546302795,
+          0.01788771152496338,
+          0.02531777136027813
+        ],
+        "time": 5.233333333333333,
+        "trianglePairs": 21
+      },
+      {
+        "center": [
+          0.6020665168762207,
+          -0.3757858872413635,
+          0.2215784341096878
+        ],
+        "pair": "right.forearm / juggle.0",
+        "sampledFramesWithCrossing": 101,
+        "span": [
+          0.1450728178024292,
+          0.22042754292488098,
+          0.033573418855667114
+        ],
+        "time": 2.95,
+        "trianglePairs": 256
+      },
+      {
+        "center": [
+          0.734676718711853,
+          -0.32656756043434143,
+          0.30170726776123047
+        ],
+        "pair": "right.forearm / juggle.1",
+        "sampledFramesWithCrossing": 68,
+        "span": [
+          0.13388752937316895,
+          0.1944483518600464,
+          0.08792689442634583
+        ],
+        "time": 2.15,
+        "trianglePairs": 255
+      },
+      {
+        "center": [
+          0.7865507006645203,
+          -0.30376407504081726,
+          0.37169596552848816
+        ],
+        "pair": "right.forearm / juggle.2",
+        "sampledFramesWithCrossing": 149,
+        "span": [
+          0.14138352870941162,
+          0.20336228609085083,
+          0.1512923240661621
+        ],
+        "time": 6.008333333333334,
+        "trianglePairs": 264
+      },
+      {
+        "center": [
+          0.266326904296875,
+          -0.19030213356018066,
+          0.622394323348999
+        ],
+        "pair": "right.hand / juggle.0",
+        "sampledFramesWithCrossing": 191,
+        "span": [
+          0.2228735238313675,
+          0.07654102146625519,
+          0.2031295895576477
+        ],
+        "time": 0.65,
+        "trianglePairs": 608
+      },
+      {
+        "center": [
+          0.15952268242835999,
+          0.011926651000976562,
+          0.7346717119216919
+        ],
+        "pair": "right.hand / juggle.1",
+        "sampledFramesWithCrossing": 95,
+        "span": [
+          0.19198453426361084,
+          0.1609542965888977,
+          0.1645635962486267
+        ],
+        "time": 2.3666666666666667,
+        "trianglePairs": 664
+      },
+      {
+        "center": [
+          0.37369662523269653,
+          0.02896227315068245,
+          0.7722015380859375
+        ],
+        "pair": "right.hand / juggle.2",
+        "sampledFramesWithCrossing": 235,
+        "span": [
+          0.2201099693775177,
+          0.08693378418684006,
+          0.2148200273513794
+        ],
+        "time": 1.1083333333333334,
+        "trianglePairs": 795
+      },
+      {
+        "center": [
+          0.24258914589881897,
+          0.26862701773643494,
+          0.031786032021045685
+        ],
+        "pair": "right.upper-arm / body",
+        "sampledFramesWithCrossing": 31,
+        "span": [
+          0.005722135305404663,
+          0.0192909836769104,
+          0.02787909284234047
+        ],
+        "time": 2.7083333333333335,
+        "trianglePairs": 22
+      }
+    ],
+    "wearables": true
+  },
+  {
+    "action": "Write",
+    "cameraPitchRadians": 0.18000000715255737,
+    "cameraYawRadians": 0,
+    "fps": 120,
+    "frames": 835,
+    "peaks": [
+      {
+        "center": [
+          -0.043352335691452026,
+          -0.2908903956413269,
+          0.1299443542957306
+        ],
+        "pair": "left.forearm / body",
+        "sampledFramesWithCrossing": 154,
+        "span": [
+          0.4269648790359497,
+          0.2783144414424896,
+          0.18711970746517181
+        ],
+        "time": 6.066666666666666,
+        "trianglePairs": 439
+      },
+      {
+        "center": [
+          0.14931948482990265,
+          -0.17455723881721497,
+          0.4604177474975586
+        ],
+        "pair": "left.forearm / write.pad",
+        "sampledFramesWithCrossing": 82,
+        "span": [
+          0.05689939111471176,
+          0.03382255136966705,
+          0.059633612632751465
+        ],
+        "time": 2.775,
+        "trianglePairs": 23
+      },
+      {
+        "center": [
+          -0.06578049808740616,
+          -0.050753794610500336,
+          0.17569735646247864
+        ],
+        "pair": "left.hand / body",
+        "sampledFramesWithCrossing": 551,
+        "span": [
+          0.3852900266647339,
+          0.3159664273262024,
+          0.1547500044107437
+        ],
+        "time": 0.275,
+        "trianglePairs": 1022
+      },
+      {
+        "center": [
+          0.09431320428848267,
+          -0.1874011754989624,
+          0.251148521900177
+        ],
+        "pair": "left.hand / right.hand",
+        "sampledFramesWithCrossing": 9,
+        "span": [
+          0.014172837138175964,
+          0.01908557116985321,
+          0.01971191167831421
+        ],
+        "time": 0.25,
+        "trianglePairs": 58
+      },
+      {
+        "center": [
+          0.22729520499706268,
+          -0.25372081995010376,
+          0.3112889528274536
+        ],
+        "pair": "left.hand / write.pad",
+        "sampledFramesWithCrossing": 436,
+        "span": [
+          0.17071309685707092,
+          0.24587653577327728,
+          0.08436188101768494
+        ],
+        "time": 1.1666666666666667,
+        "trianglePairs": 832
+      },
+      {
+        "center": [
+          0.37831538915634155,
+          -0.28691351413726807,
+          -0.17156657576560974
+        ],
+        "pair": "left.hand / write.pencil",
+        "sampledFramesWithCrossing": 688,
+        "span": [
+          0.116339772939682,
+          0.19653692841529846,
+          0.0887349396944046
+        ],
+        "time": 0.7416666666666667,
+        "trianglePairs": 318
+      },
+      {
+        "center": [
+          -0.23609879612922668,
+          -0.049799107015132904,
+          0.020671822130680084
+        ],
+        "pair": "left.upper-arm / body",
+        "sampledFramesWithCrossing": 488,
+        "span": [
+          0.14652119576931,
+          0.3670074939727783,
+          0.2658846378326416
+        ],
+        "time": 5.891666666666667,
+        "trianglePairs": 330
+      },
+      {
+        "center": [
+          0.7113580107688904,
+          -0.2777559459209442,
+          -0.23102721571922302
+        ],
+        "pair": "right.forearm / write.pad",
+        "sampledFramesWithCrossing": 51,
+        "span": [
+          0.35778355598449707,
+          0.22958214581012726,
+          0.08524017035961151
+        ],
+        "time": 0.7333333333333333,
+        "trianglePairs": 324
+      },
+      {
+        "center": [
+          0.2389911711215973,
+          -0.14728134870529175,
+          0.07982705533504486
+        ],
+        "pair": "right.hand / body",
+        "sampledFramesWithCrossing": 40,
+        "span": [
+          0.2155703753232956,
+          0.19595202803611755,
+          0.3023187518119812
+        ],
+        "time": 0.26666666666666666,
+        "trianglePairs": 673
+      },
+      {
+        "center": [
+          0.6679037809371948,
+          -0.4504516124725342,
+          -0.29892754554748535
+        ],
+        "pair": "right.hand / write.pad",
+        "sampledFramesWithCrossing": 98,
+        "span": [
+          0.042598187923431396,
+          0.26011744141578674,
+          0.04733344912528992
+        ],
+        "time": 0.7166666666666667,
+        "trianglePairs": 92
+      },
+      {
+        "center": [
+          0.23271165788173676,
+          0.28571200370788574,
+          0.00919651985168457
+        ],
+        "pair": "right.upper-arm / body",
+        "sampledFramesWithCrossing": 13,
+        "span": [
+          0.017543703317642212,
+          0.028876394033432007,
+          0.05999129265546799
+        ],
+        "time": 0.3333333333333333,
+        "trianglePairs": 35
+      }
+    ],
+    "wearables": true
+  },
+  {
+    "action": "Write Pause",
+    "cameraPitchRadians": 0.18000000715255737,
+    "cameraYawRadians": 0,
+    "fps": 120,
+    "frames": 583,
+    "peaks": [
+      {
+        "center": [
+          -0.043031610548496246,
+          -0.2872615158557892,
+          0.13069967925548553
+        ],
+        "pair": "left.forearm / body",
+        "sampledFramesWithCrossing": 154,
+        "span": [
+          0.4280812740325928,
+          0.2813979983329773,
+          0.1863432228565216
+        ],
+        "time": 3.966666666666667,
+        "trianglePairs": 430
+      },
+      {
+        "center": [
+          -0.06578049808740616,
+          -0.050753794610500336,
+          0.17569735646247864
+        ],
+        "pair": "left.hand / body",
+        "sampledFramesWithCrossing": 359,
+        "span": [
+          0.3852900266647339,
+          0.3159664273262024,
+          0.1547500044107437
+        ],
+        "time": 0.275,
+        "trianglePairs": 1022
+      },
+      {
+        "center": [
+          0.09431320428848267,
+          -0.1874011754989624,
+          0.251148521900177
+        ],
+        "pair": "left.hand / right.hand",
+        "sampledFramesWithCrossing": 9,
+        "span": [
+          0.014172837138175964,
+          0.01908557116985321,
+          0.01971191167831421
+        ],
+        "time": 0.25,
+        "trianglePairs": 58
+      },
+      {
+        "center": [
+          0.22729520499706268,
+          -0.25372081995010376,
+          0.3112889528274536
+        ],
+        "pair": "left.hand / write.pad",
+        "sampledFramesWithCrossing": 157,
+        "span": [
+          0.17071309685707092,
+          0.24587653577327728,
+          0.08436188101768494
+        ],
+        "time": 1.1666666666666667,
+        "trianglePairs": 832
+      },
+      {
+        "center": [
+          0.37831538915634155,
+          -0.28691351413726807,
+          -0.17156657576560974
+        ],
+        "pair": "left.hand / write.pencil",
+        "sampledFramesWithCrossing": 436,
+        "span": [
+          0.116339772939682,
+          0.19653692841529846,
+          0.0887349396944046
+        ],
+        "time": 0.7416666666666667,
+        "trianglePairs": 318
+      },
+      {
+        "center": [
+          -0.23279976844787598,
+          -0.04446810483932495,
+          0.013932976871728897
+        ],
+        "pair": "left.upper-arm / body",
+        "sampledFramesWithCrossing": 234,
+        "span": [
+          0.14966388046741486,
+          0.3692876994609833,
+          0.25443828105926514
+        ],
+        "time": 0.9666666666666667,
+        "trianglePairs": 328
+      },
+      {
+        "center": [
+          0.7113580107688904,
+          -0.2777559459209442,
+          -0.23102721571922302
+        ],
+        "pair": "right.forearm / write.pad",
+        "sampledFramesWithCrossing": 51,
+        "span": [
+          0.35778355598449707,
+          0.22958214581012726,
+          0.08524017035961151
+        ],
+        "time": 0.7333333333333333,
+        "trianglePairs": 324
+      },
+      {
+        "center": [
+          0.2389911711215973,
+          -0.14728134870529175,
+          0.07982705533504486
+        ],
+        "pair": "right.hand / body",
+        "sampledFramesWithCrossing": 40,
+        "span": [
+          0.2155703753232956,
+          0.19595202803611755,
+          0.3023187518119812
+        ],
+        "time": 0.26666666666666666,
+        "trianglePairs": 673
+      },
+      {
+        "center": [
+          0.6679037809371948,
+          -0.4504516124725342,
+          -0.29892754554748535
+        ],
+        "pair": "right.hand / write.pad",
+        "sampledFramesWithCrossing": 98,
+        "span": [
+          0.042598187923431396,
+          0.26011744141578674,
+          0.04733344912528992
+        ],
+        "time": 0.7166666666666667,
+        "trianglePairs": 92
+      },
+      {
+        "center": [
+          0.23271165788173676,
+          0.28571200370788574,
+          0.00919651985168457
+        ],
+        "pair": "right.upper-arm / body",
+        "sampledFramesWithCrossing": 13,
+        "span": [
+          0.017543703317642212,
+          0.028876394033432007,
+          0.05999129265546799
+        ],
+        "time": 0.3333333333333333,
+        "trianglePairs": 35
+      }
+    ],
+    "wearables": true
+  },
+  {
+    "action": "Write Once",
+    "cameraPitchRadians": 0.18000000715255737,
+    "cameraYawRadians": 0,
+    "fps": 120,
+    "frames": 757,
+    "peaks": [
+      {
+        "center": [
+          -0.04348045587539673,
+          -0.2923582196235657,
+          0.1296190768480301
+        ],
+        "pair": "left.forearm / body",
+        "sampledFramesWithCrossing": 154,
+        "span": [
+          0.42649757862091064,
+          0.2771126329898834,
+          0.1874718815088272
+        ],
+        "time": 5.416666666666667,
+        "trianglePairs": 437
+      },
+      {
+        "center": [
+          0.14669828116893768,
+          -0.1764470934867859,
+          0.45673733949661255
+        ],
+        "pair": "left.forearm / write.pad",
+        "sampledFramesWithCrossing": 34,
+        "span": [
+          0.05593524128198624,
+          0.033407628536224365,
+          0.05909237265586853
+        ],
+        "time": 2.95,
+        "trianglePairs": 23
+      },
+      {
+        "center": [
+          -0.06578049808740616,
+          -0.050753794610500336,
+          0.17569735646247864
+        ],
+        "pair": "left.hand / body",
+        "sampledFramesWithCrossing": 457,
+        "span": [
+          0.3852900266647339,
+          0.3159664273262024,
+          0.1547500044107437
+        ],
+        "time": 0.275,
+        "trianglePairs": 1022
+      },
+      {
+        "center": [
+          0.09431320428848267,
+          -0.1874011754989624,
+          0.251148521900177
+        ],
+        "pair": "left.hand / right.hand",
+        "sampledFramesWithCrossing": 9,
+        "span": [
+          0.014172837138175964,
+          0.01908557116985321,
+          0.01971191167831421
+        ],
+        "time": 0.25,
+        "trianglePairs": 58
+      },
+      {
+        "center": [
+          0.22729520499706268,
+          -0.25372081995010376,
+          0.3112889528274536
+        ],
+        "pair": "left.hand / write.pad",
+        "sampledFramesWithCrossing": 268,
+        "span": [
+          0.17071309685707092,
+          0.24587653577327728,
+          0.08436188101768494
+        ],
+        "time": 1.1666666666666667,
+        "trianglePairs": 832
+      },
+      {
+        "center": [
+          0.37831538915634155,
+          -0.28691351413726807,
+          -0.17156657576560974
+        ],
+        "pair": "left.hand / write.pencil",
+        "sampledFramesWithCrossing": 610,
+        "span": [
+          0.116339772939682,
+          0.19653692841529846,
+          0.0887349396944046
+        ],
+        "time": 0.7416666666666667,
+        "trianglePairs": 318
+      },
+      {
+        "center": [
+          -0.23619170486927032,
+          -0.050423987209796906,
+          0.02074095979332924
+        ],
+        "pair": "left.upper-arm / body",
+        "sampledFramesWithCrossing": 336,
+        "span": [
+          0.14648035168647766,
+          0.36696183681488037,
+          0.2662087082862854
+        ],
+        "time": 5.241666666666666,
+        "trianglePairs": 331
+      },
+      {
+        "center": [
+          0.7113580107688904,
+          -0.2777559459209442,
+          -0.23102721571922302
+        ],
+        "pair": "right.forearm / write.pad",
+        "sampledFramesWithCrossing": 51,
+        "span": [
+          0.35778355598449707,
+          0.22958214581012726,
+          0.08524017035961151
+        ],
+        "time": 0.7333333333333333,
+        "trianglePairs": 324
+      },
+      {
+        "center": [
+          0.2389911711215973,
+          -0.14728134870529175,
+          0.07982705533504486
+        ],
+        "pair": "right.hand / body",
+        "sampledFramesWithCrossing": 40,
+        "span": [
+          0.2155703753232956,
+          0.19595202803611755,
+          0.3023187518119812
+        ],
+        "time": 0.26666666666666666,
+        "trianglePairs": 673
+      },
+      {
+        "center": [
+          0.6679037809371948,
+          -0.4504516124725342,
+          -0.29892754554748535
+        ],
+        "pair": "right.hand / write.pad",
+        "sampledFramesWithCrossing": 99,
+        "span": [
+          0.042598187923431396,
+          0.26011744141578674,
+          0.04733344912528992
+        ],
+        "time": 0.7166666666666667,
+        "trianglePairs": 92
+      },
+      {
+        "center": [
+          0.23359230160713196,
+          0.279061496257782,
+          0.012964118272066116
+        ],
+        "pair": "right.upper-arm / body",
+        "sampledFramesWithCrossing": 13,
+        "span": [
+          0.016966819763183594,
+          0.03093859553337097,
+          0.05911538004875183
+        ],
+        "time": 6.033333333333333,
+        "trianglePairs": 36
+      }
+    ],
+    "wearables": true
+  },
+  {
+    "action": "Write Again",
+    "cameraPitchRadians": 0.18000000715255737,
+    "cameraYawRadians": 0,
+    "fps": 120,
+    "frames": 727,
+    "peaks": [
+      {
+        "center": [
+          -0.043435901403427124,
+          -0.29184257984161377,
+          0.12973396480083466
+        ],
+        "pair": "left.forearm / body",
+        "sampledFramesWithCrossing": 154,
+        "span": [
+          0.4266616702079773,
+          0.2775264084339142,
+          0.1873466968536377
+        ],
+        "time": 5.166666666666667,
+        "trianglePairs": 436
+      },
+      {
+        "center": [
+          0.14931948482990265,
+          -0.17455723881721497,
+          0.4604177474975586
+        ],
+        "pair": "left.forearm / write.pad",
+        "sampledFramesWithCrossing": 28,
+        "span": [
+          0.05689939111471176,
+          0.03382255136966705,
+          0.059633612632751465
+        ],
+        "time": 2.775,
+        "trianglePairs": 23
+      },
+      {
+        "center": [
+          -0.06578049808740616,
+          -0.050753794610500336,
+          0.17569735646247864
+        ],
+        "pair": "left.hand / body",
+        "sampledFramesWithCrossing": 440,
+        "span": [
+          0.3852900266647339,
+          0.3159664273262024,
+          0.1547500044107437
+        ],
+        "time": 0.275,
+        "trianglePairs": 1022
+      },
+      {
+        "center": [
+          0.09431320428848267,
+          -0.1874011754989624,
+          0.251148521900177
+        ],
+        "pair": "left.hand / right.hand",
+        "sampledFramesWithCrossing": 9,
+        "span": [
+          0.014172837138175964,
+          0.01908557116985321,
+          0.01971191167831421
+        ],
+        "time": 0.25,
+        "trianglePairs": 58
+      },
+      {
+        "center": [
+          0.22729520499706268,
+          -0.25372081995010376,
+          0.3112889528274536
+        ],
+        "pair": "left.hand / write.pad",
+        "sampledFramesWithCrossing": 250,
+        "span": [
+          0.17071309685707092,
+          0.24587653577327728,
+          0.08436188101768494
+        ],
+        "time": 1.1666666666666667,
+        "trianglePairs": 832
+      },
+      {
+        "center": [
+          0.37831538915634155,
+          -0.28691351413726807,
+          -0.17156657576560974
+        ],
+        "pair": "left.hand / write.pencil",
+        "sampledFramesWithCrossing": 580,
+        "span": [
+          0.116339772939682,
+          0.19653692841529846,
+          0.0887349396944046
+        ],
+        "time": 0.7416666666666667,
+        "trianglePairs": 318
+      },
+      {
+        "center": [
+          -0.23600038886070251,
+          -0.049139395356178284,
+          0.020657755434513092
+        ],
+        "pair": "left.upper-arm / body",
+        "sampledFramesWithCrossing": 319,
+        "span": [
+          0.14656513929367065,
+          0.36705613136291504,
+          0.2656606435775757
+        ],
+        "time": 4.991666666666666,
+        "trianglePairs": 332
+      },
+      {
+        "center": [
+          0.7113580107688904,
+          -0.2777559459209442,
+          -0.23102721571922302
+        ],
+        "pair": "right.forearm / write.pad",
+        "sampledFramesWithCrossing": 51,
+        "span": [
+          0.35778355598449707,
+          0.22958214581012726,
+          0.08524017035961151
+        ],
+        "time": 0.7333333333333333,
+        "trianglePairs": 324
+      },
+      {
+        "center": [
+          0.2389911711215973,
+          -0.14728134870529175,
+          0.07982705533504486
+        ],
+        "pair": "right.hand / body",
+        "sampledFramesWithCrossing": 40,
+        "span": [
+          0.2155703753232956,
+          0.19595202803611755,
+          0.3023187518119812
+        ],
+        "time": 0.26666666666666666,
+        "trianglePairs": 673
+      },
+      {
+        "center": [
+          0.6679037809371948,
+          -0.4504516124725342,
+          -0.29892754554748535
+        ],
+        "pair": "right.hand / write.pad",
+        "sampledFramesWithCrossing": 97,
+        "span": [
+          0.042598187923431396,
+          0.26011744141578674,
+          0.04733344912528992
+        ],
+        "time": 0.7166666666666667,
+        "trianglePairs": 92
+      },
+      {
+        "center": [
+          0.2336086928844452,
+          0.27766337990760803,
+          0.012669602409005165
+        ],
+        "pair": "right.upper-arm / body",
+        "sampledFramesWithCrossing": 13,
+        "span": [
+          0.017069175839424133,
+          0.03095877170562744,
+          0.059289854019880295
+        ],
+        "time": 5.783333333333333,
+        "trianglePairs": 36
+      }
+    ],
+    "wearables": true
+  },
+  {
+    "action": "Read",
+    "cameraPitchRadians": 0.18000000715255737,
+    "cameraYawRadians": 0,
+    "fps": 120,
+    "frames": 1395,
+    "peaks": [
+      {
+        "center": [
+          -0.07848771661520004,
+          -0.11355593055486679,
+          0.2237183004617691
+        ],
+        "pair": "left.forearm / body",
+        "sampledFramesWithCrossing": 148,
+        "span": [
+          0.1532190889120102,
+          0.05846549570560455,
+          0.13350054621696472
+        ],
+        "time": 6.441666666666666,
+        "trianglePairs": 441
+      },
+      {
+        "center": [
+          -0.5269812345504761,
+          -0.46452245116233826,
+          0.02741774544119835
+        ],
+        "pair": "left.forearm / read.left",
+        "sampledFramesWithCrossing": 735,
+        "span": [
+          0.15554535388946533,
+          0.11621195077896118,
+          0.15037861466407776
+        ],
+        "time": 5.766666666666667,
+        "trianglePairs": 213
+      },
+      {
+        "center": [
+          -0.20531222224235535,
+          -0.3614436388015747,
+          -0.0738144963979721
+        ],
+        "pair": "left.hand / body",
+        "sampledFramesWithCrossing": 868,
+        "span": [
+          0.3147476315498352,
+          0.36198723316192627,
+          0.3179323971271515
+        ],
+        "time": 9.458333333333334,
+        "trianglePairs": 1294
+      },
+      {
+        "center": [
+          -0.3960031270980835,
+          -0.31262433528900146,
+          0.2721650004386902
+        ],
+        "pair": "left.hand / read.left",
+        "sampledFramesWithCrossing": 805,
+        "span": [
+          0.3397173583507538,
+          0.3624444007873535,
+          0.28741851449012756
+        ],
+        "time": 5.791666666666667,
+        "trianglePairs": 1464
+      },
+      {
+        "center": [
+          -0.17527669668197632,
+          -0.2104085385799408,
+          -0.06271997094154358
+        ],
+        "pair": "left.upper-arm / body",
+        "sampledFramesWithCrossing": 73,
+        "span": [
+          0.15840619802474976,
+          0.3551045060157776,
+          0.26480627059936523
+        ],
+        "time": 6.266666666666667,
+        "trianglePairs": 352
+      },
+      {
+        "center": [
+          -0.3199530839920044,
+          -0.1332463026046753,
+          -0.13800154626369476
+        ],
+        "pair": "left.upper-arm / read.left",
+        "sampledFramesWithCrossing": 8,
+        "span": [
+          0.1323125660419464,
+          0.1638648360967636,
+          0.10755719989538193
+        ],
+        "time": 2.1083333333333334,
+        "trianglePairs": 91
+      },
+      {
+        "center": [
+          0.5741068720817566,
+          -0.6616388559341431,
+          0.11780205368995667
+        ],
+        "pair": "right.forearm / body",
+        "sampledFramesWithCrossing": 34,
+        "span": [
+          0.05760061740875244,
+          0.05154937505722046,
+          0.05567704886198044
+        ],
+        "time": 1.9916666666666667,
+        "trianglePairs": 72
+      },
+      {
+        "center": [
+          0.559249997138977,
+          -0.4609963297843933,
+          -0.10598719120025635
+        ],
+        "pair": "right.forearm / read.left",
+        "sampledFramesWithCrossing": 75,
+        "span": [
+          0.11850005388259888,
+          0.32975995540618896,
+          0.3066575527191162
+        ],
+        "time": 9.716666666666667,
+        "trianglePairs": 246
+      },
+      {
+        "center": [
+          0.6807498931884766,
+          -0.45197543501853943,
+          -0.1989791989326477
+        ],
+        "pair": "right.forearm / read.right",
+        "sampledFramesWithCrossing": 835,
+        "span": [
+          0.1184999942779541,
+          0.40667814016342163,
+          0.32292699813842773
+        ],
+        "time": 9.85,
+        "trianglePairs": 375
+      },
+      {
+        "center": [
+          0.27643391489982605,
+          -0.1898566484451294,
+          -0.014795742928981781
+        ],
+        "pair": "right.hand / body",
+        "sampledFramesWithCrossing": 845,
+        "span": [
+          0.19083428382873535,
+          0.33115285634994507,
+          0.28364890813827515
+        ],
+        "time": 11.375,
+        "trianglePairs": 1044
+      },
+      {
+        "center": [
+          0.2806311845779419,
+          -0.4488433003425598,
+          0.163690447807312
+        ],
+        "pair": "right.hand / read.left",
+        "sampledFramesWithCrossing": 32,
+        "span": [
+          0.13944092392921448,
+          0.3421606719493866,
+          0.24083943665027618
+        ],
+        "time": 9.508333333333333,
+        "trianglePairs": 688
+      },
+      {
+        "center": [
+          0.35565274953842163,
+          -0.46233025193214417,
+          0.062193747609853745
+        ],
+        "pair": "right.hand / read.right",
+        "sampledFramesWithCrossing": 1025,
+        "span": [
+          0.23076382279396057,
+          0.3741249442100525,
+          0.35295403003692627
+        ],
+        "time": 2.066666666666667,
+        "trianglePairs": 1251
+      },
+      {
+        "center": [
+          0.23322603106498718,
+          0.008032313548028469,
+          -0.14064964652061462
+        ],
+        "pair": "right.upper-arm / body",
+        "sampledFramesWithCrossing": 26,
+        "span": [
+          0.017987772822380066,
+          0.02959107793867588,
+          0.06018519401550293
+        ],
+        "time": 1.15,
+        "trianglePairs": 36
+      },
+      {
+        "center": [
+          0.44264888763427734,
+          -0.29447197914123535,
+          -0.21853101253509521
+        ],
+        "pair": "right.upper-arm / read.left",
+        "sampledFramesWithCrossing": 83,
+        "span": [
+          0.12342074513435364,
+          0.15478862822055817,
+          0.17934845387935638
+        ],
+        "time": 1.9916666666666667,
+        "trianglePairs": 160
+      },
+      {
+        "center": [
+          0.4905131161212921,
+          -0.21558146178722382,
+          -0.2328866422176361
+        ],
+        "pair": "right.upper-arm / read.right",
+        "sampledFramesWithCrossing": 36,
+        "span": [
+          0.16285985708236694,
+          0.19165143370628357,
+          0.1949123740196228
+        ],
+        "time": 9.491666666666667,
+        "trianglePairs": 201
+      }
+    ],
+    "wearables": true
+  },
+  {
+    "action": "Read Look Up",
+    "cameraPitchRadians": 0.18000000715255737,
+    "cameraYawRadians": 0,
+    "fps": 120,
+    "frames": 1595,
+    "peaks": [
+      {
+        "center": [
+          -0.3031201660633087,
+          -0.5299777984619141,
+          -0.19343005120754242
+        ],
+        "pair": "left.forearm / body",
+        "sampledFramesWithCrossing": 106,
+        "span": [
+          0.16991601884365082,
+          0.17076966166496277,
+          0.17928162217140198
+        ],
+        "time": 2.025,
+        "trianglePairs": 406
+      },
+      {
+        "center": [
+          -0.534072995185852,
+          -0.2533346712589264,
+          0.17890718579292297
+        ],
+        "pair": "left.forearm / read.left",
+        "sampledFramesWithCrossing": 1081,
+        "span": [
+          0.19673332571983337,
+          0.2474651336669922,
+          0.28552210330963135
+        ],
+        "time": 6.758333333333334,
+        "trianglePairs": 272
+      },
+      {
+        "center": [
+          -0.21207424998283386,
+          -0.3630262613296509,
+          -0.06876227259635925
+        ],
+        "pair": "left.hand / body",
+        "sampledFramesWithCrossing": 1040,
+        "span": [
+          0.2989192008972168,
+          0.3641320765018463,
+          0.3018903136253357
+        ],
+        "time": 11.15,
+        "trianglePairs": 1376
+      },
+      {
+        "center": [
+          -0.2775872051715851,
+          -0.309801310300827,
+          -0.03738986328244209
+        ],
+        "pair": "left.hand / read.left",
+        "sampledFramesWithCrossing": 999,
+        "span": [
+          0.26282209157943726,
+          0.24635213613510132,
+          0.2754833400249481
+        ],
+        "time": 11.133333333333333,
+        "trianglePairs": 646
+      },
+      {
+        "center": [
+          -0.30827799439430237,
+          -0.12815409898757935,
+          -0.1398586630821228
+        ],
+        "pair": "left.upper-arm / read.left",
+        "sampledFramesWithCrossing": 7,
+        "span": [
+          0.09700846672058105,
+          0.17470522224903107,
+          0.10745416581630707
+        ],
+        "time": 11.141666666666667,
+        "trianglePairs": 95
+      },
+      {
+        "center": [
+          0.5741068720817566,
+          -0.6616388559341431,
+          0.11780205368995667
+        ],
+        "pair": "right.forearm / body",
+        "sampledFramesWithCrossing": 33,
+        "span": [
+          0.05760061740875244,
+          0.05154937505722046,
+          0.05567704886198044
+        ],
+        "time": 1.9916666666666667,
+        "trianglePairs": 72
+      },
+      {
+        "center": [
+          0.559249997138977,
+          -0.4628485441207886,
+          -0.10603250563144684
+        ],
+        "pair": "right.forearm / read.left",
+        "sampledFramesWithCrossing": 75,
+        "span": [
+          0.11850005388259888,
+          0.33037054538726807,
+          0.3078480064868927
+        ],
+        "time": 1.8666666666666667,
+        "trianglePairs": 245
+      },
+      {
+        "center": [
+          0.6807498931884766,
+          -0.4462066888809204,
+          -0.2152879536151886
+        ],
+        "pair": "right.forearm / read.right",
+        "sampledFramesWithCrossing": 1192,
+        "span": [
+          0.1184999942779541,
+          0.40358802676200867,
+          0.31767791509628296
+        ],
+        "time": 11.55,
+        "trianglePairs": 378
+      },
+      {
+        "center": [
+          0.2719554603099823,
+          -0.18383894860744476,
+          -0.010452024638652802
+        ],
+        "pair": "right.hand / body",
+        "sampledFramesWithCrossing": 1192,
+        "span": [
+          0.20007836818695068,
+          0.33341577649116516,
+          0.27570050954818726
+        ],
+        "time": 13.05,
+        "trianglePairs": 1023
+      },
+      {
+        "center": [
+          0.30242419242858887,
+          -0.46419838070869446,
+          0.1667213886976242
+        ],
+        "pair": "right.hand / read.left",
+        "sampledFramesWithCrossing": 32,
+        "span": [
+          0.1363276243209839,
+          0.3404471278190613,
+          0.24711623787879944
+        ],
+        "time": 11.208333333333334,
+        "trianglePairs": 700
+      },
+      {
+        "center": [
+          0.3169715404510498,
+          -0.41810381412506104,
+          0.058391276746988297
+        ],
+        "pair": "right.hand / read.right",
+        "sampledFramesWithCrossing": 1227,
+        "span": [
+          0.2934187054634094,
+          0.38410285115242004,
+          0.30251267552375793
+        ],
+        "time": 11.15,
+        "trianglePairs": 1255
+      },
+      {
+        "center": [
+          0.2335074245929718,
+          0.00023160642012953758,
+          -0.14029356837272644
+        ],
+        "pair": "right.upper-arm / body",
+        "sampledFramesWithCrossing": 28,
+        "span": [
+          0.01808507740497589,
+          0.03132421150803566,
+          0.06135236471891403
+        ],
+        "time": 11.933333333333334,
+        "trianglePairs": 37
+      },
+      {
+        "center": [
+          0.44264888763427734,
+          -0.29447197914123535,
+          -0.21853101253509521
+        ],
+        "pair": "right.upper-arm / read.left",
+        "sampledFramesWithCrossing": 83,
+        "span": [
+          0.12342074513435364,
+          0.15478862822055817,
+          0.17934845387935638
+        ],
+        "time": 1.9916666666666667,
+        "trianglePairs": 160
+      },
+      {
+        "center": [
+          0.4909636676311493,
+          -0.21626640856266022,
+          -0.23241746425628662
+        ],
+        "pair": "right.upper-arm / read.right",
+        "sampledFramesWithCrossing": 36,
+        "span": [
+          0.165532648563385,
+          0.19312164187431335,
+          0.1984724998474121
+        ],
+        "time": 2.058333333333333,
+        "trianglePairs": 199
+      }
+    ],
+    "wearables": true
+  },
+  {
+    "action": "Butterfly",
+    "cameraPitchRadians": 0.18000000715255737,
+    "cameraYawRadians": 0,
+    "fps": 120,
+    "frames": 1237,
+    "peaks": [
+      {
+        "center": [
+          -0.7271234393119812,
+          0.2910926640033722,
+          0.008103914558887482
+        ],
+        "pair": "left.forearm / right.hand",
+        "sampledFramesWithCrossing": 3,
+        "span": [
+          0.002232193946838379,
+          0.004293262958526611,
+          0.0035570431500673294
+        ],
+        "time": 3.7666666666666666,
+        "trianglePairs": 5
+      },
+      {
+        "center": [
+          -0.6261396408081055,
+          0.38198328018188477,
+          0.13127171993255615
+        ],
+        "pair": "left.hand / right.forearm",
+        "sampledFramesWithCrossing": 207,
+        "span": [
+          0.003158271312713623,
+          0.004128396511077881,
+          0.00650179386138916
+        ],
+        "time": 4.158333333333333,
+        "trianglePairs": 8
+      },
+      {
+        "center": [
+          -0.7382395267486572,
+          0.4253363609313965,
+          0.10539231449365616
+        ],
+        "pair": "left.hand / right.hand",
+        "sampledFramesWithCrossing": 322,
+        "span": [
+          0.24194520711898804,
+          0.14139339327812195,
+          0.1542966514825821
+        ],
+        "time": 4.2,
+        "trianglePairs": 761
+      },
+      {
+        "center": [
+          -0.23794755339622498,
+          0.2811756432056427,
+          0.2202371060848236
+        ],
+        "pair": "right.forearm / body",
+        "sampledFramesWithCrossing": 324,
+        "span": [
+          0.2354101985692978,
+          0.1700558066368103,
+          0.17956040799617767
+        ],
+        "time": 5.725,
+        "trianglePairs": 569
+      },
+      {
+        "center": [
+          -0.2967694401741028,
+          0.25715795159339905,
+          0.23393410444259644
+        ],
+        "pair": "right.hand / body",
+        "sampledFramesWithCrossing": 13,
+        "span": [
+          0.08451533317565918,
+          0.05407530069351196,
+          0.10725416243076324
+        ],
+        "time": 6.433333333333334,
+        "trianglePairs": 192
+      },
+      {
+        "center": [
+          -0.7755012512207031,
+          0.7150033712387085,
+          0.07316430658102036
+        ],
+        "pair": "right.hand / butterfly.right",
+        "sampledFramesWithCrossing": 180,
+        "span": [
+          0.08848422765731812,
+          0.09569782018661499,
+          0.023722752928733826
+        ],
+        "time": 4.458333333333333,
+        "trianglePairs": 231
+      },
+      {
+        "center": [
+          0.05499072000384331,
+          0.16305090487003326,
+          0.1719699501991272
+        ],
+        "pair": "right.upper-arm / body",
+        "sampledFramesWithCrossing": 351,
+        "span": [
+          0.35368964076042175,
+          0.23127683997154236,
+          0.23022758960723877
+        ],
+        "time": 5.775,
+        "trianglePairs": 1024
+      }
+    ],
+    "wearables": true
+  },
+  {
+    "action": "Headphones",
+    "cameraPitchRadians": 0.18000000715255737,
+    "cameraYawRadians": 0,
+    "fps": 120,
+    "frames": 1696,
+    "peaks": [
+      {
+        "center": [
+          -0.34984174370765686,
+          -0.17570969462394714,
+          -0.1541689932346344
+        ],
+        "pair": "left.forearm / body",
+        "sampledFramesWithCrossing": 29,
+        "span": [
+          0.04519319534301758,
+          0.12409348785877228,
+          0.13049277663230896
+        ],
+        "time": 12.233333333333333,
+        "trianglePairs": 95
+      },
+      {
+        "center": [
+          -0.4008294343948364,
+          -0.6078811883926392,
+          -0.15919724106788635
+        ],
+        "pair": "left.hand / body",
+        "sampledFramesWithCrossing": 15,
+        "span": [
+          0.0620478093624115,
+          0.08576816320419312,
+          0.14579230546951294
+        ],
+        "time": 0.2916666666666667,
+        "trianglePairs": 170
+      },
+      {
+        "center": [
+          -0.29336002469062805,
+          -0.05128457769751549,
+          -0.09479660540819168
+        ],
+        "pair": "left.upper-arm / body",
+        "sampledFramesWithCrossing": 43,
+        "span": [
+          0.15034373104572296,
+          0.2515251636505127,
+          0.2252635508775711
+        ],
+        "time": 12.25,
+        "trianglePairs": 253
+      },
+      {
+        "center": [
+          0.3497471809387207,
+          -0.17541655898094177,
+          -0.15342676639556885
+        ],
+        "pair": "right.forearm / body",
+        "sampledFramesWithCrossing": 39,
+        "span": [
+          0.04499068856239319,
+          0.12351981550455093,
+          0.12869781255722046
+        ],
+        "time": 12.233333333333333,
+        "trianglePairs": 95
+      },
+      {
+        "center": [
+          0.241585835814476,
+          -0.4036230444908142,
+          -0.01258464902639389
+        ],
+        "pair": "right.hand / body",
+        "sampledFramesWithCrossing": 148,
+        "span": [
+          0.2432931363582611,
+          0.3457295596599579,
+          0.2950029969215393
+        ],
+        "time": 0.25833333333333336,
+        "trianglePairs": 901
+      },
+      {
+        "center": [
+          0.2931576371192932,
+          -0.051276013255119324,
+          -0.09499076008796692
+        ],
+        "pair": "right.upper-arm / body",
+        "sampledFramesWithCrossing": 35,
+        "span": [
+          0.15013262629508972,
+          0.25147998332977295,
+          0.2248537838459015
+        ],
+        "time": 12.25,
+        "trianglePairs": 250
+      }
+    ],
+    "wearables": true
+  },
+  {
+    "action": "Sunglasses",
+    "cameraPitchRadians": 0.18000000715255737,
+    "cameraYawRadians": 0,
+    "fps": 120,
+    "frames": 1741,
+    "peaks": [
+      {
+        "center": [
+          -0.5393238067626953,
+          -0.11884386837482452,
+          0.015319399535655975
+        ],
+        "pair": "left.forearm / sunglasses",
+        "sampledFramesWithCrossing": 83,
+        "span": [
+          0.05175095796585083,
+          0.1476844847202301,
+          0.2641286253929138
+        ],
+        "time": 13.558333333333334,
+        "trianglePairs": 58
+      },
+      {
+        "center": [
+          -0.31958305835723877,
+          -0.20627261698246002,
+          -0.05515521764755249
+        ],
+        "pair": "left.hand / body",
+        "sampledFramesWithCrossing": 469,
+        "span": [
+          0.10567522048950195,
+          0.32736000418663025,
+          0.2991046607494354
+        ],
+        "time": 0.6833333333333333,
+        "trianglePairs": 1201
+      },
+      {
+        "center": [
+          -0.026766691356897354,
+          0.05218443647027016,
+          0.2936180531978607
+        ],
+        "pair": "left.hand / right.hand",
+        "sampledFramesWithCrossing": 13,
+        "span": [
+          0.013612708076834679,
+          0.04217282682657242,
+          0.04063737392425537
+        ],
+        "time": 0.175,
+        "trianglePairs": 120
+      },
+      {
+        "center": [
+          -0.45707643032073975,
+          -0.2560025155544281,
+          0.013981476426124573
+        ],
+        "pair": "left.hand / sunglasses",
+        "sampledFramesWithCrossing": 407,
+        "span": [
+          0.17385491728782654,
+          0.24228090047836304,
+          0.0989491194486618
+        ],
+        "time": 13.633333333333333,
+        "trianglePairs": 686
+      },
+      {
+        "center": [
+          -0.24766603112220764,
+          0.27393990755081177,
+          0.02329796925187111
+        ],
+        "pair": "left.upper-arm / body",
+        "sampledFramesWithCrossing": 415,
+        "span": [
+          0.07145953178405762,
+          0.05816301703453064,
+          0.11880644410848618
+        ],
+        "time": 11.2,
+        "trianglePairs": 100
+      }
+    ],
+    "wearables": true
+  },
+  {
+    "action": "Banana",
+    "cameraPitchRadians": 0.18000000715255737,
+    "cameraYawRadians": 0,
+    "fps": 120,
+    "frames": 865,
+    "peaks": [
+      {
+        "center": [
+          -0.5169862508773804,
+          -0.05828671529889107,
+          -0.11019310355186462
+        ],
+        "pair": "left.forearm / banana.fruit",
+        "sampledFramesWithCrossing": 4,
+        "span": [
+          0.02393275499343872,
+          0.10168831795454025,
+          0.03227221220731735
+        ],
+        "time": 0.6583333333333333,
+        "trianglePairs": 86
+      },
+      {
+        "center": [
+          -0.520937442779541,
+          -0.05096704140305519,
+          -0.11318427324295044
+        ],
+        "pair": "left.forearm / banana.peel",
+        "sampledFramesWithCrossing": 5,
+        "span": [
+          0.034034788608551025,
+          0.1237088069319725,
+          0.04131194204092026
+        ],
+        "time": 0.6583333333333333,
+        "trianglePairs": 200
+      },
+      {
+        "center": [
+          -0.18466472625732422,
+          0.06036008521914482,
+          0.31068551540374756
+        ],
+        "pair": "left.hand / banana.fruit",
+        "sampledFramesWithCrossing": 463,
+        "span": [
+          0.11357204616069794,
+          0.08529727905988693,
+          0.09572157263755798
+        ],
+        "time": 4.425,
+        "trianglePairs": 329
+      },
+      {
+        "center": [
+          -0.5050336122512817,
+          0.04995992034673691,
+          0.2700192332267761
+        ],
+        "pair": "left.hand / banana.peel",
+        "sampledFramesWithCrossing": 612,
+        "span": [
+          0.1453935205936432,
+          0.08910109102725983,
+          0.13699504733085632
+        ],
+        "time": 1.95,
+        "trianglePairs": 603
+      },
+      {
+        "center": [
+          -0.31307679414749146,
+          -0.24477383494377136,
+          -0.18783952295780182
+        ],
+        "pair": "left.hand / body",
+        "sampledFramesWithCrossing": 110,
+        "span": [
+          0.08592897653579712,
+          0.32174187898635864,
+          0.3125651180744171
+        ],
+        "time": 0.6083333333333333,
+        "trianglePairs": 1146
+      },
+      {
+        "center": [
+          -0.03816598653793335,
+          0.05267048627138138,
+          0.3082050681114197
+        ],
+        "pair": "left.hand / right.hand",
+        "sampledFramesWithCrossing": 5,
+        "span": [
+          0.01524738036096096,
+          0.03889762982726097,
+          0.037708669900894165
+        ],
+        "time": 0.19166666666666668,
+        "trianglePairs": 99
+      },
+      {
+        "center": [
+          -0.4305025041103363,
+          0.22547826170921326,
+          -0.051881127059459686
+        ],
+        "pair": "left.upper-arm / banana.fruit",
+        "sampledFramesWithCrossing": 3,
+        "span": [
+          0.08061385154724121,
+          0.11586129665374756,
+          0.06947261095046997
+        ],
+        "time": 0.6583333333333333,
+        "trianglePairs": 154
+      },
+      {
+        "center": [
+          -0.4300329089164734,
+          0.22441744804382324,
+          -0.054240912199020386
+        ],
+        "pair": "left.upper-arm / banana.peel",
+        "sampledFramesWithCrossing": 47,
+        "span": [
+          0.09075051546096802,
+          0.12811607122421265,
+          0.07829912006855011
+        ],
+        "time": 0.6583333333333333,
+        "trianglePairs": 353
+      },
+      {
+        "center": [
+          -0.23394837975502014,
+          0.2895762026309967,
+          -0.03618715703487396
+        ],
+        "pair": "left.upper-arm / body",
+        "sampledFramesWithCrossing": 102,
+        "span": [
+          0.05444575846195221,
+          0.045088768005371094,
+          0.09127765893936157
+        ],
+        "time": 0.6333333333333333,
+        "trianglePairs": 70
+      }
+    ],
+    "wearables": true
+  },
+  {
+    "action": "Banana Miss",
+    "cameraPitchRadians": 0.18000000715255737,
+    "cameraYawRadians": 0,
+    "fps": 120,
+    "frames": 1361,
+    "peaks": [
+      {
+        "center": [
+          -0.5169862508773804,
+          -0.05828671529889107,
+          -0.11019310355186462
+        ],
+        "pair": "left.forearm / banana.fruit",
+        "sampledFramesWithCrossing": 4,
+        "span": [
+          0.02393275499343872,
+          0.10168831795454025,
+          0.03227221220731735
+        ],
+        "time": 0.6583333333333333,
+        "trianglePairs": 86
+      },
+      {
+        "center": [
+          -0.520937442779541,
+          -0.05096704140305519,
+          -0.11318427324295044
+        ],
+        "pair": "left.forearm / banana.peel",
+        "sampledFramesWithCrossing": 19,
+        "span": [
+          0.034034788608551025,
+          0.1237088069319725,
+          0.04131194204092026
+        ],
+        "time": 0.6583333333333333,
+        "trianglePairs": 200
+      },
+      {
+        "center": [
+          -0.7898121476173401,
+          0.2670411765575409,
+          0.5853170156478882
+        ],
+        "pair": "left.hand / banana.fruit",
+        "sampledFramesWithCrossing": 104,
+        "span": [
+          0.08811390399932861,
+          0.04612882435321808,
+          0.073062002658844
+        ],
+        "time": 1.4333333333333333,
+        "trianglePairs": 173
+      },
+      {
+        "center": [
+          -0.7645878791809082,
+          0.40134701132774353,
+          0.4794756770133972
+        ],
+        "pair": "left.hand / banana.peel",
+        "sampledFramesWithCrossing": 749,
+        "span": [
+          0.13049530982971191,
+          0.07784664630889893,
+          0.11296272277832031
+        ],
+        "time": 10.558333333333334,
+        "trianglePairs": 517
+      },
+      {
+        "center": [
+          -0.31307679414749146,
+          -0.24477383494377136,
+          -0.18783952295780182
+        ],
+        "pair": "left.hand / body",
+        "sampledFramesWithCrossing": 56,
+        "span": [
+          0.08592897653579712,
+          0.32174187898635864,
+          0.3125651180744171
+        ],
+        "time": 0.6083333333333333,
+        "trianglePairs": 1146
+      },
+      {
+        "center": [
+          -0.03816597908735275,
+          0.05267046391963959,
+          0.30820509791374207
+        ],
+        "pair": "left.hand / right.hand",
+        "sampledFramesWithCrossing": 784,
+        "span": [
+          0.015247391536831856,
+          0.038897555321455,
+          0.03770864009857178
+        ],
+        "time": 0.19166666666666668,
+        "trianglePairs": 99
+      },
+      {
+        "center": [
+          -0.4305025041103363,
+          0.22547826170921326,
+          -0.051881127059459686
+        ],
+        "pair": "left.upper-arm / banana.fruit",
+        "sampledFramesWithCrossing": 3,
+        "span": [
+          0.08061385154724121,
+          0.11586129665374756,
+          0.06947261095046997
+        ],
+        "time": 0.6583333333333333,
+        "trianglePairs": 154
+      },
+      {
+        "center": [
+          -0.4300329089164734,
+          0.22441744804382324,
+          -0.054240912199020386
+        ],
+        "pair": "left.upper-arm / banana.peel",
+        "sampledFramesWithCrossing": 3,
+        "span": [
+          0.09075051546096802,
+          0.12811607122421265,
+          0.07829912006855011
+        ],
+        "time": 0.6583333333333333,
+        "trianglePairs": 353
+      },
+      {
+        "center": [
+          -0.23394837975502014,
+          0.2895762026309967,
+          -0.03618715703487396
+        ],
+        "pair": "left.upper-arm / body",
+        "sampledFramesWithCrossing": 253,
+        "span": [
+          0.05444575846195221,
+          0.045088768005371094,
+          0.09127765893936157
+        ],
+        "time": 0.6333333333333333,
+        "trianglePairs": 70
+      },
+      {
+        "center": [
+          0.032865047454833984,
+          -0.04784245043992996,
+          0.5285218954086304
+        ],
+        "pair": "right.hand / banana.peel",
+        "sampledFramesWithCrossing": 336,
+        "span": [
+          0.012706460431218147,
+          0.06625500321388245,
+          0.02854520082473755
+        ],
+        "time": 3.4916666666666667,
+        "trianglePairs": 175
+      },
+      {
+        "center": [
+          -0.02306576818227768,
+          -0.10267237573862076,
+          0.22806879878044128
+        ],
+        "pair": "right.hand / body",
+        "sampledFramesWithCrossing": 25,
+        "span": [
+          0.19925877451896667,
+          0.13937492668628693,
+          0.052855685353279114
+        ],
+        "time": 3.3666666666666667,
+        "trianglePairs": 166
+      }
+    ],
+    "wearables": true
+  }
+]

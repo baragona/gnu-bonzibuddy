@@ -26,6 +26,12 @@ struct RoutinePose {
     var stance=StanceIntent()
 }
 enum RoutineLibrary {
+    // A short clearance gesture for the free hand while the opposite hand
+    // carries a wide prop across the chest. Timing belongs to each routine.
+    static func handAside(_ side:HandSide,weight:Float)->HandIntent {
+        HandIntent(wrist:[side.sign*0.58,-0.15,0.30],fingers:[side.sign*0.15,-1,0.10],palm:[0,0,1],openness:0.8,weight:weight,grip:0.15)
+    }
+
     static func smooth(_ t: Double, _ start: Double, _ end: Double) -> Float {
         let x=Float(min(1,max(0,(t-start)/(end-start))))
         return x*x*x*(x*(x*6-15)+10)

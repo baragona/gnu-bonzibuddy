@@ -1,0 +1,455 @@
+configuration,action,pair,before crossing frames,after crossing frames,before peak triangle pairs,after peak triangle pairs,after peak time
+normal,Idle,left.hand / body,553,0,989,0,
+normal,Idle,left.hand / right.hand,553,0,667,0,
+normal,Idle,right.hand / body,553,0,673,0,
+normal,Look Left,left.hand / body,161,0,1029,0,
+normal,Look Left,left.hand / right.hand,161,0,667,0,
+normal,Look Left,right.hand / body,161,0,673,0,
+normal,Look Right,left.hand / body,161,0,989,0,
+normal,Look Right,left.hand / right.hand,161,0,667,0,
+normal,Look Right,right.hand / body,161,0,673,0,
+normal,Chest Beat,left.hand / body,50,17,1005,128,1.325
+normal,Chest Beat,left.hand / right.hand,46,23,1430,1276,1.2916666666666667
+normal,Chest Beat,right.hand / body,48,14,902,313,0.13333333333333333
+normal,Clap,left.forearm / right.hand,76,74,33,21,0.6666666666666666
+normal,Clap,left.hand / body,183,169,989,112,0.06666666666666667
+normal,Clap,left.hand / right.forearm,136,136,152,142,1.25
+normal,Clap,left.hand / right.hand,156,152,805,634,0.08333333333333333
+normal,Clap,right.forearm / body,78,78,101,101,0.26666666666666666
+normal,Clap,right.hand / body,185,175,769,584,1.4333333333333333
+normal,Shrug,left.hand / body,102,18,1368,1064,1.7583333333333333
+normal,Shrug,left.hand / right.hand,98,14,1452,1119,0.3333333333333333
+normal,Shrug,right.hand / body,102,18,1370,1135,1.7583333333333333
+normal,Wave,left.hand / body,481,0,989,0,
+normal,Wave,left.hand / right.hand,146,0,695,0,
+normal,Wave,right.hand / body,166,0,1358,0,
+normal,Wave,right.upper-arm / body,297,297,94,94,0.48333333333333334
+normal,Dance,left.hand / body,23,0,989,0,
+normal,Dance,left.hand / right.hand,36,0,940,0,
+normal,Dance,right.hand / body,29,0,670,0,
+normal,Dance,right.upper-arm / body,102,102,48,48,5.3
+normal,Think,left.hand / body,481,0,989,0,
+normal,Think,left.hand / right.hand,36,0,667,0,
+normal,Think,right.hand / body,58,26,672,277,0.225
+normal,Surprised,left.hand / body,44,0,1194,0,
+normal,Surprised,left.hand / right.hand,22,0,667,0,
+normal,Surprised,left.upper-arm / body,429,429,65,64,0.3416666666666667
+normal,Surprised,right.hand / body,46,6,702,58,0.09166666666666666
+normal,Surprised,right.upper-arm / body,429,429,65,64,0.3333333333333333
+normal,Speak,left.hand / body,241,0,994,0,
+normal,Speak,left.hand / right.hand,241,0,667,0,
+normal,Speak,right.hand / body,241,0,673,0,
+normal,Mail Full,left.forearm / mail.door,7,7,52,52,0.6416666666666667
+normal,Mail Full,left.forearm / mail.letter.back,87,87,245,245,1.7583333333333333
+normal,Mail Full,left.forearm / mail.letter.flap,87,87,245,245,1.75
+normal,Mail Full,left.hand / body,125,48,1232,657,5.983333333333333
+normal,Mail Full,left.hand / mail.box,77,76,812,812,1.175
+normal,Mail Full,left.hand / mail.door,93,98,450,480,0.8916666666666667
+normal,Mail Full,left.hand / mail.letter.back,561,558,1347,1347,5.641666666666667
+normal,Mail Full,left.hand / mail.letter.flap,565,563,1447,1447,5.533333333333333
+normal,Mail Full,left.hand / right.hand,77,11,673,358,1.825
+normal,Mail Full,left.upper-arm / body,40,37,75,75,1.6083333333333334
+normal,Mail Full,right.hand / body,317,0,681,0,
+normal,Mail Full,right.hand / mail.letter.back,434,449,801,782,1.8
+normal,Mail Full,right.hand / mail.letter.flap,433,449,828,810,1.8083333333333333
+normal,Mail Empty,left.forearm / mail.door,15,15,52,52,0.6416666666666667
+normal,Mail Empty,left.hand / body,283,0,1146,0,
+normal,Mail Empty,left.hand / mail.box,67,66,240,240,0.4583333333333333
+normal,Mail Empty,left.hand / mail.door,126,129,450,486,2.283333333333333
+normal,Mail Empty,left.hand / right.hand,274,1,669,63,1.025
+normal,Mail Empty,left.upper-arm / body,173,170,118,119,1.3416666666666666
+normal,Mail Empty,right.hand / body,421,0,673,0,
+normal,Mail Read,left.forearm / mail.letter.back,147,147,218,218,1.0416666666666667
+normal,Mail Read,left.forearm / mail.letter.flap,148,148,244,244,1.7083333333333333
+normal,Mail Read,left.hand / body,136,86,1235,657,0.35833333333333334
+normal,Mail Read,left.hand / mail.letter.back,326,326,1346,1346,4.291666666666667
+normal,Mail Read,left.hand / mail.letter.flap,329,329,1443,1443,0.775
+normal,Mail Read,left.hand / right.hand,50,10,673,150,4.75
+normal,Mail Read,left.upper-arm / body,89,85,379,379,1.7416666666666667
+normal,Mail Read,right.hand / body,220,0,673,0,
+normal,Mail Read,right.hand / mail.letter.back,373,395,751,715,0.975
+normal,Mail Read,right.hand / mail.letter.flap,291,315,768,744,0.9833333333333333
+normal,Mail Next,left.forearm / mail.letter.back,138,138,218,218,1.7416666666666667
+normal,Mail Next,left.forearm / mail.letter.flap,140,140,237,237,1.6166666666666667
+normal,Mail Next,left.hand / body,136,86,1232,657,0.35833333333333334
+normal,Mail Next,left.hand / mail.letter.back,570,570,1344,1345,6.091666666666667
+normal,Mail Next,left.hand / mail.letter.flap,575,575,1444,1444,5.983333333333333
+normal,Mail Next,left.hand / right.hand,50,10,674,148,0.25
+normal,Mail Next,left.upper-arm / body,77,73,464,464,1.6333333333333333
+normal,Mail Next,right.hand / body,220,0,679,0,
+normal,Mail Next,right.hand / mail.letter.back,589,611,754,716,5.775
+normal,Mail Next,right.hand / mail.letter.flap,536,560,770,744,0.9833333333333333
+normal,Globe,left.hand / body,83,0,991,0,
+normal,Globe,left.hand / right.hand,68,0,759,0,
+normal,Globe,left.hand / search.globe,559,559,449,449,1.9083333333333334
+normal,Globe,right.forearm / body,641,635,21,18,0.5333333333333333
+normal,Globe,right.hand / body,83,0,676,0,
+normal,Globe,right.upper-arm / body,669,663,303,303,0.675
+normal,Juggle,left.forearm / juggle.0,69,69,164,164,1.8833333333333333
+normal,Juggle,left.forearm / juggle.1,209,209,273,273,3.283333333333333
+normal,Juggle,left.forearm / juggle.2,68,68,165,165,2.6
+normal,Juggle,left.hand / body,72,0,991,0,
+normal,Juggle,left.hand / juggle.0,93,93,625,625,3.9916666666666667
+normal,Juggle,left.hand / juggle.1,238,238,801,754,0.6083333333333333
+normal,Juggle,left.hand / juggle.2,93,93,625,625,4.875
+normal,Juggle,left.hand / right.hand,54,0,671,0,
+normal,Juggle,left.upper-arm / body,13,13,21,21,5.233333333333333
+normal,Juggle,right.forearm / juggle.0,101,101,256,256,2.95
+normal,Juggle,right.forearm / juggle.1,68,68,255,255,2.15
+normal,Juggle,right.forearm / juggle.2,149,149,264,264,6.008333333333334
+normal,Juggle,right.hand / body,76,0,673,0,
+normal,Juggle,right.hand / juggle.0,191,191,608,608,0.65
+normal,Juggle,right.hand / juggle.1,95,95,664,664,2.3666666666666667
+normal,Juggle,right.hand / juggle.2,235,235,795,795,1.1083333333333334
+normal,Juggle,right.upper-arm / body,31,31,22,22,2.7083333333333335
+normal,Write,left.forearm / body,164,154,439,439,6.066666666666666
+normal,Write,left.forearm / write.pad,82,82,23,23,2.775
+normal,Write,left.hand / body,594,551,1494,1022,0.275
+normal,Write,left.hand / right.hand,71,9,670,58,0.25
+normal,Write,left.hand / write.pad,436,436,832,832,1.1666666666666667
+normal,Write,left.hand / write.pencil,688,688,318,318,0.7416666666666667
+normal,Write,left.upper-arm / body,494,488,330,330,5.891666666666667
+normal,Write,right.forearm / write.pad,51,51,324,324,0.7333333333333333
+normal,Write,right.hand / body,79,40,1047,673,0.26666666666666666
+normal,Write,right.hand / write.pad,98,98,92,92,0.7166666666666667
+normal,Write,right.upper-arm / body,19,13,52,35,0.3333333333333333
+normal,Write Pause,left.forearm / body,164,154,430,430,3.966666666666667
+normal,Write Pause,left.hand / body,402,359,1494,1022,0.275
+normal,Write Pause,left.hand / right.hand,71,9,670,58,0.25
+normal,Write Pause,left.hand / write.pad,157,157,832,832,1.1666666666666667
+normal,Write Pause,left.hand / write.pencil,436,436,318,318,0.7416666666666667
+normal,Write Pause,left.upper-arm / body,240,234,328,328,0.9666666666666667
+normal,Write Pause,right.forearm / write.pad,51,51,324,324,0.7333333333333333
+normal,Write Pause,right.hand / body,79,40,1049,673,0.26666666666666666
+normal,Write Pause,right.hand / write.pad,98,98,92,92,0.7166666666666667
+normal,Write Pause,right.upper-arm / body,19,13,51,35,0.3333333333333333
+normal,Write Once,left.forearm / body,164,154,437,437,5.416666666666667
+normal,Write Once,left.forearm / write.pad,34,34,23,23,2.95
+normal,Write Once,left.hand / body,500,457,1494,1022,0.275
+normal,Write Once,left.hand / right.hand,71,9,670,58,0.25
+normal,Write Once,left.hand / write.pad,268,268,832,832,1.1666666666666667
+normal,Write Once,left.hand / write.pencil,610,610,318,318,0.7416666666666667
+normal,Write Once,left.upper-arm / body,342,336,331,331,5.241666666666666
+normal,Write Once,right.forearm / write.pad,51,51,324,324,0.7333333333333333
+normal,Write Once,right.hand / body,79,40,1050,673,0.26666666666666666
+normal,Write Once,right.hand / write.pad,99,99,92,92,0.7166666666666667
+normal,Write Once,right.upper-arm / body,19,13,52,36,6.033333333333333
+normal,Write Again,left.forearm / body,164,154,436,436,5.166666666666667
+normal,Write Again,left.forearm / write.pad,28,28,23,23,2.775
+normal,Write Again,left.hand / body,483,440,1494,1022,0.275
+normal,Write Again,left.hand / right.hand,71,9,670,58,0.25
+normal,Write Again,left.hand / write.pad,250,250,832,832,1.1666666666666667
+normal,Write Again,left.hand / write.pencil,580,580,318,318,0.7416666666666667
+normal,Write Again,left.upper-arm / body,325,319,332,332,4.991666666666666
+normal,Write Again,right.forearm / write.pad,51,51,324,324,0.7333333333333333
+normal,Write Again,right.hand / body,79,40,1050,673,0.26666666666666666
+normal,Write Again,right.hand / write.pad,97,97,92,92,0.7166666666666667
+normal,Write Again,right.upper-arm / body,19,13,54,36,5.783333333333333
+normal,Read,left.forearm / body,166,148,441,441,6.441666666666666
+normal,Read,left.forearm / read.left,736,735,213,213,5.766666666666667
+normal,Read,left.hand / body,1232,868,1977,1294,9.458333333333334
+normal,Read,left.hand / read.left,812,805,1464,1464,5.791666666666667
+normal,Read,left.hand / right.hand,204,0,997,0,
+normal,Read,left.hand / right.upper-arm,4,0,44,0,
+normal,Read,left.upper-arm / body,78,73,352,352,6.266666666666667
+normal,Read,left.upper-arm / read.left,8,8,93,91,2.1083333333333334
+normal,Read,right.forearm / body,36,34,65,72,1.9916666666666667
+normal,Read,right.forearm / read.left,75,75,246,246,9.716666666666667
+normal,Read,right.forearm / read.right,835,835,375,375,9.85
+normal,Read,right.hand / body,1012,845,1158,1044,11.375
+normal,Read,right.hand / read.left,32,32,850,688,9.508333333333333
+normal,Read,right.hand / read.right,1025,1025,1227,1251,2.066666666666667
+normal,Read,right.upper-arm / body,38,26,41,36,1.15
+normal,Read,right.upper-arm / read.left,83,83,158,160,1.9916666666666667
+normal,Read,right.upper-arm / read.right,36,36,194,201,9.491666666666667
+normal,Read Look Up,left.forearm / body,126,106,423,406,2.025
+normal,Read Look Up,left.forearm / read.left,1081,1081,272,272,6.758333333333334
+normal,Read Look Up,left.hand / body,1406,1040,1960,1376,11.15
+normal,Read Look Up,left.hand / read.left,1006,999,1013,646,11.133333333333333
+normal,Read Look Up,left.hand / right.hand,203,0,979,0,
+normal,Read Look Up,left.hand / right.upper-arm,4,0,44,0,
+normal,Read Look Up,left.upper-arm / body,5,0,126,0,
+normal,Read Look Up,left.upper-arm / read.left,8,7,97,95,11.141666666666667
+normal,Read Look Up,right.forearm / body,35,33,65,72,1.9916666666666667
+normal,Read Look Up,right.forearm / read.left,75,75,245,245,1.8666666666666667
+normal,Read Look Up,right.forearm / read.right,1192,1192,378,378,11.55
+normal,Read Look Up,right.hand / body,1359,1192,1157,1023,13.05
+normal,Read Look Up,right.hand / read.left,32,32,855,700,11.208333333333334
+normal,Read Look Up,right.hand / read.right,1227,1227,1241,1255,11.15
+normal,Read Look Up,right.upper-arm / body,40,28,43,37,11.933333333333334
+normal,Read Look Up,right.upper-arm / read.left,82,83,158,160,1.9916666666666667
+normal,Read Look Up,right.upper-arm / read.right,36,36,192,199,2.058333333333333
+normal,Butterfly,left.forearm / right.hand,1,3,2,5,3.7666666666666666
+normal,Butterfly,left.hand / body,355,0,991,0,
+normal,Butterfly,left.hand / right.forearm,208,207,8,8,4.158333333333333
+normal,Butterfly,left.hand / right.hand,634,322,761,761,4.2
+normal,Butterfly,right.forearm / body,339,324,569,569,5.725
+normal,Butterfly,right.hand / body,916,13,709,192,6.433333333333334
+normal,Butterfly,right.hand / butterfly.right,181,180,231,231,4.458333333333333
+normal,Butterfly,right.upper-arm / body,355,351,1024,1024,5.775
+normal,Headphones,left.forearm / body,31,29,95,95,12.233333333333333
+normal,Headphones,left.hand / body,1307,15,1112,170,0.2916666666666667
+normal,Headphones,left.hand / right.hand,1262,0,671,0,
+normal,Headphones,left.upper-arm / body,49,43,253,253,12.25
+normal,Headphones,right.forearm / body,50,39,95,95,12.233333333333333
+normal,Headphones,right.hand / body,1407,148,1084,901,0.25833333333333336
+normal,Headphones,right.upper-arm / body,37,35,250,250,12.25
+normal,Sunglasses,left.forearm / body,30,0,6,0,
+normal,Sunglasses,left.forearm / sunglasses,83,83,58,58,13.558333333333334
+normal,Sunglasses,left.hand / body,1592,469,1380,1201,0.6833333333333333
+normal,Sunglasses,left.hand / right.hand,1153,13,696,120,0.175
+normal,Sunglasses,left.hand / sunglasses,414,407,686,686,13.633333333333333
+normal,Sunglasses,left.upper-arm / body,425,415,100,100,11.2
+normal,Sunglasses,right.hand / body,1741,0,673,0,
+normal,Sunglasses,right.hand / sunglasses,16,0,176,0,
+normal,Banana,left.forearm / banana.fruit,4,4,86,86,0.6583333333333333
+normal,Banana,left.forearm / banana.peel,5,5,200,200,0.6583333333333333
+normal,Banana,left.hand / banana.fruit,463,463,329,329,4.425
+normal,Banana,left.hand / banana.peel,612,612,603,603,1.95
+normal,Banana,left.hand / body,233,110,1258,1146,0.6083333333333333
+normal,Banana,left.hand / right.hand,100,5,700,99,0.19166666666666668
+normal,Banana,left.upper-arm / banana.fruit,3,3,154,154,0.6583333333333333
+normal,Banana,left.upper-arm / banana.peel,47,47,353,353,0.6583333333333333
+normal,Banana,left.upper-arm / body,103,102,70,70,0.6333333333333333
+normal,Banana,right.hand / banana.peel,47,0,230,0,
+normal,Banana,right.hand / body,865,0,673,0,
+normal,Banana Miss,left.forearm / banana.fruit,4,4,86,86,0.6583333333333333
+normal,Banana Miss,left.forearm / banana.peel,19,19,200,200,0.6583333333333333
+normal,Banana Miss,left.hand / banana.fruit,104,104,173,173,1.4333333333333333
+normal,Banana Miss,left.hand / banana.peel,749,749,517,517,10.558333333333334
+normal,Banana Miss,left.hand / body,127,56,1258,1146,0.6083333333333333
+normal,Banana Miss,left.hand / right.hand,848,784,700,99,0.19166666666666668
+normal,Banana Miss,left.upper-arm / banana.fruit,3,3,154,154,0.6583333333333333
+normal,Banana Miss,left.upper-arm / banana.peel,3,3,353,353,0.6583333333333333
+normal,Banana Miss,left.upper-arm / body,255,253,70,70,0.6333333333333333
+normal,Banana Miss,right.hand / banana.peel,328,336,170,175,3.4916666666666667
+normal,Banana Miss,right.hand / body,566,25,747,166,3.3666666666666667
+wearables,Idle,left.hand / body,553,0,989,0,
+wearables,Idle,left.hand / right.hand,553,0,667,0,
+wearables,Idle,right.hand / body,553,0,673,0,
+wearables,Look Left,left.hand / body,161,0,1029,0,
+wearables,Look Left,left.hand / right.hand,161,0,667,0,
+wearables,Look Left,right.hand / body,161,0,673,0,
+wearables,Look Right,left.hand / body,161,0,989,0,
+wearables,Look Right,left.hand / right.hand,161,0,667,0,
+wearables,Look Right,right.hand / body,161,0,673,0,
+wearables,Chest Beat,left.hand / body,50,17,1005,128,1.325
+wearables,Chest Beat,left.hand / right.hand,46,23,1430,1276,1.2916666666666667
+wearables,Chest Beat,right.hand / body,48,14,902,313,0.13333333333333333
+wearables,Clap,left.forearm / right.hand,76,74,33,21,0.6666666666666666
+wearables,Clap,left.hand / body,183,169,989,112,0.06666666666666667
+wearables,Clap,left.hand / right.forearm,136,136,152,142,1.25
+wearables,Clap,left.hand / right.hand,156,152,805,634,0.08333333333333333
+wearables,Clap,right.forearm / body,78,78,101,101,0.26666666666666666
+wearables,Clap,right.hand / body,185,175,769,584,1.4333333333333333
+wearables,Shrug,left.hand / body,102,18,1368,1064,1.7583333333333333
+wearables,Shrug,left.hand / right.hand,98,14,1452,1119,0.3333333333333333
+wearables,Shrug,right.hand / body,102,18,1370,1135,1.7583333333333333
+wearables,Wave,left.hand / body,481,0,989,0,
+wearables,Wave,left.hand / right.hand,146,0,695,0,
+wearables,Wave,right.hand / body,166,0,1358,0,
+wearables,Wave,right.upper-arm / body,297,297,94,94,0.48333333333333334
+wearables,Wave,right.upper-arm / headphones,245,245,34,34,0.5
+wearables,Dance,left.hand / body,23,0,989,0,
+wearables,Dance,left.hand / right.hand,36,0,940,0,
+wearables,Dance,right.hand / body,29,0,670,0,
+wearables,Dance,right.upper-arm / body,102,102,48,48,5.3
+wearables,Think,left.hand / body,481,0,989,0,
+wearables,Think,left.hand / right.hand,36,0,667,0,
+wearables,Think,right.hand / body,58,26,672,277,0.225
+wearables,Surprised,left.forearm / headphones,8,0,44,0,
+wearables,Surprised,left.hand / body,44,0,1194,0,
+wearables,Surprised,left.hand / headphones,12,0,562,0,
+wearables,Surprised,left.hand / right.hand,22,0,667,0,
+wearables,Surprised,left.upper-arm / body,429,429,65,64,0.3416666666666667
+wearables,Surprised,right.hand / body,46,6,702,58,0.09166666666666666
+wearables,Surprised,right.hand / headphones,8,0,204,0,
+wearables,Surprised,right.upper-arm / body,429,429,65,64,0.3333333333333333
+wearables,Speak,left.hand / body,241,0,994,0,
+wearables,Speak,left.hand / right.hand,241,0,667,0,
+wearables,Speak,right.hand / body,241,0,673,0,
+wearables,Mail Full,left.forearm / mail.door,7,7,52,52,0.6416666666666667
+wearables,Mail Full,left.forearm / mail.letter.back,87,87,245,245,1.7583333333333333
+wearables,Mail Full,left.forearm / mail.letter.flap,87,87,245,245,1.75
+wearables,Mail Full,left.hand / body,125,48,1232,657,5.983333333333333
+wearables,Mail Full,left.hand / mail.box,77,76,812,812,1.175
+wearables,Mail Full,left.hand / mail.door,93,98,450,480,0.8916666666666667
+wearables,Mail Full,left.hand / mail.letter.back,561,558,1347,1347,5.641666666666667
+wearables,Mail Full,left.hand / mail.letter.flap,565,563,1447,1447,5.533333333333333
+wearables,Mail Full,left.hand / right.hand,77,11,673,358,1.825
+wearables,Mail Full,left.upper-arm / body,40,37,75,75,1.6083333333333334
+wearables,Mail Full,right.hand / body,317,0,681,0,
+wearables,Mail Full,right.hand / mail.letter.back,434,449,801,782,1.8
+wearables,Mail Full,right.hand / mail.letter.flap,433,449,828,810,1.8083333333333333
+wearables,Mail Empty,left.forearm / mail.door,15,15,52,52,0.6416666666666667
+wearables,Mail Empty,left.hand / body,283,0,1146,0,
+wearables,Mail Empty,left.hand / mail.box,67,66,240,240,0.4583333333333333
+wearables,Mail Empty,left.hand / mail.door,126,129,450,486,2.283333333333333
+wearables,Mail Empty,left.hand / right.hand,274,1,669,63,1.025
+wearables,Mail Empty,left.upper-arm / body,173,170,118,119,1.3416666666666666
+wearables,Mail Empty,right.hand / body,421,0,673,0,
+wearables,Mail Read,left.forearm / mail.letter.back,147,147,218,218,1.0416666666666667
+wearables,Mail Read,left.forearm / mail.letter.flap,148,148,244,244,1.7083333333333333
+wearables,Mail Read,left.hand / body,136,86,1235,657,0.35833333333333334
+wearables,Mail Read,left.hand / mail.letter.back,326,326,1346,1346,4.291666666666667
+wearables,Mail Read,left.hand / mail.letter.flap,329,329,1443,1443,0.775
+wearables,Mail Read,left.hand / right.hand,50,10,673,150,4.75
+wearables,Mail Read,left.upper-arm / body,89,85,379,379,1.7416666666666667
+wearables,Mail Read,right.hand / body,220,0,673,0,
+wearables,Mail Read,right.hand / mail.letter.back,373,395,751,715,0.975
+wearables,Mail Read,right.hand / mail.letter.flap,291,315,768,744,0.9833333333333333
+wearables,Mail Next,left.forearm / mail.letter.back,138,138,218,218,1.7416666666666667
+wearables,Mail Next,left.forearm / mail.letter.flap,140,140,237,237,1.6166666666666667
+wearables,Mail Next,left.hand / body,136,86,1232,657,0.35833333333333334
+wearables,Mail Next,left.hand / mail.letter.back,570,570,1344,1345,6.091666666666667
+wearables,Mail Next,left.hand / mail.letter.flap,575,575,1444,1444,5.983333333333333
+wearables,Mail Next,left.hand / right.hand,50,10,674,148,0.25
+wearables,Mail Next,left.upper-arm / body,77,73,464,464,1.6333333333333333
+wearables,Mail Next,right.hand / body,220,0,679,0,
+wearables,Mail Next,right.hand / mail.letter.back,589,611,754,716,5.775
+wearables,Mail Next,right.hand / mail.letter.flap,536,560,770,744,0.9833333333333333
+wearables,Globe,left.hand / body,83,0,991,0,
+wearables,Globe,left.hand / right.hand,68,0,759,0,
+wearables,Globe,left.hand / search.globe,559,559,449,449,1.9083333333333334
+wearables,Globe,right.forearm / body,641,635,21,18,0.5333333333333333
+wearables,Globe,right.hand / body,83,0,676,0,
+wearables,Globe,right.upper-arm / body,669,663,303,303,0.675
+wearables,Juggle,left.forearm / juggle.0,69,69,164,164,1.8833333333333333
+wearables,Juggle,left.forearm / juggle.1,209,209,273,273,3.283333333333333
+wearables,Juggle,left.forearm / juggle.2,68,68,165,165,2.6
+wearables,Juggle,left.hand / body,72,0,991,0,
+wearables,Juggle,left.hand / juggle.0,93,93,625,625,3.9916666666666667
+wearables,Juggle,left.hand / juggle.1,238,238,801,754,0.6083333333333333
+wearables,Juggle,left.hand / juggle.2,93,93,625,625,4.875
+wearables,Juggle,left.hand / right.hand,54,0,671,0,
+wearables,Juggle,left.upper-arm / body,13,13,21,21,5.233333333333333
+wearables,Juggle,right.forearm / juggle.0,101,101,256,256,2.95
+wearables,Juggle,right.forearm / juggle.1,68,68,255,255,2.15
+wearables,Juggle,right.forearm / juggle.2,149,149,264,264,6.008333333333334
+wearables,Juggle,right.hand / body,76,0,673,0,
+wearables,Juggle,right.hand / juggle.0,191,191,608,608,0.65
+wearables,Juggle,right.hand / juggle.1,95,95,664,664,2.3666666666666667
+wearables,Juggle,right.hand / juggle.2,235,235,795,795,1.1083333333333334
+wearables,Juggle,right.upper-arm / body,31,31,22,22,2.7083333333333335
+wearables,Write,left.forearm / body,164,154,439,439,6.066666666666666
+wearables,Write,left.forearm / write.pad,82,82,23,23,2.775
+wearables,Write,left.hand / body,594,551,1494,1022,0.275
+wearables,Write,left.hand / right.hand,71,9,670,58,0.25
+wearables,Write,left.hand / write.pad,436,436,832,832,1.1666666666666667
+wearables,Write,left.hand / write.pencil,688,688,318,318,0.7416666666666667
+wearables,Write,left.upper-arm / body,494,488,330,330,5.891666666666667
+wearables,Write,right.forearm / write.pad,51,51,324,324,0.7333333333333333
+wearables,Write,right.hand / body,79,40,1047,673,0.26666666666666666
+wearables,Write,right.hand / write.pad,98,98,92,92,0.7166666666666667
+wearables,Write,right.upper-arm / body,19,13,52,35,0.3333333333333333
+wearables,Write Pause,left.forearm / body,164,154,430,430,3.966666666666667
+wearables,Write Pause,left.hand / body,402,359,1494,1022,0.275
+wearables,Write Pause,left.hand / right.hand,71,9,670,58,0.25
+wearables,Write Pause,left.hand / write.pad,157,157,832,832,1.1666666666666667
+wearables,Write Pause,left.hand / write.pencil,436,436,318,318,0.7416666666666667
+wearables,Write Pause,left.upper-arm / body,240,234,328,328,0.9666666666666667
+wearables,Write Pause,right.forearm / write.pad,51,51,324,324,0.7333333333333333
+wearables,Write Pause,right.hand / body,79,40,1049,673,0.26666666666666666
+wearables,Write Pause,right.hand / write.pad,98,98,92,92,0.7166666666666667
+wearables,Write Pause,right.upper-arm / body,19,13,51,35,0.3333333333333333
+wearables,Write Once,left.forearm / body,164,154,437,437,5.416666666666667
+wearables,Write Once,left.forearm / write.pad,34,34,23,23,2.95
+wearables,Write Once,left.hand / body,500,457,1494,1022,0.275
+wearables,Write Once,left.hand / right.hand,71,9,670,58,0.25
+wearables,Write Once,left.hand / write.pad,268,268,832,832,1.1666666666666667
+wearables,Write Once,left.hand / write.pencil,610,610,318,318,0.7416666666666667
+wearables,Write Once,left.upper-arm / body,342,336,331,331,5.241666666666666
+wearables,Write Once,right.forearm / write.pad,51,51,324,324,0.7333333333333333
+wearables,Write Once,right.hand / body,79,40,1050,673,0.26666666666666666
+wearables,Write Once,right.hand / write.pad,99,99,92,92,0.7166666666666667
+wearables,Write Once,right.upper-arm / body,19,13,52,36,6.033333333333333
+wearables,Write Again,left.forearm / body,164,154,436,436,5.166666666666667
+wearables,Write Again,left.forearm / write.pad,28,28,23,23,2.775
+wearables,Write Again,left.hand / body,483,440,1494,1022,0.275
+wearables,Write Again,left.hand / right.hand,71,9,670,58,0.25
+wearables,Write Again,left.hand / write.pad,250,250,832,832,1.1666666666666667
+wearables,Write Again,left.hand / write.pencil,580,580,318,318,0.7416666666666667
+wearables,Write Again,left.upper-arm / body,325,319,332,332,4.991666666666666
+wearables,Write Again,right.forearm / write.pad,51,51,324,324,0.7333333333333333
+wearables,Write Again,right.hand / body,79,40,1050,673,0.26666666666666666
+wearables,Write Again,right.hand / write.pad,97,97,92,92,0.7166666666666667
+wearables,Write Again,right.upper-arm / body,19,13,54,36,5.783333333333333
+wearables,Read,left.forearm / body,166,148,441,441,6.441666666666666
+wearables,Read,left.forearm / read.left,736,735,213,213,5.766666666666667
+wearables,Read,left.hand / body,1232,868,1977,1294,9.458333333333334
+wearables,Read,left.hand / read.left,812,805,1464,1464,5.791666666666667
+wearables,Read,left.hand / right.hand,204,0,997,0,
+wearables,Read,left.hand / right.upper-arm,4,0,44,0,
+wearables,Read,left.upper-arm / body,78,73,352,352,6.266666666666667
+wearables,Read,left.upper-arm / read.left,8,8,93,91,2.1083333333333334
+wearables,Read,right.forearm / body,36,34,65,72,1.9916666666666667
+wearables,Read,right.forearm / read.left,75,75,246,246,9.716666666666667
+wearables,Read,right.forearm / read.right,835,835,375,375,9.85
+wearables,Read,right.hand / body,1012,845,1158,1044,11.375
+wearables,Read,right.hand / read.left,32,32,850,688,9.508333333333333
+wearables,Read,right.hand / read.right,1025,1025,1227,1251,2.066666666666667
+wearables,Read,right.upper-arm / body,38,26,41,36,1.15
+wearables,Read,right.upper-arm / read.left,83,83,158,160,1.9916666666666667
+wearables,Read,right.upper-arm / read.right,36,36,194,201,9.491666666666667
+wearables,Read Look Up,left.forearm / body,126,106,423,406,2.025
+wearables,Read Look Up,left.forearm / read.left,1081,1081,272,272,6.758333333333334
+wearables,Read Look Up,left.hand / body,1406,1040,1960,1376,11.15
+wearables,Read Look Up,left.hand / read.left,1006,999,1013,646,11.133333333333333
+wearables,Read Look Up,left.hand / right.hand,203,0,979,0,
+wearables,Read Look Up,left.hand / right.upper-arm,4,0,44,0,
+wearables,Read Look Up,left.upper-arm / body,5,0,126,0,
+wearables,Read Look Up,left.upper-arm / read.left,8,7,97,95,11.141666666666667
+wearables,Read Look Up,right.forearm / body,35,33,65,72,1.9916666666666667
+wearables,Read Look Up,right.forearm / read.left,75,75,245,245,1.8666666666666667
+wearables,Read Look Up,right.forearm / read.right,1192,1192,378,378,11.55
+wearables,Read Look Up,right.hand / body,1359,1192,1157,1023,13.05
+wearables,Read Look Up,right.hand / read.left,32,32,855,700,11.208333333333334
+wearables,Read Look Up,right.hand / read.right,1227,1227,1241,1255,11.15
+wearables,Read Look Up,right.upper-arm / body,40,28,43,37,11.933333333333334
+wearables,Read Look Up,right.upper-arm / read.left,82,83,158,160,1.9916666666666667
+wearables,Read Look Up,right.upper-arm / read.right,36,36,192,199,2.058333333333333
+wearables,Butterfly,left.forearm / right.hand,1,3,2,5,3.7666666666666666
+wearables,Butterfly,left.hand / body,355,0,991,0,
+wearables,Butterfly,left.hand / right.forearm,208,207,8,8,4.158333333333333
+wearables,Butterfly,left.hand / right.hand,634,322,761,761,4.2
+wearables,Butterfly,right.forearm / body,339,324,569,569,5.725
+wearables,Butterfly,right.hand / body,916,13,709,192,6.433333333333334
+wearables,Butterfly,right.hand / butterfly.right,181,180,231,231,4.458333333333333
+wearables,Butterfly,right.upper-arm / body,355,351,1024,1024,5.775
+wearables,Headphones,left.forearm / body,31,29,95,95,12.233333333333333
+wearables,Headphones,left.hand / body,1307,15,1112,170,0.2916666666666667
+wearables,Headphones,left.hand / right.hand,1262,0,671,0,
+wearables,Headphones,left.upper-arm / body,49,43,253,253,12.25
+wearables,Headphones,right.forearm / body,50,39,95,95,12.233333333333333
+wearables,Headphones,right.hand / body,1407,148,1084,901,0.25833333333333336
+wearables,Headphones,right.upper-arm / body,37,35,250,250,12.25
+wearables,Sunglasses,left.forearm / body,30,0,6,0,
+wearables,Sunglasses,left.forearm / sunglasses,83,83,58,58,13.558333333333334
+wearables,Sunglasses,left.hand / body,1592,469,1380,1201,0.6833333333333333
+wearables,Sunglasses,left.hand / right.hand,1153,13,696,120,0.175
+wearables,Sunglasses,left.hand / sunglasses,414,407,686,686,13.633333333333333
+wearables,Sunglasses,left.upper-arm / body,425,415,100,100,11.2
+wearables,Sunglasses,right.hand / body,1741,0,673,0,
+wearables,Sunglasses,right.hand / sunglasses,16,0,176,0,
+wearables,Banana,left.forearm / banana.fruit,4,4,86,86,0.6583333333333333
+wearables,Banana,left.forearm / banana.peel,5,5,200,200,0.6583333333333333
+wearables,Banana,left.hand / banana.fruit,463,463,329,329,4.425
+wearables,Banana,left.hand / banana.peel,612,612,603,603,1.95
+wearables,Banana,left.hand / body,233,110,1258,1146,0.6083333333333333
+wearables,Banana,left.hand / right.hand,100,5,700,99,0.19166666666666668
+wearables,Banana,left.upper-arm / banana.fruit,3,3,154,154,0.6583333333333333
+wearables,Banana,left.upper-arm / banana.peel,47,47,353,353,0.6583333333333333
+wearables,Banana,left.upper-arm / body,103,102,70,70,0.6333333333333333
+wearables,Banana,right.hand / banana.peel,47,0,230,0,
+wearables,Banana,right.hand / body,865,0,673,0,
+wearables,Banana Miss,left.forearm / banana.fruit,4,4,86,86,0.6583333333333333
+wearables,Banana Miss,left.forearm / banana.peel,19,19,200,200,0.6583333333333333
+wearables,Banana Miss,left.hand / banana.fruit,104,104,173,173,1.4333333333333333
+wearables,Banana Miss,left.hand / banana.peel,749,749,517,517,10.558333333333334
+wearables,Banana Miss,left.hand / body,127,56,1258,1146,0.6083333333333333
+wearables,Banana Miss,left.hand / right.hand,848,784,700,99,0.19166666666666668
+wearables,Banana Miss,left.upper-arm / banana.fruit,3,3,154,154,0.6583333333333333
+wearables,Banana Miss,left.upper-arm / banana.peel,3,3,353,353,0.6583333333333333
+wearables,Banana Miss,left.upper-arm / body,255,253,70,70,0.6333333333333333
+wearables,Banana Miss,right.hand / banana.peel,328,336,170,175,3.4916666666666667
+wearables,Banana Miss,right.hand / body,566,25,747,166,3.3666666666666667

@@ -1,0 +1,29 @@
+{
+  "configurations": {
+    "normal": {
+      "frames": 21041,
+      "beforeFramesWithCrossings": 19592,
+      "afterFramesWithCrossings": 12983,
+      "newPairs": [],
+      "actionsWithNoCrossings": [
+        "Idle",
+        "Look Left",
+        "Look Right",
+        "Speak"
+      ]
+    },
+    "wearables": {
+      "frames": 21041,
+      "beforeFramesWithCrossings": 19598,
+      "afterFramesWithCrossings": 12983,
+      "newPairs": [],
+      "actionsWithNoCrossings": [
+        "Idle",
+        "Look Left",
+        "Look Right",
+        "Speak"
+      ]
+    }
+  },
+  "limits": "120 Hz noncoplanar triangle surface crossings with the exclusions documented in the catalog audit; no penetration depth or exhaustive interrupted-timeline proof."
+}

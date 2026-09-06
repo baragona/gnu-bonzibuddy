@@ -34,6 +34,7 @@ enum SunglassesRoutine {
         let attached=RoutineLibrary.smooth(t,1.35,1.55)*(1-RoutineLibrary.smooth(t,13.0,13.18))
         let reveal=RoutineLibrary.smooth(t,0.65,0.85)*(1-RoutineLibrary.smooth(t,13.75,14.0))
         let prop=PropCue(id:"sunglasses",kind:.sunglasses,anchor:.blend(carry,wear,weight:attached),offset:.zero,visibility:reveal)
-        return RoutinePose(hands:[.left:hand],headYaw:look.sample(at:t),face:FacialIntent(eyeClosure:0.45*attached,smileOffset:0.10*RoutineLibrary.smooth(t,1.7,1.9)*(1-RoutineLibrary.smooth(t,12.6,12.9))),props:reveal>0 ? [prop]:[])
+        let freeHand=max(RoutineLibrary.smooth(t,0.45,0.75)*(1-RoutineLibrary.smooth(t,1.35,1.65)),RoutineLibrary.smooth(t,12.9,13.2)*(1-RoutineLibrary.smooth(t,13.9,14.3)))
+        return RoutinePose(hands:[.left:hand,.right:RoutineLibrary.handAside(.right,weight:freeHand)],headYaw:look.sample(at:t),face:FacialIntent(eyeClosure:0.45*attached,smileOffset:0.10*RoutineLibrary.smooth(t,1.7,1.9)*(1-RoutineLibrary.smooth(t,12.6,12.9))),props:reveal>0 ? [prop]:[])
     }
 }

@@ -63,6 +63,10 @@ enum BananaRoutine {
         let wrist=base(at:min(t,release),miss:miss)-SIMD3<Float>(0,0.06,0)
         let handOpen=RoutineLibrary.smooth(t,release-0.04,release+0.10)
         var hands:[HandSide:HandIntent]=[.left:HandIntent(wrist:wrist,fingers:[0.8,0.2,0],palm:[0,0,1],openness:1,weight:engagement,grip:1-handOpen)]
+        if !miss {
+            let clear=RoutineLibrary.smooth(t,3.55,3.85)*(1-RoutineLibrary.smooth(t,4.75,5.05))
+            hands[.right]=HandIntent(wrist:[0.34,-0.18,0.46],fingers:[-1,0,0.10],palm:[0,-0.20,-1],openness:0.75,weight:clear,grip:0.10)
+        }
         if miss {
             let support=RoutineLibrary.smooth(t,3.15,3.55)*(1-RoutineLibrary.smooth(t,9.95,10.25))
             hands[.right]=HandIntent(wrist:[0.14,0.05,0.48],fingers:[-1,0.1,0],palm:[0,0,1],openness:0.25,weight:support)
