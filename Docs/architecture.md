@@ -123,3 +123,19 @@ Hand intentions may also supply an `elbowBend` direction in character space. The
 `--validate-planted-feet --action NAME` checks actual ankle/toe matrices across a finite, non-turning routine that does not author foot targets, while reporting pelvis travel. Giggle exercises this contract: its pelvis dips and pulses while the shared stance solver preserves foot placement. This check is separate from transition continuity and the mesh-crossing audit.
 
 `PropKind.vine` is a single indexed stem/leaf asset. `PropDeformation.vine(bend:)` maps it onto a constant-length circular arc; each leaf uses a rigid frame at its stem attachment. The grip origin remains fixed. Color, shadow, and GPU audit passes share `deformProp`, with a stable sinc formulation near zero bend. `--validate-vine` compares actual GPU vertices with a double-precision reference across the bend range and renders four angles. `Renderer.drawCharacterGeometry` defaults to true; asset-only previews can disable character/teeth geometry while retaining the prop scene and its shadows. This is a rendering switch, not a presence or entrance/exit lifecycle implementation.
+
+`RoutinePose.actorPlacement` describes whole-character translation, rotation, and
+positive uniform scale after local articulation/IK and before interruption
+blending. Aerial travel therefore carries the feet rather than stretching the
+legs toward their standing floor targets. It is separate from `StanceIntent`,
+which articulates the body relative to that moving origin. The default is identity.
+Scale is at least 0.001; hidden-state lifecycle must be explicit in playback,
+not represented by a singular skeleton matrix.
+
+Joint attachments remove limb scale/shear but retain the displayed actor's
+uniform scale. Blended prop anchors interpolate this scale separately from
+rotation, allowing hand-to-head transfers while the character grows or recedes.
+Stage anchors remain independent of actor placement. `--validate-actor-placement`
+checks actual GPU positions for the body, worn accessories, held/blended props,
+and a fixed stage object across camera angles and scales. This infrastructure
+does not itself add an entrance, exit, or persistent hidden state.

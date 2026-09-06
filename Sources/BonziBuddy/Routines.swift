@@ -23,6 +23,7 @@ struct HandIntent {
     var indexTipContact: SIMD3<Float>? = nil // Straight index only; resolved using the imported hand frame.
 }
 struct RoutinePose {
+    var actorPlacement=ActorPlacement()
     var hands: [HandSide:HandIntent] = [:] // Semantic sides, resolved by the rig.
     var bodyYaw: Float = 0
     var torsoTilt: Float = 0

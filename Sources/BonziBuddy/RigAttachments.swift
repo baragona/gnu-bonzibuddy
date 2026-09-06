@@ -31,6 +31,7 @@ extension FanRig {
             var r=simd_float3x3(columns:(SIMD3(m.columns.0.x,m.columns.0.y,m.columns.0.z),SIMD3(m.columns.1.x,m.columns.1.y,m.columns.1.z),SIMD3(m.columns.2.x,m.columns.2.y,m.columns.2.z)))
             r *= 1/max(length(r.columns.0),max(length(r.columns.1),length(r.columns.2)))
             for _ in 0..<6 {r=(r+r.inverse.transpose)*0.5}
+            r *= actorScale // Preserve whole-actor scale while removing limb stretch.
             frame=simd_float4x4(columns:(SIMD4(r.columns.0,0),SIMD4(r.columns.1,0),SIMD4(r.columns.2,0),SIMD4(0,0,0,1)))
         }
         frame.columns.3=origin

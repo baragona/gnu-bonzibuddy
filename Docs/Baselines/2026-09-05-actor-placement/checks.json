@@ -1,0 +1,11 @@
+{
+  "bodyVerticesPerSample" : 68673,
+  "maximumAttachedPropGPUError" : 3.9984010413718352e-07,
+  "maximumBodyGPUError" : 3.6164107086733566e-07,
+  "maximumStagePropDrift" : 0,
+  "maximumTransitionSettledError" : 0,
+  "maximumTransitionStartJump" : 7.4505805969238281e-07,
+  "note" : "Actual Metal-deformed body and prop vertices across three camera angles and five actor scales. Includes worn sunglasses\/headphones, joint-held and blended anchors, and an independent stage object. Flight choreography and hidden-state lifecycle are not implemented by this test.",
+  "samples" : 15,
+  "transitionScalePairs" : 25
+}

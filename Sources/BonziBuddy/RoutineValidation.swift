@@ -45,6 +45,7 @@ func validateRoutines() throws {
             let delay=definition.returnDelay(elapsed)
             guard delay.isFinite,delay>=0,delay<=definition.duration else {throw failure("Invalid return delay")}
             let pose=RoutineLibrary.sample(action,at:elapsed)
+            guard pose.actorPlacement.isValid else {throw failure("Invalid actor placement") }
             guard (0...1).contains(pose.face.individualEyeClosure.x),(0...1).contains(pose.face.individualEyeClosure.y) else {throw failure("Invalid individual eyelid closure")}
             guard (0...1).contains(pose.face.individualBrowLower.x),(0...1).contains(pose.face.individualBrowLower.y) else {throw failure("Invalid individual brow lowering")}
             sampled += 1

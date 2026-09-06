@@ -20,6 +20,7 @@ final class FanRig {
     var auditPoseAdjustment:((inout RoutinePose)->Void)?
     private(set) var routine=RoutinePose()
     private(set) var stageFrame=matrix_identity_float4x4
+    private(set) var actorScale:Float=1
     var waveTime:Double?
     var action:Action = .idle
     var actionTime:Double=0
@@ -321,7 +322,7 @@ final class FanRig {
             posed.append(result)
         }
         if !sourcePose {
-            let facing=rotate(routine.bodyYaw,[0,1,0])
+            let facing=routine.actorPlacement.matrix*rotate(routine.bodyYaw,[0,1,0])
             posed=posed.map { facing*$0 }
         }
         if !sourcePose && transitionPose.count==posed.count {
@@ -348,6 +349,9 @@ final class FanRig {
             } else { transitionPose.removeAll(keepingCapacity:true) }
         }
         displayedPose=posed
+        let rootSkin=posed[0]*inverseRest[0]
+        let scale=length(SIMD3(rootSkin.columns.0.x,rootSkin.columns.0.y,rootSkin.columns.0.z))
+        actorScale=abs(scale-1)<0.00001 ? 1:scale
         let grounding=translation(SIMD3<Float>(0,sourcePose ? 0 : -0.02,0))
         stageFrame=camera*grounding
         return posed.enumerated().map { i,m in Instance(model:camera*grounding*m*inverseRest[i],color:[1,1,1,1]) }

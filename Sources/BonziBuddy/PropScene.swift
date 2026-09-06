@@ -54,8 +54,19 @@ final class PropMotion {
             return resolve(parent,rig:rig,bones:bones)*translation(offset)*simd_float4x4(rotation)
         case let .blend(from,to,weight):
             let a=resolve(from,rig:rig,bones:bones),b=resolve(to,rig:rig,bones:bones),t=min(1,max(0,weight))
-            let qa=simd_quatf(a),qb=simd_quatf(b)
+            // Anchor frames have uniform actor scale, never limb stretch.
+            // Strip that scale before extracting rotations, then interpolate it.
+            func scale(_ m:simd_float4x4)->Float {length(SIMD3(m.columns.0.x,m.columns.0.y,m.columns.0.z))}
+            let sa=scale(a),sb=scale(b)
+            func rotation(_ m:simd_float4x4,_ s:Float)->simd_quatf {
+                var unit=m
+                for i in 0..<3 {unit[i] /= s}
+                return simd_quatf(unit)
+            }
+            let qa=rotation(a,sa),qb=rotation(b,sb)
             var result=simd_float4x4(simd_slerp(qa,qb,t))
+            let size=sa+(sb-sa)*t
+            for i in 0..<3 {result[i] *= size}
             result.columns.3=a.columns.3+(b.columns.3-a.columns.3)*t
             return result
         }
