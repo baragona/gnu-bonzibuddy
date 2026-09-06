@@ -61,6 +61,9 @@ final class FanRig {
         var gestureElbows:[Int:SIMD3<Float>]=[:],gestureWrists:[Int:SIMD3<Float>]=[:]
         func ease(_ x:Float)->Float { let t=min(1,max(0,x));return t*t*(3-2*t) }
         routine=sourcePose ? RoutinePose():RoutineLibrary.sample(action,at:actionTime)
+        for side in HandSide.allCases {
+            if let hand=routine.hands[side] {routine.hands[side]=handAnatomy(side).resolve(hand)}
+        }
         let a=Float(actionTime)
         let actionEnvelope=ease(a/0.35)*ease(Float(max(0,action.duration-actionTime))/0.35)
         func armAction(_ side:Float)->ArmPose? {
@@ -232,7 +235,14 @@ final class FanRig {
                         let curl=gripCurl+(fistCurl-gripCurl)*intent.fist
                         let p=xyz(inherited)
                         let thumbTurn=simd_slerp(simd_quatf(angle:0,axis:[1,0,0]),simd_quatf(from:SIMD3<Float>(0,-side,0),to:normalize(intent.fingers)*(-side)),intent.fist)
-                        let thumbAxis=thumbTurn.act(SIMD3<Float>(0,-side,0))
+                        var thumbAxis=thumbTurn.act(SIMD3<Float>(0,-side,0))
+                        if intent.palmContact != nil && thumb {
+                            // Surface grips articulate in the posed hand frame,
+                            // including when an object is carried upside down.
+                            let wrist=side<0 ? 26:42
+                            let mapped=posed[wrist]*inverseRest[wrist]*SIMD4<Float>(0,-side,0,0)
+                            thumbAxis=SIMD3(mapped.x,mapped.y,mapped.z)
+                        }
                         let axis=thumb ? normalize(thumbAxis):normalize(cross(intent.fingers,intent.palm))
                         // A fist aligns the finger bases before curling and lays
                         // the thumb across them; prop grips retain their spread.

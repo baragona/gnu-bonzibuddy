@@ -1,6 +1,6 @@
 # Proposed shared character motion architecture
 
-Status: design recommendation, not an implemented physics or retargeting system. No new engine, dependency, or service has been installed.
+Status: design recommendation with an initial palm-contact implementation for headphones. General collision avoidance, retargeting, and physics remain unimplemented. No new engine, dependency, or service has been installed.
 
 Use authored performances, adapted to each character with explicit contacts, inverse kinematics, and collision avoidance. Add selective dynamics for free objects and secondary motion. The [geometry audit](Audits/2026-09-05-hand-geometry/README.md) shows why: current hand axes accurately follow their targets, but the targets and paths allow hands to penetrate props. A rigid-body engine alone does not know how a character should grip a book or deliver a comic gesture.
 

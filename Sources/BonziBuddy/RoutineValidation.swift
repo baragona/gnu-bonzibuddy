@@ -53,7 +53,7 @@ func validateRoutines() throws {
                 guard finite(foot.ankle),finite(foot.kneeBend),length(foot.kneeBend)>0.001,(0...1).contains(foot.weight),abs(length(foot.rotation.vector)-1)<0.001 else {throw failure("Invalid foot target")}
             }
             for hand in pose.hands.values {
-                guard finite(hand.wrist),finite(hand.fingers),finite(hand.palm),length(cross(hand.fingers,hand.palm))>0.001,(0...1).contains(hand.weight),(0...1).contains(hand.grip),(0...1).contains(hand.fist) else {throw failure("Invalid hand frame: \(action)")}
+                guard hand.palmContact.map(finite) ?? true,finite(hand.wrist),finite(hand.fingers),finite(hand.palm),length(cross(hand.fingers,hand.palm))>0.001,(0...1).contains(hand.weight),(0...1).contains(hand.grip),(0...1).contains(hand.fist) else {throw failure("Invalid hand frame: \(action)")}
             }
             guard Set(pose.props.map(\.id)).count==pose.props.count else {throw failure("Duplicate prop IDs")}
             for prop in pose.props {

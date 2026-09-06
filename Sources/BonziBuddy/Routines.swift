@@ -13,6 +13,7 @@ struct HandIntent {
     var pointing: Bool = false
     var grip: Float = 0
     var fist: Float = 0
+    var palmContact: SIMD3<Float>? = nil // Surface target; rig resolves wrist from its anatomy.
 }
 struct RoutinePose {
     var hands: [HandSide:HandIntent] = [:] // Semantic sides, resolved by the rig.

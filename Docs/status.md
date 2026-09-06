@@ -32,3 +32,5 @@ Selected numerical reports are preserved under `Baselines/2026-09-05/`. Full gen
 The [reading checkpoint](Baselines/2026-09-05-reading/README.md) records seated grounding, page-safe returns, wearable combinations, and three-angle original comparisons.
 
 The [hand geometry audit](Audits/2026-09-05-hand-geometry/README.md) covers all 28 routines at 120 Hz in two accessory configurations (42,082 poses), using Metal-deformed geometry and multi-angle review. Hand/palm axes follow authored targets within 0.04 degrees when fully engaged, but shared rest poses and several prop transfers visibly penetrate. Findings are recorded, not fixed. The [proposed character motion architecture](character-motion-design.md) describes contact constraints and per-character anatomy profiles before selective physics integration.
+
+The [headphone contact follow-up](Baselines/2026-09-05-headphone-contacts/README.md) implements anatomy-based palm targets and explicit approach/withdrawal paths. Its full 120 Hz scans report no arm/hand crossings with headphones or sunglasses in either configuration. Other audit findings remain open.

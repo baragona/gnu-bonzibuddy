@@ -66,7 +66,7 @@ func auditAnimationGeometry() throws {
     let requested=argument("--action"),wearables=CommandLine.arguments.contains("--with-wearables")
     let actions=Action.allCases.filter {requested==nil || $0.rawValue.lowercased()==requested!.lowercased()}
     guard !actions.isEmpty else {throw failure("Unknown audit action")}
-    let root="Validation/GeometryAudit"+(wearables ? "-wearables":"")
+    let root=argument("--audit-output") ?? ("Validation/GeometryAudit"+(wearables ? "-wearables":""))
     try FileManager.default.createDirectory(atPath:root,withIntermediateDirectories:true)
     func save(_ value:Any,_ path:String) throws {try JSONSerialization.data(withJSONObject:value,options:[.prettyPrinted,.sortedKeys]).write(to:URL(fileURLWithPath:path))}
     var summaries:[[String:Any]]=[]

@@ -3,6 +3,9 @@ import simd
 // Indexed hollow shells, rims, curved headband, and telescoping antenna.
 // Coordinates are relative to the head attachment, as with the imported glasses.
 enum HeadphonesGeometry {
+    static func palmContact(_ side:HandSide)->SIMD3<Float> {
+        [side.sign*(0.330+0.178),0.245,0.085]
+    }
     static func mesh()->([PropVertex],[UInt32]) {
         var vertices:[PropVertex]=[],indices:[UInt32]=[]
         func patch(rows:Int,columns:Int,material:Float,flip:Bool=false,surface:(Float,Float)->SIMD3<Float>) {
