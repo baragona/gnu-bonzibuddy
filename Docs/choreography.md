@@ -162,3 +162,7 @@ The paused writing hand lowers toward the original chest-level pose, carrying th
 ## Mailbox — empty check
 
 Initial Mail Empty combines MailCheck (0.90 seconds) and MailCheckEmpty (2.60 seconds). A hollow bamboo barrel grows from a planted post, Bonzi reaches to open its circular door, crouches to inspect it, and reaches back to close it before the mailbox disappears. The barrel, wall thickness, post nodes and leaves are indexed geometry; the banana flag reuses the fruit and closed-peel meshes. The mailbox and door share a frame with a ground-preserving appearance offset. Full-mail retrieval and letter/read/next/return routines remain unfinished. No email service is connected.
+
+## Letter reading
+
+Initial Mail Read combines the original MailRead (3.85 seconds) and MailReturn (1.00 second). It retrieves a folded letter, opens its left flap, folds it back, scans the page, and stows it. The held region repeats only reading. Both paper panels have indexed front/back surfaces, closed thin edges, and a gentle bow. The flap has a separate hinge frame with clearance from the rear panel. The letter shares a mail continuation family for future full-mail and next-letter handoffs. Full-mail retrieval and next-letter choreography remain unfinished. Printed marks are local procedural shading, not email content.

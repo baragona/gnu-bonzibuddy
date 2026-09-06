@@ -29,6 +29,7 @@ enum RoutineLibrary {
         return x*x*x*(x*(x*6-15)+10)
     }
     static let definitions:[Action:RoutineDefinition]=[
+        .mailRead:RoutineDefinition(duration:MailReadRoutine.duration,holdRange:MailReadRoutine.holdRange,handoffPolicy:.finishRoutine,continuation:MailReadRoutine.continuation,sample:MailReadRoutine.sample),
         .mailEmpty:RoutineDefinition(duration:MailEmptyRoutine.duration,changesStance:true,handoffPolicy:.finishRoutine,sample:MailEmptyRoutine.sample),
         .writeOnce:WriteSingleRoutine.once,
         .writeAgain:WriteSingleRoutine.again,
@@ -53,7 +54,7 @@ enum RoutineLibrary {
 // One definition owns each routine's timing, movement policy, and pure sampler.
 // The action catalog, rig, face system, and validators share this definition.
 enum RoutineHandoffPolicy {case interruptible, finishRoutine}
-enum RoutineFamily {case writing}
+enum RoutineFamily {case writing,mail}
 struct RoutineContinuation {
     let family:RoutineFamily
     let entryElapsed:Double
