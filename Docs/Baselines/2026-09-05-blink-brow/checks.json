@@ -1,0 +1,35 @@
+{
+  "changedLeftVertices" : 542,
+  "manualOverridePassed" : true,
+  "maximumLeftLowering" : 0.016545295715332031,
+  "maximumOppositeDisplacement" : 0,
+  "naturalBlinkSamples" : [
+    {
+      "browLower" : 0,
+      "phase" : "open",
+      "time" : 3.8999999999999999
+    },
+    {
+      "browLower" : 0.089999876916408539,
+      "phase" : "half",
+      "time" : 4.04
+    },
+    {
+      "browLower" : 0.18000000715255737,
+      "phase" : "closed",
+      "time" : 4.0999999999999996
+    },
+    {
+      "browLower" : 0.090000316500663757,
+      "phase" : "reopening",
+      "time" : 4.2000000000000002
+    },
+    {
+      "browLower" : 0,
+      "phase" : "restored",
+      "time" : 4.2999999999999998
+    }
+  ],
+  "note" : "Actual GPU-deformed wink mesh at the identical head pose, automatic left brow versus a manual zero override. Also checks natural blink synchronization, return to neutral, and independent right-eye control; renders three angles.",
+  "rightBlinkIsolationPassed" : true
+}

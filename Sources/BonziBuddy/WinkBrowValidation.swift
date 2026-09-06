@@ -23,8 +23,31 @@ func validateWinkBrow() throws {
     }
     guard automatic.morphs.browLower.x>0.39,automatic.morphs.browLower.y==0,
           overridden.morphs.browLower == .zero,lowered>0.001,lowered<0.03,opposite<1e-6,changed>20 else {throw failure("Wink brow isolation or manual override failed")}
-    let report:[String:Any]=["changedLeftVertices":changed,"maximumLeftLowering":lowered,"maximumOppositeDisplacement":opposite,"manualOverridePassed":true,"note":"Actual GPU-deformed mesh at the identical head pose, automatic left brow versus a manual zero override. Excludes the smoothly blended center strip from the opposite-side bound."]
     try FileManager.default.createDirectory(atPath:"Validation/WinkBrow",withIntermediateDirectories:true)
+    renderer.fanExpressionOverrides.removeValue(forKey:4)
+    renderer.character.play(.idle,at:0)
+    _=try renderer.offscreen(width:160,height:128,at:0)
+    var blinkSamples=[[String:Any]]()
+    for (name,time) in [("open",3.9),("half",4.04),("closed",4.10),("reopening",4.20),("restored",4.3)] {
+        for (view,yaw) in [("front",Float(0)),("quarter",-Float.pi/4),("left",-Float.pi/2)] {
+            renderer.character.yaw=yaw
+            let (texture,_)=try renderer.offscreen(width:800,height:640,at:time)
+            let captured=frame!
+            let expected=0.18*(1-BlinkAnimation.eyeOpen(at:time))
+            guard abs(captured.morphs.browLower.x-expected)<1e-6,
+                  abs(captured.morphs.browLower.y-expected)<1e-6 else {throw failure("Natural blink brow synchronization failed")}
+            try writePNG(texture,to:"Validation/WinkBrow/blink-\(name)-\(view).png")
+            if view == "front" {blinkSamples.append(["phase":name,"time":time,"browLower":expected])}
+        }
+    }
+    renderer.fanAutoBlink=false
+    renderer.fanIndividualEyeClosure=[0,1]
+    _=try renderer.offscreen(width:160,height:128,at:4.1)
+    guard frame!.morphs.browLower.x==0,abs(frame!.morphs.browLower.y-0.18)<1e-6 else {throw failure("Right blink brow isolation failed")}
+    renderer.fanExpressionOverrides[4]=0
+    _=try renderer.offscreen(width:160,height:128,at:4.1)
+    guard frame!.morphs.browLower == .zero else {throw failure("Blink brow manual override failed")}
+    let report:[String:Any]=["changedLeftVertices":changed,"maximumLeftLowering":lowered,"maximumOppositeDisplacement":opposite,"manualOverridePassed":true,"naturalBlinkSamples":blinkSamples,"rightBlinkIsolationPassed":true,"note":"Actual GPU-deformed wink mesh at the identical head pose, automatic left brow versus a manual zero override. Also checks natural blink synchronization, return to neutral, and independent right-eye control; renders three angles."]
     let data=try JSONSerialization.data(withJSONObject:report,options:[.prettyPrinted,.sortedKeys])
     try data.write(to:URL(fileURLWithPath:"Validation/WinkBrow/checks.json"))
     print(String(decoding:data,as:UTF8.self))

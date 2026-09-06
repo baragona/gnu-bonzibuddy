@@ -1,0 +1,7 @@
+{
+  "maxChannelError" : 0,
+  "note" : "Render consistency between baked and GPU-deformed geometry, not original Bonzi likeness.",
+  "premultipliedRGBAMAE" : 0,
+  "skinnedSource" : "Validation\/FanActions\/idle-15.png",
+  "staticSource" : "Docs\/Baselines\/2026-09-05-rest-contacts\/rest-angles.png"
+}

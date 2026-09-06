@@ -203,9 +203,14 @@ final class Renderer: NSObject, MTKViewDelegate {
         var blink=(fanLiveActions || fanValidationMotion) && fanAutoBlink ? 1-BlinkAnimation.eyeOpen(at:time) : 0
         if fanLiveActions && fanAutoBlink { blink=max(blink,automaticFace.eyeClosure) }
         let gaze=fanGaze+automaticFace.gaze
+        let individualClosure=simd_max(fanIndividualEyeClosure,automaticFace.individualEyeClosure)
         var morphUniforms=FanMorphUniforms(selection:[fanUpperFaceLift && fanRig?.sourcePose == false ? 1:0,0,fanMorphVertexCount,fanMorphCount],weights:(chunk(0),chunk(4),chunk(8),chunk(12)),face:[max(blink,fanEyeClosure),gaze.x,gaze.y,fanRig == nil ? 0:(fanEyeCatchlights ? 1:2)])
         if fanExpressionOverrides[4] == nil {
-            morphUniforms.browLower=SIMD4(automaticFace.individualBrowLower.x,automaticFace.individualBrowLower.y,0,0)
+            // Follow the final eyelid controls, including natural and manual blinks.
+            // Max preserves stronger authored expressions without doubling the wink.
+            let closure=simd_clamp(simd_max(individualClosure,SIMD2(repeating:morphUniforms.face.x)),SIMD2(repeating:0),SIMD2(repeating:1))
+            let brows=simd_max(automaticFace.individualBrowLower,0.18*closure)
+            morphUniforms.browLower=SIMD4(brows.x,brows.y,0,0)
         }
         onAuditFrame?(objects,props,morphUniforms)
         let shadowPass = MTLRenderPassDescriptor()
@@ -236,7 +241,6 @@ final class Renderer: NSObject, MTKViewDelegate {
             encoder.setVertexBytes(&morphUniforms,length:MemoryLayout<FanMorphUniforms>.stride,index:4)
         }
         let gazeCompensation=FanGazeCompensation.offsets(for:automaticFace.gazeYawCompensation)
-        let individualClosure=simd_max(fanIndividualEyeClosure,automaticFace.individualEyeClosure)
         var faceControl=FanEyeUniforms(face:fanRig == nil ? SIMD4<Float>(repeating:0) : morphUniforms.face,closures:fanRig == nil ? .zero : SIMD4(individualClosure.x,individualClosure.y,gazeCompensation.x,gazeCompensation.y))
         encoder.setFragmentBytes(&faceControl,length:MemoryLayout<FanEyeUniforms>.stride,index:3)
         encoder.setFragmentBytes(&uniforms,length:MemoryLayout<RenderUniforms>.stride,index:2)
