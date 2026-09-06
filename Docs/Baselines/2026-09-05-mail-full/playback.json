@@ -1,0 +1,30 @@
+{
+  "actions" : [
+    {
+      "action" : "Mail Full",
+      "clippedViews" : 0,
+      "frames" : 94,
+      "playback" : "once",
+      "returnRequestedAt" : -1
+    }
+  ],
+  "morphNames" : [
+    "smile",
+    "jaw",
+    "eyebrow up",
+    "angry eyebrow",
+    "eyebrow down",
+    "?",
+    "¿",
+    "sad eyebrow",
+    "sad",
+    "epic sad",
+    "little mouth",
+    "oh\/kiss",
+    "cheeks",
+    "mouth",
+    "nose"
+  ],
+  "note" : "Full action duration and three-view framing review. Reuses the existing local action curves, retargeted to the fan joints; not proof of original choreography or collision-free motion. Blink is an animated skin-colored cover on the eye mesh surface.",
+  "previewFPS" : 15
+}

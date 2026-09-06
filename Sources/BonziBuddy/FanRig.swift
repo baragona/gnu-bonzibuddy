@@ -17,6 +17,7 @@ final class FanRig {
     let inverseRest:[simd_float4x4]
     var sourcePose=false
     private(set) var routine=RoutinePose()
+    private(set) var stageFrame=matrix_identity_float4x4
     var waveTime:Double?
     var action:Action = .idle
     var actionTime:Double=0
@@ -283,6 +284,7 @@ final class FanRig {
         }
         displayedPose=posed
         let grounding=translation(SIMD3<Float>(0,sourcePose ? 0 : -0.02,0))
+        stageFrame=camera*grounding
         return posed.enumerated().map { i,m in Instance(model:camera*grounding*m*inverseRest[i],color:[1,1,1,1]) }
     }
 }

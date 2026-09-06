@@ -107,7 +107,45 @@ func validateMail() throws {
         }
     }
     guard fingertipSamples>0,fingertipClearance>=0,heldTipClearance>=0 else {throw failure("Turning finger crosses the letter: \(fingertipClearance), samples \(fingertipSamples)")}
-    let report:[String:Any]=["minimumLetterPanelClearance":clearance,"minimumHeldFingertipClearance":heldTipClearance,"minimumTurningFingertipClearance":fingertipClearance,"turningFingertipSamples":fingertipSamples,"nextLetterInPlacePassed":true,"nextLetterHoldAndRepeatPassed":true,"letterHoldAndStowPassed":true,"letterUnfoldBeforeReturnPassed":true,"maximumAnkleDrift":ankleDrift,"vertices":vertices,"triangles":triangles,"maximumGroundError":groundError,"maximumDoorHingeError":hingeError,"queuedActionWaitedForClose":true,"samples":421,"note":"Mesh winding, ground anchoring, door hinge and action scheduling checks. Not proof of original fidelity or comprehensive collision avoidance."]
+    var fixedBoxError:Float=0,packetRadius:Float=0,extractedPacketClearance:Float=100
+    var boxPosition:SIMD4<Float>?
+    for frame in 0...240 {
+        let t=Double(frame)/120
+        rig.updateLiveAction(.mailFull,started:0,at:t,elapsed:t)
+        let bones=rig.instances(yaw:0,pitch:0,at:t)
+        let draws=motion.sample(action:.mailFull,started:0,at:t,cues:MailFullRoutine.sample(at:t).props,rig:rig,bones:bones)
+        if t>=0.35,let box=draws.first(where:{$0.kind == .mailbox}) {
+            if boxPosition==nil {boxPosition=box.model.columns.3}
+            fixedBoxError=max(fixedBoxError,length(box.model.columns.3-boxPosition!))
+            if t>=1.65 {
+                for sheet in draws.filter({$0.kind == .letterBack || $0.kind == .letterFlap}) {
+                    for vertex in LetterGeometry.mesh(sheet.kind).0 {
+                        let p=box.model.inverse*sheet.model*vertex.position
+                        extractedPacketClearance=min(extractedPacketClearance,p.x-0.265)
+                    }
+                }
+            }
+            if t>=1.05 && t<=1.15 {
+                for sheet in draws.filter({$0.kind == .letterBack || $0.kind == .letterFlap}) {
+                    for vertex in LetterGeometry.mesh(sheet.kind).0 {
+                        let p=box.model.inverse*sheet.model*vertex.position
+                        packetRadius=max(packetRadius,length(SIMD2<Float>(p.y,p.z)))
+                        guard p.x>=(-0.248),p.x<=0.26 else {throw failure("Stored packet exceeds barrel length")}
+                    }
+                }
+            }
+        }
+    }
+    guard fixedBoxError<0.00001,packetRadius<0.132,extractedPacketClearance>0 else {throw failure("Mailbox moved with actor or letter intersects barrel during expansion")}
+    var full=CharacterPlayback();full.play(.mailFull,at:0,mode:.hold)
+    full.request(.mailNext,at:1.30,mode:.hold)
+    guard full.playbackSnapshot(at:3.44).action == .mailFull,
+          full.playbackSnapshot(at:3.46).action == .mailNext else {throw failure("Full mailbox did not finish retrieval before next letter")}
+    var fullReturn=CharacterPlayback();fullReturn.play(.mailFull,at:0,mode:.hold)
+    fullReturn.setHeadphonesEnabled(true,at:1.30)
+    guard fullReturn.playbackSnapshot(at:4.44).action == .mailFull,
+          fullReturn.playbackSnapshot(at:4.46).action == .headphones else {throw failure("Full mailbox accessory transfer skipped stow")}
+    let report:[String:Any]=["minimumExtractedPacketClearance":extractedPacketClearance,"minimumLetterPanelClearance":clearance,"minimumHeldFingertipClearance":heldTipClearance,"minimumTurningFingertipClearance":fingertipClearance,"turningFingertipSamples":fingertipSamples,"maximumStationaryMailboxError":fixedBoxError,"storedPacketRadius":packetRadius,"fullMailContinuationAndStowPassed":true,"nextLetterInPlacePassed":true,"nextLetterHoldAndRepeatPassed":true,"letterHoldAndStowPassed":true,"letterUnfoldBeforeReturnPassed":true,"maximumAnkleDrift":ankleDrift,"vertices":vertices,"triangles":triangles,"maximumGroundError":groundError,"maximumDoorHingeError":hingeError,"queuedActionWaitedForClose":true,"samples":421,"note":"Mesh winding, ground anchoring, door hinge and action scheduling checks. Not proof of original fidelity or comprehensive collision avoidance."]
     try FileManager.default.createDirectory(atPath:"Validation/Mail",withIntermediateDirectories:true)
     let data=try JSONSerialization.data(withJSONObject:report,options:[.prettyPrinted,.sortedKeys])
     try data.write(to:URL(fileURLWithPath:"Validation/Mail/checks.json"));print(String(decoding:data,as:UTF8.self))

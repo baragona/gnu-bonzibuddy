@@ -161,14 +161,20 @@ The paused writing hand lowers toward the original chest-level pose, carrying th
 
 ## Mailbox — empty check
 
-Initial Mail Empty combines MailCheck (0.90 seconds) and MailCheckEmpty (2.60 seconds). A hollow bamboo barrel grows from a planted post, Bonzi reaches to open its circular door, crouches to inspect it, and reaches back to close it before the mailbox disappears. The barrel, wall thickness, post nodes and leaves are indexed geometry; the banana flag reuses the fruit and closed-peel meshes. The mailbox and door share a frame with a ground-preserving appearance offset. Full-mail retrieval and letter/read/next/return routines remain unfinished. No email service is connected.
+Initial Mail Empty combines MailCheck (0.90 seconds) and MailCheckEmpty (2.60 seconds). A hollow bamboo barrel grows from a planted post, Bonzi reaches to open its circular door, crouches to inspect it, and reaches back to close it before the mailbox disappears. The barrel, wall thickness, post nodes and leaves are indexed geometry; the banana flag reuses the fruit and closed-peel meshes. The mailbox and door share a frame with a ground-preserving appearance offset. Full-mail retrieval and the shared letter routines are described below. No email service is connected.
 
 ## Letter reading
 
-Initial Mail Read combines the original MailRead (3.85 seconds) and MailReturn (1.00 second). It retrieves a folded letter, opens its left flap, folds it back, scans the page, and stows it. The held region repeats only reading. Both paper panels have indexed front/back surfaces, closed thin edges, and a gentle bow. The flap has a separate hinge frame with clearance from the rear panel. The letter shares a mail continuation family for future full-mail and next-letter handoffs. Full-mail retrieval and next-letter choreography remain unfinished. Printed marks are local procedural shading, not email content.
+Initial Mail Read combines the original MailRead (3.85 seconds) and MailReturn (1.00 second). It retrieves a folded letter, opens its left flap, folds it back, scans the page, and stows it. The held region repeats only reading. Both paper panels have indexed front/back surfaces, closed thin edges, and a gentle bow. The flap has a separate hinge frame with clearance from the rear panel. The letter shares a mail continuation family with full-mail retrieval and next-letter handoffs. Printed marks are local procedural shading, not email content.
 
 ## Next letter
 
 Mail Next composes standalone retrieval with the original 2.80-second MailNext pass, then holds the folded reading pose and uses the shared return. When selected from Mail Read or Mail Next, the compatible entry skips retrieval. The flap opens once and closes before another compatible action can start. Holding does not repeat the gesture; selecting Mail Next again does. An accessory transfer waits through the current pass and stow. This is visual choreography with placeholder printed marks, not navigation through real email.
 
 The letter-opening hand now reaches onto the flap, keeps its finger/palm frame aligned with the flap while turning, and releases only after closure. Both Mail Read and Mail Next use the same geometry and grip calculation; the latter uses the original quick 0.10–0.60-second opening/closing beat, followed by release by 0.95 seconds.
+
+## Full mailbox
+
+Mail Full combines MailCheck (0.90 seconds), MailCheckFull (4.30 seconds), and MailReturn (1.00 second). Bonzi opens the stationary mailbox, turns toward it, pulls out a compact white packet with one hand, and joins with the other hand after the packet clears the opening. The letter expands as he brings it forward, the mailbox shrinks away, and he reads before the shared stow. Holding repeats only reading. Mail Read and Mail Next can continue from the held letter without another retrieval; early requests wait for extraction to finish.
+
+The compact packet reuses the two letter meshes with a stylized size expansion, rather than physically folding every crease. Validation checks its fit inside the barrel and separation from the opening during expansion. This and the simplified body lean remain fidelity refinements; the implementation is not an exact reconstruction of the original. See [the full-mail checkpoint](Baselines/2026-09-05-mail-full/README.md).

@@ -1,0 +1,22 @@
+{
+  "fullMailContinuationAndStowPassed" : true,
+  "letterHoldAndStowPassed" : true,
+  "letterUnfoldBeforeReturnPassed" : true,
+  "maximumAnkleDrift" : 0,
+  "maximumDoorHingeError" : 2.9802322387695312e-08,
+  "maximumGroundError" : 5.9604644775390625e-08,
+  "maximumStationaryMailboxError" : 0,
+  "minimumExtractedPacketClearance" : 0.13999992609024048,
+  "minimumHeldFingertipClearance" : 0.0014796453760936856,
+  "minimumLetterPanelClearance" : 0.0039949491620063782,
+  "minimumTurningFingertipClearance" : 0.041326090693473816,
+  "nextLetterHoldAndRepeatPassed" : true,
+  "nextLetterInPlacePassed" : true,
+  "note" : "Mesh winding, ground anchoring, door hinge and action scheduling checks. Not proof of original fidelity or comprehensive collision avoidance.",
+  "queuedActionWaitedForClose" : true,
+  "samples" : 421,
+  "storedPacketRadius" : 0.10476907342672348,
+  "triangles" : 6312,
+  "turningFingertipSamples" : 158,
+  "vertices" : 3965
+}

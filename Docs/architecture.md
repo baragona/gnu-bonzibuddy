@@ -83,3 +83,9 @@ A `RoutineContinuation` declares a compatible family, an entry time inside the d
 Writing and Write Pause are the first family. Switching during retrieval waits for retrieval to finish; switching during a stroke waits for the pencil lift. Unrelated actions and accessory transfers still require the full stow. The existing skeletal/facial interruption blends handle changing gaze as the variants switch.
 
 Continuations can also declare an outgoing clip phase. The paused writing variant uses it to raise the lowered pencil back to the shared grip before resuming. If reversal is requested while the hand is still lowering, the exit phase is selected at the same pose, avoiding a prop-position jump.
+
+## Stationary scene props
+
+`PropAnchor.stage` resolves to the camera-oriented, grounded scene frame, independent of the actor's authored body turn. `MailboxScene` supplies one shared mailbox layout for empty and full checks. Character attachments and carried objects retain their existing anchors. `FanRig.instances` updates the stage frame together with the current bone palette; callers sample props against that same frame.
+
+PropMotion caches retiring draws relative to the stage frame. This preserves their world pose when the actor changes facing while still following camera changes. Mail Full transfers the letter from a stage-authored extraction trajectory to the common held-letter pose at a matching boundary, sharing its IDs with Mail Read and Mail Next.

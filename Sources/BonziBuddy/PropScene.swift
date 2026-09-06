@@ -7,6 +7,7 @@ enum PropKind: Int, CaseIterable {
 }
 indirect enum PropAnchor {
     case character
+    case stage // Grounded character origin, independent of body-facing motion.
     case attachment(RigAttachment,axes:AttachmentAxes = .character)
     case transformed(PropAnchor,offset:SIMD3<Float>,rotation:simd_quatf)
     case blend(PropAnchor,PropAnchor,weight:Float)
@@ -35,7 +36,7 @@ struct PropDraw {
 }
 
 // Stateful playback, separate from GPU rendering. Snapshots are stored in the
-// character frame, so retiring props remain consistent when the camera changes.
+// grounded frame, so retiring props stay fixed as the actor turns and follow camera changes.
 final class PropMotion {
     private var action:Action?
     private var started:Double?
@@ -46,6 +47,7 @@ final class PropMotion {
     private func resolve(_ anchor:PropAnchor,rig:FanRig,bones:[Instance])->simd_float4x4 {
         switch anchor {
         case .character: return bones[0].model
+        case .stage: return rig.stageFrame
         case let .attachment(attachment,axes): return rig.attachmentFrame(attachment,axes:axes,bones:bones)
         case let .transformed(parent,offset,rotation):
             return resolve(parent,rig:rig,bones:bones)*translation(offset)*simd_float4x4(rotation)
@@ -62,7 +64,7 @@ final class PropMotion {
         if action != next || started != nextStart {
             retiring=shown;retiredAt=time;action=next;started=nextStart
         }
-        let root=bones[0].model,inverseRoot=root.inverse
+        let root=rig.stageFrame,inverseRoot=root.inverse
         var draws:[PropDraw]=[]
         for cue in cues where cue.visibility>0.001 {
             let frame=resolve(cue.anchor,rig:rig,bones:bones)

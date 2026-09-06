@@ -17,7 +17,7 @@ Research date: September 5, 2026. The original's repertoire is substantially bro
 | Juggling three coconuts | Extracted: `Juggle` 62 frames; exact trajectories still need matching | Implemented; sampled clearance passes, visual fidelity remains approximate |
 | Seated book reading, looking up, resuming, and putting away | Extracted: `Read` 31 frames plus related segments | Seated reading/page turn plus look-up/continued gestures and stow/stand; reading aloud remains |
 | Pencil-and-pad writing, pausing, repeating a stroke, and returning | Extracted: `Write` 37 frames plus related segments | Initial pad/pencil retrieval, stroke loop, and stow; in-place pause/resume and once/again passes supported; ink and Writing variations remain |
-| Bamboo-style mailbox, empty/full outcomes, read a letter, advance, and return | Extracted: separate mail family | Initial bamboo mailbox and empty check; standalone letter read/stow added; in-place next-letter gesture added; full outcome remains |
+| Bamboo-style mailbox, empty/full outcomes, read a letter, advance, and return | Extracted: separate mail family | Bamboo mailbox empty/full checks; letter read/stow and in-place next-letter gestures; extraction and folding fidelity remain |
 | Surfboard entrance, exit, and directional travel | Visual: earlier `Show` / `Hide`; move families in metadata | Missing |
 | Vine entrance, exit, and travel | Extracted: later `Show` uses a vine and landing dust | Missing |
 | Backflip with a puff at landing | Visual: earlier `GetAttention2` | Missing |

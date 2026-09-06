@@ -8,7 +8,7 @@ func validateRoutines() throws {
     }
     func validAnchor(_ anchor:PropAnchor)->Bool {
         switch anchor {
-        case .character,.attachment: return true
+        case .character,.stage,.attachment: return true
         case let .transformed(parent,offset,rotation): return validAnchor(parent) && finite(offset) && abs(length(rotation.vector)-1)<0.001
         case let .blend(from,to,weight): return validAnchor(from) && validAnchor(to) && weight.isFinite && (0...1).contains(weight)
         }
@@ -97,8 +97,10 @@ func validateRoutines() throws {
     }
     let motion=PropMotion()
     let cues=[PropCue(id:"attachment.fixture",kind:.globe,anchor:.attachment(.head,axes:.joint),offset:[0,0.1,0.2],scale:SIMD3(repeating:0.1))]
+    _=rig.instances(yaw:0,pitch:0,at:0.8)
     let before=motion.sample(action:.globe,started:0,at:0.8,cues:cues,rig:rig,bones:front)
     _=motion.sample(action:.wave,started:0.8,at:0.8,cues:[],rig:rig,bones:front)
+    _=rig.instances(yaw:-0.7,pitch:0.15,at:0.8)
     let turned=motion.sample(action:.wave,started:0.8,at:0.8,cues:[],rig:rig,bones:quarter)
     guard before.count==1,turned.count==1 else {throw failure("Interrupted attachment disappeared")}
     let retiringCameraError=matrixError(cameraChange*before[0].model,turned[0].model)
