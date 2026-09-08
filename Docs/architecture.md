@@ -156,3 +156,20 @@ uses it to turn from a free hand into a crosswise cylindrical grip and then an
 open landing hand. This avoids interpolating independent direction vectors
 through near-collinear frames during large orientation changes. Rig-specific
 palm offsets and skinning remain in `HandAnatomy` and `FanRig`.
+
+Presence is owned by `CharacterPlayback` through `PresencePlayback`, independently
+of the body clip and wearable state. Timestamped visibility boundaries are sampled
+without mutation. A Hide request waits for the current authored stow and already
+queued accessory transfers; Show can cancel a pending Hide. When already hidden,
+Show waits for hidden accessory transfers, schedules the entrance, and reserves
+that entrance before subsequent body requests (including direct speech poses).
+A cancelled queued Show cannot later reveal the character.
+
+The renderer suppresses character, tooth, prop, and ground-shadow draws while
+hidden. At a new appearance boundary it clears stale rig/retiring-prop history,
+including when the desktop view was paused throughout the hidden interval. The
+AppKit menu uses requested presence for its Show/Hide label; a single boundary
+timer updates panel visibility and pauses/resumes the MTKView. The status menu
+remains available while the panel is hidden. The procedural fallback shows
+without a vine entrance. Hide currently stows then disappears; the authored
+vine exit still needs to be connected before this matches the original Hide.

@@ -30,6 +30,9 @@ final class FanRig {
     private var transitionStarted:Double = 0
     private var actionStarted:Double?
     private var lastActionTime:Double = -.infinity
+    func resetPlaybackHistory() {
+        displayedPose=[];transitionPose=[];actionStarted=nil;lastActionTime = -.infinity
+    }
     func updateLiveAction(_ next:Action, started:Double, at time:Double, elapsed:Double?=nil) {
         if time<lastActionTime {
             // Offline scrubbing starts a new timeline; future transition poses

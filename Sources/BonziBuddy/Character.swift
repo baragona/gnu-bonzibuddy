@@ -9,6 +9,11 @@ struct Instance { var model: simd_float4x4; var color: SIMD4<Float> }
 
 final class Character {
     private var playback=CharacterPlayback()
+    var requestedVisible:Bool {playback.requestedVisible}
+    func isVisible(at time:Double)->Bool {playback.isVisible(at:time)}
+    func visibleSince(at time:Double)->Double? {playback.visibleSince(at:time)}
+    func nextVisibilityChange(after time:Double)->Double? {playback.nextVisibilityChange(after:time)}
+    func setVisible(_ enabled:Bool,at time:Double,entrance:Action? = .vineEntrance) {playback.setVisible(enabled,at:time,entrance:entrance)}
     var headphonesEnabled:Bool {playback.headphonesEnabled}
     func setHeadphonesEnabled(_ enabled:Bool,at time:Double) {playback.setHeadphonesEnabled(enabled,at:time)}
     var sunglassesEnabled:Bool {playback.sunglassesEnabled}

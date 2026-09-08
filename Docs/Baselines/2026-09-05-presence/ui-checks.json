@@ -1,0 +1,7 @@
+{
+  "menuRecoveryPassed" : true,
+  "note" : "Invokes the real AppKit menu target and verifies panel visibility, MTKView pause state, menu labels and the completion timer. Does not exercise physical mouse clicks or establish display pacing.",
+  "scheduledHideTimerPassed" : true,
+  "showStartsEntrancePassed" : true,
+  "windowPauseResumePassed" : true
+}

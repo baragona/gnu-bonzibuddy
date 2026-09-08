@@ -30,6 +30,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, AVSpeechSynthesizerDel
     var expressionSliders:[Int:NSSlider]=[:]
     let speech = AVSpeechSynthesizer()
     var bubbleTimer: Timer?
+    var visibilityTimer:Timer?
     var muted = UserDefaults.standard.bool(forKey:"muted")
     func applicationDidFinishLaunching(_ notification: Notification) {
         do {
@@ -43,7 +44,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate, AVSpeechSynthesizerDel
                 renderer.fanLiveActions=true
                 renderer.fanTeethEnabled=true
             } else { renderer = try Renderer(device: device) }
-            setupBuddy(device); setupMenu(); setupControls();setupReminderService()
+            setupBuddy(device); setupMenu(); setupControls()
+            if CommandLine.arguments.contains("--validate-presence-ui") {validatePresenceWindow();return}
+            setupReminderService()
             if CommandLine.arguments.contains("--show-reminders") { showReminders() }
             if CommandLine.arguments.contains("--validate-reminder-ui") { validateReminderWindow() }
             if CommandLine.arguments.contains("--show-expressions") || CommandLine.arguments.contains("--validate-expression-ui") { showExpressions() }
@@ -125,13 +128,13 @@ final class AppDelegate: NSObject, NSApplicationDelegate, AVSpeechSynthesizerDel
         item("Tell a joke",#selector(joke)); item("Tell the time",#selector(tellTime))
         menu.addItem(.separator())
         item(muted ? "Enable voice" : "Mute voice",#selector(toggleMute))
-        item(panel?.isVisible == true ? "Hide Bonzi" : "Show Bonzi",#selector(toggleVisible))
-        item("Quit BonziBuddy",#selector(quit),"q")
+        item(renderer.character.requestedVisible ? "Hide Bonzi" : "Show Bonzi",#selector(toggleVisible))
+        item("Quit GNU BonziBuddy",#selector(quit),"q")
         return menu
     }
     func setupControls() {
         control = NSWindow(contentRect:NSRect(x:0,y:0,width:430,height:280),styleMask:[.titled,.closable,.miniaturizable],backing:.buffered,defer:false)
-        control.title = "BonziBuddy"; control.isReleasedWhenClosed = false; control.center()
+        control.title = "GNU BonziBuddy"; control.isReleasedWhenClosed = false; control.center()
         let stack = NSStackView(); stack.orientation = .vertical; stack.alignment = .leading; stack.spacing = 16; stack.translatesAutoresizingMaskIntoConstraints = false
         let title = NSTextField(labelWithString:"A familiar friend. A fresh start."); title.font = .boldSystemFont(ofSize:21)
         stack.addArrangedSubview(title)
@@ -167,6 +170,19 @@ final class AppDelegate: NSObject, NSApplicationDelegate, AVSpeechSynthesizerDel
     func speechSynthesizer(_ synthesizer:AVSpeechSynthesizer,didStart utterance:AVSpeechUtterance) { renderer.character.play(.speak,at:renderer.time) }
     func speechSynthesizer(_ synthesizer:AVSpeechSynthesizer,didFinish utterance:AVSpeechUtterance) { renderer.character.play(.idle,at:renderer.time) }
     @objc func toggleMute() { muted.toggle(); UserDefaults.standard.set(muted,forKey:"muted"); if muted { speech.stopSpeaking(at:.immediate); renderer.character.play(.idle,at:renderer.time) }; status.menu = makeMenu() }
-    @objc func toggleVisible() { if panel.isVisible { panel.orderOut(nil); view.isPaused = true } else { panel.orderFrontRegardless(); view.isPaused = false }; status.menu = makeMenu() }
+    func syncVisibility() {
+        visibilityTimer?.invalidate();visibilityTimer=nil
+        let time=renderer.time,visible=renderer.character.isVisible(at:time)
+        if visible {panel.orderFrontRegardless();view.isPaused=false}
+        else {panel.orderOut(nil);view.isPaused=true}
+        if let next=renderer.character.nextVisibilityChange(after:time) {
+            visibilityTimer=Timer.scheduledTimer(withTimeInterval:max(0.001,next-time),repeats:false) { [weak self] _ in self?.syncVisibility() }
+        }
+        status.menu=makeMenu()
+    }
+    @objc func toggleVisible() {
+        renderer.character.setVisible(!renderer.character.requestedVisible,at:renderer.time,entrance:renderer.fanRig == nil ? nil:.vineEntrance)
+        syncVisibility()
+    }
     @objc func quit() { NSApp.terminate(nil) }
 }

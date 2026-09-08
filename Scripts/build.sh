@@ -20,7 +20,7 @@ fi
 APP="$PWD/Build/BonziBuddy.app"
 mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Resources"
 cp .build/BonziBuddy "$APP/Contents/MacOS/BonziBuddy"
-cp Sources/BonziBuddy/Shaders.metal Resources/Bonzi.mesh "$APP/Contents/Resources/"
+cp Sources/BonziBuddy/Shaders.metal Resources/Bonzi.mesh LICENSE NOTICE.md "$APP/Contents/Resources/"
 mkdir -p "$APP/Contents/Resources/Props"
 cp Resources/Props/* "$APP/Contents/Resources/Props/"
 mkdir -p "$APP/Contents/Resources/FanModel"
@@ -31,7 +31,8 @@ cat > "$APP/Contents/Info.plist" <<'PLIST'
 <plist version="1.0"><dict>
 <key>CFBundleExecutable</key><string>BonziBuddy</string>
 <key>CFBundleIdentifier</key><string>local.bonzibuddy.mac</string>
-<key>CFBundleName</key><string>BonziBuddy</string>
+<key>CFBundleName</key><string>GNU BonziBuddy</string>
+<key>CFBundleDisplayName</key><string>GNU BonziBuddy</string>
 <key>CFBundlePackageType</key><string>APPL</string>
 <key>CFBundleShortVersionString</key><string>0.1.0</string>
 <key>LSMinimumSystemVersion</key><string>14.0</string>

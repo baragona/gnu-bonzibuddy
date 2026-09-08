@@ -3,6 +3,29 @@ import Foundation
 // Coordinates independent body and accessory timelines without rendering state.
 struct CharacterPlayback {
     private var playback=ActionPlayback()
+    private var presence=PresencePlayback()
+    var requestedVisible:Bool {presence.requestedVisible}
+    func isVisible(at time:Double)->Bool {presence.isVisible(at:time)}
+    func visibleSince(at time:Double)->Double? {presence.visibleSince(at:time)}
+    func nextVisibilityChange(after time:Double)->Double? {presence.nextChange(after:time)}
+    mutating func setVisible(_ enabled:Bool,at time:Double,entrance:Action? = .vineEntrance) {
+        guard enabled != presence.requestedVisible else {return}
+        adoptQueuedBody(at:time)
+        if enabled {
+            if presence.isVisible(at:time) {
+                // Cancel a pending hide; the already-started stow may finish.
+                presence.schedule(true,requestedAt:time,effectiveAt:time,entranceEnds:presence.entranceEnds)
+            } else {
+                let start=max(time,accessories.busyUntil)
+                playback.play(entrance ?? .idle,at:start);queuedBody=nil
+                presence.schedule(true,requestedAt:time,effectiveAt:start,entranceEnds:entrance.map {start+$0.duration})
+            }
+        } else {
+            let end=presence.isVisible(at:time) ? max(handoffTime(at:time),accessories.busyUntil):time
+            presence.schedule(false,requestedAt:time,effectiveAt:end,entranceEnds:end>time ? presence.entranceEnds:nil)
+            if end==time {playback.play(.idle,at:time);queuedBody=nil}
+        }
+    }
     private var queuedBody:(player:ActionPlayback,start:Double)?
     private var suspendsBody=false
     private func bodySnapshot(at time:Double)->ActionSnapshot {
@@ -62,7 +85,7 @@ struct CharacterPlayback {
             playback.finish(at:time)
             return max(time,playback.completionTime ?? time)
         }
-        return time+max(0,body.action.duration-body.elapsed)
+        return max(time,body.started)+max(0,body.action.duration-body.elapsed)
     }
     mutating func request(_ action:Action,at time:Double,mode:PlaybackMode = .once) {
         adoptQueuedBody(at:time)
@@ -94,6 +117,12 @@ struct CharacterPlayback {
     }
     mutating func play(_ action: Action, at time: Double, mode:PlaybackMode = .once) {
         adoptQueuedBody(at:time)
+        if let end=presence.entranceEnds,time<end {
+            let ready=max(end,accessories.busyUntil)
+            var player=ActionPlayback();player.play(action,at:ready,mode:mode)
+            queuedBody=(player,ready)
+            return
+        }
         if accessories.busyUntil>time {
             var player=ActionPlayback();player.play(action,at:accessories.busyUntil,mode:mode)
             queuedBody=(player,accessories.busyUntil)

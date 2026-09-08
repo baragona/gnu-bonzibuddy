@@ -36,6 +36,8 @@ final class Renderer: NSObject, MTKViewDelegate {
     let fanFaceMotion=FanFaceMotion()
     var propRenderer:PropRenderer?
     let propMotion=PropMotion()
+    private var previousPresenceVisibility=true
+    private var previousAppearanceTime:Double?
     var fanNeutralSmile:Float=0.2
     var fanExpressionNames:[String]=[]
     var fanExpressionOverrides:[Int:Float]=[:]
@@ -161,6 +163,12 @@ final class Renderer: NSObject, MTKViewDelegate {
         return m
     }
     func encode(_ command: MTLCommandBuffer, pass: MTLRenderPassDescriptor, width: Int, height: Int, at time: Double, buffer: MTLBuffer) {
+        let present=character.isVisible(at:time)
+        let appeared=character.visibleSince(at:time)
+        if !present || !previousPresenceVisibility || appeared != previousAppearanceTime {
+            fanRig?.resetPlaybackHistory();propMotion.reset()
+        }
+        previousPresenceVisibility=present;previousAppearanceTime=appeared
         var objects:[Instance]
         var automaticFace=FacialIntent()
         let playback=character.playbackSnapshot(at:time)
@@ -181,7 +189,7 @@ final class Renderer: NSObject, MTKViewDelegate {
             if fanPreview { objects[0] = Instance(model:rotate(character.pitch,[1,0,0])*rotate(character.yaw,[0,1,0]),color:[1,1,1,1]) }
         }
         let props: [PropDraw]
-        if let rig=fanRig,fanLiveActions {
+        if let rig=fanRig,fanLiveActions,present {
             var cues=rig.routine.props
             let accessory=character.accessoryPose(at:time)
             cues += accessory.props.filter {wearable in !cues.contains(where:{$0.id==wearable.id})}
@@ -227,7 +235,7 @@ final class Renderer: NSObject, MTKViewDelegate {
             shadowEncoder.setVertexBuffer(fanMorphBuffer,offset:0,index:3)
             shadowEncoder.setVertexBytes(&morphUniforms,length:MemoryLayout<FanMorphUniforms>.stride,index:4)
         }
-        if shadowsEnabled && drawCharacterGeometry { shadowEncoder.drawIndexedPrimitives(type:.triangle,indexCount:indexCount,indexType:.uint32,indexBuffer:indices,indexBufferOffset:0);drawFanTeeth(shadowEncoder) }
+        if shadowsEnabled && drawCharacterGeometry && present { shadowEncoder.drawIndexedPrimitives(type:.triangle,indexCount:indexCount,indexType:.uint32,indexBuffer:indices,indexBufferOffset:0);drawFanTeeth(shadowEncoder) }
         if shadowsEnabled { propRenderer?.draw(props,encoder:shadowEncoder,shadow:true) }
         shadowEncoder.endEncoding()
         let encoder = command.makeRenderCommandEncoder(descriptor: pass)!
@@ -246,12 +254,12 @@ final class Renderer: NSObject, MTKViewDelegate {
         encoder.setFragmentBytes(&faceControl,length:MemoryLayout<FanEyeUniforms>.stride,index:3)
         encoder.setFragmentBytes(&uniforms,length:MemoryLayout<RenderUniforms>.stride,index:2)
         encoder.setFragmentTexture(shadowTexture,index:0)
-        if drawCharacterGeometry {
+        if drawCharacterGeometry && present {
             encoder.drawIndexedPrimitives(type: .triangle,indexCount: indexCount,indexType: .uint32,indexBuffer: indices,indexBufferOffset: 0)
             drawFanTeeth(encoder)
         }
         propRenderer?.draw(props,encoder:encoder,shadow:false)
-        if !wireframe && shadowsEnabled {
+        if !wireframe && shadowsEnabled && present {
             encoder.setRenderPipelineState(groundPipeline)
             encoder.drawPrimitives(type:.triangle,vertexStart:0,vertexCount:6)
         }

@@ -45,6 +45,9 @@ final class PropMotion {
     private var shown:[PropDraw]=[]
     private var retiring:[PropDraw]=[]
     private var retiredAt:Double=0
+    func reset() {
+        action=nil;started=nil;lastTime = -.infinity;shown=[];retiring=[]
+    }
     private func resolve(_ anchor:PropAnchor,rig:FanRig,bones:[Instance])->simd_float4x4 {
         switch anchor {
         case .character: return bones[0].model

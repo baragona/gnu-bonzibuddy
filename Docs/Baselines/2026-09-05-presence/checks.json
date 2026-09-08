@@ -1,0 +1,10 @@
+{
+  "accessoryIntentPreserved" : true,
+  "entranceReservationPassed" : true,
+  "hideWaitsForStow" : true,
+  "hideWaitsForTransfers" : true,
+  "maximumHiddenAlpha" : 0,
+  "note" : "Playback scheduling plus actual transparent Metal output, including worn accessories and shadows. Show uses the entrance; Hide currently waits for stow then hides, without exit choreography.",
+  "pausedShowMatrixError" : 0,
+  "queuedShowCancellationPassed" : true
+}
