@@ -1,5 +1,7 @@
 # GNU BonziBuddy
 
+![GNU BonziBuddy wearing sunglasses and holding a globe](Docs/Images/gnu-bonzibuddy.png)
+
 GNU BonziBuddy is a free software, privacy-preserving alternative to the original BonziBuddy for macOS.
 
 A native AppKit desktop companion with a rigged 3D fan model, Metal rendering, 4× MSAA, and real-time soft shadows. Runs locally with macOS speech; no third-party APIs, analytics, accounts, or network services.
